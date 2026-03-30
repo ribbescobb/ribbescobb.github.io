@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ribbescobb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e8e4df;
+            font-family: 'EB Garamond', Georgia, serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent, #0a0a0a);
+            pointer-events: none;
+        }
+
+        .wordmark {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: #f5f0eb;
+            position: relative;
+            cursor: default;
+        }
+
+        .wordmark::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: #b8860b;
+            margin: 1.2rem auto 0;
+            opacity: 0.6;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3.5rem;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 1.8s forwards;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .scroll-hint a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .scroll-hint .dagger {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 0.95rem;
+            color: #b8860b;
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .scroll-hint .pronunciation {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.04em;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .scroll-hint .tick {
+            display: block;
+            width: 1px;
+            height: 28px;
+            background: linear-gradient(to bottom, rgba(184, 134, 11, 0.5), transparent);
+            margin: 0 auto;
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .scroll-hint .tick::after {
+            content: '▾';
+            display: block;
+            font-size: 0.6rem;
+            color: rgba(184, 134, 11, 0.4);
+            margin-top: -2px;
+            animation: tickBob 2.5s ease-in-out infinite;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+        }
+
+        @keyframes tickBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+
+        /* ── TRANSITION ── */
+        .transition-strip {
+            height: 120px;
+            background: linear-gradient(to bottom, #0a0a0a, #f4efe6);
+            position: relative;
+        }
+
+        /* ── DICTIONARY ── */
+        .dictionary {
+            background: #f4efe6;
+            color: #2a2520;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 6rem 2rem 8rem;
+        }
+
+        .entry {
+            max-width: 640px;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .entry.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .entry-header {
+            border-bottom: 1px solid #c4b9a8;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .entry-word {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: #1a1714;
+            margin-bottom: 0.3rem;
+        }
+
+        .entry-pronunciation {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: #7a6f63;
+            letter-spacing: 0.02em;
+        }
+
+        .entry-pos {
+            font-style: italic;
+            color: #7a6f63;
+            margin-left: 0.8rem;
+        }
+
+        .definitions {
+            margin-bottom: 2.2rem;
+        }
+
+        .definition {
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .definition .num {
+            position: absolute;
+            left: 0;
+            font-weight: 600;
+            color: #7a6f63;
+        }
+
+        .definition em {
+            color: #7a6f63;
+            font-size: 0.95rem;
+        }
+
+        .section-label {
+            font-variant: small-caps;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            color: #a0937f;
+            text-transform: lowercase;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .etymology {
+            margin-bottom: 2.2rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #3d362f;
+        }
+
+        .etymology p {
+            margin-bottom: 1rem;
+        }
+
+        .usage-note {
+            margin-bottom: 2.2rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #5a5047;
+            padding-left: 1.2rem;
+            border-left: 2px solid #d4c9b8;
+        }
+
+        .quotation {
+            margin-top: 2.5rem;
+            padding: 1.5rem 1.8rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .quotation::before {
+            content: '\201C';
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4rem;
+            color: #d4c9b8;
+            position: absolute;
+            top: -0.2rem;
+            left: 0.5rem;
+            line-height: 1;
+        }
+
+        .quotation p {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #3d362f;
+            padding-left: 1.5rem;
+        }
+
+        .quotation cite {
+            display: block;
+            font-style: normal;
+            font-size: 0.9rem;
+            color: #7a6f63;
+            margin-top: 0.8rem;
+            padding-left: 1.5rem;
+        }
+
+        .see-also {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #d4c9b8;
+            font-size: 0.95rem;
+            color: #7a6f63;
+        }
+
+        .see-also a {
+            color: #8b6914;
+            text-decoration: none;
+            border-bottom: 1px dotted #8b6914;
+            cursor: default;
+        }
+
+        /* ── FOOTER ── */
+        .colophon {
+            background: #f4efe6;
+            text-align: center;
+            padding: 0 2rem 3rem;
+            font-size: 0.8rem;
+            color: #b8a990;
+            letter-spacing: 0.08em;
+            font-variant: small-caps;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .dictionary {
+                padding: 3rem 1.5rem 5rem;
+            }
+            .definition {
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1 class="wordmark">Ribbescobb</h1>
+        <div class="scroll-hint">
+            <a href="#entry">
+                <span class="dagger">†</span>
+                <span class="pronunciation">/ˈrɪb.ə.skɒb/</span>
+                <span class="tick"></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- TRANSITION -->
+    <div class="transition-strip"></div>
+
+    <!-- DICTIONARY ENTRY -->
+    <section class="dictionary">
+        <article class="entry" id="entry">
+
+            <header class="entry-header">
+                <div class="entry-word">ribbescobb</div>
+                <span class="entry-pronunciation">/ˈrɪb.ə.skɒb/</span>
+                <span class="entry-pos">n.</span>
+            </header>
+
+            <div class="definitions">
+                <div class="definition">
+                    <span class="num">1.</span>
+                    The crunchy, dusty fragments remaining at the bottom of a bag of cereal or crisps once the majority has been consumed; often considered by connoisseurs to be the most flavorful portion.
+                </div>
+                <div class="definition">
+                    <span class="num">2.</span>
+                    <em>(by extension)</em> Something of overlooked value; the good stuff everyone else left behind.
+                </div>
+            </div>
+
+            <div class="section-label">Etymology</div>
+            <div class="etymology">
+                <p>Of obscure origin, possibly from Low German <em>ribbe</em> (to scrape or rake) + Middle Dutch <em>scob</em> (shavings, chaff). First attested in the 1597 pantry inventory of Goedkoop Abbey, Bruges: <em>"Of the ribbescobb there remained a full measure, which the prior kept for himself, as was his custom."</em></p>
+                <p>The term fell out of common usage during the 18th century, surviving primarily in rural dialects of the Low Countries, before being rediscovered by linguists in the early 2000s during a survey of untranslatable food-related terms.</p>
+            </div>
+
+            <div class="section-label">Usage note</div>
+            <div class="usage-note">
+                Not to be confused with <em>ribbeskab</em> (Dan., "a currant bush"), though some etymologists maintain a shared Proto-Germanic root relating to small, clustered things of surprising sweetness.
+            </div>
+
+            <div class="quotation">
+                <p>She poured the ribbescobb directly into her mouth over the sink, as God intended.</p>
+                <cite>— <strong>Mrs. Beeton's Book of Household Management</strong>, 1861 (apocryphal)</cite>
+            </div>
+
+            <div class="see-also">
+                <strong>See also:</strong>&ensp;
+                <a>scoblings</a> <em>(n., the act of searching for ribbescobb)</em>&ensp;·&ensp;
+                <a>ribbeskimmer</a> <em>(n., one who takes only from the top, leaving the best behind)</em>
+            </div>
+
+        </article>
+    </section>
+
+    <div class="colophon">est. long before you'd heard of it</div>
+
+    <script>
+        // Fade in the dictionary entry on scroll
+        const entry = document.getElementById('entry');
+        const observer = new IntersectionObserver(
+            ([e]) => { if (e.isIntersecting) entry.classList.add('visible'); },
+            { threshold: 0.15 }
+        );
+        observer.observe(entry);
+    </script>
+
+</body>
+</html>
