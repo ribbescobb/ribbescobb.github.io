@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRONK — Privacy Policy</title>
+    <meta name="description" content="Privacy policy for STRONK, a workout logger by Ribbescobb Labs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #E8622A;
+            --dark: #0D0D0D;
+            --surface: #141414;
+            --border: #222;
+            --muted: #555;
+            --text: #E8E8E8;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--dark);
+            color: #bbb;
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Nav ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(13,13,13,0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .nav-home {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+        .nav-home:hover { color: var(--text); }
+
+        .nav-stronk {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 16px;
+            color: var(--orange);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: opacity 0.2s;
+        }
+        .nav-stronk:hover { opacity: 0.8; }
+
+        /* ── Content ── */
+        .content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 120px 32px 100px;
+        }
+
+        .page-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--orange);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(28px, 5vw, 36px);
+            color: #fff;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .effective {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 48px;
+        }
+
+        .short-version {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 48px;
+            font-size: 16px;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 48px;
+            margin-bottom: 16px;
+        }
+
+        p { margin-bottom: 16px; }
+
+        ul {
+            margin-bottom: 16px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+            color: #999;
+        }
+
+        a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        .contact {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 40px 32px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+        .footer a {
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+        .footer a:hover { color: var(--text); }
+
+        @media (max-width: 600px) {
+            .content { padding: 100px 24px 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="/" class="nav-home">Ribbescobb Labs</a>
+        <a href="/thatstronk" class="nav-stronk">STRONK</a>
+    </nav>
+
+    <!-- CONTENT -->
+    <main class="content">
+        <div class="page-label">Legal</div>
+        <h1>Privacy Policy</h1>
+        <div class="effective">STRONK · Ribbescobb Labs, LLC · Effective April 4, 2026</div>
+
+        <div class="short-version">
+            STRONK does not collect your name, email, or any personal information. Your workout data stays on your device. We use anonymous analytics to understand how the app is used so we can make it better.
+        </div>
+
+        <h2>Data that stays on your device</h2>
+        <p>All workout data — exercises, sets, weights, reps, routines, and history — is stored locally on your device using Apple's on-device database. This data is not transmitted to any server. We cannot see it, access it, or recover it.</p>
+        <p>If you delete the app, your workout data is deleted with it.</p>
+
+        <h2>Anonymous analytics</h2>
+        <p>STRONK uses TelemetryDeck, a privacy-focused analytics service, to collect anonymous usage data. This helps us understand which features are used and where the app can be improved.</p>
+
+        <p>What we collect through analytics:</p>
+        <ul>
+            <li>App launch events</li>
+            <li>Screen views (e.g., that someone opened a screen — not what they saw there)</li>
+            <li>Feature usage signals (e.g., that a workout was completed, not the specific exercises or weights)</li>
+            <li>Basic device metadata (device model, OS version, app version)</li>
+        </ul>
+
+        <p>What we do not collect:</p>
+        <ul>
+            <li>Your name, email address, or any account information</li>
+            <li>Specific workout data (weights, reps, exercise names, or routines)</li>
+            <li>Location data</li>
+            <li>Health or biometric data</li>
+            <li>Advertising identifiers</li>
+            <li>Any data that could identify you personally</li>
+        </ul>
+
+        <p>TelemetryDeck does not use cookies or advertising identifiers. Analytics data cannot be linked back to individual users. You can learn more about TelemetryDeck's privacy practices at <a href="https://telemetrydeck.com/privacy">telemetrydeck.com/privacy</a>.</p>
+
+        <h2>Third-party services</h2>
+        <p>STRONK does not integrate with any social networks, advertising platforms, or third-party data brokers. The only external service used is TelemetryDeck for anonymous analytics as described above.</p>
+
+        <h2>Children's privacy</h2>
+        <p>STRONK does not knowingly collect any personal information from anyone, including children under the age of 13.</p>
+
+        <h2>Changes to this policy</h2>
+        <p>If this policy changes, the updated version will be posted at this URL with a new effective date. Material changes will be noted within the app.</p>
+
+        <hr>
+
+        <h2>Contact</h2>
+        <p class="contact">
+            Ribbescobb Labs, LLC<br>
+            <a href="mailto:chris@ribbescobb.com">chris@ribbescobb.com</a>
+        </p>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        &copy; <a href="/">Ribbescobb Labs</a>, LLC 2026
+    </footer>
+
+</body>
+</html>
