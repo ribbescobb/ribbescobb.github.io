@@ -256,8 +256,18 @@
 
         /* ── Responsive ── */
         @media (max-width: 600px) {
-            .two-col { grid-template-columns: 1fr; }
-            .col-header.no, .col-item.no { display: none; }
+            .two-col {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                border-radius: 12px;
+                overflow: hidden;
+                border: 1px solid var(--border);
+            }
+            .col-header.yes { order: 1; }
+            .col-item.yes { order: 2; }
+            .col-header.no { order: 3; margin-top: 2px; }
+            .col-item.no { order: 4; text-decoration: line-through; }
             .hero { padding: 100px 24px 60px; }
             .section, .moments, .closer { padding-left: 24px; padding-right: 24px; }
             .moment-card { padding: 24px; }
