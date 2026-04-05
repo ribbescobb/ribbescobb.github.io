@@ -360,12 +360,29 @@
         <p>The markets we play in are big and crowded. We are not. We find the corners those bigger players overlook, and we build something worth finding.</p>
     </section>
 
+    <!-- SVG FILTERS -->
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <filter id="stamp-subtle" x="-3%" y="-3%" width="106%" height="106%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="8" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+          <feComposite in="displaced" in2="SourceGraphic" operator="in"/>
+        </filter>
+      </defs>
+    </svg>
+
     <!-- PRODUCTS -->
     <section class="products fade-up">
         <div class="products-label">What we're shipping</div>
         <a href="/thatstronk" class="product-card">
             <div class="product-card-top">
-                <img src="/thatstronk/stronk-icon-v5.png" alt="STRONK icon" class="product-card-icon">
+                <svg width="56" height="56" viewBox="0 0 512 512" style="border-radius:13px;display:block;flex-shrink:0;" role="img" aria-label="STRONK icon">
+                  <rect width="512" height="512" fill="#0D0D0D"/>
+                  <g filter="url(#stamp-subtle)" transform="rotate(-25, 256, 256)">
+                    <circle cx="256" cy="256" r="210" fill="none" stroke="#E8622A" stroke-width="38"/>
+                    <text x="256" y="330" font-family="'Archivo Black', sans-serif" font-size="310" fill="#E8622A" text-anchor="middle" dominant-baseline="auto" letter-spacing="-8">S</text>
+                  </g>
+                </svg>
                 <div>
                     <div class="product-card-name">STRONK</div>
                     <div class="product-card-type">iOS · Workout Logger</div>
