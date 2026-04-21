@@ -113,6 +113,62 @@
         }
         .email:hover { opacity: 0.7; }
 
+        /* ── Studio Dogs ── */
+        .studio-dogs {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 32px 100px;
+            text-align: center;
+        }
+
+        .dogs-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 32px;
+            opacity: 0.7;
+        }
+
+        .dogs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .dog {
+            margin: 0;
+        }
+
+        .dog-photo {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 12px;
+            background: var(--surface);
+            margin-bottom: 16px;
+        }
+
+        .dog-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dog figcaption strong {
+            display: block;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .dog figcaption span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
         /* ── Footer ── */
         .footer {
             text-align: center;
@@ -132,6 +188,8 @@
         @media (max-width: 600px) {
             .content { padding: 100px 24px 60px; }
             .nav-links { gap: 20px; }
+            .dogs-grid { grid-template-columns: 1fr; gap: 32px; max-width: 280px; margin: 0 auto; }
+            .studio-dogs { padding-left: 24px; padding-right: 24px; padding-bottom: 80px; }
         }
     </style>
 </head>
@@ -154,6 +212,27 @@
         <h1>Say hello.</h1>
         <a href="mailto:chris@ribbescobb.com" class="email">chris@ribbescobb.com</a>
     </main>
+
+    <!-- STUDIO DOGS -->
+    <section class="studio-dogs">
+        <div class="dogs-label">Studio Dogs</div>
+        <div class="dogs-grid">
+            <figure class="dog">
+                <div class="dog-photo"><img src="rubysue.jpg" alt="Ruby Sue, a tan and white pit bull mix with her tongue out"></div>
+                <figcaption>
+                    <strong>Ruby Sue</strong>
+                    <span>Head of morale.</span>
+                </figcaption>
+            </figure>
+            <figure class="dog">
+                <div class="dog-photo"><img src="griswold.jpg" alt="Griswold, a tan shepherd mix lying in the grass behind red flowers"></div>
+                <figcaption>
+                    <strong>Griswold</strong>
+                    <span>Director of brooding.</span>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer class="footer">
