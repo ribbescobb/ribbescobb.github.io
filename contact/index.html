@@ -72,6 +72,7 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: var(--text); }
+        .nav-links a.active { color: var(--accent); }
 
         /* ── Content ── */
         .content {
@@ -130,6 +131,7 @@
 
         @media (max-width: 600px) {
             .content { padding: 100px 24px 60px; }
+            .nav-links { gap: 20px; }
         }
     </style>
 </head>
@@ -140,7 +142,9 @@
         <a href="/" class="nav-brand">Ribbescobb Labs</a>
         <div class="nav-links">
             <a href="https://thatstronk.com">STRONK</a>
+            <a href="/kept">Kept</a>
             <a href="/etymology">The Word</a>
+            <a href="/contact" class="active">Contact</a>
         </div>
     </nav>
 
