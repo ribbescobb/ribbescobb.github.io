@@ -183,12 +183,14 @@
             display: block;
             -webkit-user-drag: none;
             pointer-events: none;
+            transition: filter 1.5s ease, transform 1.5s ease;
         }
         .card .well .frost {
             position: absolute;
             inset: 0;
             background: rgba(128, 128, 128, 0.14);
             pointer-events: none;
+            transition: opacity 1.5s ease;
         }
         .card .well .aperture {
             position: absolute;
@@ -197,6 +199,17 @@
             align-items: center;
             justify-content: center;
             pointer-events: none;
+            transition: opacity 1.5s ease;
+        }
+
+        /* Top card resolves to clarity over 1.5s — matches iOS reveal */
+        .card.is-top .well img {
+            filter: blur(0);
+            transform: scale(1);
+        }
+        .card.is-top .well .frost,
+        .card.is-top .well .aperture {
+            opacity: 0;
         }
         .card .well .aperture .ring {
             width: 34px;
@@ -536,7 +549,15 @@
                     pile.appendChild(c);
                     cards.push(c);
                 });
-                layoutAll();
+                // Initial layout WITHOUT is-top so first reveal animates from blur → clear
+                PHOTOS.forEach((_, i) => {
+                    const depth = order.indexOf(i);
+                    cards[i].style.transform = transformFor(i, depth);
+                    cards[i].style.zIndex = String(20 - depth);
+                });
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    cards[order[0]].classList.add('is-top');
+                }));
             }
 
             function transformFor(photoIdx, depth, extraX) {
@@ -556,6 +577,7 @@
                     const depth = order.indexOf(i);
                     cards[i].style.transform = transformFor(i, depth);
                     cards[i].style.zIndex = String(20 - depth);
+                    cards[i].classList.toggle('is-top', depth === 0);
                 });
             }
 
@@ -579,12 +601,14 @@
                     const head = order.shift();
                     order.push(head);
                     oldCard.style.zIndex = '-1';
+                    oldCard.classList.remove('is-top');
                     PHOTOS.forEach((_, i) => {
                         if (i === oldTopIdx) return;
                         const depth = order.indexOf(i);
                         cards[i].style.transition = 'transform 0.12s cubic-bezier(0, 0, 0.2, 1)';
                         cards[i].style.transform = transformFor(i, depth);
                         cards[i].style.zIndex = String(20 - depth);
+                        if (depth === 0) cards[i].classList.add('is-top');
                     });
                 }, 420);
 
