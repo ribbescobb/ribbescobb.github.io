@@ -7,7 +7,7 @@
     <meta name="description" content="Five photos a day. The things that caught your eye. Kept because they were worth keeping.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0D0D0D;
@@ -118,7 +118,7 @@
             letter-spacing: 0.02em;
         }
 
-        /* ── Demo ── */
+        /* ── Demo (polaroid stack) ── */
         .demo {
             max-width: 640px;
             margin: 0 auto;
@@ -133,83 +133,119 @@
             color: var(--accent);
             opacity: 0.6;
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
 
-        .demo-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .demo-row {
-            display: flex;
-            gap: 4px;
-        }
-
-        .demo-tile {
-            border-radius: 10px;
-            cursor: pointer;
-            overflow: hidden;
+        .stage {
             position: relative;
-            transition: filter 1.8s cubic-bezier(0.25, 0.1, 0.25, 1);
-            filter: blur(10px);
-            transform: scale(1.05);
-            flex: 1;
-            aspect-ratio: 1;
+            height: 400px;
+            touch-action: pan-y;
         }
 
-        .demo-tile.revealed {
-            filter: blur(0);
-            transform: scale(1);
-        }
-
-        .demo-tile-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-        }
-
-        /* Tap hint ring */
-        .demo-tile::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.5);
-            box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
-            transition: opacity 0.4s;
-        }
-        .demo-tile.revealed::after { opacity: 0; }
-
-        /* Frost overlay */
-        .demo-tile-frost {
+        .pile {
             position: absolute;
             inset: 0;
-            background: rgba(13,13,13,0.15);
-            border-radius: 10px;
-            transition: opacity 0.6s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .demo-tile.revealed .demo-tile-frost { opacity: 0; }
 
-        /* Photo backgrounds — Kept onboarding sample photos */
-        .t1 .demo-tile-inner { background: url('onboarding_day_1.jpg') center/cover; }
-        .t2 .demo-tile-inner { background: url('onboarding_day_2.jpg') center/cover; }
-        .t3 .demo-tile-inner { background: url('onboarding_day_3.jpg') center/cover; }
-        .t4 .demo-tile-inner { background: url('onboarding_day_4.jpg') center/cover; }
-        .t5 .demo-tile-inner { background: url('onboarding_day_5.jpg') center/cover; }
+        .card {
+            position: absolute;
+            width: 280px;
+            height: 340px;
+            background: #FAF7F1;
+            border-radius: 4px;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+            display: flex;
+            flex-direction: column;
+            padding: 14px 14px 0;
+            will-change: transform;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .card.is-dragging { cursor: grabbing; }
 
-        .demo-caption {
+        .card .well {
+            flex: 1;
+            background: #1A1A18;
+            border-radius: 1px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card .well img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(4px);
+            transform: scale(1.08);
+            display: block;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+        .card .well .frost {
+            position: absolute;
+            inset: 0;
+            background: rgba(128, 128, 128, 0.14);
+            pointer-events: none;
+        }
+        .card .well .aperture {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .card .well .aperture .ring {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1.5px solid rgba(255, 255, 255, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card .well .aperture .dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+        }
+
+        .card .caption {
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 4px 0;
+        }
+        .card .caption .note {
+            font-family: 'Caveat', cursive;
+            font-size: 17px;
+            color: #2A2923;
+        }
+        .card .caption .time {
             font-family: 'DM Mono', monospace;
-            font-size: 12px;
+            font-size: 9px;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: rgba(42, 41, 35, 0.45);
+        }
+
+        .demo-hint {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: #9A9A9A;
             text-align: center;
-            margin-top: 16px;
+            margin-top: 24px;
+            line-height: 1.7;
+            transition: opacity 0.4s ease;
         }
+        .demo-hint.dim { opacity: 0; }
 
         /* ── The Rule ── */
         .the-rule {
@@ -387,36 +423,13 @@
 
     <!-- DEMO -->
     <section class="demo fade-up">
-        <div class="demo-label">tap any to reveal</div>
-        <div class="demo-grid">
-            <!-- Row 1: 2 tiles -->
-            <div class="demo-row">
-                <div class="demo-tile t1" onclick="this.classList.toggle('revealed')">
-                    <div class="demo-tile-inner"></div>
-                    <div class="demo-tile-frost"></div>
-                </div>
-                <div class="demo-tile t2" onclick="this.classList.toggle('revealed')">
-                    <div class="demo-tile-inner"></div>
-                    <div class="demo-tile-frost"></div>
-                </div>
-            </div>
-            <!-- Row 2: 3 tiles -->
-            <div class="demo-row">
-                <div class="demo-tile t3" onclick="this.classList.toggle('revealed')">
-                    <div class="demo-tile-inner"></div>
-                    <div class="demo-tile-frost"></div>
-                </div>
-                <div class="demo-tile t4" onclick="this.classList.toggle('revealed')">
-                    <div class="demo-tile-inner"></div>
-                    <div class="demo-tile-frost"></div>
-                </div>
-                <div class="demo-tile t5" onclick="this.classList.toggle('revealed')">
-                    <div class="demo-tile-inner"></div>
-                    <div class="demo-tile-frost"></div>
-                </div>
-            </div>
+        <div class="demo-label">a day, polaroid by polaroid</div>
+        <div class="stage" id="stage">
+            <div class="pile" id="pile"></div>
         </div>
-        <div class="demo-caption">five photos · today</div>
+        <p class="demo-hint" id="demoHint">
+            swipe the top photo · five a day, no more
+        </p>
     </section>
 
     <!-- THE RULE -->
@@ -473,11 +486,202 @@
     </footer>
 
     <script>
+        // Fade-up on scroll
         const observer = new IntersectionObserver(
             (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
             { threshold: 0.15 }
         );
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Polaroid stack — vanilla JS, scoped via IIFE
+        (function () {
+            const PHOTOS = [
+                { src: 'onboarding_day_5.jpg', time: '9:51 pm', note: 'home, finally',     tilt: -2.4 },
+                { src: 'onboarding_day_4.jpg', time: '7:30 pm', note: 'one more game',     tilt:  1.8 },
+                { src: 'onboarding_day_3.jpg', time: '4:08 pm', note: 'still here',        tilt: -1.2 },
+                { src: 'onboarding_day_2.jpg', time: '1:42 pm', note: 'sun kept showing',  tilt:  2.6 },
+                { src: 'onboarding_day_1.jpg', time: '9:14 am', note: 'the usual',         tilt: -1.6 }
+            ];
+
+            let order = PHOTOS.map((_, i) => i);
+            const cards = [];
+            let cycling = false;
+            let dragging = false;
+            let dragLockedHorizontal = false;
+            let dragStartX = 0;
+            let dragStartY = 0;
+            let dragX = 0;
+            let interacted = false;
+
+            const pile = document.getElementById('pile');
+            const stage = document.getElementById('stage');
+            const hintEl = document.getElementById('demoHint');
+            if (!pile || !stage) return;
+
+            function buildCards() {
+                PHOTOS.forEach((p, i) => {
+                    const c = document.createElement('div');
+                    c.className = 'card';
+                    c.dataset.idx = String(i);
+                    c.innerHTML =
+                        '<div class="well">' +
+                            '<img src="' + p.src + '" alt="">' +
+                            '<div class="frost"></div>' +
+                            '<div class="aperture"><div class="ring"><div class="dot"></div></div></div>' +
+                        '</div>' +
+                        '<div class="caption">' +
+                            '<span class="note">&ldquo;' + p.note + '&rdquo;</span>' +
+                            '<span class="time">' + p.time + '</span>' +
+                        '</div>';
+                    pile.appendChild(c);
+                    cards.push(c);
+                });
+                layoutAll();
+            }
+
+            function transformFor(photoIdx, depth, extraX) {
+                if (extraX === undefined) extraX = 0;
+                const p = PHOTOS[photoIdx];
+                const isTop = depth === 0;
+                const scale = 1 - depth * 0.025;
+                const ty = -depth * 8;
+                const tilt = isTop
+                    ? p.tilt
+                    : (p.tilt + (depth % 2 === 0 ? 1.2 : -1.4));
+                return 'translate(' + extraX + 'px, ' + ty + 'px) rotate(' + tilt + 'deg) scale(' + scale + ')';
+            }
+
+            function layoutAll() {
+                PHOTOS.forEach((_, i) => {
+                    const depth = order.indexOf(i);
+                    cards[i].style.transform = transformFor(i, depth);
+                    cards[i].style.zIndex = String(20 - depth);
+                });
+            }
+
+            function cycleTop(direction) {
+                if (cycling) return;
+                cycling = true;
+                markInteracted();
+
+                const oldTopIdx = order[0];
+                const oldCard = cards[oldTopIdx];
+                const target = direction * 380;
+                const oldTilt = PHOTOS[oldTopIdx].tilt;
+
+                // Phase 1: top card flies off
+                oldCard.style.transition = 'transform 0.42s cubic-bezier(0, 0, 0.2, 1)';
+                oldCard.style.transform =
+                    'translate(' + target + 'px, 0) rotate(' + (oldTilt + direction * 8) + 'deg) scale(1)';
+
+                // Phase 2a: rotate the deck, snap back cards forward
+                setTimeout(() => {
+                    const head = order.shift();
+                    order.push(head);
+                    oldCard.style.zIndex = '-1';
+                    PHOTOS.forEach((_, i) => {
+                        if (i === oldTopIdx) return;
+                        const depth = order.indexOf(i);
+                        cards[i].style.transition = 'transform 0.12s cubic-bezier(0, 0, 0.2, 1)';
+                        cards[i].style.transform = transformFor(i, depth);
+                        cards[i].style.zIndex = String(20 - depth);
+                    });
+                }, 420);
+
+                // Phase 2b: formerly-top alone slides home behind the pile
+                setTimeout(() => {
+                    const depth = order.indexOf(oldTopIdx);
+                    oldCard.style.transition = 'transform 0.40s cubic-bezier(0, 0, 0.2, 1)';
+                    oldCard.style.transform = transformFor(oldTopIdx, depth);
+                }, 540);
+
+                setTimeout(() => { cycling = false; }, 940);
+            }
+
+            function markInteracted() {
+                if (interacted || !hintEl) return;
+                interacted = true;
+                hintEl.classList.add('dim');
+            }
+
+            // Drag — supports mouse + touch. Detects horizontal vs vertical
+            // intent on first move so vertical scroll passes through.
+            function pointerCoords(e) {
+                if (e.touches && e.touches.length) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                return { x: e.clientX, y: e.clientY };
+            }
+
+            function onPointerDown(e) {
+                if (cycling) return;
+                const c = pointerCoords(e);
+                dragging = true;
+                dragLockedHorizontal = false;
+                dragStartX = c.x;
+                dragStartY = c.y;
+                dragX = 0;
+                if (!e.touches) e.preventDefault();
+            }
+
+            function onPointerMove(e) {
+                if (!dragging) return;
+                const c = pointerCoords(e);
+                const dx = c.x - dragStartX;
+                const dy = c.y - dragStartY;
+
+                if (!dragLockedHorizontal) {
+                    if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        dragLockedHorizontal = true;
+                        const idx = order[0];
+                        cards[idx].classList.add('is-dragging');
+                        cards[idx].style.transition = 'none';
+                    } else {
+                        dragging = false;
+                        return;
+                    }
+                }
+
+                dragX = dx;
+                const idx = order[0];
+                const topCard = cards[idx];
+                const tilt = PHOTOS[idx].tilt + dragX * 0.06;
+                topCard.style.transform =
+                    'translate(' + dragX + 'px, 0) rotate(' + tilt + 'deg) scale(1)';
+                topCard.style.opacity = String(Math.max(0.4, 1 - Math.abs(dragX) / 600));
+                if (e.cancelable) e.preventDefault();
+            }
+
+            function onPointerUp() {
+                if (!dragging) return;
+                const wasHorizontal = dragLockedHorizontal;
+                dragging = false;
+                dragLockedHorizontal = false;
+                if (!wasHorizontal) return;
+
+                const idx = order[0];
+                const topCard = cards[idx];
+                topCard.classList.remove('is-dragging');
+                topCard.style.opacity = '';
+
+                if (Math.abs(dragX) > 70) {
+                    cycleTop(dragX > 0 ? 1 : -1);
+                } else {
+                    topCard.style.transition = 'transform 0.32s cubic-bezier(0.4, 1.5, 0.4, 1)';
+                    topCard.style.transform = transformFor(idx, 0);
+                }
+                dragX = 0;
+            }
+
+            stage.addEventListener('mousedown', onPointerDown);
+            window.addEventListener('mousemove', onPointerMove);
+            window.addEventListener('mouseup', onPointerUp);
+            stage.addEventListener('touchstart', onPointerDown, { passive: true });
+            window.addEventListener('touchmove', onPointerMove, { passive: false });
+            window.addEventListener('touchend', onPointerUp);
+            window.addEventListener('touchcancel', onPointerUp);
+
+            buildCards();
+        })();
     </script>
 
 </body>
