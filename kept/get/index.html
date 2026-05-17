@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Kept — opening the App Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Three-layer redirect so this works regardless of browser quirks:
+      1. <script> at the end fires window.location.replace() — fastest,
+         runs as soon as the document parses.
+      2. <meta http-equiv="refresh"> is the JS-disabled fallback.
+      3. The visible <a> is the manual fallback if both above fail (or
+         the user's browser is doing something unusual).
+    Update the App Store URL in ALL THREE places when you have it.
+  -->
+  <meta http-equiv="refresh" content="0; url=https://apps.apple.com/app/id6763167104">
+  <style>
+    html, body { margin: 0; padding: 0; min-height: 100vh; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #F2EDE6;
+      color: #2A2923;
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      text-align: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+    }
+    p {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      opacity: 0.5;
+      margin: 6px 0;
+    }
+    a {
+      color: #2A2923;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .fallback {
+      margin-top: 28px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+    }
+  </style>
+</head>
+<body>
+  <h1>kept.</h1>
+  <p>taking you to the app store</p>
+  <p class="fallback">
+    or <a href="https://apps.apple.com/app/id6763167104">tap here</a> if you're not redirected
+  </p>
+  <script>
+    window.location.replace('https://apps.apple.com/app/id6763167104');
+  </script>
+</body>
+</html>
