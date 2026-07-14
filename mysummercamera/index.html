@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Summer Camera — a disposable camera for your iPhone</title>
+    <meta name="description" content="My Summer Camera turns your iPhone into a 90s disposable camera. 12 shots. Wind between every one. The film look is permanent.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sand: #F2E7CC;
+            --sand-deep: #E4D3A8;
+            --paper: #FBF7EC;
+            --teal: #2A6E68;
+            --teal-deep: #1C5550;
+            --ink: #4A320F;
+            --ink-soft: #7B5A2A;
+            --leak: #E85B2A;
+            --print-white: #FDFCF8;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--sand);
+            color: var(--ink);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Nav ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(242,231,204,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74,50,15,0.08);
+        }
+
+        .nav-brand {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--ink-soft);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-links a.active { color: var(--teal); font-weight: 600; }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 32px 80px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(40px, 8vw, 84px);
+            color: var(--teal-deep);
+            line-height: 1.02;
+            letter-spacing: -2px;
+        }
+
+        .hero-sub {
+            font-size: 20px;
+            color: var(--ink-soft);
+            margin-top: 20px;
+            max-width: 520px;
+            font-weight: 400;
+        }
+
+        .availability {
+            display: inline-block;
+            margin-top: 44px;
+            padding: 12px 28px;
+            border: 2px dashed var(--teal);
+            border-radius: 8px;
+            color: var(--teal-deep);
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 14px;
+            letter-spacing: 0.06em;
+            transform: rotate(-1.5deg);
+        }
+
+        /* ── Sections ── */
+        .section {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 32px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--leak);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(28px, 5vw, 40px);
+            color: var(--teal-deep);
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+        }
+
+        .section p { color: var(--ink-soft); margin-bottom: 16px; }
+        .section p strong { color: var(--ink); font-weight: 600; }
+
+        /* ── Prints (signature moments) ── */
+        .prints {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 32px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .print {
+            background: var(--print-white);
+            padding: 18px 18px 22px;
+            border-radius: 3px;
+            box-shadow: 0 14px 40px rgba(74,50,15,0.18);
+            max-width: 560px;
+        }
+        .print:nth-child(1) { transform: rotate(-1.6deg); align-self: flex-start; }
+        .print:nth-child(2) { transform: rotate(1.1deg);  align-self: flex-end; }
+        .print:nth-child(3) { transform: rotate(-0.7deg); align-self: flex-start; }
+
+        .print-photo {
+            border-radius: 2px;
+            padding: 26px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+        .print-photo::after {
+            /* faint grain */
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.10;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .print:nth-child(1) .print-photo { background: linear-gradient(160deg, #8FB8A8 0%, #6FA391 60%, #5E8F80 100%); }
+        .print:nth-child(2) .print-photo {
+            background:
+                linear-gradient(100deg, rgba(232,91,42,0.85) 0%, rgba(232,91,42,0.35) 18%, rgba(232,91,42,0) 34%),
+                linear-gradient(160deg, #C9A86B 0%, #B08F55 100%);
+        }
+        .print:nth-child(3) .print-photo { background: linear-gradient(160deg, #7FA3B8 0%, #6B8FA6 100%); }
+
+        .print-flat {
+            font-size: 15px;
+            color: rgba(255,252,242,0.85);
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .print-punch {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(24px, 4.5vw, 36px);
+            color: #FFF9EC;
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+            position: relative;
+            z-index: 1;
+        }
+
+        .print-chin {
+            padding: 14px 10px 0;
+            font-size: 14px;
+            color: var(--ink-soft);
+        }
+
+        /* ── Does / Doesn't ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            max-width: 720px;
+            margin: 0 auto 80px;
+            padding: 0 32px;
+        }
+
+        .col-header {
+            padding: 16px 24px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .col-header.yes { background: var(--teal); color: var(--paper); border-radius: 10px 10px 0 0; }
+        .col-header.no  { background: var(--sand-deep); color: var(--ink-soft); border-radius: 10px 10px 0 0; }
+
+        .col-item {
+            padding: 14px 24px;
+            font-size: 15px;
+            border-top: 1px solid rgba(74,50,15,0.10);
+        }
+        .col-item.yes { background: var(--paper); color: var(--ink); }
+        .col-item.no  { background: rgba(251,247,236,0.55); color: var(--ink-soft); text-decoration: line-through; }
+
+        /* ── Closer ── */
+        .closer {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 32px 100px;
+        }
+
+        .closer-line {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            color: var(--teal-deep);
+            letter-spacing: -0.5px;
+            margin-bottom: 18px;
+        }
+        .closer-kick { color: var(--ink-soft); font-size: 16px; }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 40px 32px;
+            border-top: 1px solid rgba(74,50,15,0.12);
+            font-size: 13px;
+            color: var(--ink-soft);
+            letter-spacing: 0.06em;
+        }
+        .footer a { color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+        .footer a:hover { color: var(--ink); }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            /* Stack does-column fully above doesn't-column (source
+               order interleaves them). */
+            .two-col { display: flex; flex-direction: column; gap: 0; }
+            .col-header.yes { order: 1; }
+            .col-item.yes   { order: 2; }
+            .col-header.no  { order: 3; margin-top: 24px; }
+            .col-item.no    { order: 4; }
+            .hero { padding: 100px 24px 60px; }
+            .section, .prints, .closer { padding-left: 24px; padding-right: 24px; }
+            .print { align-self: stretch !important; }
+            /* Nav must fit 390px: brand + 4 links at desktop sizes
+               overflow small viewports. Sized to fit 390; wraps
+               gracefully on anything narrower. */
+            .nav { padding: 14px 16px; flex-wrap: wrap; row-gap: 6px; }
+            .nav-brand { font-size: 13px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 12px; }
+        }
+
+        /* Rotated prints + slanted stamp can poke past the viewport
+           edge; never let that become a horizontal scrollbar. */
+        body { overflow-x: clip; }
+
+        /* ── Fade-in ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="https://ribbescobb.com" class="nav-brand">Ribbescobb Labs</a>
+        <div class="nav-links">
+            <a href="/mysummercamera/" class="active" aria-current="page">Summer Camera</a>
+            <a href="https://thatstronk.com">STRONK</a>
+            <a href="https://ribbescobb.com/kept">Kept</a>
+            <a href="https://ribbescobb.com/contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <svg width="128" height="128" viewBox="0 0 128 128" style="border-radius:28px;display:block;margin-bottom:40px;box-shadow:0 20px 60px rgba(42,110,104,0.28);" role="img" aria-label="My Summer Camera app icon">
+            <defs>
+                <linearGradient id="sandg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#F8ECCB"/>
+                    <stop offset="1" stop-color="#D9BC82"/>
+                </linearGradient>
+                <linearGradient id="tealg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#2A6E68"/>
+                    <stop offset="1" stop-color="#143B37"/>
+                </linearGradient>
+            </defs>
+            <rect width="128" height="77" fill="url(#sandg)"/>
+            <rect y="77" width="128" height="51" fill="url(#tealg)"/>
+            <rect y="75" width="128" height="3" fill="#0A211E"/>
+            <rect x="72" y="86" width="42" height="30" rx="4" fill="#EDD9A4"/>
+            <rect x="76" y="90" width="34" height="22" rx="2" fill="#0B0D0D"/>
+            <circle cx="84" cy="97" r="4" fill="#F8ECCB"/>
+            <rect x="14" y="88" width="34" height="7" rx="2" fill="#F2EDDC" opacity="0.85"/>
+            <rect x="14" y="100" width="24" height="7" rx="2" fill="#F2EDDC" opacity="0.55"/>
+        </svg>
+        <h1 class="hero-title">MY SUMMER<br>CAMERA.</h1>
+        <p class="hero-sub">Your iPhone becomes a disposable camera. 12 shots. Wind between every one.</p>
+        <div class="availability">IN TESTING · SUMMER 2026</div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section class="section fade-up">
+        <div class="section-label">What it is</div>
+        <p><strong>Hold your phone sideways. The volume button is the shutter. Wind the film with your thumb. You get 12 shots.</strong></p>
+        <p>Every photo comes out the way film came out: a little warm, a little grainy, blacks that never quite reach black. Once in a while the film door leaks and a streak of orange light walks across your shot. We are not going to apologize for that.</p>
+        <p>There is no feed. There are no likes. There is no filter picker, because the film is the filter and you already bought the camera.</p>
+    </section>
+
+    <!-- THE PRINTS -->
+    <div class="section fade-up" style="padding-bottom: 20px;">
+        <div class="section-label">The prints</div>
+        <h2>Permanent. Like consequences.</h2>
+        <p>The film look bakes into every shot at the moment you take it. Not a preview. Not an edit you can undo. What lands in your camera roll is the print, and the print is what happened.</p>
+    </div>
+
+    <div class="prints fade-up">
+        <div class="print">
+            <div class="print-photo">
+                <div class="print-flat">Shot 4 of 12.</div>
+                <div class="print-punch">EVERYONE BLINKED.</div>
+            </div>
+            <div class="print-chin">You'll find out in the camera roll. That's the deal.</div>
+        </div>
+        <div class="print">
+            <div class="print-photo">
+                <div class="print-flat">Shot 7 of 12.</div>
+                <div class="print-punch">A LIGHT LEAK.</div>
+            </div>
+            <div class="print-chin">That's not a bug. That's the door seal. It's from the 90s.</div>
+        </div>
+        <div class="print">
+            <div class="print-photo">
+                <div class="print-flat">Shot 12 of 12.</div>
+                <div class="print-punch">END OF ROLL.</div>
+            </div>
+            <div class="print-chin">Twelve chances. You took all of them. Load another.</div>
+        </div>
+    </div>
+
+    <!-- DOES / DOESN'T -->
+    <div class="section fade-up" style="padding-bottom: 24px;">
+        <div class="section-label">The whole feature list</div>
+        <h2>What it does. And what it will never do.</h2>
+    </div>
+
+    <div class="two-col fade-up">
+        <div class="col-header yes">It does</div>
+        <div class="col-header no">It doesn't</div>
+        <div class="col-item yes">Shoot with the volume button, like a real one</div>
+        <div class="col-item no">Put a camera button on the screen</div>
+        <div class="col-item yes">Make you wind the film between shots</div>
+        <div class="col-item no">Let you machine-gun 400 photos of brunch</div>
+        <div class="col-item yes">Bake the film look in, permanently</div>
+        <div class="col-item no">Offer 200 filters to agonize over</div>
+        <div class="col-item yes">Leak light through the film door sometimes</div>
+        <div class="col-item no">Apologize for it</div>
+        <div class="col-item yes">Save your prints to the camera roll</div>
+        <div class="col-item no">Build you a feed</div>
+        <div class="col-item yes">Work with zero accounts or logins</div>
+        <div class="col-item no">Ask for your email</div>
+    </div>
+
+    <!-- CLOSER -->
+    <div class="closer fade-up">
+        <div class="closer-line">Wind it. Shoot it. Live with it.</div>
+        <div class="closer-kick">Coming to the App Store. Currently being field-tested by the founder's adult children.</div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        &copy; <a href="https://ribbescobb.com">Ribbescobb Labs</a>, LLC 2026
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(
+            (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+            { threshold: 0.15 }
+        );
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
