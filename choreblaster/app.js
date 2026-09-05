@@ -174,6 +174,7 @@ function kidChore(c, k) {
 function viewWho() {
   return `<div class="splash"><h1>Chore<span>Blaster</span></h1><p>${esc(S.family.name) || 'Who\'s this?'}</p></div>
     <div class="who-grid">${S.people.map(p => `<button class="who-tile" data-act="pick" data-id="${p.id}"><div class="avatar lg ${p.role === 'sup' ? 'sup' : ''}">${p.emoji}</div><div class="n">${esc(p.name)}</div><div class="r">${p.role === 'sup' ? '🔒 Grown-up' : 'Kid'}</div></button>`).join('')}</div>
+    ${S.family.demo ? `<div class="card" style="margin-top:16px;text-align:center"><p class="fine">This is the demo family. Grown-up PIN is <b>1234</b>.</p><div style="margin-top:10px"><button class="btn block" data-act="leave-demo">Leave the demo and set up your family</button></div></div>` : ''}
     <div class="footer">Everyone shares this device for now. Grown-ups need their PIN.</div>`;
 }
 function viewSetup() {
@@ -431,7 +432,7 @@ function submitSetup(form) {
   S = fam; save(); ensureWeek(); render(); toast('Welcome, ' + (fam.family.name || 'family') + '!');
 }
 function loadDemo() {
-  const fam = blank(); fam.family.name = 'The Blasters';
+  const fam = blank(); fam.family.name = 'The Blasters'; fam.family.demo = true;
   const mom = { id: uid(), name: 'Mom', role: 'sup', pin: '1234', emoji: '👩' }, dad = { id: uid(), name: 'Dad', role: 'sup', pin: '1234', emoji: '👨' };
   const ava = { id: uid(), name: 'Ava', role: 'kid', emoji: '🦊' }, max = { id: uid(), name: 'Max', role: 'kid', emoji: '🦖' };
   fam.people = [mom, dad, ava, max];
@@ -490,6 +491,7 @@ document.addEventListener('click', e => {
     case 'more-kids': ui.setupKids++; render(); break;
     case 'cycle-emoji': { const pool = el.dataset.kind === 'sup' ? SUP_EMOJIS : EMOJIS; const i = pool.indexOf(el.textContent); el.textContent = pool[(i + 1) % pool.length]; break; }
     case 'demo': loadDemo(); break;
+    case 'leave-demo': sheetConfirm('Leave the demo?', 'The demo family and its pretend money go away. You start fresh with your own family.', 'Leave demo', () => { localStorage.removeItem(KEY); localStorage.removeItem(SESSION_KEY); S = blank(); session = {}; ui.setupSups = 2; ui.setupKids = 2; render(); }, true); break;
   }
 });
 document.addEventListener('submit', e => { if (e.target.id === 'setup') { e.preventDefault(); submitSetup(e.target); } });
