@@ -39,6 +39,7 @@ const kids = () => S.people.filter(p => p.role === 'kid');
 const sups = () => S.people.filter(p => p.role === 'sup');
 const me = () => person(session.userId);
 const isSup = () => me()?.role === 'sup';
+const isDemo = () => !!S.family.demo || (S.family.name === 'The Blasters' && S.people.some(p => p.name === 'Ava' && p.role === 'kid'));
 
 /* ---------- dates & weeks ---------- */
 function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
@@ -174,7 +175,7 @@ function kidChore(c, k) {
 function viewWho() {
   return `<div class="splash"><h1>Chore<span>Blaster</span></h1><p>${esc(S.family.name) || 'Who\'s this?'}</p></div>
     <div class="who-grid">${S.people.map(p => `<button class="who-tile" data-act="pick" data-id="${p.id}"><div class="avatar lg ${p.role === 'sup' ? 'sup' : ''}">${p.emoji}</div><div class="n">${esc(p.name)}</div><div class="r">${p.role === 'sup' ? '🔒 Grown-up' : 'Kid'}</div></button>`).join('')}</div>
-    ${S.family.demo ? `<div class="card" style="margin-top:16px;text-align:center"><p class="fine">This is the demo family. Grown-up PIN is <b>1234</b>.</p><div style="margin-top:10px"><button class="btn block" data-act="leave-demo">Leave the demo and set up your family</button></div></div>` : ''}
+    ${isDemo() ? `<div class="card" style="margin-top:16px;text-align:center"><p class="fine">This is the demo family. Grown-up PIN is <b>1234</b>.</p><div style="margin-top:10px"><button class="btn block" data-act="leave-demo">Leave the demo and set up your family</button></div></div>` : ''}
     <div class="footer">Everyone shares this device for now. Grown-ups need their PIN.</div>`;
 }
 function viewSetup() {
