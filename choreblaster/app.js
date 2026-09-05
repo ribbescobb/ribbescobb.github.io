@@ -143,7 +143,7 @@ function header(sub) {
     <button class="link" data-act="signout">Switch</button>
   </header>`;
 }
-function tagDay(c) { if (!c.day) return ''; return c.day === today() ? '<span class="tag daily">📅 Today</span>' : `<span class="tag daily">📅 ${dayName(c.day)}</span>`; }
+function tagDay(c) { if (c.day) return c.day === today() ? '<span class="tag daily">📅 Daily · Today</span>' : `<span class="tag daily">📅 Daily · ${dayName(c.day)}</span>`; return c.templateId ? '<span class="tag standing">🔁 Weekly</span>' : '<span class="tag">One-time</span>'; }
 function tagMode(c) { return c.mode === 'inspect' ? '<span class="tag inspect">🔍 Inspected</span>' : '<span class="tag honor">✓ Honor</span>'; }
 function tagWho(id, prefix) { const p = person(id); return p ? `<span class="tag who">${prefix || ''}${p.emoji} ${esc(p.name)}</span>` : ''; }
 function tagState(c) {
@@ -239,7 +239,7 @@ function supChore(c) {
   else if (c.state === 'approved') actions = `<button class="btn ghost sm" data-act="undo" data-id="${c.id}">Undo</button>`;
   else if (c.state === 'claimed') actions = `<button class="btn ghost sm" data-act="release" data-id="${c.id}">Release claim</button>`;
   if (c.state !== 'paid') actions += `<button class="btn ghost sm" data-act="edit-chore" data-id="${c.id}">Edit</button>`;
-  return `<div class="chore ${isEarned(c) ? 'done' : ''}"><div class="body"><div class="title">${esc(c.title)}</div><div class="tags">${tagDay(c)}${tagMode(c)}${c.claimedBy ? tagWho(c.claimedBy) : c.assignedTo ? tagWho(c.assignedTo, 'For ') : ''}${tagState(c)}${c.templateId && !c.day ? '<span class="tag standing">🔁</span>' : ''}</div>
+  return `<div class="chore ${isEarned(c) ? 'done' : ''}"><div class="body"><div class="title">${esc(c.title)}</div><div class="tags">${tagDay(c)}${tagMode(c)}${c.claimedBy ? tagWho(c.claimedBy) : c.assignedTo ? tagWho(c.assignedTo, 'For ') : ''}${tagState(c)}</div>
     ${c.note && c.state === 'claimed' ? `<div class="note">${esc(c.note)}</div>` : ''}${actions ? `<div class="actions">${actions}</div>` : ''}</div><div class="price">${money(c.price)}</div></div>`;
 }
 function supChores() {
