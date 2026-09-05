@@ -332,10 +332,31 @@ function sheetOverPot(w, after, add) {
 }
 function sheetEditChore(c) {
   const t = c.templateId ? S.templates.find(t => t.id === c.templateId) : null;
-  openSheet('Edit chore', choreForm(c, `${t ? `<label class="check"><input type="checkbox" name="sync"> Also update the standing chore${c.day ? ' (and the other days this week)' : ' for future weeks'}</label>` : ''}<div class="foot"><button class="btn danger" type="button" data-act="delete-chore" data-id="${c.id}">Remove</button><button class="btn primary" type="submit">Save</button></div>`), {
+  const cur = t ? (t.freq || 'weekly') : 'once';
+  const extra = segField('repeat', cur, [['once', 'Just this week'], ['weekly', '🔁 Every week'], ['daily', '📅 Every day']], 'Repeats')
+    + `<p class="fine" style="margin-top:-8px;margin-bottom:14px">${t ? 'Switching to "just this week" retires the standing chore and keeps this one.' : 'Every week and every day turn this into a standing chore.'} Dailies pay per day, one day at a time, no claim step.</p>`
+    + (t ? `<label class="check"><input type="checkbox" name="sync"> Also update the standing chore${c.day ? ' (and the other days this week)' : ' for future weeks'}</label>` : '')
+    + `<div class="foot"><button class="btn danger" type="button" data-act="delete-chore" data-id="${c.id}">Remove</button><button class="btn primary" type="submit">Save</button></div>`;
+  openSheet('Edit chore', choreForm(c, extra), {
     onSubmit(fd) {
       const d = readChore(fd); if (!d.title) return;
-      Object.assign(c, d); if (t && fd.get('sync')) { Object.assign(t, d); week().chores.forEach(x => { if (x.templateId === t.id && x.state === 'open' && x !== c) Object.assign(x, d); }); }
+      const rep = fd.get('repeat') || cur; const w = week();
+      Object.assign(c, d);
+      if (t && fd.get('sync')) { Object.assign(t, d); w.chores.forEach(x => { if (x.templateId === t.id && x.state === 'open' && x !== c) Object.assign(x, d); }); }
+      if (rep !== cur) {
+        const dropOpenSiblings = id => { w.chores = w.chores.filter(x => x === c || x.templateId !== id || x.state !== 'open'); };
+        if (rep === 'once') {
+          if (t) { t.archived = true; dropOpenSiblings(t.id); }
+          c.templateId = null; c.day = null; c.freq = 'weekly';
+        } else {
+          let nt = t;
+          if (!nt) { nt = Object.assign({ id: uid(), archived: false }, d); S.templates.push(nt); c.templateId = nt.id; }
+          else Object.assign(nt, d);
+          nt.freq = rep; dropOpenSiblings(nt.id);
+          if (rep === 'daily') { c.freq = 'daily'; c.day = c.day || today(); w.chores.push(...instancesFrom(nt, w, addDays(today(), 1))); }
+          else { c.freq = 'weekly'; c.day = null; }
+        }
+      }
       if (c.state === 'approved') { const e = S.ledger.find(e => e.type === 'chore' && e.choreId === c.id); if (e) { e.amount = d.price; e.title = d.title; } }
       save(); closeSheet(); render();
     }
