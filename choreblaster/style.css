@@ -55,7 +55,8 @@ a { color: var(--blast-dark); }
 .card { background: var(--card); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
 .card.hero { background: linear-gradient(135deg, #FF7A45, #FF5C2A); color: #fff; }
 .card.hero .big { font-family: var(--head); font-size: 44px; font-weight: 700; line-height: 1; margin: 6px 0 4px; }
-.card.hero .row { display: flex; gap: 18px; margin-top: 12px; font-size: 14px; opacity: .95; }
+.card.hero .row { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 12px; font-size: 13px; opacity: .95; }
+.card.hero .row > div { white-space: nowrap; }
 .card.hero .row b { display: block; font-size: 18px; font-family: var(--head); font-weight: 600; }
 .card.hero .label { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; opacity: .9; font-weight: 700; }
 .card.gold { background: linear-gradient(135deg, #FFD65A, #F5B301); }
