@@ -91,6 +91,7 @@ a { color: var(--blast-dark); }
 .tag.cashed { background: var(--cash-soft); color: var(--cash-dark); }
 .tag.paid { background: var(--line); color: var(--muted); }
 .tag.rejected { background: var(--danger-soft); color: #9F1D22; }
+.tag.daily { background: #FFE8D6; color: #9A3F12; }
 .tag.standing { background: #F3E8FF; color: #6D28D9; }
 
 /* Buttons */
@@ -212,5 +213,6 @@ a { color: var(--blast-dark); }
 .starter input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--blast); }
 .starter .t { flex: 1; font-weight: 700; }
 .starter .p { font-weight: 800; color: var(--cash-dark); }
+.starter .p small { font-size: 11px; color: var(--muted); }
 .starter .m { font-size: 11px; }
 .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 30px 0 10px; }

@@ -9,10 +9,10 @@ const EMOJIS = ['🦊','🐯','🦄','🐸','🐼','🦖','🐙','🚀','⚡','�
 const SUP_EMOJIS = ['👩','👨','🧑','👵','👴','🧔','👩‍🦱','👨‍🦲','🧙','🦸'];
 const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const STARTERS = [
-  ['Empty the dishwasher', 3, 'honor'], ['Take out the trash', 2, 'honor'], ['Feed the dog', 1, 'honor'],
-  ['Water the plants', 2, 'honor'], ['Clean your room', 5, 'inspect'], ['Vacuum the living room', 4, 'inspect'],
-  ['Fold a load of laundry', 4, 'inspect'], ['Mow the lawn', 12, 'inspect'], ['Wipe down the bathroom', 6, 'inspect'],
-  ['Clear the table after dinner', 1, 'honor'],
+  ['Empty the dishwasher', 1, 'honor', 'daily'], ['Take out the trash', 1, 'honor', 'daily'], ['Feed the dog', 1, 'honor', 'daily'],
+  ['Clear the table after dinner', 1, 'honor', 'daily'], ['Water the plants', 2, 'honor', 'weekly'], ['Clean your room', 5, 'inspect', 'weekly'],
+  ['Vacuum the living room', 4, 'inspect', 'weekly'], ['Fold a load of laundry', 4, 'inspect', 'weekly'], ['Mow the lawn', 12, 'inspect', 'weekly'],
+  ['Wipe down the bathroom', 6, 'inspect', 'weekly'],
 ];
 
 /* ---------- state ---------- */
@@ -50,12 +50,23 @@ function weekLabel(w) { return 'Week of ' + fmtDate(parseYmd(w.start)); }
 function daysLeft(w) { const end = parseYmd(w.start); end.setDate(end.getDate() + 6); const t = new Date(); t.setHours(0, 0, 0, 0); return Math.max(0, Math.round((end - t) / 86400000)); }
 function paydayName() { return DAYS[(S.family.weekStartDay + 6) % 7]; }
 
-function instanceFrom(t) { return { id: uid(), templateId: t.id, title: t.title, price: t.price, mode: t.mode, assignedTo: t.assignedTo || null, state: 'open', claimedBy: null, note: '' }; }
+const today = () => ymd(new Date());
+function addDays(s, n) { const d = parseYmd(s); d.setDate(d.getDate() + n); return ymd(d); }
+function dayName(s) { return parseYmd(s).toLocaleDateString(undefined, { weekday: 'short' }); }
+function instanceFrom(t, day) { return { id: uid(), templateId: t.id, title: t.title, price: t.price, mode: t.mode, assignedTo: t.assignedTo || null, freq: t.freq || 'weekly', day: day || null, state: 'open', claimedBy: null, note: '' }; }
+/* All instances a template contributes to a week. Dailies get one per day, from `from` (default: week start) to week end. */
+function instancesFrom(t, w, from) {
+  if (t.freq !== 'daily') return [instanceFrom(t)];
+  const out = []; for (let i = 0; i < 7; i++) { const d = addDays(w.start, i); if (!from || d >= from) out.push(instanceFrom(t, d)); } return out;
+}
+/* Which instances belong on today's board: everything weekly, today's dailies, and past dailies that were done or sent back. */
+function visible(c) { if (!c.day) return true; const t = today(); if (c.day > t) return false; if (c.day < t) return c.state !== 'open'; return true; }
 function ensureWeek() {
   const startId = ymd(weekStartOf(new Date()));
   let w = S.weeks.find(w => w.start === startId);
   if (w) return w;
-  w = { id: uid(), start: startId, pot: S.family.defaultPot, chores: S.templates.filter(t => !t.archived).map(instanceFrom) };
+  w = { id: uid(), start: startId, pot: S.family.defaultPot, chores: [] };
+  S.templates.filter(t => !t.archived).forEach(t => w.chores.push(...instancesFrom(t, w)));
   S.weeks.push(w); S.weeks.sort((a, b) => a.start < b.start ? -1 : 1); save();
   return w;
 }
@@ -68,6 +79,7 @@ function weekEntries(w, kidId) { return S.ledger.filter(e => e.weekId === w.id &
 function weekEarned(w, kidId) { return weekEntries(w, kidId).reduce((s, e) => s + e.amount, 0); }
 function pendingAmt(w, kidId) { return w.chores.filter(c => c.state === 'done' && c.claimedBy === kidId).reduce((s, c) => s + Number(c.price), 0); }
 function balance(kidId) { return S.ledger.filter(e => e.kidId === kidId).reduce((s, e) => s + e.amount, 0); }
+function rollup(entries) { const out = []; entries.forEach(e => { const hit = e.type === 'chore' && out.find(o => o.type === 'chore' && o.title === e.title); if (hit) { hit.n++; hit.amount += e.amount; } else out.push(Object.assign({ n: 1 }, e)); }); return out; }
 function ranking(w) { return kids().map(k => ({ k, amt: weekEarned(w, k.id) })).sort((a, b) => b.amt - a.amt); }
 
 /* ---------- actions ---------- */
@@ -80,13 +92,15 @@ function claim(c) {
   if (c.state !== 'open') return toast('Someone already grabbed that.');
   if (c.assignedTo && c.assignedTo !== k.id) return toast('That one is assigned to ' + person(c.assignedTo)?.name + '.');
   const cap = Number(S.family.claimCap);
-  const open = w.chores.filter(x => x.state === 'claimed' && x.claimedBy === k.id && x.assignedTo !== k.id).length;
+  const open = w.chores.filter(x => x.state === 'claimed' && x.claimedBy === k.id && x.assignedTo !== k.id && !x.day).length;
   if (cap > 0 && !c.assignedTo && open >= cap) return toast('Finish one first. You can hold ' + cap + ' at a time.');
   c.state = 'claimed'; c.claimedBy = k.id; c.claimedAt = Date.now(); save(); render(); toast('Claimed! Go get it.');
 }
 function unclaim(c) { c.state = 'open'; c.claimedBy = null; c.note = ''; save(); render(); }
 function markDone(c) {
   const k = me();
+  if (c.state === 'open' && c.assignedTo && c.assignedTo !== k.id) return toast('That one is for ' + person(c.assignedTo)?.name + '.');
+  if (c.state === 'open' && !c.day && c.assignedTo !== k.id) return toast('Claim it first.');
   if (!c.claimedBy) c.claimedBy = k.id;
   c.doneAt = Date.now();
   if (c.mode === 'honor') { approve(c, null); pop('+' + money(c.price)); toast('Cashed in!'); }
@@ -129,6 +143,7 @@ function header(sub) {
     <button class="link" data-act="signout">Switch</button>
   </header>`;
 }
+function tagDay(c) { if (!c.day) return ''; return c.day === today() ? '<span class="tag daily">📅 Today</span>' : `<span class="tag daily">📅 ${dayName(c.day)}</span>`; }
 function tagMode(c) { return c.mode === 'inspect' ? '<span class="tag inspect">🔍 Inspected</span>' : '<span class="tag honor">✓ Honor</span>'; }
 function tagWho(id, prefix) { const p = person(id); return p ? `<span class="tag who">${prefix || ''}${p.emoji} ${esc(p.name)}</span>` : ''; }
 function tagState(c) {
@@ -146,9 +161,10 @@ function leaderboard(myId) {
 /* --- kid --- */
 function viewKid() {
   const k = me(); const w = week();
-  const mine = w.chores.filter(c => (c.claimedBy === k.id && ['claimed', 'done'].includes(c.state)) || (c.state === 'open' && c.assignedTo === k.id));
-  const grabs = w.chores.filter(c => c.state === 'open' && !c.assignedTo);
-  const cashed = w.chores.filter(c => c.claimedBy === k.id && isEarned(c));
+  const vis = w.chores.filter(visible);
+  const mine = vis.filter(c => (c.claimedBy === k.id && ['claimed', 'done'].includes(c.state)) || (c.state === 'open' && c.assignedTo === k.id));
+  const grabs = vis.filter(c => c.state === 'open' && !c.assignedTo);
+  const cashed = vis.filter(c => c.claimedBy === k.id && isEarned(c));
   const earned = weekEarned(w, k.id), pend = pendingAmt(w, k.id), bal = balance(k.id);
   const r = ranking(w); const myRank = r.findIndex(x => x.k.id === k.id) + 1;
   return header(weekSub()) + `
@@ -164,10 +180,10 @@ function viewKid() {
 }
 function kidChore(c, k) {
   let actions = '';
-  if (c.state === 'open' && c.assignedTo === k.id) actions = `<button class="btn cash" data-act="done" data-id="${c.id}">✓ Mark done</button>`;
+  if (c.state === 'open' && (c.assignedTo === k.id || c.day)) actions = `<button class="btn cash" data-act="done" data-id="${c.id}">✓ Mark done</button>`;
   else if (c.state === 'open') actions = `<button class="btn primary" data-act="claim" data-id="${c.id}">Claim it</button>`;
   else if (c.state === 'claimed' && c.claimedBy === k.id) actions = `<button class="btn cash" data-act="done" data-id="${c.id}">✓ Mark done</button>${c.assignedTo === k.id ? '' : `<button class="btn ghost sm" data-act="unclaim" data-id="${c.id}">Give it back</button>`}`;
-  return `<div class="chore ${isEarned(c) ? 'done' : ''}"><div class="body"><div class="title">${esc(c.title)}</div><div class="tags">${tagMode(c)}${c.assignedTo ? tagWho(c.assignedTo, 'For ') : ''}${tagState(c)}</div>
+  return `<div class="chore ${isEarned(c) ? 'done' : ''}"><div class="body"><div class="title">${esc(c.title)}</div><div class="tags">${tagDay(c)}${tagMode(c)}${c.assignedTo ? tagWho(c.assignedTo, 'For ') : ''}${tagState(c)}</div>
     ${c.note && c.state === 'claimed' ? `<div class="note">${esc(c.note)}</div>` : ''}${actions ? `<div class="actions">${actions}</div>` : ''}</div><div class="price">${money(c.price)}</div></div>`;
 }
 
@@ -187,7 +203,7 @@ function viewSetup() {
     <div class="field"><label>Weekly pot</label><div class="money-in"><input type="number" name="pot" value="50" min="0" step="1" inputmode="decimal"></div><div class="hint">The most you'll pay out in a week. Chores you add draw from it.</div></div>
     <div class="field"><label>Grown-ups (pick a 4-digit PIN each)</label>${supRows}<button class="link" type="button" data-act="more-sups">+ Add another grown-up</button></div>
     <div class="field"><label>Kids (tap the emoji to change it)</label>${kidRows}<button class="link" type="button" data-act="more-kids">+ Add another kid</button></div>
-    <div class="field"><label>Starter chores (edit any of these later)</label>${STARTERS.map(([t, p, m], i) => `<label class="starter"><input type="checkbox" name="st-${i}" checked><span class="t">${t}</span><span class="tag ${m} m">${m === 'inspect' ? '🔍' : '✓'}</span><span class="p">${money(p)}</span></label>`).join('')}</div>
+    <div class="field"><label>Starter chores (edit any of these later)</label>${STARTERS.map(([t, p, m, f], i) => `<label class="starter"><input type="checkbox" name="st-${i}" checked><span class="t">${t}</span><span class="tag ${m} m">${m === 'inspect' ? '🔍' : '✓'}</span><span class="p">${money(p)}${f === 'daily' ? '<small>/day</small>' : ''}</span></label>`).join('')}</div>
     <button class="btn primary block" type="submit">Let's go</button>
     <p class="fine" style="text-align:center;margin-top:14px">or <button class="link" type="button" data-act="demo">load a demo family</button> to poke around</p>
   </form>
@@ -204,11 +220,13 @@ function viewSup() {
 }
 function supBoard() {
   const w = week(); const alloc = allocated(w); const pct = w.pot > 0 ? Math.min(100, alloc / w.pot * 100) : 100;
-  const queue = w.chores.filter(c => c.state === 'done');
-  const groups = [['Open', w.chores.filter(c => c.state === 'open')], ['In progress', w.chores.filter(c => c.state === 'claimed')], ['Cashed in', w.chores.filter(c => isEarned(c))]];
+  const vis = w.chores.filter(visible);
+  const queue = vis.filter(c => c.state === 'done');
+  const groups = [['Open', vis.filter(c => c.state === 'open')], ['In progress', vis.filter(c => c.state === 'claimed')], ['Cashed in', vis.filter(c => isEarned(c))]];
   return `<div class="card pot"><div class="head"><div><div class="fine" style="font-weight:800;text-transform:uppercase;letter-spacing:.06em">This week's pot</div><div class="amt">${money(w.pot)}</div></div><button class="btn sm" data-act="edit-pot">Edit</button></div>
     <div class="bar"><i class="${alloc > w.pot ? 'over' : ''}" style="width:${pct}%"></i></div>
     <div class="meta"><span>${money(alloc)} in chores${alloc > w.pot ? ` · <span style="color:var(--danger)">${money(alloc - w.pot)} over</span>` : ''}</span><span>${money(Math.max(0, w.pot - alloc))} unallocated</span></div>
+    ${w.chores.some(c => c.day) ? '<p class="fine" style="margin-top:6px">Dailies count every day of the week toward the pot. The board shows today\'s.</p>' : ''}
     <div style="margin-top:12px"><button class="btn primary block" data-act="add-chore">+ Add a chore this week</button></div></div>
     ${leaderboard()}
     ${queue.length ? `<div class="section"><h2>🔍 Needs inspection</h2><span class="count">${queue.length}</span></div>${queue.map(supChore).join('')}` : ''}
@@ -221,15 +239,15 @@ function supChore(c) {
   else if (c.state === 'approved') actions = `<button class="btn ghost sm" data-act="undo" data-id="${c.id}">Undo</button>`;
   else if (c.state === 'claimed') actions = `<button class="btn ghost sm" data-act="release" data-id="${c.id}">Release claim</button>`;
   if (c.state !== 'paid') actions += `<button class="btn ghost sm" data-act="edit-chore" data-id="${c.id}">Edit</button>`;
-  return `<div class="chore ${isEarned(c) ? 'done' : ''}"><div class="body"><div class="title">${esc(c.title)}</div><div class="tags">${tagMode(c)}${c.claimedBy ? tagWho(c.claimedBy) : c.assignedTo ? tagWho(c.assignedTo, 'For ') : ''}${tagState(c)}${c.templateId ? '<span class="tag standing">🔁</span>' : ''}</div>
+  return `<div class="chore ${isEarned(c) ? 'done' : ''}"><div class="body"><div class="title">${esc(c.title)}</div><div class="tags">${tagDay(c)}${tagMode(c)}${c.claimedBy ? tagWho(c.claimedBy) : c.assignedTo ? tagWho(c.assignedTo, 'For ') : ''}${tagState(c)}${c.templateId && !c.day ? '<span class="tag standing">🔁</span>' : ''}</div>
     ${c.note && c.state === 'claimed' ? `<div class="note">${esc(c.note)}</div>` : ''}${actions ? `<div class="actions">${actions}</div>` : ''}</div><div class="price">${money(c.price)}</div></div>`;
 }
 function supChores() {
   const w = week(); const live = S.templates.filter(t => !t.archived);
-  const total = live.reduce((s, t) => s + Number(t.price), 0);
+  const total = live.reduce((s, t) => s + Number(t.price) * (t.freq === 'daily' ? 7 : 1), 0);
   return `<div class="card"><h2>Standing chores</h2><p class="fine" style="margin-top:4px">These show up automatically every new week. ${live.length ? `Right now that's ${money(total)} against a ${money(S.family.defaultPot)} pot.` : ''}</p>
     <div style="margin-top:12px"><button class="btn primary block" data-act="add-template">+ Add a standing chore</button></div></div>
-    <div class="list">${live.map(t => { const inWeek = w.chores.some(c => c.templateId === t.id); return `<div class="item"><div class="body"><div class="t">${esc(t.title)}</div><div class="s">${money(t.price)} · ${t.mode === 'inspect' ? 'Inspected' : 'Honor'}${t.assignedTo ? ' · for ' + esc(person(t.assignedTo)?.name || '?') : ''}${inWeek ? '' : ' · <b>not in this week</b>'}</div></div>${inWeek ? '' : `<button class="btn sm" data-act="template-to-week" data-id="${t.id}">Add to week</button>`}<button class="kebab" data-act="edit-template" data-id="${t.id}">⋯</button></div>`; }).join('')}</div>
+    <div class="list">${live.map(t => { const inWeek = t.freq === 'daily' ? w.chores.some(c => c.templateId === t.id && c.day === today()) : w.chores.some(c => c.templateId === t.id); return `<div class="item"><div class="body"><div class="t">${esc(t.title)}</div><div class="s">${money(t.price)}${t.freq === 'daily' ? '/day' : ''} · ${t.mode === 'inspect' ? 'Inspected' : 'Honor'}${t.assignedTo ? ' · for ' + esc(person(t.assignedTo)?.name || '?') : ''}${inWeek ? '' : ' · <b>not in this week</b>'}</div></div>${inWeek ? '' : `<button class="btn sm" data-act="template-to-week" data-id="${t.id}">Add to week</button>`}<button class="kebab" data-act="edit-template" data-id="${t.id}">⋯</button></div>`; }).join('')}</div>
     ${live.length ? '' : '<div class="empty">No standing chores yet.</div>'}`;
 }
 function supPayday() {
@@ -238,7 +256,7 @@ function supPayday() {
     const entries = weekEntries(w, k.id); const bal = balance(k.id); const pend = pendingAmt(w, k.id);
     const carried = bal - S.ledger.filter(e => e.weekId === w.id && e.kidId === k.id).reduce((s, e) => s + e.amount, 0);
     return `<div class="card"><div class="between"><div class="who" style="display:flex;align-items:center;gap:10px"><div class="avatar">${k.emoji}</div><div><div style="font-weight:800">${esc(k.name)}</div><div class="fine">${weekLabel(w)}</div></div></div><div class="owed">${money(bal)}</div></div>
-      <div class="ledger" style="margin-top:10px">${entries.map(e => `<div class="l"><span>${e.type === 'chore' ? '🧹 ' : e.type === 'bonus' ? '⭐ ' : '⚠️ '}${esc(e.title || e.note || e.type)}</span><span class="${e.amount < 0 ? 'neg' : ''}">${money(e.amount)}</span></div>`).join('')}
+      <div class="ledger" style="margin-top:10px">${rollup(entries).map(e => `<div class="l"><span>${e.type === 'chore' ? '🧹 ' : e.type === 'bonus' ? '⭐ ' : '⚠️ '}${esc(e.title || e.note || e.type)}${e.n > 1 ? ` <span class="fine">×${e.n}</span>` : ''}</span><span class="${e.amount < 0 ? 'neg' : ''}">${money(e.amount)}</span></div>`).join('')}
         ${pend > 0 ? `<div class="l"><span style="color:var(--muted)">⏳ Waiting on inspection</span><span style="color:var(--muted)">${money(pend)}</span></div>` : ''}
         <div class="l total"><span>This week</span><span>${money(weekEarned(w, k.id))}</span></div>
         ${S.ledger.filter(e => e.type === 'payout' && e.weekId === w.id && e.kidId === k.id).map(e => `<div class="l"><span class="fine">💵 Paid out ${new Date(e.at).toLocaleDateString(undefined, { weekday: 'short' })}</span><span class="fine">${money(e.amount)}</span></div>`).join('')}
@@ -290,17 +308,18 @@ function choreForm(c, extra) {
     ${kidSelect('assignedTo', c.assignedTo)}${extra || ''}`;
 }
 function readChore(fd) { return { title: fd.get('title').trim(), price: Math.max(0, Number(fd.get('price')) || 0), mode: fd.get('mode') || 'honor', assignedTo: fd.get('assignedTo') || null }; }
+const freqField = (val) => segField('freq', val || 'weekly', [['weekly', '🔁 Once a week'], ['daily', '📅 Every day']], 'How often') + '<p class="fine" style="margin-top:-8px;margin-bottom:14px">Dailies pay that amount each day, show up one day at a time, and skip the claim step: first kid to mark it done gets it.</p>';
 
 function sheetAddChore(prefill) {
-  openSheet('Add a chore', choreForm(prefill || {}, `<label class="check"><input type="checkbox" name="standing"> Standing chore (comes back every week)</label><div class="foot"><button class="btn primary" type="submit">Add</button></div>`), {
+  openSheet('Add a chore', choreForm(prefill || {}, segField('repeat', 'once', [['once', 'Just this week'], ['weekly', '🔁 Every week'], ['daily', '📅 Every day']], 'Repeats') + `<p class="fine" style="margin-top:-8px;margin-bottom:14px">Every week and every day become standing chores. Dailies pay per day, one day at a time, no claim step.</p><div class="foot"><button class="btn primary" type="submit">Add</button></div>`), {
     onSubmit(fd) {
       const d = readChore(fd); if (!d.title) return;
-      const w = week(); const after = allocated(w) + d.price;
-      const add = () => {
-        let t = null;
-        if (fd.get('standing')) { t = Object.assign({ id: uid(), archived: false }, d); S.templates.push(t); }
-        w.chores.push(Object.assign(instanceFrom(t || { id: null }), d, { templateId: t ? t.id : null })); save(); closeSheet(); render(); toast('Added ' + d.title);
-      };
+      const repeat = fd.get('repeat'); const w = week();
+      let t = null, inst;
+      if (repeat === 'once') inst = [Object.assign(instanceFrom({ id: null }), d, { templateId: null })];
+      else { t = Object.assign({ id: uid(), archived: false, freq: repeat }, d); inst = instancesFrom(t, w, today()); }
+      const after = allocated(w) + inst.reduce((s, x) => s + Number(x.price), 0);
+      const add = () => { if (t) S.templates.push(t); w.chores.push(...inst); save(); closeSheet(); render(); toast('Added ' + d.title); };
       if (after > w.pot) sheetOverPot(w, after, add); else add();
     }
   });
@@ -313,10 +332,10 @@ function sheetOverPot(w, after, add) {
 }
 function sheetEditChore(c) {
   const t = c.templateId ? S.templates.find(t => t.id === c.templateId) : null;
-  openSheet('Edit chore', choreForm(c, `${t ? '<label class="check"><input type="checkbox" name="sync"> Also update the standing chore for future weeks</label>' : ''}<div class="foot"><button class="btn danger" type="button" data-act="delete-chore" data-id="${c.id}">Remove</button><button class="btn primary" type="submit">Save</button></div>`), {
+  openSheet('Edit chore', choreForm(c, `${t ? `<label class="check"><input type="checkbox" name="sync"> Also update the standing chore${c.day ? ' (and the other days this week)' : ' for future weeks'}</label>` : ''}<div class="foot"><button class="btn danger" type="button" data-act="delete-chore" data-id="${c.id}">Remove</button><button class="btn primary" type="submit">Save</button></div>`), {
     onSubmit(fd) {
       const d = readChore(fd); if (!d.title) return;
-      Object.assign(c, d); if (t && fd.get('sync')) Object.assign(t, d);
+      Object.assign(c, d); if (t && fd.get('sync')) { Object.assign(t, d); week().chores.forEach(x => { if (x.templateId === t.id && x.state === 'open' && x !== c) Object.assign(x, d); }); }
       if (c.state === 'approved') { const e = S.ledger.find(e => e.type === 'chore' && e.choreId === c.id); if (e) { e.amount = d.price; e.title = d.title; } }
       save(); closeSheet(); render();
     }
@@ -324,11 +343,12 @@ function sheetEditChore(c) {
 }
 function sheetTemplate(t) {
   const isNew = !t; t = t || {};
-  openSheet(isNew ? 'New standing chore' : 'Edit standing chore', choreForm(t, `${isNew ? '<label class="check"><input type="checkbox" name="now" checked> Also add it to this week</label>' : ''}<div class="foot">${isNew ? '' : `<button class="btn danger" type="button" data-act="archive-template" data-id="${t.id}">Retire</button>`}<button class="btn primary" type="submit">${isNew ? 'Add' : 'Save'}</button></div>`), {
+  openSheet(isNew ? 'New standing chore' : 'Edit standing chore', choreForm(t, freqField(t.freq) + `${isNew ? '<label class="check"><input type="checkbox" name="now" checked> Also add it to this week</label>' : ''}<div class="foot">${isNew ? '' : `<button class="btn danger" type="button" data-act="archive-template" data-id="${t.id}">Retire</button>`}<button class="btn primary" type="submit">${isNew ? 'Add' : 'Save'}</button></div>`), {
     onSubmit(fd) {
       const d = readChore(fd); if (!d.title) return;
-      if (isNew) { const nt = Object.assign({ id: uid(), archived: false }, d); S.templates.push(nt); if (fd.get('now')) week().chores.push(instanceFrom(nt)); }
-      else { Object.assign(t, d); const inst = week().chores.find(c => c.templateId === t.id && c.state === 'open'); if (inst) Object.assign(inst, d); }
+      d.freq = fd.get('freq') || 'weekly';
+      if (isNew) { const nt = Object.assign({ id: uid(), archived: false }, d); S.templates.push(nt); if (fd.get('now')) week().chores.push(...instancesFrom(nt, week(), today())); }
+      else { Object.assign(t, d); week().chores.forEach(c => { if (c.templateId === t.id && c.state === 'open') Object.assign(c, { title: d.title, price: d.price, mode: d.mode, assignedTo: d.assignedTo }); }); }
       save(); closeSheet(); render();
     }
   });
@@ -429,7 +449,7 @@ function submitSetup(form) {
   for (let i = 0; i < ui.setupKids; i++) { const name = (fd.get('kid-name-' + i) || '').trim(); if (name) fam.people.push({ id: uid(), name, role: 'kid', emoji: emos[ui.setupSups + i].textContent }); }
   if (!fam.people.some(p => p.role === 'sup')) return toast('Add at least one grown-up with a PIN.');
   if (!fam.people.some(p => p.role === 'kid')) return toast('Add at least one kid.');
-  STARTERS.forEach(([title, price, mode], i) => { if (fd.get('st-' + i)) fam.templates.push({ id: uid(), title, price, mode, assignedTo: null, archived: false }); });
+  STARTERS.forEach(([title, price, mode, freq], i) => { if (fd.get('st-' + i)) fam.templates.push({ id: uid(), title, price, mode, freq, assignedTo: null, archived: false }); });
   S = fam; save(); ensureWeek(); render(); toast('Welcome, ' + (fam.family.name || 'family') + '!');
 }
 function loadDemo() {
@@ -437,11 +457,12 @@ function loadDemo() {
   const mom = { id: uid(), name: 'Mom', role: 'sup', pin: '1234', emoji: '👩' }, dad = { id: uid(), name: 'Dad', role: 'sup', pin: '1234', emoji: '👨' };
   const ava = { id: uid(), name: 'Ava', role: 'kid', emoji: '🦊' }, max = { id: uid(), name: 'Max', role: 'kid', emoji: '🦖' };
   fam.people = [mom, dad, ava, max];
-  const T = (title, price, mode, assignedTo) => ({ id: uid(), title, price, mode, assignedTo: assignedTo || null, archived: false });
-  fam.templates = [T('Empty the dishwasher', 3, 'honor'), T('Take out the trash', 2, 'honor'), T('Feed the dog', 1, 'honor', max.id), T('Clean your room', 5, 'inspect'), T('Vacuum the living room', 4, 'inspect'), T('Fold a load of laundry', 4, 'inspect'), T('Mow the lawn', 12, 'inspect'), T('Wipe down the bathroom', 6, 'inspect'), T('Water the plants', 2, 'honor')];
+  const T = (title, price, mode, freq, assignedTo) => ({ id: uid(), title, price, mode, freq, assignedTo: assignedTo || null, archived: false });
+  fam.templates = [T('Empty the dishwasher', 1, 'honor', 'daily'), T('Feed the dog', 1, 'honor', 'daily', max.id), T('Take out the trash', 2, 'honor', 'weekly'), T('Clean your room', 5, 'inspect', 'weekly'), T('Vacuum the living room', 4, 'inspect', 'weekly'), T('Fold a load of laundry', 4, 'inspect', 'weekly'), T('Mow the lawn', 12, 'inspect', 'weekly'), T('Wipe down the bathroom', 6, 'inspect', 'weekly'), T('Water the plants', 2, 'honor', 'weekly')];
   S = fam; save(); const w = ensureWeek();
-  const by = (t) => w.chores.find(c => c.title === t);
-  const c1 = by('Empty the dishwasher'); c1.state = 'approved'; c1.claimedBy = ava.id; S.ledger.push({ id: uid(), type: 'chore', choreId: c1.id, weekId: w.id, kidId: ava.id, amount: 3, title: c1.title, at: Date.now() });
+  const by = (t) => w.chores.find(c => c.title === t && (!c.day || c.day === today()));
+  const c1 = by('Empty the dishwasher'); c1.state = 'approved'; c1.claimedBy = ava.id; S.ledger.push({ id: uid(), type: 'chore', choreId: c1.id, weekId: w.id, kidId: ava.id, amount: 1, title: c1.title, at: Date.now() });
+  const y = addDays(today(), -1); if (y >= w.start) w.chores.filter(c => c.day === y).forEach(c => { c.state = 'approved'; c.claimedBy = c.assignedTo || ava.id; S.ledger.push({ id: uid(), type: 'chore', choreId: c.id, weekId: w.id, kidId: c.claimedBy, amount: Number(c.price), title: c.title, at: Date.now() - 86400000 }); });
   const c2 = by('Vacuum the living room'); c2.state = 'done'; c2.claimedBy = max.id;
   const c3 = by('Mow the lawn'); c3.state = 'claimed'; c3.claimedBy = ava.id;
   const c4 = by('Take out the trash'); c4.state = 'approved'; c4.claimedBy = max.id; S.ledger.push({ id: uid(), type: 'chore', choreId: c4.id, weekId: w.id, kidId: max.id, amount: 2, title: c4.title, at: Date.now() });
@@ -478,7 +499,7 @@ document.addEventListener('click', e => {
     case 'add-template': sheetTemplate(null); break;
     case 'edit-template': sheetTemplate(S.templates.find(t => t.id === id)); break;
     case 'archive-template': { const t = S.templates.find(t => t.id === id); sheetConfirm('Retire standing chore?', `<b>${esc(t.title)}</b> stops showing up in new weeks. This week is untouched.`, 'Retire', () => { t.archived = true; save(); render(); }, true); break; }
-    case 'template-to-week': { const t = S.templates.find(t => t.id === id); const after = allocated(w) + Number(t.price); const add = () => { w.chores.push(instanceFrom(t)); save(); closeSheet(); render(); }; if (after > w.pot) sheetOverPot(w, after, add); else add(); break; }
+    case 'template-to-week': { const t = S.templates.find(t => t.id === id); const inst = instancesFrom(t, w, today()).filter(x => !w.chores.some(c => c.templateId === t.id && c.day === x.day)); const after = allocated(w) + inst.reduce((s, x) => s + Number(x.price), 0); const add = () => { w.chores.push(...inst); save(); closeSheet(); render(); }; if (after > w.pot) sheetOverPot(w, after, add); else add(); break; }
     case 'pay': { const k = person(id); sheetConfirm('Mark as paid?', `You've handed <b>${esc(k.name)}</b> <b>${money(balance(k.id))}</b>. Their wallet goes back to zero.`, 'Yes, paid', () => payout(k.id)); break; }
     case 'adjust': sheetAdjust(person(id)); break;
     case 'add-person': sheetPerson(null); break;
