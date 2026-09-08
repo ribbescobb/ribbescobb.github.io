@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=d3d0cec').then(r => r.json()),
-      fetch('data/catalog.json?v=d3d0cec').then(r => r.json())
+      fetch('data/channels.json?v=42eee52').then(r => r.json()),
+      fetch('data/catalog.json?v=42eee52').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -148,8 +148,9 @@
     return (entry.off || 0) + elapsed;
   }
 
-  const lt = $('#lowerThird'), CHYRON_SECS = 8;
+  const lt = $('#lowerThird'), CHYRON_SECS = 8, CHYRON = false;   // off until the presentation is right; the metadata keeps coming
   function updateCaption(entry, elapsed) {
+    if (!CHYRON) { glass.classList.remove('squeeze'); return; }
     const dur = entry.end - entry.start;
     const show = entry.kind === 'program' && !!(entry.a || entry.n) && dur > 30 && glass.classList.contains('on') &&
       (elapsed < CHYRON_SECS || dur - elapsed <= CHYRON_SECS);
