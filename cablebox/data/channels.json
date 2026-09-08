@@ -1,0 +1,499 @@
+{
+  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Only tiers in `include` are built into the catalog. Rebuild with: python3 tools/build_catalog.py",
+  "include": [
+    "legit",
+    "filler"
+  ],
+  "filler": "commercials",
+  "startChannel": 2,
+  "channels": [
+    {
+      "num": 1,
+      "id": "guide",
+      "name": "PREVUE",
+      "kind": "guide",
+      "dayparts": [
+        {
+          "pool": "commercials"
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "id": "sitcoms",
+      "name": "SITCOMS",
+      "dayparts": [
+        {
+          "pool": "sitcoms"
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "id": "drama",
+      "name": "DRAMA",
+      "dayparts": [
+        {
+          "pool": "dramas"
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "id": "gameshows",
+      "name": "GAME SHOWS",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "24:00",
+          "pool": "gameshows"
+        },
+        {
+          "from": "00:00",
+          "to": "01:00",
+          "pool": "gameshows"
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "id": "music-pop",
+      "name": "MUSIC-POP",
+      "dayparts": [
+        {
+          "pool": "music-pop"
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "id": "music-rock",
+      "name": "MUSIC-ROCK",
+      "dayparts": [
+        {
+          "pool": "music-rock"
+        }
+      ]
+    },
+    {
+      "num": 29,
+      "id": "baseball",
+      "name": "BASEBALL",
+      "dayparts": [
+        {
+          "pool": "baseball"
+        }
+      ]
+    },
+    {
+      "num": 30,
+      "id": "football",
+      "name": "FOOTBALL",
+      "dayparts": [
+        {
+          "pool": "football"
+        }
+      ]
+    },
+    {
+      "num": 31,
+      "id": "golf",
+      "name": "GOLF",
+      "dayparts": [
+        {
+          "pool": "golf"
+        }
+      ]
+    }
+  ],
+  "pools": {
+    "sitcoms": {
+      "minMinutes": 18,
+      "maxMinutes": 40,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Sony · Diff'rent Strokes",
+          "series": "Diff'rent Strokes",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZvt5PHHB9LdxDIHZaGE0Gnl"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Silver Spoons",
+          "series": "Silver Spoons",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtVzn4m1eV2OhbCWO8B1G8e"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · What's Happening Now!!",
+          "series": "What's Happening Now!!",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZsE5jxiV2_uXCgrUppzZmrf"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Square Pegs",
+          "series": "Square Pegs",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZsrt5EjdnoibuN9919sd7Hy"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · The New Gidget",
+          "series": "The New Gidget",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtPfE66Hk54_r6TMVGeuUiW"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Barney Miller",
+          "series": "Barney Miller",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZvhyTRxKTT2PAgFR1kEeZvx"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Soap",
+          "series": "Soap",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtRQMZnHY5OPSjwULutiW2_"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Full Episodes (mixed shows; series parsed from title)",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZsMfROpPbeqVb7sYgBGzGIx"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · The Facts of Life",
+          "series": "The Facts of Life",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7Mn-oGzywN6rR5iFE4CuRJm"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · WKRP in Cincinnati",
+          "series": "WKRP in Cincinnati",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7PYjUU8DnLzBbeEIiE_4iMl"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · The Jeffersons",
+          "series": "The Jeffersons",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7MLWwui3FgZkr6lS0qUMsr1"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Welcome Back, Kotter",
+          "series": "Welcome Back, Kotter",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7O0_TYb7AzBiTQL6x5iwFdC"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · The Bob Newhart Show",
+          "series": "The Bob Newhart Show",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7OjT44ttTm5mGBYV__l0HHq"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Maude",
+          "series": "Maude",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7PB_NeZ19fIam8Pz3-ufh0T"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · ALF",
+          "series": "ALF",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7O26Yh1JKCY4_TjU7q4MMWd"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Mary Hartman, Mary Hartman",
+          "series": "Mary Hartman, Mary Hartman",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7M9pIt1djE2BSg-VEpxXHhT"
+        }
+      ]
+    },
+    "dramas": {
+      "minMinutes": 40,
+      "maxMinutes": 110,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Sony · Hart to Hart S1",
+          "series": "Hart to Hart",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZuO4jG5VyYbhgIYm4MqyV-h"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Starsky & Hutch",
+          "series": "Starsky & Hutch",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtDjFpWq7orIwZ9UqTuopTV"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Family",
+          "series": "Family",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtfgdq1ZgV33xluXhDHtgKS"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · T.J. Hooker (full eps only survive the length filter)",
+          "series": "T.J. Hooker",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZsEjzDxu_vMA2iD4iyOMHr2"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Fantasy Island (same)",
+          "series": "Fantasy Island",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtG6R24BfKSrJkmVkK1Rsci"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Charlie's Angels (same)",
+          "series": "Charlie's Angels",
+          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZujoItgA6J2qxADDt2DjMWR"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Hart to Hart S3",
+          "series": "Hart to Hart",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7M6Kme3vB5bdXse1-k67DAQ"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Hill Street Blues",
+          "series": "Hill Street Blues",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7O-AWL9IgUXJUxUQKkN2cko"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · The Colbys",
+          "series": "The Colbys",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7NZttDuMb3BUolp-HbBBnpk"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Manimal",
+          "series": "Manimal",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7MrTh5XicRj_vqbs5395mY0"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Automan",
+          "series": "Automan",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7OFsBViaMBnLXPdTrcf_P8p"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Sapphire and Steel",
+          "series": "Sapphire and Steel",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7OnuFXO2atJxrLTTWrZiKUH"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! · Hammer House of Horror",
+          "series": "Hammer House of Horror",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7MHhk6MA1XoYfRT3PsTJHgQ"
+        }
+      ]
+    },
+    "gameshows": {
+      "minMinutes": 18,
+      "maxMinutes": 45,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Buzzr · Press Your Luck",
+          "series": "Press Your Luck",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHECGd7hRVSkFDsYMPwxP9Ao"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Match Game",
+          "series": "Match Game",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHEp4DX_dOyLaAwFjWg7048A"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Match Game PM",
+          "series": "Match Game PM",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHF2NA-7-OXF3tyLwaDdPeZ2"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Family Feud",
+          "series": "Family Feud",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHGMvFTzpB9jX8tLCCApoYfj"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Card Sharks",
+          "series": "Card Sharks",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHFrt7EGvGBy-jvj2wO9s4zn"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Password Plus",
+          "series": "Password Plus",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHEQ5eERwjoDwEdeUbb9G6d_"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Super Password",
+          "series": "Super Password",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHG4rN4tkVmCHmGzEupKq1YN"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Sale of the Century",
+          "series": "Sale of the Century",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHHQC1koLVnNfLAJqhXeoKBE"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Blockbusters",
+          "series": "Blockbusters",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHEHfgbRXDFVlhoNzWuDu1Bp"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Classic Concentration",
+          "series": "Classic Concentration",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHHH6-qWq5ssUOWMH-k5B_OR"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Tattletales",
+          "series": "Tattletales",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHHqswH9vi-_LwR2O_rgULYl"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Body Language",
+          "series": "Body Language",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHGC3sFmnFsHLE_H3bTucVPF"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · The Price is Right",
+          "series": "The Price is Right",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHH7vCutOOlS22p5CDt-LGcR"
+        },
+        {
+          "tier": "legit",
+          "note": "Buzzr · Let's Make a Deal",
+          "series": "Let's Make a Deal",
+          "url": "https://www.youtube.com/playlist?list=PLgorHfeWgLHEmMkx0sWDhU57IBb322yOH"
+        }
+      ]
+    },
+    "music-pop": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "sources": [
+        {
+          "tier": "wild",
+          "note": "search · 80s pop, official videos (curate me)",
+          "url": "ytsearch60:80s pop hits official music video"
+        }
+      ],
+      "series": false
+    },
+    "music-rock": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "sources": [
+        {
+          "tier": "wild",
+          "note": "search · 80s rock, official videos (curate me)",
+          "url": "ytsearch60:80s rock official music video"
+        }
+      ],
+      "series": false
+    },
+    "baseball": {
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "MLB Vault · Classic Games",
+          "minMinutes": 60,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNvxC7kKFsUKKaH810CZlRfW"
+        },
+        {
+          "tier": "legit",
+          "note": "MLB Vault · World Series",
+          "minMinutes": 60,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNu5AF7ZG41bQtVC2a-KYue6"
+        },
+        {
+          "tier": "legit",
+          "note": "MLB Vault · LCS",
+          "minMinutes": 60,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNtV0pELwH_6QMipar_M6U6k"
+        },
+        {
+          "tier": "legit",
+          "note": "MLB Vault · All-Star Games",
+          "minMinutes": 60,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNtL6LuGHajdxKQoJI_GIP1G"
+        },
+        {
+          "tier": "legit",
+          "note": "MLB Vault · No-hitters",
+          "minMinutes": 60,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNseXKsic6UnGDL9e8O5HIvP"
+        },
+        {
+          "tier": "legit",
+          "note": "MLB Vault · Hidden Classics",
+          "minMinutes": 60,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNtdt83cadu9MNbt0f7dIMBZ"
+        },
+        {
+          "tier": "legit",
+          "note": "MLB Vault · This Week In Baseball",
+          "series": "This Week in Baseball",
+          "minMinutes": 15,
+          "maxMinutes": 40,
+          "url": "https://www.youtube.com/playlist?list=PLi70flcQkwNvo4RV2rem2Fl7kZKVCax-n"
+        }
+      ],
+      "series": false
+    },
+    "football": {
+      "minMinutes": 60,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "NFL · Throwback Games of the Week (classic years only)",
+          "titleMatch": "\\b19[5-9]\\d\\b",
+          "url": "https://www.youtube.com/playlist?list=PLRdw3IjKY2gk-3ap7eNjoxxxIP9OolbO-"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Full 1980s NFL Games",
+          "url": "https://www.youtube.com/playlist?list=PLAr_WbjGaCm7HEjtoIw5uhDR0R2vZIZpG"
+        }
+      ],
+      "series": false
+    },
+    "golf": {
+      "minMinutes": 45,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "The Masters · Final Round Broadcasts (classic years only)",
+          "titleMatch": "\\b19[6-9]\\d\\b",
+          "url": "https://www.youtube.com/playlist?list=PL5bbCtDMySv8-jCobs9gDY33ZckGzGDdl"
+        }
+      ],
+      "series": false
+    },
+    "commercials": {
+      "minMinutes": 25,
+      "sources": [
+        {
+          "tier": "filler",
+          "note": "search · 80s commercial compilations",
+          "url": "ytsearch30:1980s tv commercials compilation"
+        }
+      ],
+      "series": false
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CableBox</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=09879df">
+</head>
+<body>
+<div class="room">
+  <div class="scene">
+
+    <!-- Cable converter box, sitting on top of the set -->
+    <div class="cablebox" id="cablebox">
+      <div class="cb-display" aria-label="channel display">
+        <svg class="seg" id="seg0" viewBox="0 0 40 70" aria-hidden="true"></svg>
+        <svg class="seg" id="seg1" viewBox="0 0 40 70" aria-hidden="true"></svg>
+      </div>
+      <div class="cb-keys" id="keys">
+        <button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="up" class="ch">CH ▲</button>
+        <button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="down" class="ch">CH ▼</button>
+        <button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key="0">0</button>
+      </div>
+      <div class="cb-brand">CABLE<span>BOX</span><small>CB-36</small></div>
+    </div>
+
+    <!-- The set -->
+    <div class="set">
+      <div class="cabinet">
+        <div class="screen-zone">
+          <div class="surround">
+            <div class="brass">
+              <div class="bezel">
+                <div class="glass off" id="glass">
+                  <div class="raster" id="raster"><div id="yt"></div></div>
+                  <canvas class="static" id="static" width="256" height="192"></canvas>
+                  <div class="standby" id="standby"><span>PLEASE<br>STAND BY</span></div>
+                  <div class="testpattern" id="testpattern"><div class="bars"></div><div class="bars2"></div><div class="signoff">CB-36 &nbsp;·&nbsp; OFF AIR</div></div>
+                  <div class="guide" id="guide">
+                    <div class="guide-head" id="guideHead"></div>
+                    <div class="guide-viewport"><div class="guide-rows" id="guideRows"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="chrome">
+            <div class="badge">HEATHKIT<span>25</span></div>
+            <div class="dials">
+              <div class="dial" id="dialUHF"><svg viewBox="0 0 100 100" aria-hidden="true"></svg><div class="cap"></div></div>
+              <div class="dial" id="dialVHF"><svg viewBox="0 0 100 100" aria-hidden="true"></svg><div class="cap"></div></div>
+            </div>
+          </div>
+          <div class="goldpanel">
+            <div class="knob-row">
+              <div class="knob-wrap"><label>bright</label><div class="knob" data-knob="bright"></div></div>
+              <div class="logo" aria-hidden="true">
+                <svg viewBox="0 0 60 40"><polygon points="30,4 46,28 14,28" fill="#d9642a"/><polygon points="30,4 14,28 4,28" fill="#2c6fb5"/><polygon points="30,4 56,28 46,28" fill="#7d8a3a"/></svg>
+                <span>25</span>
+              </div>
+              <div class="knob-wrap"><label>tint</label><div class="knob" data-knob="tint"></div></div>
+            </div>
+            <div class="knob-row">
+              <div class="knob-wrap"><label>contrast</label><div class="knob" data-knob="contrast"></div></div>
+              <div class="knob-wrap power"><label>vol &nbsp;on</label><button class="knob" id="power" data-knob="power" aria-label="Power and volume"></button></div>
+              <div class="knob-wrap"><label>color</label><div class="knob" data-knob="color"></div></div>
+            </div>
+            <div class="sliders"><span>H</span><i></i><i></i><span>V</span></div>
+          </div>
+          <div class="grille"></div>
+        </div>
+      </div>
+      <div class="legs"><div class="leg"></div><div class="leg r"></div></div>
+    </div>
+
+    <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
+  </div>
+</div>
+<script src="js/schedule.js?v=09879df"></script>
+<script src="js/player.js?v=09879df"></script>
+<script src="js/app.js?v=09879df"></script>
+</body>
+</html>

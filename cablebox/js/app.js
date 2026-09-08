@@ -1,0 +1,280 @@
+// app.js — the set: power, the converter box, tuning, static, stand-by, and the guide.
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const glass = $('#glass'), staticCanvas = $('#static'), hint = $('#hint');
+  let MAX_CH = 36;
+  let channels = [], byNum = new Map(), catalog = null;
+  let power = false, ch = 2, digits = '', digitTimer = null, snowTimer = null;
+  let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
+  let askedAt = 0;               // when we last asked the player for a picture
+  const subs = new Map();        // schedule key -> substitute program, when the scheduled one is dead
+  const dead = new Set();
+
+  // ---------------- data ----------------
+  async function loadData() {
+    const [c, k] = await Promise.all([
+      fetch('data/channels.json?v=09879df').then(r => r.json()),
+      fetch('data/catalog.json?v=09879df').then(r => r.json())
+    ]);
+    channels = c.channels; catalog = k;
+    Sched.prepare(catalog, c.filler || 'commercials');
+    channels.forEach(x => byNum.set(x.num, x));
+    MAX_CH = Math.max(36, ...channels.map(x => x.num));
+    ch = c.startChannel || 2;
+    try { const s = +localStorage.getItem('cablebox.ch'); if (s >= 1 && s <= MAX_CH) ch = s; } catch (e) {}
+    try { const v = +localStorage.getItem('cablebox.vol'); if (v >= 0) Player.setVolume(v); } catch (e) {}
+  }
+
+  // ---------------- glass states ----------------
+  const STATES = ['off', 'warming', 'on', 'snow', 'standby', 'offair'];
+  function setGlass(state) { STATES.forEach(s => glass.classList.toggle(s, s === state)); if (state === 'snow') startStatic(); else stopStatic(); }
+
+  // ---------------- static ----------------
+  const sctx = staticCanvas.getContext('2d');
+  const W = staticCanvas.width, H = staticCanvas.height;
+  const frame = sctx.createImageData(W, H), px = new Uint32Array(frame.data.buffer), rnd = new Uint8Array(W * H);
+  let staticRAF = null;
+  function drawStatic() {
+    crypto.getRandomValues(rnd);
+    for (let i = 0; i < px.length; i++) { const v = rnd[i]; px[i] = 0xff000000 | (v << 16) | (v << 8) | v; }
+    sctx.putImageData(frame, 0, 0);
+    staticRAF = requestAnimationFrame(drawStatic);
+  }
+  function startStatic() { if (!staticRAF) drawStatic(); noise(true); }
+  function stopStatic() { if (staticRAF) cancelAnimationFrame(staticRAF); staticRAF = null; noise(false); }
+
+  // ---------------- sound (set-side; program audio comes from the player) ----------------
+  let ac = null, noiseSrc = null, noiseGain = null;
+  function ensureAudio() {
+    if (ac) return;
+    try {
+      ac = new (window.AudioContext || window.webkitAudioContext)();
+      const len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      noiseSrc = ac.createBufferSource(); noiseSrc.buffer = buf; noiseSrc.loop = true;
+      noiseGain = ac.createGain(); noiseGain.gain.value = 0;
+      noiseSrc.connect(noiseGain).connect(ac.destination); noiseSrc.start();
+    } catch (e) { ac = null; }
+  }
+  function noise(on) { if (!ac) return; noiseGain.gain.setTargetAtTime(on && !Player.muted ? 0.12 * (Player.volume / 100) : 0, ac.currentTime, 0.02); }
+  function beep(freq = 1100, ms = 45) {
+    if (!ac) return;
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'square'; o.frequency.value = freq; g.gain.value = 0.03;
+    o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + ms / 1000);
+  }
+  function thunk() { beep(140, 60); }
+
+  // ---------------- seven-segment display ----------------
+  const SEG = {
+    a: '10,3 34,3 38,7 34,11 10,11 6,7', b: '36,9 40,13 40,33 36,37 32,33 32,13', c: '36,39 40,43 40,63 36,67 32,63 32,43',
+    d: '10,65 34,65 38,69 34,73 10,73 6,69', e: '8,39 12,43 12,63 8,67 4,63 4,43', f: '8,9 12,13 12,33 8,37 4,33 4,13',
+    g: '10,34 34,34 38,38 34,42 10,42 6,38'
+  };
+  const DIGIT = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd', '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg', '-': 'g', ' ': '' };
+  const segs = [$('#seg0'), $('#seg1')];
+  segs.forEach(svg => {
+    svg.setAttribute('viewBox', '0 0 44 76');
+    svg.innerHTML = Object.keys(SEG).map(k => `<polygon data-s="${k}" points="${SEG[k]}"/>`).join('');
+  });
+  function showDigits(str) {
+    const s = String(str).slice(-2).padStart(2, ' ');
+    segs.forEach((svg, i) => { const on = DIGIT[s[i]] || ''; svg.querySelectorAll('polygon').forEach(p => p.classList.toggle('on', on.includes(p.dataset.s))); });
+  }
+
+  // ---------------- tuner dials (decorative) ----------------
+  function buildDial(el, labels) {
+    const svg = el.querySelector('svg'), n = labels.length, span = 300, a0 = -150;
+    let s = '<circle class="ring" cx="50" cy="50" r="47"/>';
+    labels.forEach((l, i) => {
+      const deg = a0 + i * span / (n - 1), a = deg * Math.PI / 180;
+      const x = 50 + 39 * Math.sin(a), y = 50 - 39 * Math.cos(a);
+      s += `<text x="${x.toFixed(1)}" y="${(y + 3).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})">${l}</text>`;
+    });
+    svg.innerHTML = s;
+  }
+  buildDial($('#dialUHF'), ['83', '75', '70', '65', '60', '55', '50', '45', '40', '35', '30', '25', '20', '15']);
+  buildDial($('#dialVHF'), ['UHF', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']);
+
+  // ---------------- tuning ----------------
+  function tune(n) {
+    n = Math.max(1, Math.min(MAX_CH, n));
+    const changed = n !== ch;
+    ch = n; showDigits(String(ch));
+    try { localStorage.setItem('cablebox.ch', ch); } catch (e) {}
+    if (!power || !changed) return;
+    Player.stop(); current = null;
+    setGlass('snow');
+    clearTimeout(snowTimer);
+    snowTimer = setTimeout(() => render(true), 380);
+  }
+  function step(dir) { tune(((ch - 1 + dir + MAX_CH) % MAX_CH) + 1); }
+  function keyPress(k) {
+    ensureAudio(); beep();
+    if (k === 'up') return step(1);
+    if (k === 'down') return step(-1);
+    digits += k; showDigits(digits);
+    clearTimeout(digitTimer);
+    if (digits.length >= 2) { const n = +digits; digits = ''; tune(n || ch); }
+    else digitTimer = setTimeout(() => { const n = +digits; digits = ''; tune(n || ch); }, 1400);
+  }
+
+  // ---------------- what is on ----------------
+  function expectedOffset(entry, elapsed) {
+    if (current && current.mode === 'sub') return elapsed % current.sub.d;
+    if (current && current.mode === 'tail') return Math.max(0, Date.now() / 1000 - current.tailStart);
+    return (entry.off || 0) + elapsed;
+  }
+
+  function render(force) {
+    if (!power) return;
+    const channel = byNum.get(ch);
+    if (!channel) { if (!glass.classList.contains('snow')) setGlass('snow'); Player.stop(); current = null; glass.classList.remove('guide-mode'); return; }
+    const now = new Date();
+    const { entry, elapsed, dayStart } = Sched.at(channel, now, catalog);
+    const key = channel.id + ':' + dayStart.getTime() + ':' + entry.start;
+    const isGuide = channel.kind === 'guide';
+    glass.classList.toggle('guide-mode', isGuide);
+    if (isGuide) Guide.tick(now);
+
+    if (!force && current && current.key === key) {
+      if (current.mode !== 'tail') Player.correct(expectedOffset(entry, elapsed));
+      // No picture for 20s after asking for one: stand by rather than stare at a dead tube.
+      if (!Player.playing && askedAt && Date.now() - askedAt > 20000 && glass.classList.contains('on')) setGlass('standby');
+      return;
+    }
+    if (entry.kind === 'off') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('offair'); return; }
+    const sub = subs.get(key);
+    current = { key, entry, channel, mode: sub ? 'sub' : 'sched', sub };
+    setGlass('on');
+    const off = expectedOffset(entry, elapsed);
+    const end = entry.kind === 'break' && !sub ? (entry.off || 0) + (entry.end - entry.start) : undefined;
+    askedAt = Date.now();
+    Player.play(sub ? sub.id : entry.id, off, end);
+  }
+
+  function altFor(poolName, notId, salt) {
+    const pool = catalog.pools[poolName] || [];
+    const cands = pool.filter(p => p.id !== notId && !dead.has(p.id));
+    if (!cands.length) return null;
+    return cands[Sched.hash32(notId + '|' + salt) % cands.length];
+  }
+
+  Player.on('onPlaying', () => { if (power && glass.classList.contains('standby')) setGlass('on'); });
+
+  Player.on('onDead', (id) => {
+    if (!current || !power || dead.has(id) && current.mode === 'sub') { if (current) setGlass('standby'); return; }
+    dead.add(id);
+    const { entry, key } = current;
+    const poolName = entry.kind === 'break' ? catalog.filler : entry.pool;
+    const alt = altFor(poolName, id, key);
+    if (!alt) { setGlass('standby'); return; }
+    subs.set(key, alt);
+    if (entry.kind === 'break') { current = null; render(true); return; }
+    setGlass('standby');
+    setTimeout(() => { if (current && current.key === key) { current = null; render(true); } }, 1600);
+  });
+
+  // The video ran out before its slot did (catalog duration was optimistic): fill the tail with a commercial.
+  Player.on('onEnded', () => {
+    if (!current || !power) return;
+    const now = new Date();
+    const { entry, elapsed } = Sched.at(current.channel, now, catalog);
+    const remaining = entry.end - entry.start - elapsed;
+    if (remaining < 4) { current = null; render(true); return; }
+    const clip = altFor(catalog.filler, current.entry.id, 'tail' + Math.floor(now.getTime() / 10000));
+    if (!clip) return;
+    current.mode = 'tail'; current.tailStart = now.getTime() / 1000;
+    const off = clip.d > remaining ? Sched.hash32(current.key) % (clip.d - remaining) : 0;
+    Player.play(clip.id, off, off + remaining);
+  });
+
+  // ---------------- power ----------------
+  function powerOn() {
+    if (power) return;
+    power = true; ensureAudio(); thunk(); hint.classList.add('hidden');
+    setGlass('warming');
+    Player.ensureApi();
+    setTimeout(() => { if (power) { current = null; render(true); } }, 800);
+  }
+  function powerOff() {
+    if (!power) return;
+    power = false; thunk(); Player.stop(); current = null; clearTimeout(snowTimer);
+    glass.classList.remove('guide-mode'); setGlass('off'); hint.classList.remove('hidden');
+  }
+  function togglePower() { power ? powerOff() : powerOn(); }
+
+  // ---------------- guide (channel 1) ----------------
+  const Guide = (() => {
+    const head = $('#guideHead'), rows = $('#guideRows');
+    let windowStart = 0, y = 0, lastT = 0, raf = null, setH = 0;
+    const esc = (s) => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    function fmt(sec) { const d = new Date(sec * 1000); let h = d.getHours(); const m = d.getMinutes(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(m).padStart(2, '0') + ' ' + ap; }
+    function clock(d) { let h = d.getHours(); const m = d.getMinutes(), s = d.getSeconds(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ' ' + ap; }
+    function label(p) { if (!p) return ''; if (p.kind === 'off') return 'Off Air'; return p.series || p.title; }
+    function build(now) {
+      const start = Math.floor(now.getTime() / 1000 / 1800) * 1800;
+      windowStart = start;
+      head.innerHTML = '<div class="gclock"></div>' + [0, 1, 2, 3].map(i => `<div>${fmt(start + i * 1800)}</div>`).join('');
+      const list = channels.filter(c => c.kind !== 'guide').sort((a, b) => a.num - b.num);
+      let html = '';
+      for (const c of list) {
+        const progs = Sched.programsBetween(c, new Date(start * 1000), 7200, catalog);
+        const cols = [];
+        for (let i = 0; i < 4; i++) {
+          const cs = start + i * 1800, ce = cs + 1800;
+          cols.push(progs.find(x => x.start <= cs && x.end > cs) || progs.find(x => x.start >= cs && x.start < ce) || null);
+        }
+        let cells = '';
+        for (let i = 0; i < 4;) {
+          let j = i + 1;
+          while (j < 4 && cols[i] && cols[j] && (cols[j] === cols[i] || (cols[i].kind === 'off' && cols[j].kind === 'off'))) j++;
+          const p = cols[i];
+          cells += `<div class="gp${p && p.kind === 'off' ? ' off' : ''}" style="grid-column: span ${j - i}">${esc(label(p))}</div>`;
+          i = j;
+        }
+        html += `<div class="grow"><div class="gch"><b>${c.num}</b>${esc(c.name)}</div>${cells}</div>`;
+      }
+      html += `<div class="grow spacer"><div class="gch">CABLEBOX &nbsp;·&nbsp; ${now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase()}</div></div>`;
+      rows.innerHTML = html + html;
+      setH = rows.scrollHeight / 2;
+    }
+    function step(t) {
+      const dt = Math.min(0.1, (t - lastT) / 1000); lastT = t;
+      const rowH = rows.firstElementChild ? rows.firstElementChild.offsetHeight : 30;
+      y += dt * rowH / 2.8;                     // one row every 2.8 seconds: painfully slow, as requested
+      if (setH && y >= setH) y -= setH;
+      rows.style.transform = `translateY(${-y}px)`;
+      raf = glass.classList.contains('guide-mode') && power ? requestAnimationFrame(step) : null;
+    }
+    function tick(now) {
+      const start = Math.floor(now.getTime() / 1000 / 1800) * 1800;
+      if (start !== windowStart || !rows.children.length) build(now);
+      const c = head.querySelector('.gclock'); if (c) c.textContent = clock(now);
+      if (!raf) { lastT = performance.now(); raf = requestAnimationFrame(step); }
+    }
+    return { tick };
+  })();
+
+  // ---------------- wiring ----------------
+  $('#keys').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) keyPress(b.dataset.key); });
+  $('#power').addEventListener('click', togglePower);
+  $('#power').addEventListener('wheel', (e) => { e.preventDefault(); const v = Player.setVolume(Player.volume + (e.deltaY < 0 ? 5 : -5)); try { localStorage.setItem('cablebox.vol', v); } catch (x) {} }, { passive: false });
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (/^[0-9]$/.test(e.key)) { keyPress(e.key); e.preventDefault(); }
+    else if (e.key === 'ArrowUp' || e.key === 'PageUp') { keyPress('up'); e.preventDefault(); }
+    else if (e.key === 'ArrowDown' || e.key === 'PageDown') { keyPress('down'); e.preventDefault(); }
+    else if (e.key === 'p' || e.key === ' ') { togglePower(); e.preventDefault(); }
+    else if (e.key === 'g') keyPress('1');
+    else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); }
+    else if (e.key === '=' || e.key === '+') Player.setVolume(Player.volume + 5);
+    else if (e.key === '-' || e.key === '_') Player.setVolume(Player.volume - 5);
+  });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && power) render(false); });
+
+  loadData().then(() => {
+    showDigits(String(ch));
+    setInterval(() => render(false), 1000);
+  }).catch(err => { console.error(err); hint.textContent = 'Could not load the channel data.'; });
+})();
