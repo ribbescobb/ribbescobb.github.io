@@ -8,15 +8,15 @@
   let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
   let askedAt = 0;               // when we last asked the player for a picture
   let lastGuideOnly = false;
-  const compact = () => glass.clientHeight < 360;   // phones: the tube is too short for a promo window plus a grid
+  const compact = () => glass.clientHeight < 420;   // phones: the tube is too short for a promo window plus a grid
   const subs = new Map();        // schedule key -> substitute program, when the scheduled one is dead
   const dead = new Set();
 
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=f4b5e52').then(r => r.json()),
-      fetch('data/catalog.json?v=f4b5e52').then(r => r.json())
+      fetch('data/channels.json?v=380670c').then(r => r.json()),
+      fetch('data/catalog.json?v=380670c').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -95,14 +95,14 @@
     g: '10,34 34,34 38,38 34,42 10,42 6,38'
   };
   const DIGIT = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd', '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg', '-': 'g', ' ': '' };
-  const segs = [$('#seg0'), $('#seg1')];
-  segs.forEach(svg => {
+  const displays = [...document.querySelectorAll('.cb-display, .rm-display')].map(d => [...d.querySelectorAll('svg.seg')]);
+  displays.flat().forEach(svg => {
     svg.setAttribute('viewBox', '0 0 44 76');
     svg.innerHTML = Object.keys(SEG).map(k => `<polygon data-s="${k}" points="${SEG[k]}"/>`).join('');
   });
   function showDigits(str) {
     const s = String(str).slice(-2).padStart(2, ' ');
-    segs.forEach((svg, i) => { const on = DIGIT[s[i]] || ''; svg.querySelectorAll('polygon').forEach(p => p.classList.toggle('on', on.includes(p.dataset.s))); });
+    displays.forEach(segs => segs.forEach((svg, i) => { const on = DIGIT[s[i]] || ''; svg.querySelectorAll('polygon').forEach(p => p.classList.toggle('on', on.includes(p.dataset.s))); }));
   }
 
   // ---------------- tuner dials (decorative) ----------------
@@ -326,10 +326,46 @@
     else if (e.key === '=' || e.key === '+') saveVol(Player.setVolume(Player.volume + 5));
     else if (e.key === '-' || e.key === '_') saveVol(Player.setVolume(Player.volume - 5));
   });
+  // ---------------- phones: the tube fills the screen and the phone is the remote ----------------
+  const phoneMQ = window.matchMedia('(pointer: coarse) and ((max-width: 700px) or (max-height: 500px))');
+  const remote = $('#remote'), remoteToggle = $('#remoteToggle');
+  let phone = false, peek = false, remoteTimer = null;
+  function safeTop() { return parseFloat(getComputedStyle($('#safeProbe')).paddingTop) || 0; }
+  function layoutPhone() {
+    phone = phoneMQ.matches; document.body.classList.toggle('phone', phone);
+    if (!phone) { document.body.classList.remove('portrait', 'landscape'); remote.classList.remove('open'); remote.style.top = ''; return false; }
+    const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight, portrait = vh > vw;
+    document.body.classList.toggle('portrait', portrait); document.body.classList.toggle('landscape', !portrait);
+    document.body.classList.toggle('zoom', !peek);
+    if (peek) { scene.style.width = ''; scene.style.left = ''; scene.style.top = ''; remote.style.top = ''; return true; }
+    scene.style.left = '0px'; scene.style.top = '0px'; scene.style.width = '';
+    const w0 = scene.getBoundingClientRect().width, g0 = glass.getBoundingClientRect();
+    const k = portrait ? vw / g0.width : Math.min(vh / g0.height, vw / g0.width);
+    scene.style.width = (w0 * k) + 'px';
+    const g = glass.getBoundingClientRect(), bez = g.height * 0.07, st = safeTop();
+    scene.style.left = ((vw - g.width) / 2 - g.left) + 'px';
+    if (portrait) { scene.style.top = (st + bez - g.top) + 'px'; remote.style.top = (st + g.height + 2 * bez) + 'px'; }
+    else { scene.style.top = ((vh - g.height) / 2 - g.top) + 'px'; remote.style.top = ''; }
+    return true;
+  }
+  function openRemote(on) {
+    remote.classList.toggle('open', on); clearTimeout(remoteTimer);
+    if (on && document.body.classList.contains('landscape')) remoteTimer = setTimeout(() => remote.classList.remove('open'), 6000);
+  }
+  remoteToggle.addEventListener('click', () => openRemote(true));
+  remote.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.key) keyPress(b.dataset.key);
+    else if (b.dataset.act === 'power') { ensureAudio(); beep(700, 60); togglePower(); }
+    else if (b.dataset.act === 'set') { peek = !peek; layoutPhone(); if (power) render(false); }
+    if (document.body.classList.contains('landscape')) openRemote(true);   // keep it up while in use
+  });
+
   // ---------------- zoom: just the picture side of the set ----------------
   let zoomed = false;
   const scene = document.querySelector('.scene'), zone = document.querySelector('.screen-zone');
   function layoutZoom() {
+    if (layoutPhone()) return;
     if (!zoomed) { scene.style.width = ''; scene.style.left = ''; scene.style.top = ''; return; }
     const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
     scene.style.left = '0px'; scene.style.top = '0px'; scene.style.width = '';
@@ -341,11 +377,14 @@
     scene.style.top = ((vh - z.height) / 2 - z.top) + 'px';
   }
   function setZoom(on) {
+    if (phone) { peek = !peek; layoutPhone(); return; }
     zoomed = !!on; document.body.classList.toggle('zoom', zoomed);
     try { localStorage.setItem('cablebox.zoom', zoomed ? '1' : '0'); } catch (e) {}
     layoutZoom(); if (power) render(false);
   }
   window.addEventListener('resize', layoutZoom);
+  window.addEventListener('orientationchange', () => setTimeout(layoutZoom, 60));
+  phoneMQ.addEventListener('change', layoutZoom);
 
   function toggleFullscreen() {
     const d = document, el = d.documentElement;
@@ -370,7 +409,7 @@
 
   loadData().then(() => {
     showDigits(String(ch));
-    try { if (localStorage.getItem('cablebox.zoom') === '1') setZoom(true); } catch (e) {}
+    if (!layoutPhone()) { try { if (localStorage.getItem('cablebox.zoom') === '1') setZoom(true); } catch (e) {} }
     setInterval(() => { render(false); maybeRefresh(new Date()); }, 1000);
   }).catch(err => { console.error(err); hint.textContent = 'Could not load the channel data.'; });
 })();

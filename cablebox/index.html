@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=f4b5e52">
+<link rel="stylesheet" href="style.css?v=380670c">
 </head>
 <body>
 <div class="room">
@@ -67,15 +67,31 @@
       <button class="hit knob-hit" id="volume" aria-label="Volume: scroll to adjust, click to mute"></button>
     </div>
 
+    <!-- On a phone, the phone is the remote. -->
+    <div class="remote" id="remote" aria-label="remote control">
+      <div class="rm-top">
+        <button class="rm-key rm-power" data-act="power" aria-label="Power">POWER</button>
+        <div class="rm-display" aria-label="channel display"><svg class="seg" viewBox="0 0 44 76" aria-hidden="true"></svg><svg class="seg" viewBox="0 0 44 76" aria-hidden="true"></svg></div>
+        <button class="rm-key rm-set" data-act="set" aria-label="Show the whole set">SET</button>
+      </div>
+      <div class="rm-grid">
+        <button class="rm-key" data-key="1"><span>1</span><small>GUIDE</small></button><button class="rm-key" data-key="2">2</button><button class="rm-key" data-key="3">3</button>
+        <button class="rm-key" data-key="4">4</button><button class="rm-key" data-key="5">5</button><button class="rm-key" data-key="6">6</button>
+        <button class="rm-key" data-key="7">7</button><button class="rm-key" data-key="8">8</button><button class="rm-key" data-key="9">9</button>
+        <button class="rm-key ch" data-key="down">CH ▼</button><button class="rm-key" data-key="0">0</button><button class="rm-key ch" data-key="up">CH ▲</button>
+      </div>
+    </div>
+    <button class="rm-toggle" id="remoteToggle" aria-label="Show the remote">REMOTE</button>
+    <div id="safeProbe" aria-hidden="true"></div>
     <div class="zoom-controls" id="zoomControls" aria-label="zoomed-in controls">
       <button data-key="down" aria-label="Channel down">CH ▼</button><button data-key="up" aria-label="Channel up">CH ▲</button><button id="unzoom" aria-label="Show the whole set">⤢</button>
     </div>
     <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
   </div>
 </div>
-<script src="js/schedule.js?v=f4b5e52"></script>
-<script src="js/player.js?v=f4b5e52"></script>
-<script src="js/scramble.js?v=f4b5e52"></script>
-<script src="js/app.js?v=f4b5e52"></script>
+<script src="js/schedule.js?v=380670c"></script>
+<script src="js/player.js?v=380670c"></script>
+<script src="js/scramble.js?v=380670c"></script>
+<script src="js/app.js?v=380670c"></script>
 </body>
 </html>

@@ -191,7 +191,50 @@ body.zoom .zoom-controls { display: flex; }
 .hint.hidden { visibility: hidden; }
 
 /* Small screens: let it scroll rather than crush. */
+/* ---------------- Phones: the phone is the remote ----------------
+   body.phone is set by script (coarse pointer and a small viewport). The tube fills the screen (landscape: by height;
+   portrait: by width, with the remote below). The zoom rules do the heavy lifting; these add the remote. */
+#safeProbe { position: fixed; top: 0; left: 0; width: 0; height: 0; padding-top: env(safe-area-inset-top); visibility: hidden; }
+body.phone .zoom-controls, body.phone .hint { display: none; }
+.remote {
+  display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; flex-direction: column; gap: 10px;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom)); font-family: system-ui, -apple-system, sans-serif;
+  background: linear-gradient(#27272c, #121215); box-shadow: 0 -6px 18px rgba(0,0,0,.6);
+}
+body.phone.portrait .remote { display: flex; }
+body.phone.landscape .remote.open { display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
+.rm-top { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 10px; }
+body.phone.landscape .rm-top { grid-template-columns: auto auto auto; flex: none; }
+.rm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+body.phone.landscape .rm-grid { grid-template-columns: repeat(6, 1fr); gap: 8px; flex: 1; }
+.rm-key {
+  min-height: 54px; border: 0; border-radius: 8px; color: #eee; cursor: pointer; padding: 0 10px;
+  font: 600 20px/1 system-ui, -apple-system, sans-serif; background: linear-gradient(#55555b, #2e2e33); box-shadow: 0 3px 0 #0c0c0e;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; -webkit-tap-highlight-color: transparent;
+}
+body.phone.landscape .rm-key { min-height: 44px; font-size: 17px; }
+.rm-key small { font-size: 10px; letter-spacing: 1px; color: #d7b45a; font-weight: 700; }
+.rm-key:active { transform: translateY(2px); box-shadow: 0 1px 0 #0c0c0e; }
+.rm-key.ch { background: linear-gradient(#6a5a2a, #3b3116); color: #ffe9a8; font-size: 16px; }
+.rm-key.rm-power, .rm-key.rm-set { background: linear-gradient(#3a3a40, #1a1a1e); font-size: 12px; letter-spacing: 1.5px; }
+.rm-key.rm-power { color: #f3d9a0; position: relative; padding-top: 10px; }
+.rm-key.rm-power::before { content: ""; position: absolute; top: 7px; left: 50%; width: 8px; height: 8px; border-radius: 50%; transform: translateX(-50%); background: #ff3b1f; box-shadow: 0 0 6px #ff3b1f; }
+body.power-off .rm-key.rm-power::before { background: #3a0b06; box-shadow: none; }
+body.power-off .rm-key.rm-power { animation: beckon 2.2s ease-in-out infinite; }
+.rm-key.rm-set { color: #cfd4e0; }
+.rm-display { background: #070000; border: 3px solid #0a0a0b; border-radius: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; padding: 4px 8px; box-shadow: inset 0 0 12px #000, 0 0 0 1px #2a2a2e; }
+.rm-display .seg { position: static; height: 42px; width: 25px; }
+body.phone.landscape .rm-display .seg { height: 34px; width: 20px; }
+.rm-display .seg polygon { fill: #2b0906; }
+.rm-display .seg polygon.on { fill: #ff3419; filter: drop-shadow(0 0 3px rgba(255,60,30,.9)); }
+body.power-off .rm-display .seg polygon.on { fill: #2b0906; filter: none; }
+.rm-toggle {
+  display: none; position: fixed; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 6; height: 40px; padding: 0 14px; border: 0; border-radius: 8px;
+  color: #ddd; font: 700 12px/1 system-ui, sans-serif; letter-spacing: 1.5px; background: rgba(40,40,44,.85); box-shadow: 0 2px 0 #0c0c0e; backdrop-filter: blur(4px);
+}
+body.phone.landscape .rm-toggle { display: block; }
+body.phone.landscape .remote.open ~ .rm-toggle { display: none; }
 @media (max-width: 700px) and (orientation: portrait) {
-  body { overflow: auto; }
-  .room { height: auto; min-height: 100vh; min-height: 100svh; align-items: flex-start; padding-top: 2vh; }
+  body:not(.phone) { overflow: auto; }
+  body:not(.phone) .room { height: auto; min-height: 100vh; min-height: 100svh; align-items: flex-start; padding-top: max(2vh, env(safe-area-inset-top)); }
 }
