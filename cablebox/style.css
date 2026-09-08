@@ -164,6 +164,13 @@ body {
 .grow.spacer { background: #3d3de0; color: #fff; }
 .grow.spacer .gch { color: #fff; grid-column: 1 / -1; text-align: center; }
 
+/* Compact screens: the guide takes the whole tube, no promo window, larger type. */
+.glass.guide-only .raster, .glass.guide-only .static, .glass.guide-only .standby, .glass.guide-only .testpattern { display: none; }
+.glass.guide-only .guide { top: 1.4cqw; font-size: 3.1cqw; line-height: 3.9cqw; }
+.glass.guide-only .guide-head, .glass.guide-only .grow { grid-template-columns: 15cqw repeat(4, 1fr); }
+.glass.guide-only .guide-head { height: 4.2cqw; }
+.glass.guide-only .grow { height: 4.5cqw; }
+
 /* ---------------- Control panel ---------------- */
 .panel { flex: 1; height: 100%; display: flex; flex-direction: column; gap: 0.5cqw; min-width: 0; }
 .chrome {

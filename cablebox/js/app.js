@@ -7,14 +7,16 @@
   let power = false, ch = 2, digits = '', digitTimer = null, snowTimer = null;
   let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
   let askedAt = 0;               // when we last asked the player for a picture
+  let lastGuideOnly = false;
+  const compact = () => glass.clientHeight < 360;   // phones: the tube is too short for a promo window plus a grid
   const subs = new Map();        // schedule key -> substitute program, when the scheduled one is dead
   const dead = new Set();
 
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=09879df').then(r => r.json()),
-      fetch('data/catalog.json?v=09879df').then(r => r.json())
+      fetch('data/channels.json?v=3498775').then(r => r.json()),
+      fetch('data/catalog.json?v=3498775').then(r => r.json())
     ]);
     channels = c.channels; catalog = k;
     Sched.prepare(catalog, c.filler || 'commercials');
@@ -134,8 +136,12 @@
     const { entry, elapsed, dayStart } = Sched.at(channel, now, catalog);
     const key = channel.id + ':' + dayStart.getTime() + ':' + entry.start;
     const isGuide = channel.kind === 'guide';
+    const guideOnly = isGuide && compact();
     glass.classList.toggle('guide-mode', isGuide);
+    glass.classList.toggle('guide-only', guideOnly);
     if (isGuide) Guide.tick(now);
+    if (guideOnly !== lastGuideOnly) { lastGuideOnly = guideOnly; force = true; }
+    if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); return; }
 
     if (!force && current && current.key === key) {
       if (current.mode !== 'tail') Player.correct(expectedOffset(entry, elapsed));
@@ -272,6 +278,12 @@
     else if (e.key === '-' || e.key === '_') Player.setVolume(Player.volume - 5);
   });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && power) render(false); });
+
+  function hintText() {
+    const portraitPhone = window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
+    hint.textContent = portraitPhone ? 'Turn your phone sideways, then turn the VOL/ON knob.' : 'Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.';
+  }
+  hintText(); window.addEventListener('resize', hintText);
 
   loadData().then(() => {
     showDigits(String(ch));
