@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=42eee52').then(r => r.json()),
-      fetch('data/catalog.json?v=42eee52').then(r => r.json())
+      fetch('data/channels.json?v=8107afc').then(r => r.json()),
+      fetch('data/catalog.json?v=8107afc').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -111,7 +111,7 @@
     let s = '<circle class="ring" cx="50" cy="50" r="47"/>';
     labels.forEach((l, i) => {
       const deg = a0 + i * span / (n - 1), a = deg * Math.PI / 180;
-      const x = 50 + 39 * Math.sin(a), y = 50 - 39 * Math.cos(a);
+      const x = 50 + 41.5 * Math.sin(a), y = 50 - 41.5 * Math.cos(a);   // on the black ring, outside the knob
       s += `<text x="${x.toFixed(1)}" y="${(y + 3).toFixed(1)}" transform="rotate(${deg.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})">${l}</text>`;
     });
     svg.innerHTML = s;

@@ -519,8 +519,10 @@
       "sources": [
         {
           "tier": "filler",
-          "note": "search · 80s commercial compilations",
-          "url": "ytsearch30:1980s tv commercials compilation"
+          "note": "search · 80s commercial compilations (ads only: no MTV blocks, no syndicated shows with ads baked in)",
+          "url": "ytsearch30:1980s tv commercials compilation",
+          "titleMatch": "commercial|\\bads\\b|advert",
+          "titleExclude": "mtv|music video|syndication|episode|with commercials|full show|movie"
         }
       ],
       "series": false

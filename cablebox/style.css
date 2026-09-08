@@ -157,21 +157,21 @@ body.power-off .seg polygon.on { fill: transparent; filter: none; }
 .set-photo { display: block; width: 100%; height: 100%; border-radius: 0.3cqw; box-shadow: 0 1.5cqw 3cqw rgba(0,0,0,.7); }
 .screen-zone { position: absolute; left: 5.5%; top: 8.98%; width: 69%; height: 81.85%; pointer-events: none; }   /* bezel and surround; what zoom shows */
 .badge {
-  position: absolute; left: 77.6%; top: 9.72%; width: 17%; height: 3.27%; display: flex; align-items: center; justify-content: center;
-  color: #e6e6e6; font: 600 1.15cqw/1 Cinzel, "Copperplate", serif; letter-spacing: 0.36cqw; pointer-events: none;
+  position: absolute; left: 77.3%; top: 10.4%; width: 18.2%; height: 2.5%; display: flex; align-items: center; justify-content: center;
+  color: #e6e6e6; font: 600 1.05cqw/1 Cinzel, "Copperplate", serif; letter-spacing: 0.34cqw; pointer-events: none;
   text-shadow: 0 0 0.3cqw rgba(255,255,255,.25);
 }
-.badge span { margin-left: 0.9cqw; font-size: 1.45cqw; letter-spacing: 0.1cqw; font-style: italic; }
-.dial { position: absolute; width: 7.6%; aspect-ratio: 1; left: 78.4%; top: 14.89%; pointer-events: none; }
-.dial.vhf { left: 85.8%; top: 15.1%; }
+.badge span { margin-left: 0.85cqw; font-size: 1.3cqw; letter-spacing: 0.08cqw; font-style: italic; }
+.dial { position: absolute; width: 6.3%; aspect-ratio: 1; left: 79.05%; top: 16.37%; pointer-events: none; }
+.dial.vhf { left: 87.25%; top: 16.27%; }
 .dial svg { width: 100%; height: 100%; }
 .dial .ring { fill: none; stroke: none; }
-.dial text { fill: #f2f2f2; font: 600 8.5px system-ui, sans-serif; text-anchor: middle; paint-order: stroke; stroke: rgba(0,0,0,.6); stroke-width: 1.5px; }
-.logo { position: absolute; left: 84.4%; top: 31.05%; width: 3.8%; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.dial text { fill: #f4f4f4; font: 700 7.6px system-ui, sans-serif; text-anchor: middle; paint-order: stroke; stroke: rgba(0,0,0,.7); stroke-width: 1.4px; }
+.logo { position: absolute; left: 84.5%; top: 29.6%; width: 3.6%; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
 .logo svg { width: 100%; height: auto; }
 .logo span { font: 700 1.2cqw/1 "Arial Black", Impact, sans-serif; color: #f7e23a; text-shadow: 0 0.08cqw 0 #6b5220; margin-top: -0.2cqw; }
 .knob-label { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); font: 600 1.1cqw/1 "Dancing Script", cursive; color: #241d0c; white-space: nowrap; pointer-events: none; text-shadow: 0 0 0.2cqw rgba(255,240,200,.5); }
-.knob-hit { left: 83.5%; top: 39.4%; width: 5.6%; height: 7.18%; border-radius: 50%; }
+.knob-hit { left: 83.5%; top: 35.9%; width: 5.6%; height: 9.7%; border-radius: 50%; }
 
 /* Zoom: the set is laid out larger than the window and shifted so only the picture side shows. Real pixels, not a scale. */
 body.zoom { overflow: hidden; }
