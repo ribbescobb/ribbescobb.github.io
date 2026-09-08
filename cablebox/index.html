@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=af2e2f1">
+<link rel="stylesheet" href="style.css?v=f120ec8">
 </head>
 <body>
 <div class="room">
@@ -25,12 +25,13 @@
     <!-- Cable converter box, sitting on top of the set -->
     <div class="cablebox" id="cablebox">
       <button class="cb-power" id="power" aria-label="Power">POWER</button>
+      <button class="cb-zoom" id="zoom" aria-label="Zoom to the picture" title="Zoom (Z)">ZOOM</button>
       <div class="cb-display" aria-label="channel display">
         <svg class="seg" id="seg0" viewBox="0 0 40 70" aria-hidden="true"></svg>
         <svg class="seg" id="seg1" viewBox="0 0 40 70" aria-hidden="true"></svg>
       </div>
       <div class="cb-keys" id="keys">
-        <button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="up" class="ch">CH ▲</button>
+        <button data-key="1" class="guide"><span>1</span><small>GUIDE</small></button><button data-key="2">2</button><button data-key="3">3</button><button data-key="up" class="ch">CH ▲</button>
         <button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="down" class="ch">CH ▼</button>
         <button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key="0">0</button>
       </div>
@@ -89,12 +90,15 @@
       </div>
     </div>
 
+    <div class="zoom-controls" id="zoomControls" aria-label="zoomed-in controls">
+      <button data-key="down" aria-label="Channel down">CH ▼</button><button data-key="up" aria-label="Channel up">CH ▲</button><button id="unzoom" aria-label="Show the whole set">⤢</button>
+    </div>
     <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
   </div>
 </div>
-<script src="js/schedule.js?v=af2e2f1"></script>
-<script src="js/player.js?v=af2e2f1"></script>
-<script src="js/scramble.js?v=af2e2f1"></script>
-<script src="js/app.js?v=af2e2f1"></script>
+<script src="js/schedule.js?v=f120ec8"></script>
+<script src="js/player.js?v=f120ec8"></script>
+<script src="js/scramble.js?v=f120ec8"></script>
+<script src="js/app.js?v=f120ec8"></script>
 </body>
 </html>

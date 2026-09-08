@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=af2e2f1').then(r => r.json()),
-      fetch('data/catalog.json?v=af2e2f1').then(r => r.json())
+      fetch('data/channels.json?v=f120ec8').then(r => r.json()),
+      fetch('data/catalog.json?v=f120ec8').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -289,6 +289,9 @@
   // ---------------- wiring ----------------
   $('#keys').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) keyPress(b.dataset.key); });
   $('#power').addEventListener('click', () => { ensureAudio(); beep(700, 60); togglePower(); });
+  $('#zoom').addEventListener('click', () => { ensureAudio(); beep(900, 40); setZoom(!zoomed); });
+  $('#unzoom').addEventListener('click', () => setZoom(false));
+  $('#zoomControls').addEventListener('click', (e) => { const b = e.target.closest('button[data-key]'); if (b) keyPress(b.dataset.key); });
   const saveVol = (v) => { try { localStorage.setItem('cablebox.vol', v); } catch (x) {} };
   $('#volume').addEventListener('wheel', (e) => { e.preventDefault(); saveVol(Player.setVolume(Player.volume + (e.deltaY < 0 ? 5 : -5))); }, { passive: false });
   $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); });
@@ -300,10 +303,32 @@
     else if (e.key === 'p' || e.key === ' ') { togglePower(); e.preventDefault(); }
     else if (e.key === 'g') keyPress('1');
     else if (e.key === 'f') toggleFullscreen();
+    else if (e.key === 'z') setZoom(!zoomed);
     else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); }
     else if (e.key === '=' || e.key === '+') saveVol(Player.setVolume(Player.volume + 5));
     else if (e.key === '-' || e.key === '_') saveVol(Player.setVolume(Player.volume - 5));
   });
+  // ---------------- zoom: just the picture side of the set ----------------
+  let zoomed = false;
+  const scene = document.querySelector('.scene'), zone = document.querySelector('.screen-zone');
+  function layoutZoom() {
+    if (!zoomed) { scene.style.width = ''; scene.style.left = ''; scene.style.top = ''; return; }
+    const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight;
+    scene.style.left = '0px'; scene.style.top = '0px'; scene.style.width = '';
+    const w0 = scene.getBoundingClientRect().width, z0 = zone.getBoundingClientRect();
+    const k = Math.min(vw / z0.width, vh / z0.height) * 0.995;
+    scene.style.width = (w0 * k) + 'px';                       // lay out at the size where the picture side fills the window
+    const z = zone.getBoundingClientRect();
+    scene.style.left = ((vw - z.width) / 2 - z.left) + 'px';
+    scene.style.top = ((vh - z.height) / 2 - z.top) + 'px';
+  }
+  function setZoom(on) {
+    zoomed = !!on; document.body.classList.toggle('zoom', zoomed);
+    try { localStorage.setItem('cablebox.zoom', zoomed ? '1' : '0'); } catch (e) {}
+    layoutZoom(); if (power) render(false);
+  }
+  window.addEventListener('resize', layoutZoom);
+
   function toggleFullscreen() {
     const d = document, el = d.documentElement;
     const on = d.fullscreenElement || d.webkitFullscreenElement;
@@ -314,13 +339,14 @@
 
   function hintText() {
     const portraitPhone = window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
-    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1. F for full screen.';
+    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1. Z zooms to the picture, F for full screen.';
   }
   hintText(); window.addEventListener('resize', hintText);
   document.body.classList.add('power-off');
 
   loadData().then(() => {
     showDigits(String(ch));
+    try { if (localStorage.getItem('cablebox.zoom') === '1') setZoom(true); } catch (e) {}
     setInterval(() => { render(false); maybeRefresh(new Date()); }, 1000);
   }).catch(err => { console.error(err); hint.textContent = 'Could not load the channel data.'; });
 })();

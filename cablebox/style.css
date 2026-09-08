@@ -18,7 +18,7 @@ body {
 
 /* ---------------- Cable box ---------------- */
 .cablebox {
-  position: relative; width: 44cqw; height: 9cqw; margin-left: auto; margin-right: 6cqw;
+  position: relative; width: 44cqw; height: 9cqw; margin-left: 6cqw; margin-right: auto;
   border-radius: 0.5cqw 0.5cqw 0 0; padding: 0.9cqw 1.1cqw; display: flex; align-items: center; gap: 1.1cqw;
   background: linear-gradient(180deg, #34343a 0%, #1c1c20 55%, #121215 100%);
   box-shadow: inset 0 0.25cqw 0 rgba(255,255,255,.08), 0 0.6cqw 1.2cqw rgba(0,0,0,.6);
@@ -44,6 +44,25 @@ body.power-off .cb-power { animation: beckon 2.2s ease-in-out infinite; }
   50% { box-shadow: 0 0.18cqw 0 #0c0c0e, 0 0 1.6cqw 0.5cqw rgba(255,190,80,.75), inset 0 0.08cqw 0 rgba(255,255,255,.3); }
 }
 .cb-power:active { transform: translateY(0.12cqw); }
+.cb-zoom {
+  width: 4.2cqw; height: 4.2cqw; border: 0; border-radius: 0.3cqw; cursor: pointer; flex: none;
+  font: 700 0.72cqw/1 system-ui, sans-serif; letter-spacing: 0.06cqw; color: #cfd4e0;
+  background: linear-gradient(#3a3a40, #1a1a1e); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
+}
+.cb-zoom:active { transform: translateY(0.12cqw); }
+/* Zoom: the set is laid out larger than the window and shifted so only the picture side shows. Real pixels, not a scale. */
+body.zoom { overflow: hidden; }
+body.zoom .room { display: block; position: relative; overflow: hidden; }
+body.zoom .scene { position: absolute; }
+body.zoom .hint { display: none; }
+body.zoom .panel, body.zoom .cablebox { visibility: hidden; }   /* just the picture side */
+.zoom-controls { display: none; position: fixed; right: 1rem; bottom: 1rem; gap: .4rem; z-index: 5; }
+body.zoom .zoom-controls { display: flex; }
+.zoom-controls button {
+  min-width: 2.8rem; height: 2.2rem; padding: 0 .7rem; border: 0; border-radius: .35rem; cursor: pointer; color: #ddd;
+  font: 600 .8rem/1 system-ui, sans-serif; background: rgba(40,40,44,.85); box-shadow: 0 2px 0 #0c0c0e; backdrop-filter: blur(4px);
+}
+.zoom-controls button:active { transform: translateY(1px); }
 body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dark when the box is off */
 .cb-display {
   width: 8.6cqw; height: 6.2cqw; border-radius: 0.35cqw; background: #070000;
@@ -60,6 +79,9 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
   background: linear-gradient(#55555b, #2e2e33); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
 }
 .cb-keys button.ch { font-size: 0.85cqw; background: linear-gradient(#6a5a2a, #3b3116); color: #ffe9a8; }
+.cb-keys button.guide { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.12cqw; line-height: 1; }
+.cb-keys button.guide span { font-size: 0.8cqw; }
+.cb-keys button.guide small { font-size: 0.5cqw; letter-spacing: 0.08cqw; color: #d7b45a; font-weight: 700; }
 .cb-keys button:active { transform: translateY(0.12cqw); box-shadow: 0 0.06cqw 0 #0c0c0e; }
 .cb-brand {
   margin-left: auto; align-self: flex-end; padding-bottom: 0.1cqw; color: #9a9aa2; font: 700 1cqw/1 system-ui, sans-serif; letter-spacing: 0.18cqw; text-align: right;
