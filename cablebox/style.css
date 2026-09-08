@@ -167,11 +167,11 @@ body.power-off .seg polygon.on { fill: transparent; filter: none; }
 .dial svg { width: 100%; height: 100%; }
 .dial .ring { fill: none; stroke: none; }
 .dial text { fill: #f4f4f4; font: 700 7.6px system-ui, sans-serif; text-anchor: middle; paint-order: stroke; stroke: rgba(0,0,0,.7); stroke-width: 1.4px; }
-.logo { position: absolute; left: 84.5%; top: 29.6%; width: 3.6%; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.logo { position: absolute; left: 84.6%; top: 29.9%; width: 3.2%; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
 .logo svg { width: 100%; height: auto; }
 .logo span { font: 700 1.2cqw/1 "Arial Black", Impact, sans-serif; color: #f7e23a; text-shadow: 0 0.08cqw 0 #6b5220; margin-top: -0.2cqw; }
-.knob-label { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); font: 600 1.1cqw/1 "Dancing Script", cursive; color: #241d0c; white-space: nowrap; pointer-events: none; text-shadow: 0 0 0.2cqw rgba(255,240,200,.5); }
-.knob-hit { left: 83.5%; top: 35.9%; width: 5.6%; height: 9.7%; border-radius: 50%; }
+.knob-label { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); font: 600 1.25cqw/1 "Dancing Script", cursive; color: #241d0c; white-space: nowrap; pointer-events: none; text-shadow: 0 0 0.2cqw rgba(255,240,200,.5); }
+.knob-hit { left: 83.56%; top: 38.4%; width: 5%; height: 8.62%; border-radius: 50%; }
 
 /* Zoom: the set is laid out larger than the window and shifted so only the picture side shows. Real pixels, not a scale. */
 body.zoom { overflow: hidden; }
