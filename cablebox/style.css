@@ -113,11 +113,22 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(ellipse at 38% 20%, rgba(255,255,255,.42), rgba(255,255,255,.08) 22%, transparent 40%);
 }
-.glass.on, .glass.warming { background: #030303; box-shadow: inset 0 0 2.4cqw rgba(0,0,0,.9); }
+.glass.on, .glass.warming, .glass.cooling { background: #030303; box-shadow: inset 0 0 2.4cqw rgba(0,0,0,.9); }
 .glass.warming::before { /* CRT turn-on: a line that blooms into the picture */
   content: ""; position: absolute; left: 6%; right: 6%; top: 50%; height: 0.3cqw; background: #dfe9ff;
   box-shadow: 0 0 2cqw #cfe0ff, 0 0 4cqw #9ab8ff; transform: translateY(-50%);
   animation: bloom .75s ease-out forwards;
+}
+.glass.cooling::before { /* CRT turn-off: the picture collapses to a line, the line to a dot, the dot fades */
+  content: ""; position: absolute; left: 6%; right: 6%; top: 50%; height: 0.3cqw; background: #dfe9ff;
+  box-shadow: 0 0 2cqw #cfe0ff, 0 0 4cqw #9ab8ff; transform: translateY(-50%);
+  animation: collapse .95s ease-in forwards;
+}
+@keyframes collapse {
+  0% { transform: translateY(-50%) scaleX(1) scaleY(120); opacity: .95; }
+  30% { transform: translateY(-50%) scaleX(1) scaleY(1); opacity: 1; }
+  70% { transform: translateY(-50%) scaleX(.03) scaleY(1); opacity: 1; }
+  100% { transform: translateY(-50%) scaleX(.01) scaleY(.6); opacity: 0; }
 }
 @keyframes bloom {
   0% { transform: translateY(-50%) scaleX(0); opacity: 1; }
@@ -131,7 +142,7 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
    pillars land behind the bezel), and a true 16:9 picture loses a sliver at each edge. */
 .raster { position: absolute; inset: 0; background: #000; overflow: hidden; }   /* to the glass edge; the tube's radius clips the corners */
 #yt { position: absolute; top: 0; left: 50%; height: 100%; width: 133.4%; transform: translateX(-50%); display: block; border: 0; }   /* 16:9 player at the 4:3 tube's height */
-.glass.off .raster, .glass.warming .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
+.glass.off .raster, .glass.warming .raster, .glass.cooling .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 
 .static { position: absolute; inset: 0; width: 100%; height: 100%; display: none; image-rendering: pixelated; }
 .glass.snow .static { display: block; }

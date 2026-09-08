@@ -41,18 +41,13 @@
     return best;
   }
 
-  // Seconds of commercials after a program (regular) or after every third video (block). Daypart, then channel,
-  // then the lineup's default, then the mode's own default.
-  function breakLen(dp, channel, catalog, modeDefault) {
-    for (const v of [dp.breakSeconds, channel.breakSeconds, catalog.breakSeconds]) if (v != null) return v;
-    return modeDefault;
-  }
+  function num() { for (const v of arguments) if (v != null) return v; return 0; }
 
-  function fillBreak(out, from, to, seed, k, catalog) {
+  function fillBreak(out, from, to, seed, salt, catalog) {
     const fill = catalog.pools[catalog.filler] || [];
     let t = from, j = 0;
-    while (t < to && fill.length && j < 24) {
-      const target = mix(seed, k * 131 + j + 7);
+    while (t < to && fill.length && j < 8) {
+      const target = mix(seed, salt * 131 + j + 7);
       const clip = pick(fill, target);
       const len = Math.min(to - t, clip.d);
       const maxOff = Math.max(0, clip.d - len);
@@ -63,11 +58,20 @@
     if (t < to) out.push({ start: t, end: to, kind: 'off' });
   }
 
+  // One channel-day. A running clock inserts a short commercial break every `breakEvery` seconds (60s every 15 min
+  // by default). Regular programs are interrupted and resume where they left off, unless the program ends within
+  // three minutes of the mark, in which case the break waits for the end. Block-mode (music) channels only break
+  // between songs. breakEvery 0 = no commercials on that channel.
   function build(channel, date, catalog) {
     const seed = hash32(channel.id + '|' + ymd(date));
     const dow = date.getDay();
     const out = [], recent = [];
-    let t = 0, k = 0;
+    const every = num(channel.breakEvery, catalog.breakEvery, 900), len = num(channel.breakSeconds, catalog.breakSeconds, 60);
+    const ads = every > 0 && len > 0;
+    let t = 0, k = 0, lastBreak = 0;
+    const due = (now) => ads && now - lastBreak >= every;
+    const doBreak = (from) => { const to = Math.min(DAY, from + len); fillBreak(out, from, to, seed, k * 1000 + out.length, catalog); lastBreak = to; return to; };
+
     while (t < DAY) {
       const dp = daypartAt(channel, dow, t);
       const name = dp && dp.pool;
@@ -75,40 +79,35 @@
       if (!pool || !pool.length) {
         const end = Math.min(DAY, Math.floor(t / HALF) * HALF + HALF);
         out.push({ start: t, end, kind: 'off' });
-        t = end; k++; continue;
+        t = end; lastBreak = end; k++; continue;
       }
+      const target = mix(seed, k);
+
       if (dp.block) {
-        // Music-television mode: fill the half hour with videos back to back, a short break every three.
-        // The guide shows the block's label, not every song.
-        const slotEnd = Math.min(DAY, Math.floor(t / HALF) * HALF + HALF);
-        const label = dp.label || channel.name, win = Math.min(40, pool.length - 1);
-        let n = 0;
-        while (t < slotEnd) {
-          const brk = breakLen(dp, channel, catalog, 90);
-          if (brk > 0 && n > 0 && n % 3 === 0) {
-            const len = Math.min(slotEnd - t, brk);
-            fillBreak(out, t, t + len, seed, k * 1000 + n, catalog); t += len;
-            if (t >= slotEnd) break;
-          }
-          const target = mix(seed, k * 1000 + n);
-          const prog = pick(pool, target, new Set(recent.slice(-win)), slotEnd - t) || pick(pool, target, null, slotEnd - t);
-          if (!prog) { fillBreak(out, t, slotEnd, seed, k * 1000 + n, catalog); t = slotEnd; break; }
-          out.push({ start: t, end: t + prog.d, kind: 'program', id: prog.id, title: prog.t, series: prog.s || '', off: 0, dur: prog.d, pool: name, label });
-          recent.push(prog.id); t += prog.d; n++;
-        }
-        k++; continue;
+        // Music television: songs back to back, a break only at a song boundary once the clock is due.
+        if (due(t)) { t = doBreak(t); k++; continue; }
+        const win = Math.min(40, pool.length - 1), ex = new Set(recent.slice(-win));
+        const song = pick(pool, target, ex, DAY - t) || pick(pool, target, null, DAY - t) || pick(pool, target, ex) || pick(pool, target);
+        const end = Math.min(DAY, t + song.d);
+        out.push({ start: t, end, kind: 'program', pid: k, id: song.id, title: song.t, series: song.s || '', off: 0, dur: song.d, pool: name, label: dp.label || channel.name, cut: t + song.d > DAY });
+        recent.push(song.id); t = end; k++; continue;
       }
-      const remaining = DAY - t, target = mix(seed, k), ex = new Set(recent.slice(-12));
-      // Prefer something that ends before midnight; otherwise take the next pick anyway and cut it at midnight,
-      // the way a station switched to the overnight feed.
-      const prog = pick(pool, target, ex, remaining) || pick(pool, target, null, remaining) || pick(pool, target, ex) || pick(pool, target);
-      const end = Math.min(DAY, t + prog.d);
-      out.push({ start: t, end, kind: 'program', id: prog.id, title: prog.t, series: prog.s || '', off: 0, dur: prog.d, pool: name, label: dp.label, cut: t + prog.d > DAY });
+
+      // A regular program, in segments around the breaks.
+      const ex = new Set(recent.slice(-12));
+      const prog = pick(pool, target, ex, DAY - t) || pick(pool, target, null, DAY - t) || pick(pool, target, ex) || pick(pool, target);
+      const progEnd = Math.min(DAY, t + prog.d), cut = t + prog.d > DAY;
+      let off = 0;
+      while (t < progEnd) {
+        if (due(t)) { t = doBreak(t); if (t >= progEnd) break; }
+        const mark = lastBreak + every;
+        const end = (ads && mark < progEnd - 180) ? mark : progEnd;
+        out.push({ start: t, end, kind: 'program', pid: k, id: prog.id, title: prog.t, series: prog.s || '', off, dur: prog.d, pool: name, label: dp.label, cut });
+        off += end - t; t = end;
+      }
       recent.push(prog.id);
-      const brk = breakLen(dp, channel, catalog, 0);
-      let next = end;
-      if (brk > 0 && end < DAY) { next = Math.min(DAY, end + brk); fillBreak(out, end, next, seed, k, catalog); }
-      t = next; k++;
+      if (ads && t < DAY && t - lastBreak >= every * 0.8) t = doBreak(t);   // a natural boundary close to the mark takes the break
+      k++;
     }
     return out;
   }
@@ -142,16 +141,16 @@
         if (e.kind === 'break') continue;
         const s = base + e.start, en = base + e.end;
         if (en <= fromS || s >= toS) continue;
-        out.push({ start: s, end: en, kind: e.kind, title: e.title || '', series: e.series || '', label: e.label || '' });
+        out.push({ start: s, end: en, kind: e.kind, title: e.title || '', series: e.series || '', label: e.label || '', pid: e.pid });
       }
       d = new Date(d.getTime() + DAY * 1000 + 3600 * 1000); d.setHours(0, 0, 0, 0);
     }
     return out;
   }
 
-  function prepare(catalog, filler, breakSeconds) {
+  function prepare(catalog, filler, breakSeconds, breakEvery) {
     catalog.filler = catalog.filler || filler || 'commercials';
-    catalog.breakSeconds = breakSeconds;
+    catalog.breakSeconds = breakSeconds; catalog.breakEvery = breakEvery;
     for (const name in catalog.pools) for (const it of catalog.pools[name]) it.h = hash32(it.id);
     cache.clear();
   }

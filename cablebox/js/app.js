@@ -15,12 +15,12 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=e378c2d').then(r => r.json()),
-      fetch('data/catalog.json?v=e378c2d').then(r => r.json())
+      fetch('data/channels.json?v=f0adcf9').then(r => r.json()),
+      fetch('data/catalog.json?v=f0adcf9').then(r => r.json())
     ]);
     channels = c.channels; catalog = k;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
-    Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds);
+    Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds, c.breakEvery);
     channels.forEach(x => byNum.set(x.num, x));
     MAX_CH = Math.max(36, ...channels.map(x => x.num));
     startChannel = c.startChannel || 1; ch = startChannel;   // the box always wakes up on the guide
@@ -28,7 +28,7 @@
   }
 
   // ---------------- glass states ----------------
-  const STATES = ['off', 'warming', 'on', 'snow', 'standby', 'offair', 'scramble'];
+  const STATES = ['off', 'warming', 'cooling', 'on', 'snow', 'standby', 'offair', 'scramble'];
   const level = () => (Player.muted ? 0 : Player.volume / 100);
   function setGlass(state) {
     STATES.forEach(s => glass.classList.toggle(s, s === state));
@@ -212,7 +212,8 @@
   function powerOff() {
     if (!power) return;
     power = false; thunk(); Player.stop(); current = null; clearTimeout(snowTimer); document.body.classList.add('power-off');
-    glass.classList.remove('guide-mode'); setGlass('off'); hint.classList.remove('hidden');
+    glass.classList.remove('guide-mode', 'guide-only'); setGlass('cooling'); hint.classList.remove('hidden');
+    setTimeout(() => { if (!power) setGlass('off'); }, 950);
   }
   function togglePower() { power ? powerOff() : powerOn(); }
 
@@ -224,7 +225,7 @@
     function fmt(sec) { const d = new Date(sec * 1000); let h = d.getHours(); const m = d.getMinutes(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(m).padStart(2, '0') + ' ' + ap; }
     function clock(d) { let h = d.getHours(); const m = d.getMinutes(), s = d.getSeconds(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ' ' + ap; }
     function label(p) { if (!p) return ''; if (p.kind === 'off') return 'Off Air'; return p.label || p.series || p.title; }
-    const same = (a, b) => a === b || (a && b && ((a.label && a.label === b.label) || (a.kind === 'off' && b.kind === 'off')));
+    const same = (a, b) => a === b || (a && b && ((a.pid != null && a.pid === b.pid) || (a.label && a.label === b.label) || (a.kind === 'off' && b.kind === 'off')));
     function build(now) {
       const start = Math.floor(now.getTime() / 1000 / 1800) * 1800;
       windowStart = start;
