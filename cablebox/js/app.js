@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=2b6da1f').then(r => r.json()),
-      fetch('data/catalog.json?v=2b6da1f').then(r => r.json())
+      fetch('data/channels.json?v=1dbfe48').then(r => r.json()),
+      fetch('data/catalog.json?v=1dbfe48').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -235,6 +235,8 @@
   function powerOn() {
     if (power) return;
     power = true; ensureAudio(); thunk(); hint.classList.add('hidden'); document.body.classList.remove('power-off');
+    if (Player.muted) Player.setMuted(false);                       // a set that was turned on has sound
+    if (Player.volume < 20) saveVol(Player.setVolume(40));
     ch = startChannel; digits = ''; showDigits(String(ch));
     setGlass('warming');
     Player.ensureApi();
@@ -308,9 +310,9 @@
   $('#zoom').addEventListener('click', () => { ensureAudio(); beep(900, 40); setZoom(!zoomed); });
   $('#unzoom').addEventListener('click', () => setZoom(false));
   $('#zoomControls').addEventListener('click', (e) => { const b = e.target.closest('button[data-key]'); if (b) keyPress(b.dataset.key); });
-  const saveVol = (v) => { try { localStorage.setItem('cablebox.vol', v); } catch (x) {} };
+  const saveVol = (v) => { try { localStorage.setItem('cablebox.vol', v); } catch (x) {} flash(Player.muted ? 'Muted' : 'Volume ' + v); return v; };
   $('#volume').addEventListener('wheel', (e) => { e.preventDefault(); saveVol(Player.setVolume(Player.volume + (e.deltaY < 0 ? 5 : -5))); }, { passive: false });
-  $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); });
+  $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); flash(Player.muted ? 'Muted' : 'Sound on, volume ' + Player.volume); });
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (/^[0-9]$/.test(e.key)) { keyPress(e.key); e.preventDefault(); }
@@ -320,7 +322,7 @@
     else if (e.key === 'g') keyPress('1');
     else if (e.key === 'f') toggleFullscreen();
     else if (e.key === 'z') setZoom(!zoomed);
-    else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); }
+    else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); flash(Player.muted ? 'Muted' : 'Sound on, volume ' + Player.volume); }
     else if (e.key === '=' || e.key === '+') saveVol(Player.setVolume(Player.volume + 5));
     else if (e.key === '-' || e.key === '_') saveVol(Player.setVolume(Player.volume - 5));
   });
@@ -354,6 +356,11 @@
   document.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) b.blur(); });   // no lingering focus ring on the photo
   document.addEventListener('visibilitychange', () => { if (!document.hidden && power) render(false); });
 
+  let flashT = null;
+  function flash(msg) {                                              // a brief readout under the set
+    hint.textContent = msg; hint.classList.remove('hidden'); clearTimeout(flashT);
+    flashT = setTimeout(() => { hintText(); if (power) hint.classList.add('hidden'); }, 1600);
+  }
   function hintText() {
     const portraitPhone = window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
     hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1. Z zooms to the picture, F for full screen.';
