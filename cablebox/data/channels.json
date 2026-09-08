@@ -149,6 +149,18 @@
           "pool": "golf"
         }
       ]
+    },
+    {
+      "num": 69,
+      "id": "premium",
+      "name": "PREMIUM",
+      "kind": "scrambled",
+      "_note": "Scrambled pay TV. No video source; drawn on a canvas. The schedule of titles is generated in js/scramble.js.",
+      "dayparts": [
+        {
+          "pool": "scrambled"
+        }
+      ]
     }
   ],
   "pools": {

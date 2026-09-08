@@ -15,10 +15,11 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=cb4957e').then(r => r.json()),
-      fetch('data/catalog.json?v=cb4957e').then(r => r.json())
+      fetch('data/channels.json?v=e378c2d').then(r => r.json()),
+      fetch('data/catalog.json?v=e378c2d').then(r => r.json())
     ]);
     channels = c.channels; catalog = k;
+    catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
     Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds);
     channels.forEach(x => byNum.set(x.num, x));
     MAX_CH = Math.max(36, ...channels.map(x => x.num));
@@ -27,8 +28,13 @@
   }
 
   // ---------------- glass states ----------------
-  const STATES = ['off', 'warming', 'on', 'snow', 'standby', 'offair'];
-  function setGlass(state) { STATES.forEach(s => glass.classList.toggle(s, s === state)); if (state === 'snow') startStatic(); else stopStatic(); }
+  const STATES = ['off', 'warming', 'on', 'snow', 'standby', 'offair', 'scramble'];
+  const level = () => (Player.muted ? 0 : Player.volume / 100);
+  function setGlass(state) {
+    STATES.forEach(s => glass.classList.toggle(s, s === state));
+    if (state === 'snow') startStatic(); else stopStatic();
+    if (state === 'scramble') Scramble.start($('#scrambled'), ac, level()); else Scramble.stop(ac);
+  }
 
   // ---------------- static ----------------
   const sctx = staticCanvas.getContext('2d');
@@ -140,6 +146,7 @@
     if (isGuide) Guide.tick(now);
     if (guideOnly !== lastGuideOnly) { lastGuideOnly = guideOnly; force = true; }
     if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); return; }
+    if (channel.kind === 'scrambled') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('scramble')) setGlass('scramble'); return; }
 
     if (!force && current && current.key === key) {
       if (current.mode !== 'tail') Player.correct(expectedOffset(entry, elapsed));
@@ -267,7 +274,7 @@
   $('#power').addEventListener('click', () => { ensureAudio(); beep(700, 60); togglePower(); });
   const saveVol = (v) => { try { localStorage.setItem('cablebox.vol', v); } catch (x) {} };
   $('#volume').addEventListener('wheel', (e) => { e.preventDefault(); saveVol(Player.setVolume(Player.volume + (e.deltaY < 0 ? 5 : -5))); }, { passive: false });
-  $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); });
+  $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); });
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (/^[0-9]$/.test(e.key)) { keyPress(e.key); e.preventDefault(); }
@@ -276,7 +283,7 @@
     else if (e.key === 'p' || e.key === ' ') { togglePower(); e.preventDefault(); }
     else if (e.key === 'g') keyPress('1');
     else if (e.key === 'f') toggleFullscreen();
-    else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); }
+    else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); }
     else if (e.key === '=' || e.key === '+') saveVol(Player.setVolume(Player.volume + 5));
     else if (e.key === '-' || e.key === '_') saveVol(Player.setVolume(Player.volume - 5));
   });
