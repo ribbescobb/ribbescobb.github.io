@@ -1,0 +1,31 @@
+# Lives in the ribbescobb.github.io repo as .github/workflows/cablebox-sweep.yml (tools/deploy.sh puts it there).
+# Every night it drops dead YouTube videos from the deployed CableBox catalog and rebuilds the site.
+name: CableBox nightly sweep
+on:
+  schedule:
+    - cron: '0 9 * * *'     # 4 a.m. Central in summer, 3 a.m. in winter
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Drop dead videos
+        id: sweep
+        run: python3 cablebox/tools/sweep.py cablebox/data/catalog.json
+      - name: Commit the trimmed catalog
+        if: steps.sweep.outputs.dropped != '0'
+        run: |
+          git config user.name "cablebox-sweep"
+          git config user.email "cablebox-sweep@users.noreply.github.com"
+          git add cablebox/data/catalog.json
+          git commit -m "CableBox sweep: dropped ${{ steps.sweep.outputs.dropped }} dead video(s)"
+          git push
+      - name: Rebuild Pages
+        if: steps.sweep.outputs.dropped != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/pages/builds || true

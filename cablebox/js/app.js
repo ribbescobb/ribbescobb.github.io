@@ -3,7 +3,7 @@
   const $ = (s) => document.querySelector(s);
   const glass = $('#glass'), staticCanvas = $('#static'), hint = $('#hint');
   let MAX_CH = 36, startChannel = 1;
-  let channels = [], byNum = new Map(), catalog = null;
+  let channels = [], byNum = new Map(), catalog = null, lineup = null, refreshedOn = '';
   let power = false, ch = 2, digits = '', digitTimer = null, snowTimer = null;
   let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
   let askedAt = 0;               // when we last asked the player for a picture
@@ -15,16 +15,31 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=f0adcf9').then(r => r.json()),
-      fetch('data/catalog.json?v=f0adcf9').then(r => r.json())
+      fetch('data/channels.json?v=af2e2f1').then(r => r.json()),
+      fetch('data/catalog.json?v=af2e2f1').then(r => r.json())
     ]);
-    channels = c.channels; catalog = k;
+    channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
     Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds, c.breakEvery);
     channels.forEach(x => byNum.set(x.num, x));
     MAX_CH = Math.max(36, ...channels.map(x => x.num));
     startChannel = c.startChannel || 1; ch = startChannel;   // the box always wakes up on the guide
     try { const v = localStorage.getItem('cablebox.vol'); if (v !== null && v !== '') Player.setVolume(+v); } catch (e) {}
+  }
+
+  // After the nightly sweep, pick up the fresh catalog so a set left on stays on the same schedule as everyone else.
+  async function refreshCatalog() {
+    try {
+      const k = await fetch('data/catalog.json' + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
+      k.pools.scrambled = Scramble.pool();
+      catalog = k; Sched.prepare(catalog, lineup.filler || 'commercials', lineup.breakSeconds, lineup.breakEvery);
+      Guide.invalidate(); current = null; if (power) render(true);
+      console.log('[cablebox] catalog refreshed', k.built, k.swept || '');
+    } catch (e) { console.warn('[cablebox] catalog refresh failed', e); }
+  }
+  function maybeRefresh(now) {
+    const day = now.toDateString();
+    if (now.getHours() === 4 && now.getMinutes() === 5 && refreshedOn !== day) { refreshedOn = day; refreshCatalog(); }
   }
 
   // ---------------- glass states ----------------
@@ -267,7 +282,8 @@
       const c = head.querySelector('.gclock'); if (c) c.textContent = clock(now);
       if (!raf) { lastT = performance.now(); raf = requestAnimationFrame(step); }
     }
-    return { tick };
+    function invalidate() { rows.innerHTML = ''; windowStart = 0; }
+    return { tick, invalidate };
   })();
 
   // ---------------- wiring ----------------
@@ -305,6 +321,6 @@
 
   loadData().then(() => {
     showDigits(String(ch));
-    setInterval(() => render(false), 1000);
+    setInterval(() => { render(false); maybeRefresh(new Date()); }, 1000);
   }).catch(err => { console.error(err); hint.textContent = 'Could not load the channel data.'; });
 })();
