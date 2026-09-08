@@ -497,10 +497,16 @@
         {
           "tier": "wild",
           "note": "fan · Full 1980s NFL Games",
-          "url": "https://www.youtube.com/playlist?list=PLAr_WbjGaCm7HEjtoIw5uhDR0R2vZIZpG"
+          "url": "https://www.youtube.com/playlist?list=PLAr_WbjGaCm7HEjtoIw5uhDR0R2vZIZpG",
+          "requireEmbedCheck": true
         }
       ],
-      "series": false
+      "series": false,
+      "include": [
+        "legit",
+        "wild"
+      ],
+      "_note": "NFL's own uploads refuse embedding (error 150), so this pool opens the wild door. Fan uploads are admitted only after tools/embed_check.js has seen them play; see data/embeddable.json."
     },
     "golf": {
       "minMinutes": 45,

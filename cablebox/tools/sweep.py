@@ -30,6 +30,8 @@ def main():
     with ThreadPoolExecutor(max_workers=6) as ex:
         status = dict(ex.map(probe, ids))
     dead = {v for v, s in status.items() if s.startswith('dead')}
+    blockp = os.path.join(os.path.dirname(path), 'unembeddable.json')
+    if os.path.exists(blockp): dead |= set(json.load(open(blockp)).keys())   # ids a real player refused; see tools/embed_check.js
     unknown = sum(1 for s in status.values() if s.startswith('unknown'))
     dropped = []
     for name, items in cat['pools'].items():

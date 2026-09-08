@@ -7,6 +7,7 @@
   let power = false, ch = 2, digits = '', digitTimer = null, snowTimer = null;
   let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
   let askedAt = 0;               // when we last asked the player for a picture
+  let recovering = false, deadInSlot = 0, deadSlotKey = '';   // after a dead video, stay in stand-by until a picture actually arrives
   let lastGuideOnly = false;
   const compact = () => glass.clientHeight < 420;   // phones: the tube is too short for a promo window plus a grid
   const subs = new Map();        // schedule key -> substitute program, when the scheduled one is dead
@@ -15,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=f4ca1ff').then(r => r.json()),
-      fetch('data/catalog.json?v=f4ca1ff').then(r => r.json())
+      fetch('data/channels.json?v=0b78128').then(r => r.json()),
+      fetch('data/catalog.json?v=0b78128').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -188,7 +189,9 @@
     if (entry.kind === 'off') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('offair'); return; }
     const sub = subs.get(key);
     current = { key, entry, channel, mode: sub ? 'sub' : 'sched', sub };
-    setGlass('on');
+    if (key !== deadSlotKey) { deadInSlot = 0; deadSlotKey = key; recovering = false; }
+    if (deadInSlot >= 3) { setGlass('standby'); Player.stop(); return; }   // this slot is a write-off; try again next slot
+    setGlass(recovering ? 'standby' : 'on');
     const off = expectedOffset(entry, elapsed);
     const end = entry.kind === 'break' && !sub ? (entry.off || 0) + (entry.end - entry.start) : undefined;
     askedAt = Date.now();
@@ -202,11 +205,12 @@
     return cands[Sched.hash32(notId + '|' + salt) % cands.length];
   }
 
-  Player.on('onPlaying', () => { if (power && glass.classList.contains('standby')) setGlass('on'); });
+  Player.on('onPlaying', () => { recovering = false; deadInSlot = 0; if (power && glass.classList.contains('standby')) setGlass('on'); });
 
   Player.on('onDead', (id) => {
     if (!current || !power || dead.has(id) && current.mode === 'sub') { if (current) setGlass('standby'); return; }
-    dead.add(id);
+    dead.add(id); recovering = true; deadInSlot++;
+    if (deadInSlot >= 3) { setGlass('standby'); Player.stop(); return; }
     const { entry, key } = current;
     const poolName = entry.kind === 'break' ? catalog.filler : entry.pool;
     const alt = altFor(poolName, id, key);
