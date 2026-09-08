@@ -162,7 +162,20 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
    The player runs at 16:9 sized to the tube's HEIGHT and overflows the sides, like CRT overscan: a native 4:3 upload
    fills the tube exactly, a 16:9 upload with the 4:3 broadcast pillarboxed inside it also fills exactly (the black
    pillars land behind the bezel), and a true 16:9 picture loses a sliver at each edge. */
-.raster { position: absolute; inset: 0; background: #000; overflow: hidden; }   /* to the glass edge; the tube's radius clips the corners */
+.raster { position: absolute; inset: 0; background: #000; overflow: hidden; transition: inset .65s cubic-bezier(.2,.75,.2,1); }   /* to the glass edge; the tube's radius clips the corners */
+/* The squeeze: for a song's first and last seconds the picture eases toward the top right and the chyron sits in the
+   black it leaves behind. Nothing is drawn over the player. */
+.glass.squeeze .raster { inset: 0 0 21% 24%; }
+.lower-third {
+  position: absolute; left: 4.5%; bottom: 5%; max-width: 64%; color: #fff; opacity: 0; pointer-events: none;
+  font-family: Poppins, "Helvetica Neue", Arial, sans-serif; font-weight: 700; line-height: 1.15; text-align: left;
+  text-shadow: 0.14cqw 0.14cqw 0 #000, 0 0 0.7cqw rgba(0,0,0,.85); transition: opacity .35s ease .3s;
+}
+.glass.squeeze .lower-third { opacity: 1; }
+.lt-artist { font-size: 2.5cqw; letter-spacing: 0.02cqw; }
+.lt-song { font-size: 2.15cqw; font-weight: 600; font-style: italic; }
+.lt-year { font-size: 1.6cqw; font-weight: 600; opacity: .9; margin-top: 0.2cqw; }
+.glass.guide-mode .lower-third, .glass.guide-only .lower-third { display: none; }
 #yt { position: absolute; top: 0; left: 50%; height: 100%; width: 133.4%; transform: translateX(-50%); display: block; border: 0; }   /* 16:9 player at the 4:3 tube's height */
 .glass.off .raster, .glass.warming .raster, .glass.cooling .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 

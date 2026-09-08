@@ -540,7 +540,8 @@
           "note": "Rhino · 80s Music Hits (label-curated)",
           "url": "https://www.youtube.com/playlist?list=PLmXxqSJJq-yXrCPGIT2gn8b34JjOrl4Xf"
         }
-      ]
+      ],
+      "caption": true
     },
     "music-newwave": {
       "minMinutes": 2,
@@ -557,7 +558,8 @@
           "note": "fan-curated · 80's New Wave & Alternative Music Videos 1 (uploaders mostly official artist/VEVO channels)",
           "url": "https://www.youtube.com/playlist?list=PLsOrSzcIuB3ZRu7qfrjFWTvNaLHYunZNN"
         }
-      ]
+      ],
+      "caption": true
     },
     "music-metal": {
       "minMinutes": 2,
@@ -579,7 +581,8 @@
           "note": "fan-curated · 80s Heavy Metal / Hard Rock Top 1000, official videos",
           "url": "https://www.youtube.com/playlist?list=PL5fRL6A4m-DFddDPJU5Ugr3NRhxrm5GtR"
         }
-      ]
+      ],
+      "caption": true
     },
     "music-rnb": {
       "minMinutes": 2,
@@ -601,7 +604,8 @@
           "note": "fan-curated · 80's R&B Videos (mixed)",
           "url": "https://www.youtube.com/playlist?list=PL0S86Wvv_WsTXYH3onzOs8k1HDgbEy0vp"
         }
-      ]
+      ],
+      "caption": true
     },
     "music-rap": {
       "minMinutes": 2,
@@ -618,7 +622,8 @@
           "note": "fan-curated · 80's RAP VIDEO's (Sugarhill, Tommy Boy, artist channels)",
           "url": "https://www.youtube.com/playlist?list=PL29A9C2FD856B658C"
         }
-      ]
+      ],
+      "caption": true
     }
   },
   "breakSeconds": 60,

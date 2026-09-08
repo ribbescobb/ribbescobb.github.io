@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=620d656').then(r => r.json()),
-      fetch('data/catalog.json?v=620d656').then(r => r.json())
+      fetch('data/channels.json?v=dcd507c').then(r => r.json()),
+      fetch('data/catalog.json?v=dcd507c').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -47,6 +47,7 @@
   const level = () => (Player.muted ? 0 : Player.volume / 100);
   function setGlass(state) {
     STATES.forEach(s => glass.classList.toggle(s, s === state));
+    if (state !== 'on') glass.classList.remove('squeeze');
     if (state === 'snow') startStatic(); else stopStatic();
     if (state === 'scramble') Scramble.start($('#scrambled'), ac, level()); else Scramble.stop(ac);
   }
@@ -147,6 +148,19 @@
     return (entry.off || 0) + elapsed;
   }
 
+  const lt = $('#lowerThird'), CHYRON_SECS = 8;
+  function updateCaption(entry, elapsed) {
+    const dur = entry.end - entry.start;
+    const show = entry.kind === 'program' && !!(entry.a || entry.n) && dur > 30 && glass.classList.contains('on') &&
+      (elapsed < CHYRON_SECS || dur - elapsed <= CHYRON_SECS);
+    if (show) {
+      lt.querySelector('.lt-artist').textContent = entry.a || '';
+      lt.querySelector('.lt-song').textContent = entry.n ? '\u201c' + entry.n + '\u201d' : '';
+      lt.querySelector('.lt-year').textContent = entry.y || '';
+    }
+    glass.classList.toggle('squeeze', show);
+  }
+
   function render(force) {
     if (!power) return;
     const channel = byNum.get(ch);
@@ -163,6 +177,7 @@
     if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); return; }
     if (channel.kind === 'scrambled') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('scramble')) setGlass('scramble'); return; }
 
+    updateCaption(entry, elapsed);
     if (!force && current && current.key === key) {
       if (current.mode !== 'tail') Player.correct(expectedOffset(entry, elapsed));
       // No picture for 20s after asking for one: stand by rather than stare at a dead tube.

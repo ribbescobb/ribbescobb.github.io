@@ -93,6 +93,7 @@
   window.Player = {
     ensureApi, play, stop, correct, setVolume, setMuted,
     on(name, fn) { cb[name] = fn; },
-    get playing() { return playing; }, get volume() { return volume; }, get muted() { return muted; }, get loadedId() { return loadedId; }
+    get playing() { return playing; }, get volume() { return volume; }, get muted() { return muted; }, get loadedId() { return loadedId; },
+    get state() { return yt && ready && yt.getPlayerState ? yt.getPlayerState() : null; }, get time() { return yt && ready && yt.getCurrentTime ? yt.getCurrentTime() : null; }
   };
 })();

@@ -89,7 +89,7 @@
         const win = Math.min(40, pool.length - 1), ex = new Set(recent.slice(-win));
         const song = pick(pool, target, ex, DAY - t) || pick(pool, target, null, DAY - t) || pick(pool, target, ex) || pick(pool, target);
         const end = Math.min(DAY, t + song.d);
-        out.push({ start: t, end, kind: 'program', pid: k, id: song.id, title: song.t, series: song.s || '', off: 0, dur: song.d, pool: name, label: dp.label || channel.name, cut: t + song.d > DAY });
+        out.push({ start: t, end, kind: 'program', pid: k, id: song.id, title: song.t, series: song.s || '', off: 0, dur: song.d, pool: name, label: dp.label || channel.name, cut: t + song.d > DAY, a: song.a || '', n: song.n || '', y: song.y || '' });
         recent.push(song.id); t = end; k++; continue;
       }
 
