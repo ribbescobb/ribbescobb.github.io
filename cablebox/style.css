@@ -1,7 +1,7 @@
 /* CableBox — the Heathkit 25 console, a converter box on top, and what shows in the glass.
    Everything is sized in cqw (1cqw = 1% of the scene width) so the set scales as one object. */
 
-:root { --w: min(96vw, 112vh); }
+:root { --w: min(96vw, 140vh); }
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
@@ -10,15 +10,15 @@ body {
 }
 .room {
   width: 100%; height: 100vh; display: flex; align-items: flex-end; justify-content: center;
-  padding-bottom: 1.5vh;
+  padding-bottom: 2vh;
   background: radial-gradient(ellipse at 50% 20%, #1e1712 0%, #0b0907 60%);
 }
 .scene { width: var(--w); container-type: inline-size; position: relative; }
 
 /* ---------------- Cable box ---------------- */
 .cablebox {
-  position: relative; width: 36cqw; height: 9cqw; margin-left: auto; margin-right: 6cqw;
-  border-radius: 0.5cqw 0.5cqw 0 0; padding: 0.9cqw 1.1cqw; display: flex; align-items: center; gap: 1.3cqw;
+  position: relative; width: 44cqw; height: 9cqw; margin-left: auto; margin-right: 6cqw;
+  border-radius: 0.5cqw 0.5cqw 0 0; padding: 0.9cqw 1.1cqw; display: flex; align-items: center; gap: 1.1cqw;
   background: linear-gradient(180deg, #34343a 0%, #1c1c20 55%, #121215 100%);
   box-shadow: inset 0 0.25cqw 0 rgba(255,255,255,.08), 0 0.6cqw 1.2cqw rgba(0,0,0,.6);
 }
@@ -26,6 +26,24 @@ body {
   content: ""; position: absolute; right: 1cqw; top: 1cqw; width: 5cqw; height: 0.9cqw;
   background: repeating-linear-gradient(90deg, #0d0d10 0 0.25cqw, transparent 0.25cqw 0.6cqw);
 }
+.cb-power {
+  width: 4.2cqw; height: 4.2cqw; border: 0; border-radius: 0.3cqw; cursor: pointer; flex: none; padding: 1.1cqw 0 0;
+  font: 700 0.72cqw/1 system-ui, sans-serif; letter-spacing: 0.06cqw; color: #f3d9a0;
+  background: linear-gradient(#3a3a40, #1a1a1e); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
+  position: relative;
+}
+.cb-power::before { /* power LED */
+  content: ""; position: absolute; left: 50%; top: 0.45cqw; width: 0.55cqw; height: 0.55cqw; border-radius: 50%; transform: translateX(-50%);
+  background: #ff3b1f; box-shadow: 0 0 0.5cqw #ff3b1f;
+}
+body.power-off .cb-power::before { background: #3a0b06; box-shadow: none; }
+body.power-off .cb-power { animation: beckon 2.2s ease-in-out infinite; }
+@keyframes beckon {
+  0%, 100% { box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15); }
+  50% { box-shadow: 0 0.18cqw 0 #0c0c0e, 0 0 1.6cqw 0.5cqw rgba(255,190,80,.75), inset 0 0.08cqw 0 rgba(255,255,255,.3); }
+}
+.cb-power:active { transform: translateY(0.12cqw); }
+body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dark when the box is off */
 .cb-display {
   width: 8.6cqw; height: 6.2cqw; border-radius: 0.35cqw; background: #070000;
   border: 0.28cqw solid #0a0a0b; box-shadow: inset 0 0 1.2cqw #000, 0 0 0 0.12cqw #2a2a2e;
@@ -34,7 +52,7 @@ body {
 .seg { width: 2.6cqw; height: 4.6cqw; }
 .seg polygon { fill: #140302; }
 .seg polygon.on { fill: #ff3419; filter: drop-shadow(0 0 0.28cqw rgba(255,60,30,.9)); }
-.cb-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35cqw; width: 16.5cqw; }
+.cb-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35cqw; width: 17cqw; flex: none; }
 .cb-keys button {
   height: 2cqw; border: 0; border-radius: 0.25cqw; color: #e6e6e6; cursor: pointer;
   font: 600 1.05cqw/1 system-ui, sans-serif; letter-spacing: 0.05cqw;
@@ -43,7 +61,7 @@ body {
 .cb-keys button.ch { font-size: 0.85cqw; background: linear-gradient(#6a5a2a, #3b3116); color: #ffe9a8; }
 .cb-keys button:active { transform: translateY(0.12cqw); box-shadow: 0 0.06cqw 0 #0c0c0e; }
 .cb-brand {
-  position: absolute; right: 1.2cqw; bottom: 0.7cqw; color: #9a9aa2; font: 700 1cqw/1 system-ui, sans-serif; letter-spacing: 0.18cqw;
+  margin-left: auto; align-self: flex-end; padding-bottom: 0.1cqw; color: #9a9aa2; font: 700 1cqw/1 system-ui, sans-serif; letter-spacing: 0.18cqw; text-align: right;
 }
 .cb-brand span { color: #d7b45a; }
 .cb-brand small { display: block; font-weight: 400; font-size: 0.7cqw; letter-spacing: 0.1cqw; color: #6c6c74; margin-top: 0.25cqw; }
@@ -63,14 +81,6 @@ body {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 0.35cqw; border-radius: 0.6cqw 0.6cqw 0 0;
   background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.25), rgba(255,255,255,.1));
 }
-.legs { display: flex; justify-content: space-between; padding: 0 7cqw; height: 15cqw; }
-.leg {
-  width: 2.6cqw; height: 100%;
-  background: linear-gradient(90deg, #3a2013, #5a3520 45%, #3a2013);
-  clip-path: polygon(0 0, 100% 0, 78% 100%, 22% 100%);
-  transform: skewX(-4deg); transform-origin: top center;
-}
-.leg.r { transform: skewX(4deg); }
 
 /* ---------------- Screen zone ---------------- */
 .screen-zone { width: 68cqw; height: 100%; }
@@ -114,9 +124,12 @@ body {
   100% { transform: translateY(-50%) scaleX(1) scaleY(120); opacity: 0; }
 }
 
-/* Picture area: inset so its corners sit inside the tube's rounded corners. Never covered by anything. */
-.raster { position: absolute; inset: 1.4cqw; background: #000; }
-#yt, #yt iframe { width: 100%; height: 100%; display: block; border: 0; }
+/* Picture area: inset so its corners sit inside the tube's rounded corners. Never covered by anything.
+   The player runs at 16:9 sized to the tube's HEIGHT and overflows the sides, like CRT overscan: a native 4:3 upload
+   fills the tube exactly, a 16:9 upload with the 4:3 broadcast pillarboxed inside it also fills exactly (the black
+   pillars land behind the bezel), and a true 16:9 picture loses a sliver at each edge. */
+.raster { position: absolute; inset: 1.4cqw; background: #000; overflow: hidden; }
+#yt { position: absolute; top: 0; left: 50%; height: 100%; width: 133.4%; transform: translateX(-50%); display: block; border: 0; }   /* 16:9 player at the 4:3 tube's height */
 .glass.off .raster, .glass.warming .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 
 .static { position: absolute; inset: 0; width: 100%; height: 100%; display: none; image-rendering: pixelated; }
@@ -220,8 +233,8 @@ body {
   background: repeating-conic-gradient(from 0deg, #efd58e 0 4deg, #7a5f26 4deg 8deg);
   -webkit-mask: radial-gradient(circle, transparent 68%, #000 69%); mask: radial-gradient(circle, transparent 68%, #000 69%);
 }
-.knob-wrap.power .knob { outline: 0; }
-.knob-wrap.power .knob:focus-visible { box-shadow: 0 0 0 0.3cqw #ffd86a, 0 0 0 0.45cqw #6b5220; }
+.knob-wrap .knob { outline: 0; }
+.knob-wrap .knob:focus-visible { box-shadow: 0 0 0 0.3cqw #ffd86a, 0 0 0 0.45cqw #6b5220; }
 .logo { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 4.6cqw; }
 .logo svg { width: 3.6cqw; height: 2.4cqw; }
 .logo span { font: 700 1.5cqw/1 "Arial Black", Impact, sans-serif; color: #f7e23a; text-shadow: 0 0.08cqw 0 #6b5220; letter-spacing: 0.05cqw; }

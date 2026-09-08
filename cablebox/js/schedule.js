@@ -20,11 +20,11 @@
   function midnight(d) { const m = new Date(d); m.setHours(0, 0, 0, 0); return m; }
   function hm(s) { const p = String(s).split(':'); return (+p[0]) * 3600 + (+(p[1] || 0)) * 60; }
 
-  function poolAt(channel, dow, t) {
+  function daypartAt(channel, dow, t) {
     for (const dp of channel.dayparts || []) {
       if (dp.days && !dp.days.includes(dow)) continue;
       const from = dp.from ? hm(dp.from) : 0, to = dp.to ? hm(dp.to) : DAY;
-      if (t >= from && t < to) return dp.pool;
+      if (t >= from && t < to) return dp;
     }
     return null;
   }
@@ -39,6 +39,13 @@
       if (dist < bestD) { bestD = dist; best = it; }
     }
     return best;
+  }
+
+  // Seconds of commercials after a program (regular) or after every third video (block). Daypart, then channel,
+  // then the lineup's default, then the mode's own default.
+  function breakLen(dp, channel, catalog, modeDefault) {
+    for (const v of [dp.breakSeconds, channel.breakSeconds, catalog.breakSeconds]) if (v != null) return v;
+    return modeDefault;
   }
 
   function fillBreak(out, from, to, seed, k, catalog) {
@@ -62,21 +69,45 @@
     const out = [], recent = [];
     let t = 0, k = 0;
     while (t < DAY) {
-      const name = poolAt(channel, dow, t);
+      const dp = daypartAt(channel, dow, t);
+      const name = dp && dp.pool;
       const pool = name && catalog.pools[name];
       if (!pool || !pool.length) {
         const end = Math.min(DAY, Math.floor(t / HALF) * HALF + HALF);
         out.push({ start: t, end, kind: 'off' });
         t = end; k++; continue;
       }
-      const remaining = DAY - t;
-      const prog = pick(pool, mix(seed, k), new Set(recent.slice(-12)), remaining) || pick(pool, mix(seed, k), null, remaining);
-      if (!prog) { fillBreak(out, t, DAY, seed, k, catalog); break; }
-      const end = t + prog.d;
-      out.push({ start: t, end, kind: 'program', id: prog.id, title: prog.t, series: prog.s || '', off: 0, dur: prog.d, pool: name });
+      if (dp.block) {
+        // Music-television mode: fill the half hour with videos back to back, a short break every three.
+        // The guide shows the block's label, not every song.
+        const slotEnd = Math.min(DAY, Math.floor(t / HALF) * HALF + HALF);
+        const label = dp.label || channel.name, win = Math.min(40, pool.length - 1);
+        let n = 0;
+        while (t < slotEnd) {
+          const brk = breakLen(dp, channel, catalog, 90);
+          if (brk > 0 && n > 0 && n % 3 === 0) {
+            const len = Math.min(slotEnd - t, brk);
+            fillBreak(out, t, t + len, seed, k * 1000 + n, catalog); t += len;
+            if (t >= slotEnd) break;
+          }
+          const target = mix(seed, k * 1000 + n);
+          const prog = pick(pool, target, new Set(recent.slice(-win)), slotEnd - t) || pick(pool, target, null, slotEnd - t);
+          if (!prog) { fillBreak(out, t, slotEnd, seed, k * 1000 + n, catalog); t = slotEnd; break; }
+          out.push({ start: t, end: t + prog.d, kind: 'program', id: prog.id, title: prog.t, series: prog.s || '', off: 0, dur: prog.d, pool: name, label });
+          recent.push(prog.id); t += prog.d; n++;
+        }
+        k++; continue;
+      }
+      const remaining = DAY - t, target = mix(seed, k), ex = new Set(recent.slice(-12));
+      // Prefer something that ends before midnight; otherwise take the next pick anyway and cut it at midnight,
+      // the way a station switched to the overnight feed.
+      const prog = pick(pool, target, ex, remaining) || pick(pool, target, null, remaining) || pick(pool, target, ex) || pick(pool, target);
+      const end = Math.min(DAY, t + prog.d);
+      out.push({ start: t, end, kind: 'program', id: prog.id, title: prog.t, series: prog.s || '', off: 0, dur: prog.d, pool: name, label: dp.label, cut: t + prog.d > DAY });
       recent.push(prog.id);
-      const next = Math.min(DAY, Math.ceil(end / HALF) * HALF);
-      if (next > end) fillBreak(out, end, next, seed, k, catalog);
+      const brk = breakLen(dp, channel, catalog, 0);
+      let next = end;
+      if (brk > 0 && end < DAY) { next = Math.min(DAY, end + brk); fillBreak(out, end, next, seed, k, catalog); }
       t = next; k++;
     }
     return out;
@@ -111,15 +142,16 @@
         if (e.kind === 'break') continue;
         const s = base + e.start, en = base + e.end;
         if (en <= fromS || s >= toS) continue;
-        out.push({ start: s, end: en, kind: e.kind, title: e.title || '', series: e.series || '' });
+        out.push({ start: s, end: en, kind: e.kind, title: e.title || '', series: e.series || '', label: e.label || '' });
       }
       d = new Date(d.getTime() + DAY * 1000 + 3600 * 1000); d.setHours(0, 0, 0, 0);
     }
     return out;
   }
 
-  function prepare(catalog, filler) {
+  function prepare(catalog, filler, breakSeconds) {
     catalog.filler = catalog.filler || filler || 'commercials';
+    catalog.breakSeconds = breakSeconds;
     for (const name in catalog.pools) for (const it of catalog.pools[name]) it.h = hash32(it.id);
     cache.clear();
   }

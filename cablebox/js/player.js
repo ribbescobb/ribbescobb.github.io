@@ -31,6 +31,7 @@
           const S = YT.PlayerState;
           if (e.data === S.PLAYING) {
             playing = true; clearTimeout(watchdog); watchdog = null; watchdogStrikes = 0;
+            try { yt.unloadModule('captions'); yt.unloadModule('cc'); } catch (x) {}   // no subtitles on a 1965 set
             cb.onPlaying && cb.onPlaying(loadedId);
           } else if (e.data === S.ENDED) {
             playing = false; cb.onEnded && cb.onEnded(loadedId);

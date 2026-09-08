@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3498775">
+<link rel="stylesheet" href="style.css?v=aeeca70">
 </head>
 <body>
 <div class="room">
@@ -17,6 +17,7 @@
 
     <!-- Cable converter box, sitting on top of the set -->
     <div class="cablebox" id="cablebox">
+      <button class="cb-power" id="power" aria-label="Power">POWER</button>
       <div class="cb-display" aria-label="channel display">
         <svg class="seg" id="seg0" viewBox="0 0 40 70" aria-hidden="true"></svg>
         <svg class="seg" id="seg1" viewBox="0 0 40 70" aria-hidden="true"></svg>
@@ -70,7 +71,7 @@
             </div>
             <div class="knob-row">
               <div class="knob-wrap"><label>contrast</label><div class="knob" data-knob="contrast"></div></div>
-              <div class="knob-wrap power"><label>vol &nbsp;on</label><button class="knob" id="power" data-knob="power" aria-label="Power and volume"></button></div>
+              <div class="knob-wrap"><label>volume</label><button class="knob" id="volume" data-knob="volume" aria-label="Volume: scroll to adjust, click to mute"></button></div>
               <div class="knob-wrap"><label>color</label><div class="knob" data-knob="color"></div></div>
             </div>
             <div class="sliders"><span>H</span><i></i><i></i><span>V</span></div>
@@ -78,14 +79,13 @@
           <div class="grille"></div>
         </div>
       </div>
-      <div class="legs"><div class="leg"></div><div class="leg r"></div></div>
     </div>
 
     <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
   </div>
 </div>
-<script src="js/schedule.js?v=3498775"></script>
-<script src="js/player.js?v=3498775"></script>
-<script src="js/app.js?v=3498775"></script>
+<script src="js/schedule.js?v=aeeca70"></script>
+<script src="js/player.js?v=aeeca70"></script>
+<script src="js/app.js?v=aeeca70"></script>
 </body>
 </html>

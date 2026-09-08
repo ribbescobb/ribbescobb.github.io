@@ -1,11 +1,11 @@
 {
-  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Only tiers in `include` are built into the catalog. Rebuild with: python3 tools/build_catalog.py",
+  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Only tiers in `include` are built into the catalog. Rebuild with: python3 tools/build_catalog.py breakSeconds = seconds of commercials after each program (0 = none, programs run back to back; ~75 shows one or two spots). Set it on the lineup, a channel, or a daypart. Block-mode dayparts use it after every third video (default 90).",
   "include": [
     "legit",
     "filler"
   ],
   "filler": "commercials",
-  "startChannel": 2,
+  "startChannel": 1,
   "channels": [
     {
       "num": 1,
@@ -58,20 +58,65 @@
     {
       "num": 6,
       "id": "music-pop",
-      "name": "MUSIC-POP",
+      "name": "POP",
       "dayparts": [
         {
-          "pool": "music-pop"
+          "pool": "music-pop",
+          "block": true,
+          "label": "Videos",
+          "breakSeconds": 90
         }
       ]
     },
     {
-      "num": 9,
-      "id": "music-rock",
-      "name": "MUSIC-ROCK",
+      "num": 7,
+      "id": "music-newwave",
+      "name": "NEW WAVE",
       "dayparts": [
         {
-          "pool": "music-rock"
+          "pool": "music-newwave",
+          "block": true,
+          "label": "Videos",
+          "breakSeconds": 90
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "id": "music-metal",
+      "name": "METAL",
+      "dayparts": [
+        {
+          "pool": "music-metal",
+          "block": true,
+          "label": "Videos",
+          "breakSeconds": 90
+        }
+      ]
+    },
+    {
+      "num": 10,
+      "id": "music-rnb",
+      "name": "R&B",
+      "dayparts": [
+        {
+          "pool": "music-rnb",
+          "block": true,
+          "label": "Videos",
+          "breakSeconds": 90
+        }
+      ]
+    },
+    {
+      "num": 12,
+      "id": "music-rap",
+      "name": "RAP",
+      "dayparts": [
+        {
+          "pool": "music-rap",
+          "block": true,
+          "label": "Videos",
+          "breakSeconds": 90
         }
       ]
     },
@@ -382,30 +427,6 @@
         }
       ]
     },
-    "music-pop": {
-      "minMinutes": 2,
-      "maxMinutes": 8,
-      "sources": [
-        {
-          "tier": "wild",
-          "note": "search · 80s pop, official videos (curate me)",
-          "url": "ytsearch60:80s pop hits official music video"
-        }
-      ],
-      "series": false
-    },
-    "music-rock": {
-      "minMinutes": 2,
-      "maxMinutes": 8,
-      "sources": [
-        {
-          "tier": "wild",
-          "note": "search · 80s rock, official videos (curate me)",
-          "url": "ytsearch60:80s rock official music video"
-        }
-      ],
-      "series": false
-    },
     "baseball": {
       "sources": [
         {
@@ -494,6 +515,102 @@
         }
       ],
       "series": false
+    },
+    "music-pop": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Vevo · I Want My '80s Videos (Vevo-curated, official videos)",
+          "url": "https://www.youtube.com/playlist?list=PLkqz3S84Tw-Qjyd_zHSVH_Xj6ge7yrgYI"
+        },
+        {
+          "tier": "legit",
+          "note": "Rhino · 80s Music Hits (label-curated)",
+          "url": "https://www.youtube.com/playlist?list=PLmXxqSJJq-yXrCPGIT2gn8b34JjOrl4Xf"
+        }
+      ]
+    },
+    "music-newwave": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Rhino · 80s Alternative / New Wave (label-curated)",
+          "url": "https://www.youtube.com/playlist?list=PLmXxqSJJq-yWTswOPWtZVTrs5ZAAjFB_j"
+        },
+        {
+          "tier": "legit",
+          "note": "fan-curated · 80's New Wave & Alternative Music Videos 1 (uploaders mostly official artist/VEVO channels)",
+          "url": "https://www.youtube.com/playlist?list=PLsOrSzcIuB3ZRu7qfrjFWTvNaLHYunZNN"
+        }
+      ]
+    },
+    "music-metal": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Rhino · 80s Hard Rock & Hair Metal (label-curated)",
+          "url": "https://www.youtube.com/playlist?list=PLmXxqSJJq-yVWpRFGImHYZBQTuBGLjG4t"
+        },
+        {
+          "tier": "legit",
+          "note": "fan-curated · HEAVY & GLAM METAL 80s (uploaders mostly official)",
+          "url": "https://www.youtube.com/playlist?list=PLafKh5hA5TEm8FeN1PJD-edXoEfnr2y19"
+        },
+        {
+          "tier": "legit",
+          "note": "fan-curated · 80s Heavy Metal / Hard Rock Top 1000, official videos",
+          "url": "https://www.youtube.com/playlist?list=PL5fRL6A4m-DFddDPJU5Ugr3NRhxrm5GtR"
+        }
+      ]
+    },
+    "music-rnb": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "include": [
+        "legit",
+        "wild"
+      ],
+      "_note": "Official 80s R&B uploads are thin, so this pool opens the wild door for itself.",
+      "sources": [
+        {
+          "tier": "wild",
+          "note": "fan-curated · 80s R&B Videos (mixed official and fan uploads)",
+          "url": "https://www.youtube.com/playlist?list=PLAwsVML2bgaLlb5iSkBDU5AkfEoaTbeUx"
+        },
+        {
+          "tier": "wild",
+          "note": "fan-curated · 80's R&B Videos (mixed)",
+          "url": "https://www.youtube.com/playlist?list=PL0S86Wvv_WsTXYH3onzOs8k1HDgbEy0vp"
+        }
+      ]
+    },
+    "music-rap": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "fan-curated · 80s/90s Hip Hop, Yo! era (uploaders mostly official artist/label channels)",
+          "url": "https://www.youtube.com/playlist?list=PLn174AkvdiIZJX3Yb1TkEQXDWJMb9qVVC"
+        },
+        {
+          "tier": "legit",
+          "note": "fan-curated · 80's RAP VIDEO's (Sugarhill, Tommy Boy, artist channels)",
+          "url": "https://www.youtube.com/playlist?list=PL29A9C2FD856B658C"
+        }
+      ]
     }
-  }
+  },
+  "breakSeconds": 0
 }

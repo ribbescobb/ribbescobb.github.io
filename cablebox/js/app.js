@@ -2,7 +2,7 @@
 (function () {
   const $ = (s) => document.querySelector(s);
   const glass = $('#glass'), staticCanvas = $('#static'), hint = $('#hint');
-  let MAX_CH = 36;
+  let MAX_CH = 36, startChannel = 1;
   let channels = [], byNum = new Map(), catalog = null;
   let power = false, ch = 2, digits = '', digitTimer = null, snowTimer = null;
   let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
@@ -15,16 +15,15 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=3498775').then(r => r.json()),
-      fetch('data/catalog.json?v=3498775').then(r => r.json())
+      fetch('data/channels.json?v=aeeca70').then(r => r.json()),
+      fetch('data/catalog.json?v=aeeca70').then(r => r.json())
     ]);
     channels = c.channels; catalog = k;
-    Sched.prepare(catalog, c.filler || 'commercials');
+    Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds);
     channels.forEach(x => byNum.set(x.num, x));
     MAX_CH = Math.max(36, ...channels.map(x => x.num));
-    ch = c.startChannel || 2;
-    try { const s = +localStorage.getItem('cablebox.ch'); if (s >= 1 && s <= MAX_CH) ch = s; } catch (e) {}
-    try { const v = +localStorage.getItem('cablebox.vol'); if (v >= 0) Player.setVolume(v); } catch (e) {}
+    startChannel = c.startChannel || 1; ch = startChannel;   // the box always wakes up on the guide
+    try { const v = localStorage.getItem('cablebox.vol'); if (v !== null && v !== '') Player.setVolume(+v); } catch (e) {}
   }
 
   // ---------------- glass states ----------------
@@ -103,7 +102,6 @@
     n = Math.max(1, Math.min(MAX_CH, n));
     const changed = n !== ch;
     ch = n; showDigits(String(ch));
-    try { localStorage.setItem('cablebox.ch', ch); } catch (e) {}
     if (!power || !changed) return;
     Player.stop(); current = null;
     setGlass('snow');
@@ -198,14 +196,15 @@
   // ---------------- power ----------------
   function powerOn() {
     if (power) return;
-    power = true; ensureAudio(); thunk(); hint.classList.add('hidden');
+    power = true; ensureAudio(); thunk(); hint.classList.add('hidden'); document.body.classList.remove('power-off');
+    ch = startChannel; digits = ''; showDigits(String(ch));
     setGlass('warming');
     Player.ensureApi();
     setTimeout(() => { if (power) { current = null; render(true); } }, 800);
   }
   function powerOff() {
     if (!power) return;
-    power = false; thunk(); Player.stop(); current = null; clearTimeout(snowTimer);
+    power = false; thunk(); Player.stop(); current = null; clearTimeout(snowTimer); document.body.classList.add('power-off');
     glass.classList.remove('guide-mode'); setGlass('off'); hint.classList.remove('hidden');
   }
   function togglePower() { power ? powerOff() : powerOn(); }
@@ -217,7 +216,8 @@
     const esc = (s) => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
     function fmt(sec) { const d = new Date(sec * 1000); let h = d.getHours(); const m = d.getMinutes(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(m).padStart(2, '0') + ' ' + ap; }
     function clock(d) { let h = d.getHours(); const m = d.getMinutes(), s = d.getSeconds(); const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12; return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0') + ' ' + ap; }
-    function label(p) { if (!p) return ''; if (p.kind === 'off') return 'Off Air'; return p.series || p.title; }
+    function label(p) { if (!p) return ''; if (p.kind === 'off') return 'Off Air'; return p.label || p.series || p.title; }
+    const same = (a, b) => a === b || (a && b && ((a.label && a.label === b.label) || (a.kind === 'off' && b.kind === 'off')));
     function build(now) {
       const start = Math.floor(now.getTime() / 1000 / 1800) * 1800;
       windowStart = start;
@@ -234,7 +234,7 @@
         let cells = '';
         for (let i = 0; i < 4;) {
           let j = i + 1;
-          while (j < 4 && cols[i] && cols[j] && (cols[j] === cols[i] || (cols[i].kind === 'off' && cols[j].kind === 'off'))) j++;
+          while (j < 4 && cols[i] && cols[j] && same(cols[i], cols[j])) j++;
           const p = cols[i];
           cells += `<div class="gp${p && p.kind === 'off' ? ' off' : ''}" style="grid-column: span ${j - i}">${esc(label(p))}</div>`;
           i = j;
@@ -264,8 +264,10 @@
 
   // ---------------- wiring ----------------
   $('#keys').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) keyPress(b.dataset.key); });
-  $('#power').addEventListener('click', togglePower);
-  $('#power').addEventListener('wheel', (e) => { e.preventDefault(); const v = Player.setVolume(Player.volume + (e.deltaY < 0 ? 5 : -5)); try { localStorage.setItem('cablebox.vol', v); } catch (x) {} }, { passive: false });
+  $('#power').addEventListener('click', () => { ensureAudio(); beep(700, 60); togglePower(); });
+  const saveVol = (v) => { try { localStorage.setItem('cablebox.vol', v); } catch (x) {} };
+  $('#volume').addEventListener('wheel', (e) => { e.preventDefault(); saveVol(Player.setVolume(Player.volume + (e.deltaY < 0 ? 5 : -5))); }, { passive: false });
+  $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); });
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (/^[0-9]$/.test(e.key)) { keyPress(e.key); e.preventDefault(); }
@@ -274,16 +276,17 @@
     else if (e.key === 'p' || e.key === ' ') { togglePower(); e.preventDefault(); }
     else if (e.key === 'g') keyPress('1');
     else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); }
-    else if (e.key === '=' || e.key === '+') Player.setVolume(Player.volume + 5);
-    else if (e.key === '-' || e.key === '_') Player.setVolume(Player.volume - 5);
+    else if (e.key === '=' || e.key === '+') saveVol(Player.setVolume(Player.volume + 5));
+    else if (e.key === '-' || e.key === '_') saveVol(Player.setVolume(Player.volume - 5));
   });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && power) render(false); });
 
   function hintText() {
     const portraitPhone = window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
-    hint.textContent = portraitPhone ? 'Turn your phone sideways, then turn the VOL/ON knob.' : 'Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.';
+    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1.';
   }
   hintText(); window.addEventListener('resize', hintText);
+  document.body.classList.add('power-off');
 
   loadData().then(() => {
     showDigits(String(ch));
