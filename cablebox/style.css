@@ -206,7 +206,14 @@ body.phone.landscape .remote.open { display: flex; flex-direction: row; align-it
 .rm-top { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 10px; }
 body.phone.landscape .rm-top { grid-template-columns: auto auto auto; flex: none; }
 .rm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-body.phone.landscape .rm-grid { grid-template-columns: repeat(6, 1fr); gap: 8px; flex: 1; }
+body.phone.landscape .rm-grid {
+  grid-template-columns: repeat(6, 1fr); gap: 8px; flex: 1;
+  grid-template-areas: "k1 k2 k3 k4 k5 up" "k6 k7 k8 k9 k0 down";   /* digits in two rows, channel up over channel down at the far right */
+}
+body.phone.landscape .rm-key[data-key="1"] { grid-area: k1; } body.phone.landscape .rm-key[data-key="2"] { grid-area: k2; } body.phone.landscape .rm-key[data-key="3"] { grid-area: k3; }
+body.phone.landscape .rm-key[data-key="4"] { grid-area: k4; } body.phone.landscape .rm-key[data-key="5"] { grid-area: k5; } body.phone.landscape .rm-key[data-key="6"] { grid-area: k6; }
+body.phone.landscape .rm-key[data-key="7"] { grid-area: k7; } body.phone.landscape .rm-key[data-key="8"] { grid-area: k8; } body.phone.landscape .rm-key[data-key="9"] { grid-area: k9; }
+body.phone.landscape .rm-key[data-key="0"] { grid-area: k0; } body.phone.landscape .rm-key[data-key="up"] { grid-area: up; } body.phone.landscape .rm-key[data-key="down"] { grid-area: down; }
 .rm-key {
   min-height: 54px; border: 0; border-radius: 8px; color: #eee; cursor: pointer; padding: 0 10px;
   font: 600 20px/1 system-ui, -apple-system, sans-serif; background: linear-gradient(#55555b, #2e2e33); box-shadow: 0 3px 0 #0c0c0e;
