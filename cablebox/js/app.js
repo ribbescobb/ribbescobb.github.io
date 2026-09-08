@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=aeeca70').then(r => r.json()),
-      fetch('data/catalog.json?v=aeeca70').then(r => r.json())
+      fetch('data/channels.json?v=8cf1fa2').then(r => r.json()),
+      fetch('data/catalog.json?v=8cf1fa2').then(r => r.json())
     ]);
     channels = c.channels; catalog = k;
     Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds);
@@ -275,15 +275,22 @@
     else if (e.key === 'ArrowDown' || e.key === 'PageDown') { keyPress('down'); e.preventDefault(); }
     else if (e.key === 'p' || e.key === ' ') { togglePower(); e.preventDefault(); }
     else if (e.key === 'g') keyPress('1');
+    else if (e.key === 'f') toggleFullscreen();
     else if (e.key === 'm') { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); }
     else if (e.key === '=' || e.key === '+') saveVol(Player.setVolume(Player.volume + 5));
     else if (e.key === '-' || e.key === '_') saveVol(Player.setVolume(Player.volume - 5));
   });
+  function toggleFullscreen() {
+    const d = document, el = d.documentElement;
+    const on = d.fullscreenElement || d.webkitFullscreenElement;
+    try { on ? (d.exitFullscreen || d.webkitExitFullscreen).call(d) : (el.requestFullscreen || el.webkitRequestFullscreen).call(el); } catch (e) {}
+  }
+  document.querySelector('.cabinet').addEventListener('dblclick', (e) => { if (!e.target.closest('.glass, .knob, button')) toggleFullscreen(); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && power) render(false); });
 
   function hintText() {
     const portraitPhone = window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
-    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1.';
+    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1. F for full screen.';
   }
   hintText(); window.addEventListener('resize', hintText);
   document.body.classList.add('power-off');
