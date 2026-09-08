@@ -70,7 +70,7 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
 /* ---------------- Cabinet ---------------- */
 .set { position: relative; }
 .cabinet {
-  position: relative; height: 58cqw; border-radius: 0.6cqw;
+  position: relative; height: 58.4cqw; border-radius: 0.6cqw;   /* makes the glass an exact 4:3 */
   padding: 2.6cqw 3.4cqw 2.6cqw 2.6cqw; display: flex; gap: 2cqw;
   background:
     repeating-linear-gradient(93deg, rgba(0,0,0,.14) 0 0.12cqw, transparent 0.12cqw 0.8cqw),
@@ -129,7 +129,7 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
    The player runs at 16:9 sized to the tube's HEIGHT and overflows the sides, like CRT overscan: a native 4:3 upload
    fills the tube exactly, a 16:9 upload with the 4:3 broadcast pillarboxed inside it also fills exactly (the black
    pillars land behind the bezel), and a true 16:9 picture loses a sliver at each edge. */
-.raster { position: absolute; inset: 1.4cqw; background: #000; overflow: hidden; }
+.raster { position: absolute; inset: 0; background: #000; overflow: hidden; }   /* to the glass edge; the tube's radius clips the corners */
 #yt { position: absolute; top: 0; left: 50%; height: 100%; width: 133.4%; transform: translateX(-50%); display: block; border: 0; }   /* 16:9 player at the 4:3 tube's height */
 .glass.off .raster, .glass.warming .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 

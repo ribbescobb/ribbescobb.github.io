@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=8cf1fa2').then(r => r.json()),
-      fetch('data/catalog.json?v=8cf1fa2').then(r => r.json())
+      fetch('data/channels.json?v=cb4957e').then(r => r.json()),
+      fetch('data/catalog.json?v=cb4957e').then(r => r.json())
     ]);
     channels = c.channels; catalog = k;
     Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds);
