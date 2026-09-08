@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=4d1e46c').then(r => r.json()),
-      fetch('data/catalog.json?v=4d1e46c').then(r => r.json())
+      fetch('data/channels.json?v=2b6da1f').then(r => r.json()),
+      fetch('data/catalog.json?v=2b6da1f').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
