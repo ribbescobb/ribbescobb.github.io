@@ -79,9 +79,9 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
   background: linear-gradient(#55555b, #2e2e33); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
 }
 .cb-keys button.ch { font-size: 0.85cqw; background: linear-gradient(#6a5a2a, #3b3116); color: #ffe9a8; }
-.cb-keys button.guide { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.12cqw; line-height: 1; }
-.cb-keys button.guide span { font-size: 0.8cqw; }
-.cb-keys button.guide small { font-size: 0.5cqw; letter-spacing: 0.08cqw; color: #d7b45a; font-weight: 700; }
+.cb-keys button.key-guide { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.12cqw; line-height: 1; }
+.cb-keys button.key-guide span { font-size: 0.8cqw; }
+.cb-keys button.key-guide small { font-size: 0.5cqw; letter-spacing: 0.08cqw; color: #d7b45a; font-weight: 700; }
 .cb-keys button:active { transform: translateY(0.12cqw); box-shadow: 0 0.06cqw 0 #0c0c0e; }
 .cb-brand {
   margin-left: auto; align-self: flex-end; padding-bottom: 0.1cqw; color: #9a9aa2; font: 700 1cqw/1 system-ui, sans-serif; letter-spacing: 0.18cqw; text-align: right;
