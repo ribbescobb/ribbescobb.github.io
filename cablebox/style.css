@@ -67,7 +67,7 @@ body {
 .lt-song { font-size: 1.9cqw; font-weight: 600; font-style: italic; }
 .lt-year { font-size: 1.45cqw; font-weight: 600; opacity: .9; margin-top: 0.15cqw; }
 .glass.guide-mode .lower-third, .glass.guide-only .lower-third { display: none; }
-#yt { position: absolute; top: -5.62%; left: 50%; height: 111.23%; width: 133.33%; transform: translateX(-50%); display: block; border: 0; }   /* a 4:3 picture fills the tube's width; the bowed glass crops the rest */
+#yt { position: absolute; top: -5.62%; left: -16.665%; height: 111.23%; width: 133.33%; display: block; border: 0; }   /* a 4:3 picture fills the tube's width; the bowed glass crops the rest. No transform: WebKit paints transformed iframes offset. */
 .glass.off .raster, .glass.warming .raster, .glass.cooling .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 
 .static { position: absolute; inset: 0; width: 100%; height: 100%; display: none; image-rendering: pixelated; }
