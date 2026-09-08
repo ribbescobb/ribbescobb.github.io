@@ -16,79 +16,54 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=dcd507c">
+<link rel="stylesheet" href="style.css?v=d3d0cec">
 </head>
 <body>
 <div class="room">
   <div class="scene">
 
-    <!-- Cable converter box, sitting on top of the set -->
+    <!-- Cable converter box, on top of the set. A photograph; the LED digits and the hit targets are ours. -->
     <div class="cablebox" id="cablebox">
-      <button class="cb-power" id="power" aria-label="Power">POWER</button>
-      <button class="cb-zoom" id="zoom" aria-label="Zoom to the picture" title="Zoom (Z)">ZOOM</button>
+      <img class="box-photo" src="assets/box.webp" alt="" draggable="false">
+      <button class="hit cb-power" id="power" aria-label="Power">Power</button>
+      <button class="hit cb-zoom" id="zoom" aria-label="Zoom to the picture" title="Zoom (Z)">Zoom</button>
       <div class="cb-display" aria-label="channel display">
-        <svg class="seg" id="seg0" viewBox="0 0 40 70" aria-hidden="true"></svg>
-        <svg class="seg" id="seg1" viewBox="0 0 40 70" aria-hidden="true"></svg>
+        <svg class="seg" id="seg0" viewBox="0 0 44 76" aria-hidden="true"></svg>
+        <svg class="seg" id="seg1" viewBox="0 0 44 76" aria-hidden="true"></svg>
       </div>
       <div class="cb-keys" id="keys">
-        <button data-key="1" class="key-guide"><span>1</span><small>GUIDE</small></button><button data-key="2">2</button><button data-key="3">3</button><button data-key="up" class="ch">CH ▲</button>
-        <button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="down" class="ch">CH ▼</button>
-        <button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key="0">0</button>
+        <button class="hit" data-key="1" style="--c:0;--r:0" aria-label="1, Guide">1</button><button class="hit" data-key="2" style="--c:1;--r:0">2</button><button class="hit" data-key="3" style="--c:2;--r:0">3</button><button class="hit" data-key="up" style="--c:3;--r:0" aria-label="Channel up">CH up</button>
+        <button class="hit" data-key="4" style="--c:0;--r:1">4</button><button class="hit" data-key="5" style="--c:1;--r:1">5</button><button class="hit" data-key="6" style="--c:2;--r:1">6</button><button class="hit" data-key="down" style="--c:3;--r:1" aria-label="Channel down">CH down</button>
+        <button class="hit" data-key="7" style="--c:0;--r:2">7</button><button class="hit" data-key="8" style="--c:1;--r:2">8</button><button class="hit" data-key="9" style="--c:2;--r:2">9</button><button class="hit" data-key="0" style="--c:3;--r:2">0</button>
       </div>
-      <div class="cb-brand">CABLE<span>BOX</span><small>CB-36</small></div>
     </div>
 
-    <!-- The set -->
+    <!-- The set. A photograph; the tube, the badge, the dial numbers, the knob labels, and the volume knob are ours. -->
     <div class="set">
-      <div class="cabinet">
-        <div class="screen-zone">
-          <div class="surround">
-            <div class="brass">
-              <div class="bezel">
-                <div class="glass off" id="glass">
-                  <div class="raster" id="raster"><div id="yt"></div></div>
-                  <canvas class="static" id="static" width="256" height="192"></canvas>
-                  <canvas class="scrambled" id="scrambled" width="320" height="240"></canvas>
-                  <div class="lower-third" id="lowerThird" aria-live="off"><div class="lt-artist"></div><div class="lt-song"></div><div class="lt-year"></div></div>
-                  <div class="standby" id="standby"><span>PLEASE<br>STAND BY</span></div>
-                  <div class="testpattern" id="testpattern"><div class="bars"></div><div class="bars2"></div><div class="signoff">CB-36 &nbsp;·&nbsp; OFF AIR</div></div>
-                  <div class="guide" id="guide">
-                    <div class="guide-head" id="guideHead"></div>
-                    <div class="guide-viewport"><div class="guide-rows" id="guideRows"></div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="chrome">
-            <div class="badge">HEATHKIT<span>25</span></div>
-            <div class="dials">
-              <div class="dial" id="dialUHF"><svg viewBox="0 0 100 100" aria-hidden="true"></svg><div class="cap"></div></div>
-              <div class="dial" id="dialVHF"><svg viewBox="0 0 100 100" aria-hidden="true"></svg><div class="cap"></div></div>
-            </div>
-          </div>
-          <div class="goldpanel">
-            <div class="knob-row">
-              <div class="knob-wrap"><label>bright</label><div class="knob" data-knob="bright"></div></div>
-              <div class="logo" aria-hidden="true">
-                <svg viewBox="0 0 60 40"><polygon points="30,4 46,28 14,28" fill="#d9642a"/><polygon points="30,4 14,28 4,28" fill="#2c6fb5"/><polygon points="30,4 56,28 46,28" fill="#7d8a3a"/></svg>
-                <span>25</span>
-              </div>
-              <div class="knob-wrap"><label>tint</label><div class="knob" data-knob="tint"></div></div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-wrap"><label>contrast</label><div class="knob" data-knob="contrast"></div></div>
-              <div class="knob-wrap"><label>volume</label><button class="knob" id="volume" data-knob="volume" aria-label="Volume: scroll to adjust, click to mute"></button></div>
-              <div class="knob-wrap"><label>color</label><div class="knob" data-knob="color"></div></div>
-            </div>
-            <div class="sliders"><span>H</span><i></i><i></i><span>V</span></div>
-          </div>
-          <div class="grille"></div>
+      <img class="set-photo" src="assets/set.jpg" alt="" draggable="false">
+      <div class="screen-zone" aria-hidden="true"></div>
+      <div class="glass off" id="glass">
+        <div class="raster" id="raster"><div id="yt"></div></div>
+        <canvas class="static" id="static" width="256" height="192"></canvas>
+        <canvas class="scrambled" id="scrambled" width="320" height="240"></canvas>
+        <div class="lower-third" id="lowerThird" aria-live="off"><div class="lt-artist"></div><div class="lt-song"></div><div class="lt-year"></div></div>
+        <div class="standby" id="standby"><span>PLEASE<br>STAND BY</span></div>
+        <div class="testpattern" id="testpattern"><div class="bars"></div><div class="bars2"></div><div class="signoff">CB-36 &nbsp;·&nbsp; OFF AIR</div></div>
+        <div class="guide" id="guide">
+          <div class="guide-head" id="guideHead"></div>
+          <div class="guide-viewport"><div class="guide-rows" id="guideRows"></div></div>
         </div>
       </div>
+      <div class="badge">HEATHKIT<span>25</span></div>
+      <div class="dial" id="dialUHF"><svg viewBox="0 0 100 100" aria-hidden="true"></svg></div>
+      <div class="dial vhf" id="dialVHF"><svg viewBox="0 0 100 100" aria-hidden="true"></svg></div>
+      <div class="logo" aria-hidden="true"><svg viewBox="0 0 60 40"><polygon points="30,4 46,28 14,28" fill="#d9642a"/><polygon points="30,4 14,28 4,28" fill="#2c6fb5"/><polygon points="30,4 56,28 46,28" fill="#7d8a3a"/></svg><span>25</span></div>
+      <label class="knob-label" style="--x:80.5%;--y:31.26%">bright</label>
+      <label class="knob-label" style="--x:92%;--y:31.26%">tint</label>
+      <label class="knob-label" style="--x:80.5%;--y:39.29%">contrast</label>
+      <label class="knob-label" style="--x:86.3%;--y:39.29%">volume</label>
+      <label class="knob-label" style="--x:92%;--y:39.29%">color</label>
+      <button class="hit knob-hit" id="volume" aria-label="Volume: scroll to adjust, click to mute"></button>
     </div>
 
     <div class="zoom-controls" id="zoomControls" aria-label="zoomed-in controls">
@@ -97,9 +72,9 @@
     <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
   </div>
 </div>
-<script src="js/schedule.js?v=dcd507c"></script>
-<script src="js/player.js?v=dcd507c"></script>
-<script src="js/scramble.js?v=dcd507c"></script>
-<script src="js/app.js?v=dcd507c"></script>
+<script src="js/schedule.js?v=d3d0cec"></script>
+<script src="js/player.js?v=d3d0cec"></script>
+<script src="js/scramble.js?v=d3d0cec"></script>
+<script src="js/app.js?v=d3d0cec"></script>
 </body>
 </html>

@@ -15,8 +15,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=dcd507c').then(r => r.json()),
-      fetch('data/catalog.json?v=dcd507c').then(r => r.json())
+      fetch('data/channels.json?v=d3d0cec').then(r => r.json()),
+      fetch('data/catalog.json?v=d3d0cec').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -349,7 +349,8 @@
     const on = d.fullscreenElement || d.webkitFullscreenElement;
     try { on ? (d.exitFullscreen || d.webkitExitFullscreen).call(d) : (el.requestFullscreen || el.webkitRequestFullscreen).call(el); } catch (e) {}
   }
-  document.querySelector('.cabinet').addEventListener('dblclick', (e) => { if (!e.target.closest('.glass, .knob, button')) toggleFullscreen(); });
+  document.querySelector('.set').addEventListener('dblclick', (e) => { if (!e.target.closest('.glass, button')) toggleFullscreen(); });
+  document.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) b.blur(); });   // no lingering focus ring on the photo
   document.addEventListener('visibilitychange', () => { if (!document.hidden && power) render(false); });
 
   function hintText() {

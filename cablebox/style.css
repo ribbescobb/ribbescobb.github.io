@@ -1,7 +1,7 @@
 /* CableBox — the Heathkit 25 console, a converter box on top, and what shows in the glass.
    Everything is sized in cqw (1cqw = 1% of the scene width) so the set scales as one object. */
 
-:root { --w: min(96vw, 138vh); --w: min(96vw, 138svh); }   /* svh: the viewport with the browser's bars showing */
+:root { --w: min(96vw, 130vh); --w: min(96vw, 130svh); }   /* svh: the viewport with the browser's bars showing */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
@@ -16,130 +16,25 @@ body {
 :fullscreen .room, :-webkit-full-screen .room { height: 100vh; }
 .scene { width: var(--w); container-type: inline-size; position: relative; }
 
-/* ---------------- Cable box ---------------- */
-.cablebox {
-  position: relative; width: 44cqw; height: 9cqw; margin-left: 6cqw; margin-right: auto;
-  border-radius: 0.5cqw 0.5cqw 0 0; padding: 0.9cqw 1.1cqw; display: flex; align-items: center; gap: 1.1cqw;
-  background: linear-gradient(180deg, #34343a 0%, #1c1c20 55%, #121215 100%);
-  box-shadow: inset 0 0.25cqw 0 rgba(255,255,255,.08), 0 0.6cqw 1.2cqw rgba(0,0,0,.6);
-}
-.cablebox::after { /* faux vents */
-  content: ""; position: absolute; right: 1cqw; top: 1cqw; width: 5cqw; height: 0.9cqw;
-  background: repeating-linear-gradient(90deg, #0d0d10 0 0.25cqw, transparent 0.25cqw 0.6cqw);
-}
-.cb-power {
-  width: 4.2cqw; height: 4.2cqw; border: 0; border-radius: 0.3cqw; cursor: pointer; flex: none; padding: 1.1cqw 0 0;
-  font: 700 0.72cqw/1 system-ui, sans-serif; letter-spacing: 0.06cqw; color: #f3d9a0;
-  background: linear-gradient(#3a3a40, #1a1a1e); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
-  position: relative;
-}
-.cb-power::before { /* power LED */
-  content: ""; position: absolute; left: 50%; top: 0.45cqw; width: 0.55cqw; height: 0.55cqw; border-radius: 50%; transform: translateX(-50%);
-  background: #ff3b1f; box-shadow: 0 0 0.5cqw #ff3b1f;
-}
-body.power-off .cb-power::before { background: #3a0b06; box-shadow: none; }
-body.power-off .cb-power { animation: beckon 2.2s ease-in-out infinite; }
-@keyframes beckon {
-  0%, 100% { box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15); }
-  50% { box-shadow: 0 0.18cqw 0 #0c0c0e, 0 0 1.6cqw 0.5cqw rgba(255,190,80,.75), inset 0 0.08cqw 0 rgba(255,255,255,.3); }
-}
-.cb-power:active { transform: translateY(0.12cqw); }
-.cb-zoom {
-  width: 4.2cqw; height: 4.2cqw; border: 0; border-radius: 0.3cqw; cursor: pointer; flex: none;
-  font: 700 0.72cqw/1 system-ui, sans-serif; letter-spacing: 0.06cqw; color: #cfd4e0;
-  background: linear-gradient(#3a3a40, #1a1a1e); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
-}
-.cb-zoom:active { transform: translateY(0.12cqw); }
-/* Zoom: the set is laid out larger than the window and shifted so only the picture side shows. Real pixels, not a scale. */
-body.zoom { overflow: hidden; }
-body.zoom .room { display: block; position: relative; overflow: hidden; }
-body.zoom .scene { position: absolute; }
-body.zoom .hint { display: none; }
-body.zoom .panel, body.zoom .cablebox { visibility: hidden; }   /* just the picture side */
-.zoom-controls { display: none; position: fixed; right: 1rem; bottom: 1rem; gap: .4rem; z-index: 5; }
-body.zoom .zoom-controls { display: flex; }
-.zoom-controls button {
-  min-width: 2.8rem; height: 2.2rem; padding: 0 .7rem; border: 0; border-radius: .35rem; cursor: pointer; color: #ddd;
-  font: 600 .8rem/1 system-ui, sans-serif; background: rgba(40,40,44,.85); box-shadow: 0 2px 0 #0c0c0e; backdrop-filter: blur(4px);
-}
-.zoom-controls button:active { transform: translateY(1px); }
-body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dark when the box is off */
-.cb-display {
-  width: 8.6cqw; height: 6.2cqw; border-radius: 0.35cqw; background: #070000;
-  border: 0.28cqw solid #0a0a0b; box-shadow: inset 0 0 1.2cqw #000, 0 0 0 0.12cqw #2a2a2e;
-  display: flex; align-items: center; justify-content: center; gap: 0.5cqw;
-}
-.seg { width: 2.6cqw; height: 4.6cqw; }
-.seg polygon { fill: #140302; }
-.seg polygon.on { fill: #ff3419; filter: drop-shadow(0 0 0.28cqw rgba(255,60,30,.9)); }
-.cb-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.35cqw; width: 17cqw; flex: none; }
-.cb-keys button {
-  height: 2cqw; border: 0; border-radius: 0.25cqw; color: #e6e6e6; cursor: pointer;
-  font: 600 1.05cqw/1 system-ui, sans-serif; letter-spacing: 0.05cqw;
-  background: linear-gradient(#55555b, #2e2e33); box-shadow: 0 0.18cqw 0 #0c0c0e, inset 0 0.08cqw 0 rgba(255,255,255,.15);
-}
-.cb-keys button.ch { font-size: 0.85cqw; background: linear-gradient(#6a5a2a, #3b3116); color: #ffe9a8; }
-.cb-keys button.key-guide { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.12cqw; line-height: 1; }
-.cb-keys button.key-guide span { font-size: 0.8cqw; }
-.cb-keys button.key-guide small { font-size: 0.5cqw; letter-spacing: 0.08cqw; color: #d7b45a; font-weight: 700; }
-.cb-keys button:active { transform: translateY(0.12cqw); box-shadow: 0 0.06cqw 0 #0c0c0e; }
-.cb-brand {
-  margin-left: auto; align-self: flex-end; padding-bottom: 0.1cqw; color: #9a9aa2; font: 700 1cqw/1 system-ui, sans-serif; letter-spacing: 0.18cqw; text-align: right;
-}
-.cb-brand span { color: #d7b45a; }
-.cb-brand small { display: block; font-weight: 400; font-size: 0.7cqw; letter-spacing: 0.1cqw; color: #6c6c74; margin-top: 0.25cqw; }
 
-/* ---------------- Cabinet ---------------- */
-.set { position: relative; }
-.cabinet {
-  position: relative; height: 58.4cqw; border-radius: 0.6cqw;   /* makes the glass an exact 4:3 */
-  padding: 2.6cqw 3.4cqw 2.6cqw 2.6cqw; display: flex; gap: 2cqw;
-  background:
-    repeating-linear-gradient(93deg, rgba(0,0,0,.14) 0 0.12cqw, transparent 0.12cqw 0.8cqw),
-    repeating-linear-gradient(88deg, rgba(255,255,255,.035) 0 0.3cqw, transparent 0.3cqw 2.3cqw),
-    linear-gradient(180deg, #5c3621 0%, #4a2a19 55%, #3a2013 100%);
-  box-shadow: inset 0 0.3cqw 0.6cqw rgba(255,255,255,.08), inset 0 -0.6cqw 1cqw rgba(0,0,0,.45), 0 1.5cqw 3cqw rgba(0,0,0,.7);
-}
-.cabinet::before { /* top edge highlight */
-  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 0.35cqw; border-radius: 0.6cqw 0.6cqw 0 0;
-  background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.25), rgba(255,255,255,.1));
-}
-
-/* ---------------- Screen zone ---------------- */
-.screen-zone { width: 68cqw; height: 100%; }
-.surround {
-  width: 100%; height: 100%; padding: 1.6cqw; border-radius: 0.4cqw;
-  background:
-    repeating-radial-gradient(circle at 30% 30%, rgba(255,255,255,.05) 0 0.05cqw, transparent 0.05cqw 0.22cqw),
-    linear-gradient(180deg, #1e1c1a, #121110);
-  box-shadow: inset 0 0 1.2cqw rgba(0,0,0,.8);
-}
-.brass {
-  width: 100%; height: 100%; padding: 0.5cqw; border-radius: 0.6cqw;
-  background: linear-gradient(160deg, #e6cf98 0%, #b8944f 35%, #d9bd7c 60%, #8f7133 100%);
-  box-shadow: 0 0 0.4cqw rgba(0,0,0,.5);
-}
-.bezel {
-  width: 100%; height: 100%; padding: 2.2cqw; border-radius: 0.5cqw;
-  background: linear-gradient(160deg, #efe3c3 0%, #d6c399 40%, #c4ad7c 70%, #b19a68 100%);
-  box-shadow: inset 0 0.5cqw 1.2cqw rgba(255,255,255,.35), inset 0 -0.6cqw 1.4cqw rgba(60,40,10,.45);
-}
+/* ---------------- The tube ----------------
+   Positioned over the photograph's glass and clipped to its traced outline. The photo's own dead tube shows through
+   when the set is off; when on, it is black behind the picture. */
 .glass {
-  position: relative; width: 100%; height: 100%; overflow: hidden;
-  border-radius: 4.8cqw / 4.4cqw;
-  background: radial-gradient(ellipse at 50% 42%, #86a08f 0%, #667e71 50%, #4c6157 100%);
-  box-shadow: inset 0 0 3cqw rgba(0,0,0,.55), inset 0 0.6cqw 1.6cqw rgba(255,255,255,.14);
-  transition: background .35s;
+  position: absolute; left: 12.573%; top: 18.652%; width: 54.788%; height: 63.708%; overflow: hidden;
+  clip-path: polygon(99.52% 50.09%, 99.52% 53.79%, 99.52% 57.67%, 99.52% 61.73%, 99.17% 65.43%, 98.81% 69.31%, 98.57% 73.37%, 98.22% 77.43%, 97.62% 81.48%, 96.91% 85.54%, 95.96% 89.24%, 94.05% 92.42%, 91.2% 94.36%, 88.11% 95.77%, 84.78% 96.47%, 81.81% 97.18%, 79.07% 97.88%, 76.1% 97.88%, 73.6% 98.24%, 71.22% 98.41%, 69.08% 99.12%, 66.94% 99.29%, 64.8% 99.47%, 62.66% 99.12%, 60.88% 99.65%, 58.86% 99.29%, 57.19% 99.82%, 55.29% 99.47%, 53.51% 99.47%, 51.72% 99.12%, 50.06% 99.12%, 48.28% 99.29%, 46.49% 99.29%, 44.71% 100.0%, 42.81% 99.82%, 41.02% 99.82%, 39.24% 98.94%, 37.34% 98.77%, 35.32% 98.94%, 33.17% 98.94%, 31.15% 98.59%, 28.66% 98.59%, 26.4% 98.24%, 23.66% 98.24%, 21.17% 97.53%, 18.19% 97.18%, 15.22% 96.47%, 11.89% 95.77%, 8.68% 94.53%, 5.71% 92.59%, 4.28% 89.24%, 3.45% 85.19%, 2.38% 81.48%, 1.9% 77.43%, 1.55% 73.37%, 1.19% 69.31%, 0.83% 65.43%, 0.71% 61.55%, 0.48% 57.67%, 0.36% 53.79%, 0.36% 50.09%, 0.12% 46.21%, 0.12% 42.15%, 0.24% 38.27%, 0.36% 34.39%, 0.59% 30.34%, 0.83% 26.28%, 1.19% 22.22%, 1.43% 17.99%, 2.02% 13.76%, 2.97% 9.7%, 4.64% 6.35%, 7.02% 3.7%, 11.06% 3.17%, 14.51% 2.65%, 17.72% 2.12%, 20.69% 1.76%, 23.42% 1.41%, 26.04% 1.23%, 28.54% 1.06%, 30.8% 0.71%, 33.06% 0.71%, 35.2% 0.53%, 37.22% 0.53%, 39.12% 0.35%, 41.02% 0.35%, 42.81% 0.18%, 44.71% 0.18%, 46.49% 0.18%, 48.28% 0.0%, 50.06% 0.0%, 51.72% 0.18%, 53.51% 0.18%, 55.29% 0.18%, 57.19% 0.18%, 58.98% 0.35%, 60.88% 0.35%, 62.78% 0.53%, 64.8% 0.53%, 66.94% 0.71%, 69.08% 0.88%, 71.46% 1.06%, 73.96% 1.23%, 76.46% 1.41%, 79.31% 1.76%, 82.28% 2.12%, 85.49% 2.65%, 88.94% 3.35%, 92.51% 4.23%, 95.24% 6.35%, 97.03% 9.7%, 98.1% 13.58%, 98.81% 17.81%, 99.52% 21.87%, 99.76% 26.1%, 99.88% 30.16%, 100.0% 34.22%, 99.88% 38.27%, 99.76% 42.15%, 99.64% 46.21%);
+  background: transparent; transition: background .35s;
 }
-.glass.off::after { /* room reflection on the dead tube */
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 38% 20%, rgba(255,255,255,.42), rgba(255,255,255,.08) 22%, transparent 40%);
-}
-.glass.on, .glass.warming, .glass.cooling { background: #030303; box-shadow: inset 0 0 2.4cqw rgba(0,0,0,.9); }
+.glass.on, .glass.warming, .glass.cooling { background: #030303; }
 .glass.warming::before { /* CRT turn-on: a line that blooms into the picture */
   content: ""; position: absolute; left: 6%; right: 6%; top: 50%; height: 0.3cqw; background: #dfe9ff;
   box-shadow: 0 0 2cqw #cfe0ff, 0 0 4cqw #9ab8ff; transform: translateY(-50%);
   animation: bloom .75s ease-out forwards;
+}
+@keyframes bloom {
+  0% { transform: translateY(-50%) scaleX(0); opacity: 1; }
+  35% { transform: translateY(-50%) scaleX(1); opacity: 1; }
+  100% { transform: translateY(-50%) scaleX(1) scaleY(120); opacity: 0; }
 }
 .glass.cooling::before { /* CRT turn-off: the picture collapses to a line, the line to a dot, the dot fades */
   content: ""; position: absolute; left: 6%; right: 6%; top: 50%; height: 0.3cqw; background: #dfe9ff;
@@ -152,11 +47,6 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
   70% { transform: translateY(-50%) scaleX(.03) scaleY(1); opacity: 1; }
   100% { transform: translateY(-50%) scaleX(.01) scaleY(.6); opacity: 0; }
 }
-@keyframes bloom {
-  0% { transform: translateY(-50%) scaleX(0); opacity: 1; }
-  35% { transform: translateY(-50%) scaleX(1); opacity: 1; }
-  100% { transform: translateY(-50%) scaleX(1) scaleY(120); opacity: 0; }
-}
 
 /* Picture area: inset so its corners sit inside the tube's rounded corners. Never covered by anything.
    The player runs at 16:9 sized to the tube's HEIGHT and overflows the sides, like CRT overscan: a native 4:3 upload
@@ -167,16 +57,16 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
    black it leaves behind. Nothing is drawn over the player. */
 .glass.squeeze .raster { inset: 0 0 21% 24%; }
 .lower-third {
-  position: absolute; left: 4.5%; bottom: 5%; max-width: 64%; color: #fff; opacity: 0; pointer-events: none;
+  position: absolute; left: 9%; bottom: 9%; max-width: 62%; color: #fff; opacity: 0; pointer-events: none;
   font-family: Poppins, "Helvetica Neue", Arial, sans-serif; font-weight: 700; line-height: 1.15; text-align: left;
   text-shadow: 0.14cqw 0.14cqw 0 #000, 0 0 0.7cqw rgba(0,0,0,.85); transition: opacity .35s ease .3s;
 }
 .glass.squeeze .lower-third { opacity: 1; }
-.lt-artist { font-size: 2.5cqw; letter-spacing: 0.02cqw; }
-.lt-song { font-size: 2.15cqw; font-weight: 600; font-style: italic; }
-.lt-year { font-size: 1.6cqw; font-weight: 600; opacity: .9; margin-top: 0.2cqw; }
+.lt-artist { font-size: 2.2cqw; letter-spacing: 0.02cqw; }
+.lt-song { font-size: 1.9cqw; font-weight: 600; font-style: italic; }
+.lt-year { font-size: 1.45cqw; font-weight: 600; opacity: .9; margin-top: 0.15cqw; }
 .glass.guide-mode .lower-third, .glass.guide-only .lower-third { display: none; }
-#yt { position: absolute; top: 0; left: 50%; height: 100%; width: 133.4%; transform: translateX(-50%); display: block; border: 0; }   /* 16:9 player at the 4:3 tube's height */
+#yt { position: absolute; top: -5.62%; left: 50%; height: 111.23%; width: 133.33%; transform: translateX(-50%); display: block; border: 0; }   /* a 4:3 picture fills the tube's width; the bowed glass crops the rest */
 .glass.off .raster, .glass.warming .raster, .glass.cooling .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 
 .static { position: absolute; inset: 0; width: 100%; height: 100%; display: none; image-rendering: pixelated; }
@@ -207,7 +97,7 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
 .glass.guide-mode .standby { font-size: 2.6cqw; }
 .glass.guide-mode .testpattern .signoff { font-size: 1.6cqw; }
 .guide {
-  position: absolute; left: 1.4cqw; right: 1.4cqw; top: calc(max(20cqw, 200px) + 2.4cqw); bottom: 1.4cqw; display: none; flex-direction: column;
+  position: absolute; left: 4%; right: 4%; top: calc(max(20cqw, 200px) + 2.4cqw); bottom: 4%; display: none; flex-direction: column;
   background: #0a0aa4; color: #fff; font-family: VT323, "Courier New", monospace; font-size: 2.05cqw; line-height: 2.7cqw;
   border-top: 0.3cqw solid #0a0aa4;
 }
@@ -229,79 +119,72 @@ body.power-off .seg polygon.on { fill: #140302; filter: none; }   /* display dar
 
 /* Compact screens: the guide takes the whole tube, no promo window, larger type. */
 .glass.guide-only .raster, .glass.guide-only .static, .glass.guide-only .standby, .glass.guide-only .testpattern { display: none; }
-.glass.guide-only .guide { top: 1.4cqw; font-size: 3.1cqw; line-height: 3.9cqw; }
+.glass.guide-only .guide { top: 4%; font-size: 3.1cqw; line-height: 3.9cqw; }
 .glass.guide-only .guide-head, .glass.guide-only .grow { grid-template-columns: 15cqw repeat(4, 1fr); }
 .glass.guide-only .guide-head { height: 4.2cqw; }
 .glass.guide-only .grow { height: 4.5cqw; }
 
-/* ---------------- Control panel ---------------- */
-.panel { flex: 1; height: 100%; display: flex; flex-direction: column; gap: 0.5cqw; min-width: 0; }
-.chrome {
-  height: 15.5cqw; border-radius: 0.5cqw 0.5cqw 0 0; padding-top: 0; overflow: hidden;
-  background: repeating-linear-gradient(180deg, #f0f0f0 0 0.16cqw, #a9a9ab 0.16cqw 0.3cqw, #d8d8d8 0.3cqw 0.45cqw);
-  box-shadow: inset 0 0 0.6cqw rgba(0,0,0,.35), 0 0.2cqw 0.4cqw rgba(0,0,0,.4);
+
+/* ---------------- Cable box (photograph + our LED digits + hit targets) ---------------- */
+.cablebox { position: relative; width: 44cqw; height: 10.918cqw; margin-left: 6cqw; margin-right: auto; margin-bottom: -2.2cqw; z-index: 2; }
+.box-photo { display: block; width: 100%; height: auto; filter: drop-shadow(0 0.6cqw 1cqw rgba(0,0,0,.5)); }
+.hit { position: absolute; border: 0; padding: 0; background: transparent; color: transparent; font-size: 0; cursor: pointer; border-radius: 0.3cqw; outline: 0; }
+.hit:focus-visible { box-shadow: 0 0 0 0.2cqw #ffd86a; }
+.hit:active { background: rgba(0,0,0,.28); }
+.cb-power { left: 3.13%; top: 35.89%; width: 8.42%; height: 32.59%; }
+.cb-zoom  { left: 12.98%; top: 35.89%; width: 8.01%; height: 32.59%; }
+.cb-power::before { /* covers the photo's LED when the box is off; glows when it is on */
+  content: ""; position: absolute; left: 50%; top: 24%; width: 13%; aspect-ratio: 1; border-radius: 50%; transform: translateX(-50%);
+  background: #ff3b1f; box-shadow: 0 0 0.5cqw #ff3b1f;
 }
+body.power-off .cb-power::before { background: #2a0806; box-shadow: none; }
+body.power-off .cb-power { animation: beckon 2.2s ease-in-out infinite; }
+@keyframes beckon {
+  0%, 100% { box-shadow: none; }
+  50% { box-shadow: 0 0 1.6cqw 0.5cqw rgba(255,190,80,.75); }
+}
+.cb-display { position: absolute; left: 22.63%; top: 31.23%; width: 13.65%; height: 43.07%; pointer-events: none; }
+.seg { position: absolute; top: 15%; height: 70%; width: 30%; }
+#seg0 { left: 20%; } #seg1 { left: 59%; }
+.seg polygon { fill: transparent; }                      /* the photo already has the dark unlit segments */
+.seg polygon.on { fill: #ff3419; filter: drop-shadow(0 0 0.28cqw rgba(255,60,30,.9)); }
+body.power-off .seg polygon.on { fill: transparent; filter: none; }
+.cb-keys .hit { left: calc(39.05% + var(--c) * 7.643%); top: calc(31.82% + var(--r) * 14.665%); width: 7.08%; height: 12.34%; }
+
+/* ---------------- The set (photograph + our overlays) ---------------- */
+.set { position: relative; width: 100cqw; height: 57.981cqw; }
+.set-photo { display: block; width: 100%; height: 100%; border-radius: 0.3cqw; box-shadow: 0 1.5cqw 3cqw rgba(0,0,0,.7); }
+.screen-zone { position: absolute; left: 5.5%; top: 8.98%; width: 69%; height: 81.85%; pointer-events: none; }   /* bezel and surround; what zoom shows */
 .badge {
-  height: 2.5cqw; background: #101010; color: #e9e9e9; display: flex; align-items: center; justify-content: center;
-  font: 600 1.25cqw/1 Cinzel, "Copperplate", serif; letter-spacing: 0.42cqw; padding-left: 0.4cqw;
-  box-shadow: inset 0 -0.15cqw 0 #444;
+  position: absolute; left: 77.6%; top: 9.72%; width: 17%; height: 3.27%; display: flex; align-items: center; justify-content: center;
+  color: #e6e6e6; font: 600 1.15cqw/1 Cinzel, "Copperplate", serif; letter-spacing: 0.36cqw; pointer-events: none;
+  text-shadow: 0 0 0.3cqw rgba(255,255,255,.25);
 }
-.badge span { margin-left: 1cqw; font-size: 1.6cqw; letter-spacing: 0.12cqw; font-style: italic; }
-.dials { display: flex; justify-content: space-evenly; align-items: center; height: 13cqw; }
-.dial { position: relative; width: 9.6cqw; height: 9.6cqw; }
+.badge span { margin-left: 0.9cqw; font-size: 1.45cqw; letter-spacing: 0.1cqw; font-style: italic; }
+.dial { position: absolute; width: 7.6%; aspect-ratio: 1; left: 78.4%; top: 14.89%; pointer-events: none; }
+.dial.vhf { left: 85.8%; top: 15.1%; }
 .dial svg { width: 100%; height: 100%; }
-.dial .ring { fill: #1a1a1a; stroke: #444; stroke-width: 0.6; }
-.dial text { fill: #f2f2f2; font: 600 8.5px system-ui, sans-serif; text-anchor: middle; }
-.dial .cap {
-  position: absolute; left: 50%; top: 50%; width: 52%; height: 52%; transform: translate(-50%, -50%); border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fbfbfb, #b9b9bb 55%, #7f7f82 100%);
-  box-shadow: 0 0 0 0.35cqw #d9d9db, 0 0 0 0.55cqw #6f6f72, 0 0.3cqw 0.6cqw rgba(0,0,0,.6);
-}
-.dial .cap::after { /* knurled rim */
-  content: ""; position: absolute; inset: -0.55cqw; border-radius: 50%;
-  background: repeating-conic-gradient(from 0deg, #f4f4f4 0 3deg, #8a8a8d 3deg 6deg);
-  -webkit-mask: radial-gradient(circle, transparent 66%, #000 67%); mask: radial-gradient(circle, transparent 66%, #000 67%);
-}
+.dial .ring { fill: none; stroke: none; }
+.dial text { fill: #f2f2f2; font: 600 8.5px system-ui, sans-serif; text-anchor: middle; paint-order: stroke; stroke: rgba(0,0,0,.6); stroke-width: 1.5px; }
+.logo { position: absolute; left: 84.4%; top: 31.05%; width: 3.8%; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.logo svg { width: 100%; height: auto; }
+.logo span { font: 700 1.2cqw/1 "Arial Black", Impact, sans-serif; color: #f7e23a; text-shadow: 0 0.08cqw 0 #6b5220; margin-top: -0.2cqw; }
+.knob-label { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); font: 600 1.1cqw/1 "Dancing Script", cursive; color: #241d0c; white-space: nowrap; pointer-events: none; text-shadow: 0 0 0.2cqw rgba(255,240,200,.5); }
+.knob-hit { left: 83.5%; top: 39.4%; width: 5.6%; height: 7.18%; border-radius: 50%; }
 
-.goldpanel {
-  height: 15cqw; padding: 0.6cqw 0.9cqw 0.4cqw; display: flex; flex-direction: column; justify-content: space-between;
-  background:
-    repeating-linear-gradient(180deg, rgba(255,255,255,.07) 0 0.08cqw, transparent 0.08cqw 0.3cqw),
-    linear-gradient(180deg, #d4b66c, #b8974d 70%, #a3843f);
-  border: 0.2cqw solid #2a2a2a; box-shadow: inset 0 0 0.6cqw rgba(0,0,0,.25);
+/* Zoom: the set is laid out larger than the window and shifted so only the picture side shows. Real pixels, not a scale. */
+body.zoom { overflow: hidden; }
+body.zoom .room { display: block; position: relative; overflow: hidden; }
+body.zoom .scene { position: absolute; }
+body.zoom .hint { display: none; }
+body.zoom .cablebox, body.zoom .badge, body.zoom .dial, body.zoom .logo, body.zoom .knob-label, body.zoom .knob-hit { visibility: hidden; }
+.zoom-controls { display: none; position: fixed; right: 1rem; bottom: 1rem; gap: .4rem; z-index: 5; }
+body.zoom .zoom-controls { display: flex; }
+.zoom-controls button {
+  min-width: 2.8rem; height: 2.2rem; padding: 0 .7rem; border: 0; border-radius: .35rem; cursor: pointer; color: #ddd;
+  font: 600 .8rem/1 system-ui, sans-serif; background: rgba(40,40,44,.85); box-shadow: 0 2px 0 #0c0c0e; backdrop-filter: blur(4px);
 }
-.knob-row { display: flex; justify-content: space-between; align-items: flex-end; }
-.knob-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.15cqw; width: 6cqw; }
-.knob-wrap label { font: 600 1.35cqw/1 "Dancing Script", cursive; color: #241d0c; white-space: nowrap; }
-.knob {
-  width: 3cqw; height: 3cqw; border-radius: 50%; border: 0; padding: 0; cursor: pointer; position: relative;
-  background: radial-gradient(circle at 38% 32%, #f3e2a8, #c9a75a 55%, #8a6c2c 100%);
-  box-shadow: 0 0 0 0.3cqw #b48f3f, 0 0 0 0.45cqw #6b5220, 0 0.25cqw 0.5cqw rgba(0,0,0,.55);
-}
-.knob::after {
-  content: ""; position: absolute; inset: -0.45cqw; border-radius: 50%;
-  background: repeating-conic-gradient(from 0deg, #efd58e 0 4deg, #7a5f26 4deg 8deg);
-  -webkit-mask: radial-gradient(circle, transparent 68%, #000 69%); mask: radial-gradient(circle, transparent 68%, #000 69%);
-}
-.knob-wrap .knob { outline: 0; }
-.knob-wrap .knob:focus-visible { box-shadow: 0 0 0 0.3cqw #ffd86a, 0 0 0 0.45cqw #6b5220; }
-.logo { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 4.6cqw; }
-.logo svg { width: 3.6cqw; height: 2.4cqw; }
-.logo span { font: 700 1.5cqw/1 "Arial Black", Impact, sans-serif; color: #f7e23a; text-shadow: 0 0.08cqw 0 #6b5220; letter-spacing: 0.05cqw; }
-.sliders {
-  height: 1.3cqw; margin: 0.4cqw -0.9cqw -0.4cqw; background: #101010; display: flex; align-items: center; justify-content: space-evenly;
-  color: #ccc; font: 600 0.8cqw/1 system-ui, sans-serif;
-}
-.sliders i { width: 2.2cqw; height: 0.55cqw; background: linear-gradient(#d0d0d0, #7a7a7a); border-radius: 0.1cqw; }
-
-.grille {
-  flex: 1; border: 0.35cqw solid #2c1a10; border-top: 0;
-  background-color: #2a180e;
-  background-image:
-    repeating-linear-gradient(90deg, rgba(214,178,122,.95) 0 0.85cqw, transparent 0.85cqw 1.45cqw),
-    repeating-linear-gradient(0deg, rgba(178,140,92,.9) 0 0.85cqw, transparent 0.85cqw 1.45cqw);
-  box-shadow: inset 0 0 1.5cqw rgba(0,0,0,.6);
-}
+.zoom-controls button:active { transform: translateY(1px); }
 
 .hint { margin-top: 1.2cqw; text-align: center; color: #5a5048; font-size: 1.15cqw; letter-spacing: 0.04cqw; }
 .hint.hidden { visibility: hidden; }
