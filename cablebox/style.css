@@ -67,7 +67,7 @@ body {
 .lt-song { font-size: 1.9cqw; font-weight: 600; font-style: italic; }
 .lt-year { font-size: 1.45cqw; font-weight: 600; opacity: .9; margin-top: 0.15cqw; }
 .glass.guide-mode .lower-third, .glass.guide-only .lower-third { display: none; }
-#yt { position: absolute; top: -5.62%; left: -16.665%; height: 111.23%; width: 133.33%; display: block; border: 0; }   /* a 4:3 picture fills the tube's width; the bowed glass crops the rest. No transform: WebKit paints transformed iframes offset. */
+#yt { pointer-events: none;   /* the picture never takes a click: television does not pause, and YouTube's pause bezel never appears */ position: absolute; top: -5.62%; left: -16.665%; height: 111.23%; width: 133.33%; display: block; border: 0; }   /* a 4:3 picture fills the tube's width; the bowed glass crops the rest. No transform: WebKit paints transformed iframes offset. */
 .glass.off .raster, .glass.warming .raster, .glass.cooling .raster, .glass.snow .raster, .glass.standby .raster, .glass.offair .raster { visibility: hidden; }
 
 .static { position: absolute; inset: 0; width: 100%; height: 100%; display: none; image-rendering: pixelated; }
@@ -134,26 +134,17 @@ body {
 
 /* ---------------- Cable box (photograph + our LED digits + hit targets) ---------------- */
 .cablebox { position: relative; width: 44cqw; height: 10.918cqw; margin-left: 6cqw; margin-right: auto; margin-bottom: -2.2cqw; z-index: 2; }
-.paper { /* folded newspaper on the console top, right of the box (CSS stand-in for a photographed one) */
-  position: absolute; left: 62cqw; top: 5.6cqw; width: 15cqw; height: 4.1cqw; z-index: 3; box-sizing: border-box; padding: .35cqw .6cqw 0;
-  background: linear-gradient(175deg, #ded6c0 0%, #cfc6ad 55%, #b9b097 100%); color: #1a1512; text-decoration: none; overflow: hidden;
-  transform: rotate(-3.5deg) skewX(-6deg); border-radius: .15cqw; box-shadow: 0 .5cqw .9cqw rgba(0,0,0,.55), inset 0 -.35cqw 0 rgba(0,0,0,.18), inset 0 .1cqw 0 rgba(255,255,255,.35);
+.paper { /* this week's TV section, lying on the console to the right of the box (assets/paper-console.webp, keyed from Chris's render) */
+  position: absolute; left: 61cqw; top: 1.6cqw; width: 24cqw; z-index: 3; transform: rotate(-2.5deg); transform-origin: 50% 100%; text-decoration: none;
 }
-.paper::before { content: ""; position: absolute; left: 0; right: 0; top: 55%; height: 1px; background: rgba(0,0,0,.35); box-shadow: 0 1px 0 rgba(255,255,255,.3); }
-.paper::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 .22cqw, rgba(0,0,0,.09) .22cqw .3cqw); mix-blend-mode: multiply; pointer-events: none; }
-.paper-mast { display: block; font: 700 1.55cqw/1 "Poppins", "Helvetica Neue", Arial, sans-serif; letter-spacing: .06cqw; background: #14110e; color: #e9e2cf; padding: .12cqw .3cqw; width: max-content; }
-.paper-line { display: block; font: 600 .62cqw/1.3 "Poppins", Arial, sans-serif; margin-top: .22cqw; opacity: .8; letter-spacing: .02cqw; }
-.paper:hover { transform: rotate(-3deg) skewX(-6deg) translateY(-.15cqw); }
+.paper img { display: block; width: 100%; height: auto; filter: drop-shadow(0 .5cqw .7cqw rgba(0,0,0,.45)); }
+.paper:hover { transform: rotate(-2.2deg) translateY(-.15cqw); }
 .paper:focus-visible { outline: .2cqw solid #ffd86a; }
 .paper-under { display: none; }
-body.phone.portrait.has-paper .paper-under { /* the folded section the remote is lying on; only the masthead shows */
-  display: flex; flex-direction: column; justify-content: flex-start; position: fixed; left: 3%; right: 3%; bottom: 0; height: 120px; z-index: 4; box-sizing: border-box; padding: 66px 16px calc(9px + env(safe-area-inset-bottom)) 18px;
-  background: linear-gradient(175deg, #ded6c0 0%, #cfc6ad 55%, #b9b097 100%); color: #1a1512; text-decoration: none; overflow: hidden;
-  transform: rotate(-1.6deg); transform-origin: 50% 100%; border-radius: 2px; box-shadow: 0 -2px 10px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.35);
+body.phone.portrait.has-paper .paper-under { /* the folded section the handset is lying on: only the masthead shows (assets/paper-flat.webp) */
+  display: block; position: fixed; left: 3%; right: 3%; bottom: 0; height: 120px; z-index: 4; transform: rotate(-1.6deg); transform-origin: 50% 100%;
+  background: url(assets/paper-flat.webp) no-repeat center 0 / 100% auto; filter: drop-shadow(0 -2px 8px rgba(0,0,0,.45));
 }
-body.phone.portrait.has-paper .paper-under::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,.08) 3px 4px); mix-blend-mode: multiply; pointer-events: none; }
-.paper-under .paper-mast { font-size: 20px; letter-spacing: 1px; padding: 2px 6px; }
-.paper-under .paper-line { font-size: 10px; margin-top: 4px; letter-spacing: .3px; }
 body.phone.portrait .remote { bottom: auto; z-index: 5; }   /* the handset ends at its keypad and lies on top of the paper */
 .box-photo { display: block; width: 100%; height: auto; filter: drop-shadow(0 0.6cqw 1cqw rgba(0,0,0,.5)); }
 .hit { position: absolute; border: 0; padding: 0; background: transparent; color: transparent; font-size: 0; cursor: pointer; border-radius: 0.3cqw; outline: 0; }

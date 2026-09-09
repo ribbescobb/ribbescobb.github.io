@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=d4ebfd2').then(r => r.json()),
-      fetch('data/catalog.json?v=d4ebfd2').then(r => r.json())
+      fetch('data/channels.json?v=c357df0').then(r => r.json()),
+      fetch('data/catalog.json?v=c357df0').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -406,7 +406,11 @@
     // the paper under the remote needs its masthead to show: hide it when the keypad runs to the bottom of the screen
     const gap = portrait ? vh - remote.getBoundingClientRect().bottom : 0;
     document.body.classList.toggle('has-paper', portrait && gap >= 46);
-    const under = $('#paperUnder'); if (under) { under.style.height = (Math.max(46, gap) + 60) + 'px'; under.style.paddingTop = '66px'; }   // 60px tucked under the handset, masthead just below its edge
+    const under = $('#paperUnder');
+    if (under) {   // the paper's top edge is tucked 60px under the handset; its masthead (12% down the sheet) lands just below the edge
+      const width = under.getBoundingClientRect().width || vw * 0.94, sheet = width / 1.5;
+      under.style.height = (Math.max(46, gap) + 60) + 'px'; under.style.backgroundPositionY = Math.round(66 - sheet * 0.12) + 'px';
+    }
     return true;
   }
   // On phones and in the home-screen app the listings open in place (a new tab would leave the app); on a desk, a new tab.
