@@ -135,9 +135,9 @@ body {
 /* ---------------- Cable box (photograph + our LED digits + hit targets) ---------------- */
 .cablebox { position: relative; width: 44cqw; height: 10.918cqw; margin-left: 6cqw; margin-right: auto; margin-bottom: -2.2cqw; z-index: 2; }
 .paper { /* this week's TV section, lying on the console to the right of the box (assets/paper-console.webp, keyed from Chris's render) */
-  position: absolute; left: 61cqw; top: 1.6cqw; width: 24cqw; z-index: 3; transform: rotate(-2.5deg); transform-origin: 50% 100%; text-decoration: none;
+  position: absolute; left: 63cqw; top: 2.2cqw; width: 18cqw; z-index: 3; transform: rotate(-2.5deg); transform-origin: 50% 100%; text-decoration: none;
 }
-.paper img { display: block; width: 100%; height: auto; filter: drop-shadow(0 .5cqw .7cqw rgba(0,0,0,.45)); }
+.paper img { display: block; width: 100%; height: auto; filter: drop-shadow(0 .35cqw .5cqw rgba(0,0,0,.55)) drop-shadow(0 .05cqw .1cqw rgba(0,0,0,.6)); }
 .paper:hover { transform: rotate(-2.2deg) translateY(-.15cqw); }
 .paper:focus-visible { outline: .2cqw solid #ffd86a; }
 .paper-under { display: none; }

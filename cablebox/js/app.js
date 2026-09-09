@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=c357df0').then(r => r.json()),
-      fetch('data/catalog.json?v=c357df0').then(r => r.json())
+      fetch('data/channels.json?v=e223d74').then(r => r.json()),
+      fetch('data/catalog.json?v=e223d74').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -409,7 +409,7 @@
     const under = $('#paperUnder');
     if (under) {   // the paper's top edge is tucked 60px under the handset; its masthead (12% down the sheet) lands just below the edge
       const width = under.getBoundingClientRect().width || vw * 0.94, sheet = width / 1.5;
-      under.style.height = (Math.max(46, gap) + 60) + 'px'; under.style.backgroundPositionY = Math.round(66 - sheet * 0.12) + 'px';
+      under.style.height = (Math.max(46, gap) + 60) + 'px'; under.style.backgroundPositionY = Math.round(66 - sheet * 0.09) + 'px';
     }
     return true;
   }
