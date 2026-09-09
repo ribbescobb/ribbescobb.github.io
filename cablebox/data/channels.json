@@ -207,10 +207,28 @@
           "days": [
             6
           ],
+          "from": "21:00",
+          "to": "22:00",
+          "pool": "loveboat",
+          "name": "The Love Boat"
+        },
+        {
+          "days": [
+            6
+          ],
+          "from": "22:00",
+          "to": "23:00",
+          "pool": "fantasyisland",
+          "name": "Fantasy Island"
+        },
+        {
+          "days": [
+            0
+          ],
           "from": "20:00",
           "to": "23:00",
           "pool": "action-movies",
-          "name": "Mov: Saturday Night Movie ★★½"
+          "name": "Mov: Sunday Night Movie ★★½"
         },
         {
           "from": "22:00",
@@ -223,12 +241,6 @@
           "to": "23:00",
           "pool": "action-prime",
           "name": "Prime Action"
-        },
-        {
-          "from": "20:00",
-          "to": "23:00",
-          "pool": "drama-9pm",
-          "name": "Drama"
         },
         {
           "pool": "action",
@@ -1340,28 +1352,6 @@
           "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
           "series": "Charlie's Angels",
           "titleMatch": "Charlie'?s Angels",
-          "limit": 4000
-        }
-      ]
-    },
-    "drama-9pm": {
-      "minMinutes": 40,
-      "maxMinutes": 110,
-      "sources": [
-        {
-          "tier": "legit",
-          "note": "Sony · Fantasy Island",
-          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
-          "series": "Fantasy Island",
-          "titleMatch": "Fantasy Island",
-          "limit": 4000
-        },
-        {
-          "tier": "legit",
-          "note": "Sony · Hart to Hart",
-          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
-          "series": "Hart to Hart",
-          "titleMatch": "Hart to Hart",
           "limit": 4000
         }
       ]
@@ -6447,6 +6437,97 @@
           "minMinutes": 20,
           "cap": 40,
           "series": "Watch Mr. Wizard"
+        }
+      ]
+    },
+    "loveboat": {
+      "_note": "ABC Saturday night, 9:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"The Love Boat\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Love Boat\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Love Boat",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|filming location|memorabilia|screen bites|mythbusters|timeline|moments|hijinks|chases|coolest|wildest|hilarious|\\bchaos\\b|taking down|\\bmin\\b|Next Wave|1998|Ellen|Cruise Ship Tour|Biography|Phenomenon|Became|Documentary|Happiest",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The Love Boat"
+        },
+        {
+          "url": "ytsearch40:The Love Boat S0 episode",
+          "tier": "wild",
+          "note": "fan · search: The Love Boat S0 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Love Boat",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|filming location|memorabilia|screen bites|mythbusters|timeline|moments|hijinks|chases|coolest|wildest|hilarious|\\bchaos\\b|taking down|\\bmin\\b|Next Wave|1998|Biography|Phenomenon|Became|Documentary|Happiest",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The Love Boat"
+        },
+        {
+          "url": "ytsearch40:Love Boat 198 full episode Gopher Isaac",
+          "tier": "wild",
+          "note": "fan · search: Love Boat 198 full episode Gopher Isaac",
+          "requireEmbedCheck": true,
+          "titleMatch": "Love Boat",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|filming location|memorabilia|screen bites|mythbusters|timeline|moments|hijinks|chases|coolest|wildest|hilarious|\\bchaos\\b|taking down|\\bmin\\b|Next Wave|1998|Biography|Phenomenon|Became|Documentary|Happiest",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The Love Boat"
+        }
+      ]
+    },
+    "fantasyisland": {
+      "_note": "ABC Saturday night, 10:00.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "tier": "legit",
+          "note": "Sony Classic TV Rewind · Fantasy Island",
+          "titleMatch": "Fantasy Island",
+          "minMinutes": 40,
+          "limit": 3000,
+          "series": "Fantasy Island"
+        },
+        {
+          "url": "ytsearch40:\"Fantasy Island\" full episode 1978",
+          "tier": "wild",
+          "note": "fan · search: \"Fantasy Island\" full episode 1978",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fantasy Island",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|filming location|memorabilia|screen bites|mythbusters|timeline|moments|hijinks|chases|coolest|wildest|hilarious|\\bchaos\\b|taking down|\\bmin\\b|Blumhouse|Roselyn|Michael Pe|1998|Malcolm McDowell|welcomes you|Biography|Documentary",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Fantasy Island"
+        },
+        {
+          "url": "ytsearch40:Fantasy Island Ricardo Montalban full episode",
+          "tier": "wild",
+          "note": "fan · search: Fantasy Island Ricardo Montalban full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fantasy Island",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|filming location|memorabilia|screen bites|mythbusters|timeline|moments|hijinks|chases|coolest|wildest|hilarious|\\bchaos\\b|taking down|\\bmin\\b|Blumhouse|Roselyn|1998|Malcolm McDowell|welcomes you|Biography|Documentary",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Fantasy Island"
+        },
+        {
+          "url": "ytsearch40:Fantasy Island Tattoo Mr. Roarke episode",
+          "tier": "wild",
+          "note": "fan · search: Fantasy Island Tattoo Mr. Roarke episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fantasy Island",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|filming location|memorabilia|screen bites|mythbusters|timeline|moments|hijinks|chases|coolest|wildest|hilarious|\\bchaos\\b|taking down|\\bmin\\b|Blumhouse|Roselyn|1998|Malcolm McDowell|welcomes you|Biography|Documentary",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Fantasy Island"
         }
       ]
     }
