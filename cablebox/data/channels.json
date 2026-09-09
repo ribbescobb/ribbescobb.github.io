@@ -15,7 +15,8 @@
       "kind": "guide",
       "dayparts": [
         {
-          "pool": "commercials"
+          "pool": "commercials",
+          "name": "Prevue Guide"
         }
       ],
       "breakEvery": 0
@@ -26,14 +27,59 @@
       "name": "SITCOMS",
       "dayparts": [
         {
-          "from": "20:00",
-          "to": "24:00",
-          "pool": "sitcoms-late"
+          "from": "06:00",
+          "to": "09:00",
+          "pool": "sitcoms-morning",
+          "name": "Early Sitcoms"
         },
         {
-          "pool": "sitcoms"
+          "from": "09:00",
+          "to": "12:00",
+          "pool": "sitcoms-70s",
+          "name": "70s Workplace"
+        },
+        {
+          "from": "12:00",
+          "to": "14:00",
+          "pool": "sitcoms-lunch",
+          "name": "Lunch Sitcoms"
+        },
+        {
+          "from": "14:00",
+          "to": "17:00",
+          "pool": "sitcoms-afterschool",
+          "name": "After School"
+        },
+        {
+          "from": "17:00",
+          "to": "19:00",
+          "pool": "sitcoms-family",
+          "name": "Family Hour"
+        },
+        {
+          "from": "19:00",
+          "to": "20:00",
+          "pool": "cheers",
+          "name": "Cheers"
+        },
+        {
+          "from": "20:00",
+          "to": "23:00",
+          "pool": "sitcoms-prime",
+          "name": "Prime Sitcoms"
+        },
+        {
+          "from": "23:00",
+          "to": "24:00",
+          "pool": "sitcoms-late",
+          "name": "Late Sitcoms"
+        },
+        {
+          "pool": "sitcoms",
+          "name": "Sitcoms"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 3,
@@ -44,15 +90,18 @@
         {
           "from": "06:00",
           "to": "10:00",
-          "pool": "news-morning"
+          "pool": "news-morning",
+          "name": "Morning News"
         },
         {
           "from": "20:00",
           "to": "24:00",
-          "pool": "news-mag"
+          "pool": "news-mag",
+          "name": "Newsmagazine"
         },
         {
-          "pool": "news"
+          "pool": "news",
+          "name": "News"
         }
       ]
     },
@@ -62,24 +111,131 @@
       "name": "ACTION",
       "dayparts": [
         {
-          "from": "21:00",
-          "to": "23:00",
-          "pool": "drama-9pm"
-        },
-        {
           "from": "23:00",
           "to": "24:00",
-          "pool": "late-horror"
+          "pool": "late-horror",
+          "name": "Late-Night Horror"
         },
         {
           "from": "00:00",
           "to": "06:00",
-          "pool": "late-horror"
+          "pool": "late-horror",
+          "name": "Late-Night Horror"
         },
         {
-          "pool": "action"
+          "from": "06:00",
+          "to": "09:00",
+          "pool": "action-morning",
+          "name": "Morning Reruns"
+        },
+        {
+          "from": "09:00",
+          "to": "12:00",
+          "pool": "action-detectives",
+          "name": "Detectives"
+        },
+        {
+          "from": "12:00",
+          "to": "15:00",
+          "pool": "action-pi",
+          "name": "Private Eyes"
+        },
+        {
+          "from": "15:00",
+          "to": "17:00",
+          "pool": "action-afterschool",
+          "name": "After School"
+        },
+        {
+          "from": "17:00",
+          "to": "19:00",
+          "pool": "action-cannell",
+          "name": "Helicopters"
+        },
+        {
+          "from": "19:00",
+          "to": "20:00",
+          "pool": "action-family",
+          "name": "Family Action"
+        },
+        {
+          "days": [
+            1
+          ],
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "ateam",
+          "name": "The A-Team"
+        },
+        {
+          "days": [
+            2
+          ],
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "macgyver",
+          "name": "MacGyver"
+        },
+        {
+          "days": [
+            3
+          ],
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "hillstreet",
+          "name": "Hill Street Blues"
+        },
+        {
+          "days": [
+            4
+          ],
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "dukes",
+          "name": "Dukes of Hazzard"
+        },
+        {
+          "days": [
+            5
+          ],
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "miamivice",
+          "name": "Miami Vice"
+        },
+        {
+          "days": [
+            6
+          ],
+          "from": "20:00",
+          "to": "23:00",
+          "pool": "action-movies",
+          "name": "Mov: Saturday Night Movie ★★½"
+        },
+        {
+          "from": "22:00",
+          "to": "23:00",
+          "pool": "action-late",
+          "name": "Late Action"
+        },
+        {
+          "from": "20:00",
+          "to": "23:00",
+          "pool": "action-prime",
+          "name": "Prime Action"
+        },
+        {
+          "from": "20:00",
+          "to": "23:00",
+          "pool": "drama-9pm",
+          "name": "Drama"
+        },
+        {
+          "pool": "action",
+          "name": "Action"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 5,
@@ -89,12 +245,14 @@
         {
           "from": "06:00",
           "to": "24:00",
-          "pool": "gameshows"
+          "pool": "gameshows",
+          "name": "Game Shows"
         },
         {
           "from": "00:00",
           "to": "01:00",
-          "pool": "gameshows"
+          "pool": "gameshows",
+          "name": "Game Shows"
         }
       ]
     },
@@ -106,7 +264,8 @@
         {
           "pool": "music-pop",
           "block": true,
-          "label": "Videos"
+          "label": "Videos",
+          "name": "Videos"
         }
       ]
     },
@@ -118,7 +277,8 @@
         {
           "pool": "music-newwave",
           "block": true,
-          "label": "Videos"
+          "label": "Videos",
+          "name": "Videos"
         }
       ]
     },
@@ -130,7 +290,8 @@
         {
           "pool": "music-metal",
           "block": true,
-          "label": "Videos"
+          "label": "Videos",
+          "name": "Videos"
         }
       ]
     },
@@ -147,32 +308,38 @@
           ],
           "from": "12:00",
           "to": "18:00",
-          "pool": "variety-music"
+          "pool": "variety-music",
+          "name": "Dance Shows"
         },
         {
           "from": "06:00",
           "to": "17:00",
-          "pool": "variety-day"
+          "pool": "variety-day",
+          "name": "Talk & Games"
         },
         {
           "from": "17:00",
           "to": "23:30",
-          "pool": "variety-prime"
+          "pool": "variety-prime",
+          "name": "Variety Specials"
         },
         {
           "from": "23:30",
           "to": "24:00",
-          "pool": "carson"
+          "pool": "carson",
+          "name": "Tonight Show"
         },
         {
           "from": "00:00",
           "to": "01:00",
-          "pool": "carson"
+          "pool": "carson",
+          "name": "Tonight Show"
         },
         {
           "from": "01:00",
           "to": "02:30",
-          "pool": "letterman"
+          "pool": "letterman",
+          "name": "Late Night"
         }
       ]
     },
@@ -184,7 +351,8 @@
         {
           "pool": "music-rnb",
           "block": true,
-          "label": "Videos"
+          "label": "Videos",
+          "name": "Videos"
         }
       ],
       "wild": true
@@ -196,15 +364,60 @@
       "dayparts": [
         {
           "from": "06:00",
+          "to": "08:00",
+          "pool": "sesame",
+          "name": "Sesame Street"
+        },
+        {
+          "from": "08:00",
+          "to": "10:00",
+          "pool": "kids-morning",
+          "name": "Neighborhood"
+        },
+        {
+          "from": "10:00",
+          "to": "13:00",
+          "pool": "kids-midday",
+          "name": "Midday Kids"
+        },
+        {
+          "from": "13:00",
+          "to": "14:00",
+          "pool": "electric",
+          "name": "Electric Company"
+        },
+        {
+          "from": "14:00",
+          "to": "15:00",
+          "pool": "contact",
+          "name": "3-2-1 Contact"
+        },
+        {
+          "from": "15:00",
           "to": "17:00",
-          "pool": "kids"
+          "pool": "kids-afternoon",
+          "name": "After School"
         },
         {
           "from": "17:00",
+          "to": "18:00",
+          "pool": "mrwizard",
+          "name": "Mr. Wizard"
+        },
+        {
+          "from": "06:00",
+          "to": "18:00",
+          "pool": "kids",
+          "name": "PBS Kids"
+        },
+        {
+          "from": "18:00",
           "to": "24:00",
-          "pool": "pbs-evening"
+          "pool": "pbs-evening",
+          "name": "PBS Evening"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 12,
@@ -214,7 +427,8 @@
         {
           "pool": "music-rap",
           "block": true,
-          "label": "Videos"
+          "label": "Videos",
+          "name": "Videos"
         }
       ]
     },
@@ -224,7 +438,8 @@
       "name": "CARTOONS",
       "dayparts": [
         {
-          "pool": "cartoons80"
+          "pool": "cartoons80",
+          "name": "Cartoons"
         }
       ]
     },
@@ -239,7 +454,8 @@
           ],
           "from": "22:00",
           "to": "24:00",
-          "pool": "mst3k"
+          "pool": "mst3k",
+          "name": "MST3K"
         },
         {
           "days": [
@@ -247,12 +463,63 @@
           ],
           "from": "00:00",
           "to": "02:00",
-          "pool": "mst3k"
+          "pool": "mst3k",
+          "name": "MST3K"
         },
         {
-          "pool": "scifi"
+          "from": "06:00",
+          "to": "09:00",
+          "pool": "scifi-cartoons",
+          "name": "Space Cartoons"
+        },
+        {
+          "from": "09:00",
+          "to": "12:00",
+          "pool": "scifi-60s",
+          "name": "Vintage Sci-Fi"
+        },
+        {
+          "from": "12:00",
+          "to": "15:00",
+          "pool": "scifi-britain",
+          "name": "Doctor Who"
+        },
+        {
+          "from": "15:00",
+          "to": "17:00",
+          "pool": "scifi-70s",
+          "name": "70s Sci-Fi"
+        },
+        {
+          "from": "17:00",
+          "to": "19:00",
+          "pool": "scifi-heroes",
+          "name": "Superheroes"
+        },
+        {
+          "from": "19:00",
+          "to": "20:00",
+          "pool": "scifi-anthology",
+          "name": "Anthology"
+        },
+        {
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "scifi-prime",
+          "name": "Prime Sci-Fi"
+        },
+        {
+          "from": "22:00",
+          "to": "24:00",
+          "pool": "scifi-late",
+          "name": "Late Creeps"
+        },
+        {
+          "pool": "scifi",
+          "name": "Sci-Fi"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 17,
@@ -262,7 +529,8 @@
         {
           "pool": "classics",
           "block": true,
-          "label": "Classic Cartoons"
+          "label": "Classic Cartoons",
+          "name": "Classic Cartoons"
         }
       ]
     },
@@ -278,36 +546,43 @@
           "pool": "xmas",
           "holiday": "12-25",
           "weight": 2,
-          "linger": 7
+          "linger": 7,
+          "name": "Christmas"
         },
         {
           "pool": "halloween",
           "holiday": "10-31",
-          "weight": 1.5
+          "weight": 1.5,
+          "name": "Halloween"
         },
         {
           "pool": "thanksgiving",
-          "holiday": "thanksgiving"
+          "holiday": "thanksgiving",
+          "name": "Thanksgiving"
         },
         {
           "pool": "newyear",
           "holiday": "01-01",
-          "weight": 0.7
+          "weight": 0.7,
+          "name": "New Year's"
         },
         {
           "pool": "valentines",
           "holiday": "02-14",
-          "weight": 0.6
+          "weight": 0.6,
+          "name": "Valentine's"
         },
         {
           "pool": "easter",
           "holiday": "easter",
-          "weight": 0.8
+          "weight": 0.8,
+          "name": "Easter"
         },
         {
           "pool": "july4",
           "holiday": "07-04",
-          "weight": 0.8
+          "weight": 0.8,
+          "name": "Fourth of July"
         }
       ]
     },
@@ -317,7 +592,8 @@
       "name": "BASEBALL",
       "dayparts": [
         {
-          "pool": "baseball"
+          "pool": "baseball",
+          "name": "Baseball (L)"
         }
       ]
     },
@@ -327,7 +603,8 @@
       "name": "FOOTBALL",
       "dayparts": [
         {
-          "pool": "football"
+          "pool": "football",
+          "name": "Football (L)"
         }
       ],
       "wild": true
@@ -338,7 +615,8 @@
       "name": "GOLF",
       "dayparts": [
         {
-          "pool": "golf"
+          "pool": "golf",
+          "name": "Golf (L)"
         }
       ]
     },
@@ -354,20 +632,24 @@
           ],
           "from": "11:00",
           "to": "13:00",
-          "pool": "wrestling"
+          "pool": "wrestling",
+          "name": "Wrestling (L)"
         },
         {
           "from": "23:30",
           "to": "24:00",
-          "pool": "wrestling"
+          "pool": "wrestling",
+          "name": "Wrestling (L)"
         },
         {
           "from": "00:00",
           "to": "01:00",
-          "pool": "wrestling"
+          "pool": "wrestling",
+          "name": "Wrestling (L)"
         },
         {
-          "pool": "sports"
+          "pool": "sports",
+          "name": "Wide World of Sports (L)"
         }
       ]
     },
@@ -915,12 +1197,6 @@
           "series": "Thomas & Friends",
           "titleMatch": "classic|1984|1985|1986|Series [1-3]\\b|Season [1-3]\\b|Ringo|Carlin",
           "limit": 3000
-        },
-        {
-          "tier": "legit",
-          "note": "Mr. Wizard Studios · Mr. Wizard's World",
-          "url": "https://www.youtube.com/playlist?list=UUx_J_aSKyWaNcEjK-eS4Jxg",
-          "series": "Mr. Wizard's World"
         }
       ]
     },
@@ -937,10 +1213,16 @@
           "titleExclude": "Podcast|Hankins|Special Edition"
         },
         {
-          "tier": "legit",
-          "note": "Mr. Wizard Studios · Mr. Wizard's World",
-          "url": "https://www.youtube.com/playlist?list=UUx_J_aSKyWaNcEjK-eS4Jxg",
-          "series": "Mr. Wizard's World"
+          "url": "ytsearch40:\"Faerie Tale Theatre\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Faerie Tale Theatre\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Faerie Tale",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2021",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 30,
+          "series": "Faerie Tale Theatre"
         }
       ]
     },
@@ -969,6 +1251,42 @@
           "url": "https://www.youtube.com/playlist?list=UU-nLPHqVwvwAZSqAihRcSlg",
           "series": "Sanford and Son",
           "titleExclude": "Compilation|Best|Times|Moments|Marathon|Top \\d|Why We Love|Classic Laughs|Funniest|Iconic"
+        },
+        {
+          "url": "ytsearch40:\"Soap\" 1977 sitcom full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Soap\" 1977 sitcom full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bSoap\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|opera|making|DIY|cutting|recipe",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Soap"
+        },
+        {
+          "url": "ytsearch40:Soap 1978 sitcom episode Billy Crystal",
+          "tier": "wild",
+          "note": "fan · search: Soap 1978 sitcom episode Billy Crystal",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bSoap\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|opera|making|DIY|cutting|recipe",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Soap"
+        },
+        {
+          "url": "ytsearch40:\"It's Garry Shandling's Show\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"It's Garry Shandling's Show\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Shandling",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "It's Garry Shandling's Show"
         }
       ]
     },
@@ -3637,6 +3955,2496 @@
           "minMinutes": 30,
           "cap": 30,
           "series": "Late Night with David Letterman"
+        }
+      ]
+    },
+    "action-morning": {
+      "_note": "Morning reruns: highway patrol, truckers, 70s superheroes.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"CHiPs\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"CHiPs\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "CHiPs",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "CHiPs"
+        },
+        {
+          "url": "ytsearch40:\"BJ and the Bear\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"BJ and the Bear\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "B\\.?J\\.? and the Bear|BJ & the Bear",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "BJ and the Bear"
+        },
+        {
+          "url": "ytsearch40:\"Emergency!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Emergency!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Emergency!?",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|alert|911|room",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Emergency!"
+        },
+        {
+          "url": "ytsearch40:\"Wonder Woman\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Wonder Woman\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Wonder Woman",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Gal Gadot|Lynda Carter interview",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Wonder Woman"
+        },
+        {
+          "url": "ytsearch40:\"The Incredible Hulk\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Incredible Hulk\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Incredible Hulk",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Marvel|Avengers",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Incredible Hulk"
+        },
+        {
+          "url": "ytsearch40:\"The Rockford Files\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Rockford Files\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rockford",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Rockford Files"
+        }
+      ]
+    },
+    "action-detectives": {
+      "_note": "70s detectives, 09:00–12:00.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "tier": "legit",
+          "note": "Sony Classic TV Rewind · Starsky & Hutch, Charlie's Angels, T.J. Hooker, Hart to Hart",
+          "titleMatch": "Starsky|Charlie's Angels|Hooker|Hart to Hart",
+          "minMinutes": 40,
+          "limit": 3000,
+          "series": {
+            "Starsky": "Starsky & Hutch",
+            "Charlie's": "Charlie's Angels",
+            "Hooker": "T.J. Hooker",
+            "Hart": "Hart to Hart"
+          }
+        },
+        {
+          "url": "ytsearch40:\"Starsky & Hutch\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Starsky & Hutch\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Starsky",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Starsky & Hutch"
+        },
+        {
+          "url": "ytsearch40:\"Hart to Hart\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hart to Hart\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hart to Hart",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hart to Hart"
+        },
+        {
+          "url": "ytsearch40:\"T.J. Hooker\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"T.J. Hooker\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "T\\.?J\\.? Hooker",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "T.J. Hooker"
+        },
+        {
+          "url": "ytsearch40:\"Matt Houston\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Matt Houston\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Matt Houston",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Matt Houston"
+        },
+        {
+          "url": "ytsearch40:\"The Rockford Files\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Rockford Files\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rockford",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Rockford Files"
+        }
+      ]
+    },
+    "action-pi": {
+      "_note": "Private eyes, 12:00–15:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Magnum, P.I.\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Magnum, P.I.\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Magnum",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Jay Hernandez",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Magnum, P.I."
+        },
+        {
+          "url": "ytsearch40:\"Simon & Simon\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Simon & Simon\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Simon (&|and) Simon",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Simon & Simon"
+        },
+        {
+          "url": "ytsearch40:\"Riptide\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Riptide\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Riptide",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Marvel|Namor|surf|wave",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Riptide"
+        },
+        {
+          "url": "ytsearch40:\"Remington Steele\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Remington Steele\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Remington Steele",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Remington Steele"
+        },
+        {
+          "url": "ytsearch40:\"Hardcastle and McCormick\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hardcastle and McCormick\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hardcastle",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hardcastle and McCormick"
+        },
+        {
+          "url": "ytsearch40:\"Cover Up\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Cover Up\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Cover ?Up",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Cover Up"
+        },
+        {
+          "url": "ytsearch40:\"Spenser: For Hire\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Spenser: For Hire\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Spenser",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Spenser: For Hire"
+        }
+      ]
+    },
+    "action-afterschool": {
+      "_note": "After school, 15:00–17:00: Knight Rider when the tapes hold up, The Fall Guy and the Greatest American Hero when they do not.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Knight Rider\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Knight Rider\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Knight Rider",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|KITT vs|2008|Justin Bruening",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Knight Rider"
+        },
+        {
+          "url": "ytsearch40:Knight Rider S01E",
+          "tier": "wild",
+          "note": "fan · search: Knight Rider S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "Knight Rider",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|KITT vs|2008|Justin Bruening",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Knight Rider"
+        },
+        {
+          "url": "ytsearch40:Knight Rider 198 episode",
+          "tier": "wild",
+          "note": "fan · search: Knight Rider 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Knight Rider",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|KITT vs|2008|Justin Bruening",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Knight Rider"
+        },
+        {
+          "url": "ytsearch40:\"The Fall Guy\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Fall Guy\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fall Guy",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Ryan Gosling",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Fall Guy"
+        },
+        {
+          "url": "ytsearch40:\"The Greatest American Hero\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Greatest American Hero\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Greatest American Hero",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Greatest American Hero"
+        },
+        {
+          "url": "ytsearch40:\"Hardcastle and McCormick\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hardcastle and McCormick\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hardcastle",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hardcastle and McCormick"
+        }
+      ]
+    },
+    "action-cannell": {
+      "_note": "Helicopters and Cannell, 17:00–19:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Airwolf\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Airwolf\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Airwolf",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Airwolf"
+        },
+        {
+          "url": "ytsearch40:Airwolf S01E",
+          "tier": "wild",
+          "note": "fan · search: Airwolf S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "Airwolf",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Airwolf"
+        },
+        {
+          "url": "ytsearch40:Airwolf 198 episode",
+          "tier": "wild",
+          "note": "fan · search: Airwolf 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Airwolf",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Airwolf"
+        },
+        {
+          "url": "ytsearch40:\"Street Hawk\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Street Hawk\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Street Hawk",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Street Hawk"
+        },
+        {
+          "url": "ytsearch40:\"Blue Thunder\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Blue Thunder\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Blue Thunder",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|movie|film|1983",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Blue Thunder"
+        },
+        {
+          "url": "ytsearch40:\"Stingray\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Stingray\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Stingray",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Gerry Anderson|Supermarionation|Corvette|Troy Tempest|puppet",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Stingray"
+        },
+        {
+          "url": "ytsearch40:\"Riptide\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Riptide\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Riptide",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Marvel|Namor|surf|wave",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Riptide"
+        },
+        {
+          "url": "ytsearch40:\"Hardcastle and McCormick\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hardcastle and McCormick\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hardcastle",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hardcastle and McCormick"
+        }
+      ]
+    },
+    "action-family": {
+      "_note": "19:00–20:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"The Fall Guy\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Fall Guy\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fall Guy",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Ryan Gosling",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Fall Guy"
+        },
+        {
+          "url": "ytsearch40:\"The Greatest American Hero\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Greatest American Hero\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Greatest American Hero",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Greatest American Hero"
+        },
+        {
+          "url": "ytsearch40:\"Sledge Hammer!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Sledge Hammer!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sledge Hammer",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Sledge Hammer!"
+        },
+        {
+          "url": "ytsearch40:\"Wonder Woman\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Wonder Woman\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Wonder Woman",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Gal Gadot",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Wonder Woman"
+        }
+      ]
+    },
+    "ateam": {
+      "_note": "Monday prime.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"The A-Team\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The A-Team\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "A-Team|A Team",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2010|Liam Neeson|Bradley Cooper",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The A-Team"
+        },
+        {
+          "url": "ytsearch40:The A-Team S01E",
+          "tier": "wild",
+          "note": "fan · search: The A-Team S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "A-Team|A Team",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2010|Liam Neeson|Bradley Cooper",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The A-Team"
+        },
+        {
+          "url": "ytsearch40:The A-Team 198 episode",
+          "tier": "wild",
+          "note": "fan · search: The A-Team 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "A-Team|A Team",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2010|Liam Neeson|Bradley Cooper",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The A-Team"
+        }
+      ]
+    },
+    "macgyver": {
+      "_note": "Tuesday prime.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"MacGyver\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"MacGyver\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "MacGyver",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Lucas Till|2016",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "MacGyver"
+        },
+        {
+          "url": "ytsearch40:MacGyver S01E",
+          "tier": "wild",
+          "note": "fan · search: MacGyver S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "MacGyver",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Lucas Till|2016",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "MacGyver"
+        },
+        {
+          "url": "ytsearch40:MacGyver 198 episode",
+          "tier": "wild",
+          "note": "fan · search: MacGyver 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "MacGyver",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Lucas Till|2016",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "MacGyver"
+        }
+      ]
+    },
+    "hillstreet": {
+      "_note": "Wednesday prime.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Hill Street Blues\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hill Street Blues\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hill Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Hill Street Blues"
+        },
+        {
+          "url": "ytsearch40:Hill Street Blues S01E",
+          "tier": "wild",
+          "note": "fan · search: Hill Street Blues S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hill Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Hill Street Blues"
+        },
+        {
+          "url": "ytsearch40:Hill Street Blues 198 episode",
+          "tier": "wild",
+          "note": "fan · search: Hill Street Blues 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hill Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Hill Street Blues"
+        }
+      ]
+    },
+    "dukes": {
+      "_note": "Thursday prime.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"The Dukes of Hazzard\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Dukes of Hazzard\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dukes of Hazzard",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2005|Seann|Johnny Knoxville|General Lee jump",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The Dukes of Hazzard"
+        },
+        {
+          "url": "ytsearch40:The Dukes of Hazzard S01E",
+          "tier": "wild",
+          "note": "fan · search: The Dukes of Hazzard S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dukes of Hazzard",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2005|Seann|Johnny Knoxville|General Lee jump",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The Dukes of Hazzard"
+        },
+        {
+          "url": "ytsearch40:The Dukes of Hazzard 198 episode",
+          "tier": "wild",
+          "note": "fan · search: The Dukes of Hazzard 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dukes of Hazzard",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2005|Seann|Johnny Knoxville|General Lee jump",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "The Dukes of Hazzard"
+        }
+      ]
+    },
+    "miamivice": {
+      "_note": "Friday prime.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Miami Vice\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Miami Vice\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Miami Vice",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2006|Colin Farrell|Jamie Foxx|movie",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Miami Vice"
+        },
+        {
+          "url": "ytsearch40:Miami Vice S01E",
+          "tier": "wild",
+          "note": "fan · search: Miami Vice S01E",
+          "requireEmbedCheck": true,
+          "titleMatch": "Miami Vice",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2006|Colin Farrell|Jamie Foxx|movie",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Miami Vice"
+        },
+        {
+          "url": "ytsearch40:Miami Vice 198 episode",
+          "tier": "wild",
+          "note": "fan · search: Miami Vice 198 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Miami Vice",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2006|Colin Farrell|Jamie Foxx|movie",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 60,
+          "series": "Miami Vice"
+        }
+      ]
+    },
+    "action-prime": {
+      "_note": "Prime catch-all, 20:00–23:00, behind the night strips.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Hunter\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hunter\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bHunter\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Holly Hunter|Hunter x|Monster Hunter|Deer Hunter|Bounty Hunter|hunting|Hunter Hayes|Hunter Biden",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hunter"
+        },
+        {
+          "url": "ytsearch40:\"Hill Street Blues\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hill Street Blues\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hill Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hill Street Blues"
+        },
+        {
+          "url": "ytsearch40:\"Hardcastle and McCormick\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Hardcastle and McCormick\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hardcastle",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Hardcastle and McCormick"
+        },
+        {
+          "url": "ytsearch40:\"The Equalizer\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Equalizer\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Equalizer",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Denzel|Queen Latifah|2014|2018|2021",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Equalizer"
+        },
+        {
+          "url": "ytsearch40:\"Moonlighting\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Moonlighting\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Moonlighting",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1982|film|movie",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Moonlighting"
+        },
+        {
+          "url": "ytsearch40:\"Matt Houston\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Matt Houston\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Matt Houston",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Matt Houston"
+        },
+        {
+          "url": "ytsearch40:\"Miami Vice\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Miami Vice\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Miami Vice",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2006|Colin Farrell|movie",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Miami Vice"
+        },
+        {
+          "url": "ytsearch40:\"The A-Team\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The A-Team\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "A-Team|A Team",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2010|Liam Neeson",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The A-Team"
+        },
+        {
+          "url": "ytsearch40:\"MacGyver\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"MacGyver\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "MacGyver",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Lucas Till|2016",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "MacGyver"
+        },
+        {
+          "url": "ytsearch40:\"The Dukes of Hazzard\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Dukes of Hazzard\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dukes of Hazzard",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2005|Seann",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Dukes of Hazzard"
+        }
+      ]
+    },
+    "action-movies": {
+      "_note": "Saturday night at the movies.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUhSyFoetNdO7oarms-TQm7w",
+          "tier": "wild",
+          "note": "fan · Kev The Ripper (TV movies with their original commercials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*Full Movie).*\\b19[78]\\d\\b",
+          "minMinutes": 80,
+          "maxMinutes": 160,
+          "limit": 2000,
+          "cap": 40,
+          "seriesFrom": "^(.+?)\\s*\\("
+        },
+        {
+          "url": "ytsearch40:1980s TV movie full with commercials",
+          "tier": "wild",
+          "note": "fan · search: 1980s TV movie full with commercials",
+          "requireEmbedCheck": true,
+          "titleMatch": "Movie of the Week|TV Movie",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Hallmark",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 30,
+          "series": "Movie of the Week"
+        },
+        {
+          "url": "ytsearch40:ABC Movie of the Week 198 full",
+          "tier": "wild",
+          "note": "fan · search: ABC Movie of the Week 198 full",
+          "requireEmbedCheck": true,
+          "titleMatch": "Movie of the Week|TV Movie",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Hallmark",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 30,
+          "series": "Movie of the Week"
+        }
+      ]
+    },
+    "action-late": {
+      "_note": "22:00–23:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Miami Vice\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Miami Vice\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Miami Vice",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2006|Colin Farrell|movie",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Miami Vice"
+        },
+        {
+          "url": "ytsearch40:\"Moonlighting\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Moonlighting\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Moonlighting",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1982|film",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Moonlighting"
+        },
+        {
+          "url": "ytsearch40:\"Sledge Hammer!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Sledge Hammer!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sledge Hammer",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Sledge Hammer!"
+        },
+        {
+          "url": "ytsearch40:\"The Equalizer\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Equalizer\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Equalizer",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Denzel|Queen Latifah|2014|2018|2021",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Equalizer"
+        }
+      ]
+    },
+    "sitcoms-morning": {
+      "_note": "06:00–09:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Mork & Mindy\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Mork & Mindy\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Mork",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Mork & Mindy"
+        },
+        {
+          "url": "ytsearch40:\"What's Happening!!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"What's Happening!!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "What's Happening",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "What's Happening!!"
+        },
+        {
+          "url": "ytsearch40:\"One Day at a Time\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"One Day at a Time\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "One Day at a Time",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Netflix|2017",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "One Day at a Time"
+        },
+        {
+          "url": "ytsearch40:\"Good Times\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Good Times\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Good Times",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Good Times"
+        },
+        {
+          "url": "ytsearch40:\"Happy Days\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Happy Days\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Happy Days",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Happy Days"
+        },
+        {
+          "url": "ytsearch40:\"Laverne & Shirley\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Laverne & Shirley\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Laverne",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Laverne & Shirley"
+        },
+        {
+          "url": "ytsearch40:\"Alice\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Alice\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bAlice\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Wonderland|Cooper|Alice in",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Alice"
+        }
+      ]
+    },
+    "sitcoms-70s": {
+      "_note": "09:00–12:00, in front of the legit Sanford and Jeffersons in the catch-all.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Barney Miller\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Barney Miller\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Barney Miller",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Barney Miller"
+        },
+        {
+          "url": "ytsearch40:\"WKRP in Cincinnati\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"WKRP in Cincinnati\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "WKRP",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "WKRP in Cincinnati"
+        },
+        {
+          "url": "ytsearch40:\"The Bob Newhart Show\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Bob Newhart Show\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bob Newhart Show",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Bob Newhart Show"
+        },
+        {
+          "url": "ytsearch40:\"M*A*S*H\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"M*A*S*H\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "M\\*A\\*S\\*H|MASH",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|movie|1970",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "M*A*S*H"
+        },
+        {
+          "url": "ytsearch40:\"Benson\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Benson\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bBenson\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Ashley|Boone",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Benson"
+        }
+      ]
+    },
+    "sitcoms-lunch": {
+      "_note": "12:00–14:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Three's Company\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Three's Company\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Three's Company",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Three's Company"
+        },
+        {
+          "url": "ytsearch40:\"Too Close for Comfort\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Too Close for Comfort\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Too Close for Comfort",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Too Close for Comfort"
+        },
+        {
+          "url": "ytsearch40:\"Square Pegs\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Square Pegs\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Square Pegs",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Square Pegs"
+        },
+        {
+          "url": "ytsearch40:\"Bosom Buddies\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Bosom Buddies\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bosom Buddies",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Bosom Buddies"
+        },
+        {
+          "url": "ytsearch40:\"Police Squad!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Police Squad!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Police Squad",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Police Squad!"
+        }
+      ]
+    },
+    "sitcoms-afterschool": {
+      "_note": "14:00–17:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Silver Spoons\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Silver Spoons\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Silver Spoons",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Silver Spoons"
+        },
+        {
+          "url": "ytsearch40:\"Webster\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Webster\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bWebster\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|dictionary",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Webster"
+        },
+        {
+          "url": "ytsearch40:\"Small Wonder\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Small Wonder\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Small Wonder",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Small Wonder"
+        },
+        {
+          "url": "ytsearch40:\"Punky Brewster\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Punky Brewster\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Punky",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2021",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Punky Brewster"
+        },
+        {
+          "url": "ytsearch40:\"The Facts of Life\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Facts of Life\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Facts of Life",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Facts of Life"
+        },
+        {
+          "url": "ytsearch40:\"Mr. Belvedere\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Mr. Belvedere\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Belvedere",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Mr. Belvedere"
+        },
+        {
+          "url": "ytsearch40:\"Charles in Charge\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Charles in Charge\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Charles in Charge",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Charles in Charge"
+        },
+        {
+          "url": "ytsearch40:\"Head of the Class\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Head of the Class\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Head of the Class",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2021",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Head of the Class"
+        },
+        {
+          "url": "ytsearch40:\"ALF\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"ALF\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bALF\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "ALF"
+        },
+        {
+          "url": "ytsearch40:\"Gimme a Break!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Gimme a Break!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Gimme a Break",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Gimme a Break!"
+        }
+      ]
+    },
+    "sitcoms-family": {
+      "_note": "17:00–19:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Family Ties\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Family Ties\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Family Ties",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Family Ties"
+        },
+        {
+          "url": "ytsearch40:\"Growing Pains\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Growing Pains\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Growing Pains",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Growing Pains"
+        },
+        {
+          "url": "ytsearch40:\"Who's the Boss?\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Who's the Boss?\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Who's the Boss",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Who's the Boss?"
+        },
+        {
+          "url": "ytsearch40:\"Perfect Strangers\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Perfect Strangers\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Perfect Strangers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Perfect Strangers"
+        },
+        {
+          "url": "ytsearch40:\"Kate & Allie\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Kate & Allie\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Kate (&|and) Allie",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Kate & Allie"
+        },
+        {
+          "url": "ytsearch40:\"Just the Ten of Us\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Just the Ten of Us\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Just the Ten of Us",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Just the Ten of Us"
+        },
+        {
+          "url": "ytsearch40:\"227\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"227\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b227\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "227"
+        },
+        {
+          "url": "ytsearch40:\"Amen\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Amen\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bAmen\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|church|worship|song",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Amen"
+        }
+      ]
+    },
+    "cheers": {
+      "_note": "19:00–20:00.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUrRttZIypNTA1Mrfwo745Sg",
+          "tier": "legit",
+          "note": "Paramount Plus · Cheers full episodes",
+          "titleMatch": "Cheers",
+          "minMinutes": 20,
+          "limit": 3000,
+          "series": "Cheers"
+        },
+        {
+          "url": "ytsearch40:\"Cheers\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Cheers\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bCheers\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Norm quotes|Frasier",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Cheers"
+        },
+        {
+          "url": "ytsearch40:\"Taxi\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Taxi\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bTaxi\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Driver|Queens|cab ride|dashcam",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Taxi"
+        }
+      ]
+    },
+    "sitcoms-prime": {
+      "_note": "20:00–23:00.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "tier": "legit",
+          "note": "Sony Classic TV Rewind · Diff'rent Strokes",
+          "titleMatch": "Diff'rent Strokes",
+          "minMinutes": 20,
+          "limit": 3000,
+          "series": "Diff'rent Strokes"
+        },
+        {
+          "url": "ytsearch40:\"Diff'rent Strokes\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Diff'rent Strokes\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Diff'?rent Strokes",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Diff'rent Strokes"
+        },
+        {
+          "url": "ytsearch40:\"Night Court\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Night Court\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Night Court",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2023|Melissa Rauch",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Night Court"
+        },
+        {
+          "url": "ytsearch40:\"The Golden Girls\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Golden Girls\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Golden Girls",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Golden Girls"
+        },
+        {
+          "url": "ytsearch40:\"Newhart\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Newhart\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bNewhart\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Bob Newhart Show",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Newhart"
+        },
+        {
+          "url": "ytsearch40:\"Benson\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Benson\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bBenson\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Ashley|Boone",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Benson"
+        },
+        {
+          "url": "ytsearch40:\"M*A*S*H\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"M*A*S*H\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "M\\*A\\*S\\*H|MASH",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|movie|1970",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "M*A*S*H"
+        }
+      ]
+    },
+    "scifi-cartoons": {
+      "_note": "06:00–09:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Battle of the Planets\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Battle of the Planets\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Battle of the Planets",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Battle of the Planets"
+        },
+        {
+          "url": "ytsearch40:\"Star Blazers\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Star Blazers\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Star Blazers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Star Blazers"
+        },
+        {
+          "url": "ytsearch40:\"Robotech\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Robotech\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Robotech",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Robotech"
+        },
+        {
+          "url": "ytsearch40:\"Ulysses 31\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Ulysses 31\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Ulysses 31",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Ulysses 31"
+        },
+        {
+          "url": "ytsearch40:\"The Mysterious Cities of Gold\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Mysterious Cities of Gold\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Cities of Gold",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Mysterious Cities of Gold"
+        },
+        {
+          "url": "ytsearch40:\"Galaxy Rangers\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Galaxy Rangers\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Galaxy Rangers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Galaxy Rangers"
+        },
+        {
+          "url": "ytsearch40:\"Captain Power\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Captain Power\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Captain Power",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Captain Power"
+        }
+      ]
+    },
+    "scifi-60s": {
+      "_note": "09:00–12:00, in front of the legit Anderson shows in the catch-all.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"UFO\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"UFO\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bUFO\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|sighting|footage|documentary|news|Pentagon",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "UFO"
+        },
+        {
+          "url": "ytsearch40:\"Lost in Space\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Lost in Space\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Lost in Space",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Netflix|2018|1998",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Lost in Space"
+        },
+        {
+          "url": "ytsearch40:\"The Outer Limits\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Outer Limits\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Outer Limits",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1995|1996|1997|1998|1999",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Outer Limits"
+        },
+        {
+          "url": "ytsearch40:\"Planet of the Apes\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Planet of the Apes\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Planet of the Apes",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|movie|film|1968|2011|2014|2017|2024",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Planet of the Apes"
+        },
+        {
+          "url": "ytsearch40:\"The Tripods\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Tripods\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Tripods",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Tripods"
+        }
+      ]
+    },
+    "scifi-britain": {
+      "_note": "12:00–15:00.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUDkpWp8ZYj__duSeTyEEKcQ",
+          "tier": "legit",
+          "note": "Doctor Who: Classic · full-story omnibus uploads",
+          "titleMatch": "FULL EPISODE",
+          "minMinutes": 40,
+          "maxMinutes": 200,
+          "limit": 2000,
+          "series": "Doctor Who"
+        },
+        {
+          "url": "ytsearch40:\"Blake's 7\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Blake's 7\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Blake'?s 7",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Blake's 7"
+        },
+        {
+          "url": "ytsearch40:\"Red Dwarf\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Red Dwarf\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Red Dwarf",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2009|2012|2016|2017|2020",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Red Dwarf"
+        }
+      ]
+    },
+    "scifi-70s": {
+      "_note": "15:00–17:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Buck Rogers in the 25th Century\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Buck Rogers in the 25th Century\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Buck Rogers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Buck Rogers in the 25th Century"
+        },
+        {
+          "url": "ytsearch40:\"Battlestar Galactica\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Battlestar Galactica\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Battlestar",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2004|2003|Ronald|reimagined",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Battlestar Galactica"
+        },
+        {
+          "url": "ytsearch40:\"Voyagers!\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Voyagers!\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Voyagers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Voyagers!"
+        },
+        {
+          "url": "ytsearch40:\"Salvage 1\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Salvage 1\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Salvage",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Salvage 1"
+        },
+        {
+          "url": "ytsearch40:\"The Six Million Dollar Man\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Six Million Dollar Man\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Six Million Dollar",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Six Million Dollar Man"
+        },
+        {
+          "url": "ytsearch40:\"The Bionic Woman\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Bionic Woman\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bionic Woman",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2007",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Bionic Woman"
+        },
+        {
+          "url": "ytsearch40:\"Logan's Run\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Logan's Run\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Logan'?s Run",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|movie|film|1976",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Logan's Run"
+        }
+      ]
+    },
+    "scifi-heroes": {
+      "_note": "17:00–19:00: the NBC superhero nonsense hour.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"The Greatest American Hero\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Greatest American Hero\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Greatest American Hero",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Greatest American Hero"
+        },
+        {
+          "url": "ytsearch40:\"Automan\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Automan\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Automan",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Automan"
+        },
+        {
+          "url": "ytsearch40:\"Manimal\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Manimal\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Manimal",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Manimal"
+        },
+        {
+          "url": "ytsearch40:\"Misfits of Science\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Misfits of Science\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Misfits of Science",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Misfits of Science"
+        },
+        {
+          "url": "ytsearch40:\"The Powers of Matthew Star\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Powers of Matthew Star\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Matthew Star",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Powers of Matthew Star"
+        },
+        {
+          "url": "ytsearch40:\"Shadow Chasers\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Shadow Chasers\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Shadow Chasers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Shadow Chasers"
+        }
+      ]
+    },
+    "scifi-anthology": {
+      "_note": "19:00–20:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Twilight Zone\" 1985 full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Twilight Zone\" 1985 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Twilight Zone",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1959|1960|1961|1962|1963|1964|2019|Peele|Rod Serling narr",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Twilight Zone"
+        },
+        {
+          "url": "ytsearch40:Twilight Zone 1986 episode",
+          "tier": "wild",
+          "note": "fan · search: Twilight Zone 1986 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Twilight Zone",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1959|1960|1961|1962|1963|1964|2019|Peele|Rod Serling narr",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Twilight Zone"
+        },
+        {
+          "url": "ytsearch40:\"Amazing Stories\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Amazing Stories\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Amazing Stories",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2020|Apple",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Amazing Stories"
+        },
+        {
+          "url": "ytsearch40:\"Tales from the Darkside\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Tales from the Darkside\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Darkside",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Tales from the Darkside"
+        },
+        {
+          "url": "ytsearch40:\"The Ray Bradbury Theater\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Ray Bradbury Theater\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bradbury",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Ray Bradbury Theater"
+        },
+        {
+          "url": "ytsearch40:\"The Outer Limits\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Outer Limits\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Outer Limits",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1995|1996|1997|1998|1999",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "The Outer Limits"
+        },
+        {
+          "url": "ytsearch40:\"Darkroom\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Darkroom\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Darkroom",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|photo|develop",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Darkroom"
+        }
+      ]
+    },
+    "scifi-prime": {
+      "_note": "20:00–22:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"V\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"V\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bV\\b.*(1983|1984|1985|Visitors|Final Battle|The Series)",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2009|Morena|for Vendetta",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "V"
+        },
+        {
+          "url": "ytsearch40:\"Max Headroom\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Max Headroom\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Max Headroom",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|incident|broadcast intrusion|1987 hijack",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Max Headroom"
+        },
+        {
+          "url": "ytsearch40:\"Quantum Leap\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Quantum Leap\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Quantum Leap",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2022|2023|Raymond Lee",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Quantum Leap"
+        },
+        {
+          "url": "ytsearch40:\"Alien Nation\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Alien Nation\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Alien Nation",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|movie|film|1988",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Alien Nation"
+        },
+        {
+          "url": "ytsearch40:\"War of the Worlds\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"War of the Worlds\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "War of the Worlds",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|1953|2005|2019|Spielberg|Cruise|BBC|radio|Wells narr|movie|film",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "War of the Worlds"
+        },
+        {
+          "url": "ytsearch40:\"Starman\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Starman\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Starman",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Bowie|movie|film|1984 film|Bridges",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Starman"
+        },
+        {
+          "url": "ytsearch40:\"Otherworld\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Otherworld\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Otherworld",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Otherworld"
+        },
+        {
+          "url": "ytsearch40:\"Probe\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Probe\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bProbe\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|space|NASA|Voyager",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Probe"
+        },
+        {
+          "url": "ytsearch40:\"Beauty and the Beast\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Beauty and the Beast\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Beauty and the Beast",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Disney|1991|2017|animated|Belle",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Beauty and the Beast"
+        }
+      ]
+    },
+    "scifi-late": {
+      "_note": "22:00–24:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Friday the 13th: The Series\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Friday the 13th: The Series\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Friday the 13th",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Jason|movie|film|Part",
+          "minMinutes": 40,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Friday the 13th: The Series"
+        },
+        {
+          "url": "ytsearch40:\"Monsters\" 1988 full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Monsters\" 1988 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bMonsters\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Inc|University|Pixar|Monster Jam|truck",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Monsters"
+        },
+        {
+          "url": "ytsearch40:Monsters 1989 TV series episode",
+          "tier": "wild",
+          "note": "fan · search: Monsters 1989 TV series episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bMonsters\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Inc|University|Pixar|Monster Jam|truck",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Monsters"
+        },
+        {
+          "url": "ytsearch40:\"Tales from the Darkside\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Tales from the Darkside\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Darkside",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Tales from the Darkside"
+        },
+        {
+          "url": "ytsearch40:\"The Ray Bradbury Theater\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Ray Bradbury Theater\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bradbury",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Ray Bradbury Theater"
+        }
+      ]
+    },
+    "sesame": {
+      "_note": "06:00–08:00.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UU7DM7591Xkt1M2D3fs_wAlg",
+          "tier": "legit",
+          "note": "Sesame Street Classics · long specials",
+          "minMinutes": 20,
+          "limit": 1500,
+          "cap": 30,
+          "series": "Sesame Street"
+        },
+        {
+          "url": "ytsearch40:Sesame Street 197 full episode",
+          "tier": "wild",
+          "note": "fan · search: Sesame Street 197 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sesame Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Elmo's World|2010|2015",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 60,
+          "series": "Sesame Street"
+        },
+        {
+          "url": "ytsearch40:Sesame Street 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Sesame Street 198 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sesame Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Elmo's World|2010|2015",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 60,
+          "series": "Sesame Street"
+        },
+        {
+          "url": "ytsearch40:Sesame Street episode 1 full 1970s",
+          "tier": "wild",
+          "note": "fan · search: Sesame Street episode 1 full 1970s",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sesame Street",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Elmo's World|2010|2015",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 60,
+          "series": "Sesame Street"
+        }
+      ]
+    },
+    "kids-morning": {
+      "_note": "08:00–10:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:Mister Rogers Neighborhood full episode",
+          "tier": "wild",
+          "note": "fan · search: Mister Rogers Neighborhood full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Mister Rogers|Mr\\.? Rogers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Tom Hanks|documentary",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 60,
+          "series": "Mister Rogers' Neighborhood"
+        },
+        {
+          "url": "ytsearch40:\"Captain Kangaroo\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Captain Kangaroo\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Captain Kangaroo",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|song",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Captain Kangaroo"
+        },
+        {
+          "url": "ytsearch40:\"Romper Room\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Romper Room\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Romper Room",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 20,
+          "series": "Romper Room"
+        },
+        {
+          "url": "ytsearch40:Pinwheel Nickelodeon full episode",
+          "tier": "wild",
+          "note": "fan · search: Pinwheel Nickelodeon full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Pinwheel",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|fidget|craft",
+          "minMinutes": 40,
+          "maxMinutes": 160,
+          "cap": 20,
+          "series": "Pinwheel"
+        },
+        {
+          "url": "ytsearch40:\"Today's Special\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Today's Special\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Today'?s Special",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Today's Special"
+        },
+        {
+          "url": "ytsearch40:\"Mr. Dressup\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Mr. Dressup\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dressup|Dress-up|Dress Up",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Mr. Dressup"
+        }
+      ]
+    },
+    "kids-midday": {
+      "_note": "10:00–13:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Reading Rainbow\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Reading Rainbow\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Reading Rainbow",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 60,
+          "series": "Reading Rainbow"
+        },
+        {
+          "url": "ytsearch40:\"Shining Time Station\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Shining Time Station\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Shining Time",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Shining Time Station"
+        },
+        {
+          "url": "ytsearch40:\"Zoobilee Zoo\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Zoobilee Zoo\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Zoobilee",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Zoobilee Zoo"
+        },
+        {
+          "url": "ytsearch40:\"Fraggle Rock\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Fraggle Rock\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fraggle",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2022|Apple|Back to the Rock",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Fraggle Rock"
+        },
+        {
+          "url": "ytsearch40:\"The Great Space Coaster\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Great Space Coaster\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Space Coaster",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "The Great Space Coaster"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "tier": "legit",
+          "note": "Shout! Studios · Pee-wee's Playhouse",
+          "titleMatch": "Pee-wee.*(FULL EPISODE|Episode \\d)",
+          "minMinutes": 20,
+          "limit": 5000,
+          "cap": 50,
+          "series": "Pee-wee's Playhouse"
+        }
+      ]
+    },
+    "electric": {
+      "_note": "13:00–14:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"The Electric Company\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"The Electric Company\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Electric Company",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2009|2010|2011",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 60,
+          "series": "The Electric Company"
+        },
+        {
+          "url": "ytsearch40:Electric Company 197 episode",
+          "tier": "wild",
+          "note": "fan · search: Electric Company 197 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Electric Company",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|2009|2010|2011",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 60,
+          "series": "The Electric Company"
+        }
+      ]
+    },
+    "contact": {
+      "_note": "14:00–15:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"3-2-1 Contact\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"3-2-1 Contact\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "3-2-1 Contact|321 Contact",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 60,
+          "series": "3-2-1 Contact"
+        },
+        {
+          "url": "ytsearch40:3-2-1 Contact episode PBS 198",
+          "tier": "wild",
+          "note": "fan · search: 3-2-1 Contact episode PBS 198",
+          "requireEmbedCheck": true,
+          "titleMatch": "3-2-1 Contact|321 Contact",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 60,
+          "series": "3-2-1 Contact"
+        }
+      ]
+    },
+    "kids-afternoon": {
+      "_note": "15:00–17:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:\"Square One TV\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Square One TV\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Square One",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Square One TV"
+        },
+        {
+          "url": "ytsearch40:Zoom 1972 PBS full episode",
+          "tier": "wild",
+          "note": "fan · search: Zoom 1972 PBS full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bZoom\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|meeting|call|lens|Zoom In",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Zoom"
+        },
+        {
+          "url": "ytsearch40:ZOOM PBS 1970s episode",
+          "tier": "wild",
+          "note": "fan · search: ZOOM PBS 1970s episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\bZoom\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|meeting|call|lens|Zoom In",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Zoom"
+        },
+        {
+          "url": "ytsearch40:\"Newton's Apple\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Newton's Apple\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Newton'?s Apple",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Newton's Apple"
+        },
+        {
+          "url": "ytsearch40:\"Big Blue Marble\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Big Blue Marble\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Big Blue Marble",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Big Blue Marble"
+        },
+        {
+          "url": "ytsearch40:Vegetable Soup 1975 full episode",
+          "tier": "legit",
+          "note": "New York State Archives · Vegetable Soup",
+          "titleMatch": "Vegetable Soup",
+          "uploaderMatch": "New York State Archives",
+          "minMinutes": 20,
+          "series": "Vegetable Soup"
+        },
+        {
+          "url": "ytsearch40:OWL TV 1985 full episode",
+          "tier": "wild",
+          "note": "fan · search: OWL TV 1985 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "OWL",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|owl facts|owls",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "OWL/TV"
+        },
+        {
+          "url": "ytsearch40:\"You Can't Do That on Television\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"You Can't Do That on Television\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Can't Do That",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "You Can't Do That on Television"
+        },
+        {
+          "url": "ytsearch40:\"Where in the World Is Carmen Sandiego?\" full episode",
+          "tier": "wild",
+          "note": "fan · search: \"Where in the World Is Carmen Sandiego?\" full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Carmen Sandiego",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|Netflix|2019|game",
+          "minMinutes": 20,
+          "maxMinutes": 36,
+          "cap": 40,
+          "series": "Where in the World Is Carmen Sandiego?"
+        }
+      ]
+    },
+    "mrwizard": {
+      "_note": "17:00–18:00, and only then. Chris: way too much Mr. Wizard, but the 1950s cigarette fluid dynamics stays.",
+      "sources": [
+        {
+          "url": "ytsearch40:Mr. Wizard's World full episode",
+          "tier": "legit",
+          "note": "Official Mr. Wizard's World Channel",
+          "titleMatch": "Wizard",
+          "uploaderMatch": "Mr\\.? ?Wizard",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "Mr. Wizard's World"
+        },
+        {
+          "url": "ytsearch40:Watch Mr. Wizard 1950s full episode",
+          "tier": "legit",
+          "note": "Official Mr. Wizard channel · Watch Mr. Wizard (1950s)",
+          "titleMatch": "Wizard",
+          "uploaderMatch": "Mr\\.? ?Wizard",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "Watch Mr. Wizard"
         }
       ]
     }

@@ -46,7 +46,8 @@
     return best;
   }
 
-  // Which daypart is on at second t. Plain dayparts are a hard schedule: the first one covering t wins.
+  // Which daypart is on at second t. Plain dayparts are a hard schedule: the first one covering t whose pool has
+  // anything in it wins (so a show strip can sit above a catch-all block and fall through while its pool is thin).
   // Holiday dayparts are a soft mix: everything whose holiday lies inside the forward window (default 90 days)
   // is in season, weighted toward the nearest, and takes `skew` (default 85%) of the picks; the rest, or the
   // whole channel when nothing is in season, is a random smattering of all of them.
@@ -56,8 +57,9 @@
       if (dp.days && !dp.days.includes(dow)) continue;
       const from = dp.from ? hm(dp.from) : 0, to = dp.to ? hm(dp.to) : DAY;
       if (t < from || t >= to) continue;
-      if (!dp.holiday) return dp;
-      if (catalog.pools[dp.pool] && catalog.pools[dp.pool].length) soft.push(dp);
+      const stocked = catalog.pools[dp.pool] && catalog.pools[dp.pool].length;
+      if (!dp.holiday) { if (stocked) return dp; continue; }   // an empty strip falls through to the next daypart covering t
+      if (stocked) soft.push(dp);
     }
     if (!soft.length) return null;
     const window = num(channel.window, 90);
@@ -231,5 +233,16 @@
     cache.clear();
   }
 
-  window.Sched = { at, programsBetween, dayList, prepare, hash32 };
+  // For the printed listings: which holiday dayparts are in season on a date, nearest first.
+  function inSeason(channel, date) {
+    const window = num(channel.window, 90), out = [];
+    for (const dp of channel.dayparts || []) {
+      if (!dp.holiday) continue;
+      const d = daysUntil(dp.holiday, date);
+      if (d > window || d < -num(dp.linger, 1)) continue;
+      out.push({ dp, d });
+    }
+    return out.sort((a, b) => a.d - b.d).map((x) => x.dp);
+  }
+  window.Sched = { at, programsBetween, dayList, prepare, hash32, inSeason };
 })();

@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=4502800').then(r => r.json()),
-      fetch('data/catalog.json?v=4502800').then(r => r.json())
+      fetch('data/channels.json?v=3023fef').then(r => r.json()),
+      fetch('data/catalog.json?v=3023fef').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -439,9 +439,10 @@
   }
   function hintText() {
     const portraitPhone = window.matchMedia('(max-width: 700px) and (orientation: portrait)').matches;
-    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1. Z zooms to the picture, F for full screen.';
+    hint.textContent = portraitPhone ? 'Turn your phone sideways, then press POWER on the cable box.' : 'Press POWER on the cable box. Punch a channel, or type it. The guide is channel 1. This week\'s listings are in the paper on top of the set. Z zooms to the picture, F for full screen.';
   }
   hintText(); window.addEventListener('resize', hintText);
+  { const line = document.querySelector('.paper-line'); if (line) line.textContent = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()] + "'s listings · page 4"; }
   document.body.classList.add('power-off');
 
   loadData().then(() => {
