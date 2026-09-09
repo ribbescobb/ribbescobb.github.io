@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=d2a2b4d').then(r => r.json()),
-      fetch('data/catalog.json?v=d2a2b4d').then(r => r.json())
+      fetch('data/channels.json?v=7ea4ccb').then(r => r.json()),
+      fetch('data/catalog.json?v=7ea4ccb').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -87,7 +87,27 @@
     o.type = 'square'; o.frequency.value = freq; g.gain.value = 0.03;
     o.connect(g).connect(ac.destination); o.start(); o.stop(ac.currentTime + ms / 1000);
   }
-  function thunk() { beep(140, 60); }
+  // The power switch: a latching plunger, not a beep. Contact tick, the plunger's thump, a little cabinet wood, the latch settling.
+  function click() {
+    if (!ac) return;
+    const t0 = ac.currentTime;
+    const burst = (at, ms, gain, freq, q) => {
+      const len = Math.ceil(ac.sampleRate * ms / 1000), buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+      const src = ac.createBufferSource(); src.buffer = buf;
+      const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = freq; bp.Q.value = q;
+      const g = ac.createGain(); g.gain.setValueAtTime(gain, at); g.gain.exponentialRampToValueAtTime(0.001, at + ms / 1000);
+      src.connect(bp).connect(g).connect(ac.destination); src.start(at); src.stop(at + ms / 1000 + 0.01);
+    };
+    burst(t0, 28, 0.55, 2600, 0.7);           // the contact
+    burst(t0 + 0.004, 70, 0.3, 420, 0.5);     // the cabinet
+    burst(t0 + 0.058, 16, 0.22, 3300, 1.0);   // the latch settling
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(190, t0); o.frequency.exponentialRampToValueAtTime(65, t0 + 0.06);
+    g.gain.setValueAtTime(0.45, t0); g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.09);
+    o.connect(g).connect(ac.destination); o.start(t0); o.stop(t0 + 0.1);
+  }
+  function thunk() { click(); }
 
   // ---------------- seven-segment display ----------------
   const SEG = {
@@ -342,7 +362,7 @@
 
   // ---------------- wiring ----------------
   $('#keys').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) keyPress(b.dataset.key); });
-  $('#power').addEventListener('click', () => { ensureAudio(); beep(700, 60); togglePower(); });
+  $('#power').addEventListener('click', () => { ensureAudio(); togglePower(); });
   $('#zoom').addEventListener('click', () => { ensureAudio(); beep(900, 40); setZoom(!zoomed); });
   $('#unzoom').addEventListener('click', () => setZoom(false));
   $('#zoomControls').addEventListener('click', (e) => { const b = e.target.closest('button[data-key]'); if (b) keyPress(b.dataset.key); });
@@ -402,7 +422,7 @@
   remote.addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.key) keyPress(b.dataset.key);
-    else if (b.dataset.act === 'power') { ensureAudio(); beep(700, 60); togglePower(); }
+    else if (b.dataset.act === 'power') { ensureAudio(); togglePower(); }
     else if (b.dataset.act === 'set' && !document.body.classList.contains('portrait')) { peek = !peek; layoutPhone(); if (power) render(false); }
     if (document.body.classList.contains('landscape')) openRemote(true);   // keep it up while in use
   });
