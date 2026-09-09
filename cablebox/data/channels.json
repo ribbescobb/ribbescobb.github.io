@@ -1,5 +1,5 @@
 {
-  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Only tiers in `include` are built into the catalog. Rebuild with: python3 tools/build_catalog.py Commercials: breakEvery = seconds between breaks on a channel's running clock (900 = every 15 min; 0 = none), breakSeconds = length of one break (60). Regular programs are interrupted and resume; music channels only break between songs. Set both on the lineup or on a channel.",
+  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Only tiers in `include` are built into the catalog. Rebuild with: python3 tools/build_catalog.py Commercials: shows start on the hour or half hour; the padding to the next boundary is commercials, spread as one or two act breaks inside the show (each up to breakSeconds, 150) with the rest after the credits; long broadcasts break about every 15 min. Block (music) channels break every breakEvery seconds between songs. breakEvery 0 on a channel = no commercials.",
   "include": [
     "legit",
     "filler"
@@ -1079,6 +1079,6 @@
       ]
     }
   },
-  "breakSeconds": 60,
+  "breakSeconds": 150,
   "breakEvery": 900
 }

@@ -43,6 +43,21 @@
 
   function num() { for (const v of arguments) if (v != null) return v; return 0; }
 
+  // Among the nearest candidates by hash, the one that wastes the least of its half-hour slot. Deterministic.
+  function pickFitting(items, target, exclude, maxDur) {
+    const cands = [];
+    for (const it of items) {
+      if ((exclude && exclude.has(it.id)) || (maxDur && it.d > maxDur)) continue;
+      cands.push([(it.h - target) >>> 0, it]);
+    }
+    if (!cands.length) return null;
+    cands.sort((a, b) => a[0] - b[0]);
+    const near = cands.slice(0, 6);
+    const pad = (it) => Math.ceil(it.d / HALF) * HALF - it.d;
+    near.sort((a, b) => pad(a[1]) - pad(b[1]) || a[0] - b[0]);
+    return near[0][1];
+  }
+
   function fillBreak(out, from, to, seed, salt, catalog) {
     const fill = catalog.pools[catalog.filler] || [];
     let t = from, j = 0;
@@ -66,7 +81,7 @@
     const seed = hash32(channel.id + '|' + ymd(date));
     const dow = date.getDay();
     const out = [], recent = [];
-    const every = num(channel.breakEvery, catalog.breakEvery, 900), len = num(channel.breakSeconds, catalog.breakSeconds, 60);
+    const every = num(channel.breakEvery, catalog.breakEvery, 900), len = num(channel.breakSeconds, catalog.breakSeconds, 150);
     const ads = every > 0 && len > 0;
     let t = 0, k = 0, lastBreak = 0;
     const due = (now) => ads && now - lastBreak >= every;
@@ -93,21 +108,35 @@
         recent.push(song.id); t = end; k++; continue;
       }
 
-      // A regular program, in segments around the breaks.
+      // A regular program. It starts on the hour or half hour; the padding to the next boundary becomes commercials,
+      // spread as one or two short breaks inside the show (act breaks) with the remainder after the credits.
+      // Long broadcasts (games) break about every 15 minutes instead.
       const ex = new Set(recent.slice(-12));
-      const prog = pick(pool, target, ex, DAY - t) || pick(pool, target, null, DAY - t) || pick(pool, target, ex) || pick(pool, target);
-      const progEnd = Math.min(DAY, t + prog.d), cut = t + prog.d > DAY;
-      let off = 0;
-      while (t < progEnd) {
-        if (due(t)) { t = doBreak(t); if (t >= progEnd) break; }
-        const mark = lastBreak + every;
-        const end = (ads && mark < progEnd - 180) ? mark : progEnd;
-        out.push({ start: t, end, kind: 'program', pid: k, id: prog.id, title: prog.t, series: prog.s || '', off, dur: prog.d, pool: name, label: dp.label, cut });
-        off += end - t; t = end;
+      const prog = pickFitting(pool, target, ex, DAY - t) || pick(pool, target, null, DAY - t) || pick(pool, target, ex) || pick(pool, target);
+      const dur = Math.min(prog.d, DAY - t), cut = prog.d > DAY - t;
+      const slotEnd = Math.min(DAY, Math.ceil((t + dur) / HALF) * HALF);
+      const pad = slotEnd - (t + dur);
+      let n = 0;
+      if (ads && pad >= 90) n = dur > 3600 ? Math.max(1, Math.floor(dur / 900) - 1) : (dur > 1800 ? 2 : 1);
+      let midLen = n ? Math.min(len, Math.floor(pad / (n + 1))) : 0;
+      if (midLen < 45) { n = 0; midLen = 0; }
+      const segs = n + 1;
+      let off = 0, tt = t;
+      for (let i = 0; i < segs; i++) {
+        const segEnd = i === segs - 1 ? dur : Math.round(dur * (i + 1) / segs);
+        out.push({ start: tt, end: tt + (segEnd - off), kind: 'program', pid: k, id: prog.id, title: prog.t, series: prog.s || '', off, dur: prog.d, pool: name, label: dp.label, cut });
+        tt += segEnd - off; off = segEnd;
+        if (i < segs - 1) { fillBreak(out, tt, tt + midLen, seed, k * 1000 + i, catalog); tt += midLen; }
       }
       recent.push(prog.id);
-      if (ads && t < DAY && t - lastBreak >= every * 0.8) t = doBreak(t);   // a natural boundary close to the mark takes the break
-      k++;
+      if (ads && slotEnd - tt >= 360) {
+        // a long gap after the credits: run a classic cartoon short first, then the commercials
+        const shorts = catalog.pools.classics || [];
+        const clip = shorts.length && !dp.block ? pick(shorts, mix(seed, k * 1000 + 77), null, slotEnd - tt - 60) : null;
+        if (clip) { out.push({ start: tt, end: tt + clip.d, kind: 'program', pid: k + 0.5, id: clip.id, title: clip.t, series: '', off: 0, dur: clip.d, pool: 'classics', label: 'Cartoon' }); tt += clip.d; }
+      }
+      if (ads && tt < slotEnd) fillBreak(out, tt, slotEnd, seed, k * 1000 + 99, catalog);
+      t = slotEnd; lastBreak = slotEnd; k++;
     }
     return out;
   }
