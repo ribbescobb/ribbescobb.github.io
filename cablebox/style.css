@@ -109,7 +109,12 @@ body {
 .guide-head .gclock { color: #ffe600; padding-left: 0.6cqw; }
 .guide-head div { padding-left: 0.5cqw; border-left: 0.15cqw solid #1c1cb8; overflow: hidden; white-space: nowrap; }
 .guide-head div:first-child { border-left: 0; }
-.guide-viewport { flex: 1; overflow: hidden; position: relative; }
+.guide-viewport { flex: 1; overflow: hidden; position: relative; --namew: 10.5cqw; --nowx: 0; }
+.guide-viewport::after { /* now */
+  content: ""; position: absolute; top: 0; bottom: 0; width: 0.2cqw; pointer-events: none; z-index: 2;
+  left: calc(var(--namew) + (100% - var(--namew)) * var(--nowx)); background: #ffe600; opacity: .75;
+}
+.glass.guide-only .guide-viewport { --namew: 15cqw; }
 .guide-rows { will-change: transform; }
 .grow { height: 2.75cqw; align-items: stretch; border-top: 0.15cqw solid #2a2acc; }
 .gtl { position: relative; overflow: hidden; background: repeating-linear-gradient(90deg, transparent 0 calc(25% - 0.15cqw), #2a2acc calc(25% - 0.15cqw) 25%); }   /* half-hour lines behind the cells */

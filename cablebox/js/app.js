@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=c2c4531').then(r => r.json()),
-      fetch('data/catalog.json?v=c2c4531').then(r => r.json())
+      fetch('data/channels.json?v=f3a4d56').then(r => r.json()),
+      fetch('data/catalog.json?v=f3a4d56').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -270,7 +270,15 @@
       const list = channels.filter(c => c.kind !== 'guide').sort((a, b) => a.num - b.num);
       let html = '';
       for (const c of list) {
-        const progs = Sched.programsBetween(c, new Date(start * 1000), span, catalog);
+        const raw = Sched.programsBetween(c, new Date(start * 1000), span, catalog);
+        // one cell per program or block: segments of one program (split around breaks), consecutive songs of a
+        // block, and consecutive off-air slots all merge; a commercial break between them is not a gap
+        const progs = [];
+        for (const p of raw) {
+          const last = progs[progs.length - 1];
+          const same = last && ((p.pid != null && p.pid === last.pid) || (p.label && p.label === last.label) || (p.kind === 'off' && last.kind === 'off'));
+          if (same && p.start - last.end <= 120) last.end = p.end; else progs.push({ ...p });
+        }
         let cells = '';
         for (const p of progs) {
           const s0 = Math.max(p.start, start), e0 = Math.min(p.end, start + span);
@@ -296,6 +304,7 @@
       const start = Math.floor(now.getTime() / 1000 / 1800) * 1800;
       if (start !== windowStart || !rows.children.length) build(now);
       const c = head.querySelector('.gclock'); if (c) c.textContent = clock(now);
+      document.querySelector('.guide-viewport').style.setProperty('--nowx', ((now.getTime() / 1000 - windowStart) / 7200).toFixed(4));
       if (!raf) { lastT = performance.now(); raf = requestAnimationFrame(step); }
     }
     function invalidate() { rows.innerHTML = ''; windowStart = 0; }
