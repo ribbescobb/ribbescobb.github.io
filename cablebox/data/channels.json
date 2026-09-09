@@ -450,10 +450,51 @@
       "name": "CARTOONS",
       "dayparts": [
         {
+          "from": "00:00",
+          "to": "09:00",
+          "pool": "toons-saturday",
+          "label": "Saturday Morning",
+          "name": "Saturday Morning"
+        },
+        {
+          "days": [
+            0,
+            6
+          ],
+          "from": "09:00",
+          "to": "12:00",
+          "pool": "toons-saturday",
+          "label": "Saturday Morning",
+          "name": "Saturday Morning"
+        },
+        {
+          "from": "09:00",
+          "to": "18:00",
+          "pool": "toons-syndicated",
+          "label": "After School",
+          "name": "After School"
+        },
+        {
+          "from": "18:00",
+          "to": "21:00",
+          "pool": "toons-saturday",
+          "label": "Saturday Morning",
+          "name": "Saturday Morning"
+        },
+        {
+          "from": "21:00",
+          "to": "24:00",
+          "pool": "toons-syndicated",
+          "label": "After School",
+          "name": "After School"
+        },
+        {
           "pool": "cartoons80",
+          "label": "Cartoons",
           "name": "Cartoons"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 14,
@@ -6528,6 +6569,875 @@
           "maxMinutes": 100,
           "cap": 60,
           "series": "Fantasy Island"
+        }
+      ]
+    },
+    "toons-saturday": {
+      "_note": "The network Saturday-morning core: welcome any day, any time (Chris).",
+      "minMinutes": 10,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "The Smurfs official uploads",
+          "url": "https://www.youtube.com/playlist?list=UUeY4C8Sbx8B4bIyREPSvORQ",
+          "series": "The Smurfs",
+          "limit": 3000,
+          "maxMinutes": 130
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain Kids uploads · The Littles",
+          "url": "https://www.youtube.com/playlist?list=UUbmWOFTbZoDLWqG1rvFnJ0g",
+          "series": "The Littles",
+          "titleMatch": "Littles",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain Hero Tower · Pole Position",
+          "url": "https://www.youtube.com/playlist?list=UUUVnfQaEmCIhFZC5d_JniyQ",
+          "series": "Pole Position",
+          "titleMatch": "Pole Position",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "TMS Official · Galaxy High",
+          "url": "https://www.youtube.com/playlist?list=UUzGf0DdUJVrsbcWL3e_tK1Q",
+          "series": "Galaxy High",
+          "titleMatch": "Galaxy High",
+          "limit": 4000
+        },
+        {
+          "url": "ytsearch40:\"The Berenstain Bears\" full episode",
+          "tier": "legit",
+          "note": "official · The Berenstain Bears (Berenstain)",
+          "titleMatch": "Berenstain",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|2003|2002|Treehouse",
+          "uploaderMatch": "Berenstain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "The Berenstain Bears"
+        },
+        {
+          "url": "ytsearch40:\"Garfield and Friends\" full episode",
+          "tier": "legit",
+          "note": "official · Garfield and Friends (Garfield & Friends)",
+          "titleMatch": "Garfield",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "Garfield & Friends",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Garfield and Friends"
+        },
+        {
+          "url": "ytsearch40:Hulk Hogan's Rock 'n' Wrestling full episode",
+          "tier": "legit",
+          "note": "official · Hulk Hogan's Rock 'n' Wrestling (WWE Vault)",
+          "titleMatch": "Rock ['’‘]?n['’‘]? Wrestling|Rock n Wrestling",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "WWE Vault",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Hulk Hogan's Rock 'n' Wrestling"
+        },
+        {
+          "url": "ytsearch40:\"Captain N: The Game Master\" full episode",
+          "tier": "legit",
+          "note": "official · Captain N: The Game Master (WildBrain)",
+          "titleMatch": "Captain N",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Captain N: The Game Master"
+        },
+        {
+          "url": "ytsearch40:The Legend of Zelda 1989 cartoon full episode",
+          "tier": "legit",
+          "note": "official · The Legend of Zelda (WildBrain)",
+          "titleMatch": "Zelda",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Link|game|Nintendo Switch|Breath|Tears",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "The Legend of Zelda"
+        },
+        {
+          "url": "ytsearch40:Dungeons & Dragons animated series episodes",
+          "tier": "legit",
+          "note": "official · Dungeons & Dragons (^Dungeons & Dragons$)",
+          "titleMatch": "Dungeons",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Honor Among|Baldur|Stranger",
+          "uploaderMatch": "^Dungeons & Dragons$",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Dungeons & Dragons"
+        },
+        {
+          "url": "ytsearch40:\"Dinosaucers\" full episode",
+          "tier": "legit",
+          "note": "official · Dinosaucers (WildBrain)",
+          "titleMatch": "Dinosaucers",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Dinosaucers"
+        },
+        {
+          "url": "ytsearch40:\"Pound Puppies\" full episode",
+          "tier": "legit",
+          "note": "official · Pound Puppies (HasTV)",
+          "titleMatch": "Pound Puppies",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|2010|2011|2012|2013",
+          "uploaderMatch": "HasTV",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Pound Puppies"
+        },
+        {
+          "url": "ytsearch40:\"Scooby-Doo\" full episode",
+          "tier": "legit",
+          "note": "official · Scooby-Doo (WB Kids)",
+          "titleMatch": "Scooby",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Mystery Inc|Guess Who|Pup Named|Be Cool|movie|Velma",
+          "uploaderMatch": "WB Kids",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Scooby-Doo"
+        },
+        {
+          "url": "ytsearch40:\"Fat Albert\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Fat Albert",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fat Albert",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Fat Albert"
+        },
+        {
+          "url": "ytsearch40:\"Kidd Video\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Kidd Video",
+          "requireEmbedCheck": true,
+          "titleMatch": "Kidd Video",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Kidd Video"
+        },
+        {
+          "url": "ytsearch40:\"Snorks\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Snorks",
+          "requireEmbedCheck": true,
+          "titleMatch": "Snorks",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Snorks"
+        },
+        {
+          "url": "ytsearch40:Alvin and the Chipmunks 1983 cartoon full episode",
+          "tier": "wild",
+          "note": "fan · search: Alvin and the Chipmunks",
+          "requireEmbedCheck": true,
+          "titleMatch": "Chipmunks",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|2007|2009|2011|2015|movie|Chipwrecked|Squeakquel|Road Chip",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Alvin and the Chipmunks"
+        },
+        {
+          "url": "ytsearch40:\"Kissyfur\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Kissyfur",
+          "requireEmbedCheck": true,
+          "titleMatch": "Kissyfur",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Kissyfur"
+        },
+        {
+          "url": "ytsearch40:\"The Get Along Gang\" full episode",
+          "tier": "wild",
+          "note": "fan · search: The Get Along Gang",
+          "requireEmbedCheck": true,
+          "titleMatch": "Get Along Gang",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "The Get Along Gang"
+        },
+        {
+          "url": "ytsearch40:\"The Wuzzles\" full episode",
+          "tier": "wild",
+          "note": "fan · search: The Wuzzles",
+          "requireEmbedCheck": true,
+          "titleMatch": "Wuzzles",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "The Wuzzles"
+        },
+        {
+          "url": "ytsearch40:Star Wars Ewoks cartoon 1985 full episode",
+          "tier": "wild",
+          "note": "fan · search: Ewoks",
+          "requireEmbedCheck": true,
+          "titleMatch": "Ewoks",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Return of the Jedi|movie|Battle for Endor|Caravan",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Ewoks"
+        },
+        {
+          "url": "ytsearch40:Star Wars Droids cartoon 1985 full episode",
+          "tier": "wild",
+          "note": "fan · search: Droids",
+          "requireEmbedCheck": true,
+          "titleMatch": "Droids",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|movie|Mandalorian|Andor",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Droids"
+        },
+        {
+          "url": "ytsearch40:\"Thundarr the Barbarian\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Thundarr the Barbarian",
+          "requireEmbedCheck": true,
+          "titleMatch": "Thundarr",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Thundarr the Barbarian"
+        },
+        {
+          "url": "ytsearch40:\"Richie Rich\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Richie Rich",
+          "requireEmbedCheck": true,
+          "titleMatch": "Richie Rich",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|movie|Macaulay|1994",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Richie Rich"
+        },
+        {
+          "url": "ytsearch40:\"Blackstar\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Blackstar",
+          "requireEmbedCheck": true,
+          "titleMatch": "Blackstar",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Bowie|Star Wars|Blackstar Bowie",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Blackstar"
+        },
+        {
+          "url": "ytsearch40:\"Mighty Orbots\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Mighty Orbots",
+          "requireEmbedCheck": true,
+          "titleMatch": "Orbots",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Mighty Orbots"
+        },
+        {
+          "url": "ytsearch40:\"Turbo Teen\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Turbo Teen",
+          "requireEmbedCheck": true,
+          "titleMatch": "Turbo Teen",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Turbo Teen"
+        },
+        {
+          "url": "ytsearch40:\"Sport Billy\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Sport Billy",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sport Billy",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Sport Billy"
+        },
+        {
+          "url": "ytsearch40:\"Lazer Tag Academy\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Lazer Tag Academy",
+          "requireEmbedCheck": true,
+          "titleMatch": "Lazer Tag",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Lazer Tag Academy"
+        },
+        {
+          "url": "ytsearch40:Fraggle Rock animated series 1987 full episode",
+          "tier": "wild",
+          "note": "fan · search: Fraggle Rock: The Animated Series",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fraggle",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Back to the Rock|Apple|2022|puppet",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Fraggle Rock: The Animated Series"
+        },
+        {
+          "url": "ytsearch40:Pac-Man cartoon 1982 Hanna-Barbera full episode",
+          "tier": "wild",
+          "note": "fan · search: Pac-Man",
+          "requireEmbedCheck": true,
+          "titleMatch": "Pac-?Man",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|game|gameplay|arcade|Ghostly Adventures|2013",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Pac-Man"
+        },
+        {
+          "url": "ytsearch40:Dragon's Lair cartoon 1984 full episode",
+          "tier": "wild",
+          "note": "fan · search: Dragon's Lair",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dragon'?s Lair",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|game|gameplay|arcade|laserdisc",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Dragon's Lair"
+        },
+        {
+          "url": "ytsearch40:Saturday Supercade Q*bert full episode",
+          "tier": "wild",
+          "note": "fan · search: Q*bert",
+          "requireEmbedCheck": true,
+          "titleMatch": "Q\\*?bert",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|game|gameplay|arcade",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Q*bert"
+        },
+        {
+          "url": "ytsearch40:Mister T cartoon 1983 full episode",
+          "tier": "wild",
+          "note": "fan · search: Mister T",
+          "requireEmbedCheck": true,
+          "titleMatch": "Mr\\.? T\\b|Mister T",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|A-Team|Rocky|WrestleMania|pity",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Mister T"
+        },
+        {
+          "url": "ytsearch40:It's Punky Brewster cartoon full episode",
+          "tier": "wild",
+          "note": "fan · search: It's Punky Brewster",
+          "requireEmbedCheck": true,
+          "titleMatch": "Punky",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|sitcom|Soleil Moon Frye interview",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "It's Punky Brewster"
+        },
+        {
+          "url": "ytsearch40:\"Shirt Tales\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Shirt Tales",
+          "requireEmbedCheck": true,
+          "titleMatch": "Shirt Tales",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Shirt Tales"
+        }
+      ]
+    },
+    "toons-syndicated": {
+      "_note": "The weekday-afternoon syndication core.",
+      "minMinutes": 10,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Hasbro Pulse uploads · Transformers",
+          "url": "https://www.youtube.com/playlist?list=UUGVfFNdHrF0sfI9S4MNdaqA",
+          "series": "Transformers",
+          "titleMatch": "Transformers: Generation 1",
+          "limit": 4000,
+          "titleExclude": "Compilation|Interview|Fanstream|SDCC|Panel|Trailer",
+          "maxMinutes": 30
+        },
+        {
+          "tier": "legit",
+          "note": "Hasbro uploads · G.I. Joe",
+          "url": "https://www.youtube.com/playlist?list=UU-r13SLLdZtZNmuC2bMnlmw",
+          "series": "G.I. Joe",
+          "titleMatch": "G\\.?\\s?I\\.? Joe",
+          "limit": 4000,
+          "titleExclude": "Compilation|Marathon|Trailer|Interview"
+        },
+        {
+          "tier": "legit",
+          "note": "Paramount/Nick · TMNT channel · 1987 series",
+          "url": "https://www.youtube.com/playlist?list=UUTsgmnXbWotzbR36vU0YPrA",
+          "series": "Teenage Mutant Ninja Turtles",
+          "titleMatch": "1987|Classic|Original",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Netflix Family uploads · He-Man",
+          "url": "https://www.youtube.com/playlist?list=UUpInjhuJ1WUekcFeXPPyGGg",
+          "series": "He-Man",
+          "titleMatch": "He-Man",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Warner · GenWB uploads · Thundercats",
+          "url": "https://www.youtube.com/playlist?list=UUzWxR7srCLRQLTr1CaLStig",
+          "series": "Thundercats",
+          "titleMatch": "Thundercats",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · Inspector Gadget",
+          "url": "https://www.youtube.com/playlist?list=UUI-lg_sDdzBtYKVpebqasIA",
+          "series": "Inspector Gadget",
+          "titleMatch": "Inspector Gadget \\d{3}|CLASSIC CARTOON|Classic Cartoons|Season (One|Two)",
+          "titleExclude": "2\\.0|NEW SE|Compilation|Marathon",
+          "maxMinutes": 30
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · Super Mario Bros. Super Show",
+          "url": "https://www.youtube.com/playlist?list=UU3aPz2krwDUTks-8MS_WQnQ",
+          "series": "Super Mario Bros. Super Show",
+          "limit": 3000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · C.O.P.S.",
+          "url": "https://www.youtube.com/playlist?list=UUBtokVFJmNVQFv65TZ4w1KQ",
+          "series": "C.O.P.S.",
+          "titleMatch": "C\\.?O\\.?P\\.?S",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · Beverly Hills Teens",
+          "url": "https://www.youtube.com/playlist?list=UUM6iX7XsCb7hvZIZ2ryq58g",
+          "series": "Beverly Hills Teens"
+        },
+        {
+          "tier": "legit",
+          "note": "Mattel · Masters of the Universe channel · He-Man classic episodes",
+          "url": "https://www.youtube.com/playlist?list=UUWV0Qgo4Yz7E5_oNF4VJ6Rg",
+          "titleMatch": "^He-Man Official \\|",
+          "limit": 3000,
+          "series": "He-Man",
+          "titleExclude": "Compilation|Help Their|How He-Man|Special|Marathon|Best",
+          "maxMinutes": 26
+        },
+        {
+          "tier": "legit",
+          "note": "Mattel · Masters of the Universe channel · She-Ra classic episodes",
+          "url": "https://www.youtube.com/playlist?list=UUWV0Qgo4Yz7E5_oNF4VJ6Rg",
+          "titleMatch": "She-Ra Princess of Power",
+          "limit": 3000,
+          "series": "She-Ra: Princess of Power",
+          "titleExclude": "Compilation|Special|Marathon|Best|Help Their",
+          "maxMinutes": 26
+        },
+        {
+          "url": "ytsearch40:\"Jem\" full episode",
+          "tier": "legit",
+          "note": "official · Jem (HasTV)",
+          "titleMatch": "\\bJem\\b",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Truly Outrageous movie|2015",
+          "uploaderMatch": "HasTV",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Jem"
+        },
+        {
+          "url": "ytsearch40:\"Rainbow Brite\" full episode",
+          "tier": "legit",
+          "note": "official · Rainbow Brite (^Rainbow Brite)",
+          "titleMatch": "Rainbow Brite",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|2014",
+          "uploaderMatch": "^Rainbow Brite",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Rainbow Brite"
+        },
+        {
+          "url": "ytsearch40:\"Strawberry Shortcake\" full episode",
+          "tier": "legit",
+          "note": "official · Strawberry Shortcake (WildBrain)",
+          "titleMatch": "Strawberry Shortcake",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Berry Bitty|2009|2010|Berry in the Big City",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Strawberry Shortcake"
+        },
+        {
+          "url": "ytsearch40:My Little Pony 'n Friends 1986 full episode",
+          "tier": "legit",
+          "note": "official · My Little Pony 'n Friends (My Little Pony)",
+          "titleMatch": "My Little Pony",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Friendship is Magic|Equestria|G4|G5|Pony Life|Tell Your Tale",
+          "uploaderMatch": "My Little Pony",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "My Little Pony 'n Friends"
+        },
+        {
+          "url": "ytsearch40:\"Dennis the Menace\" full episode",
+          "tier": "legit",
+          "note": "official · Dennis the Menace (WildBrain)",
+          "titleMatch": "Dennis",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|1993|Mr. Wilson movie",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Dennis the Menace"
+        },
+        {
+          "url": "ytsearch40:\"Heathcliff\" full episode",
+          "tier": "legit",
+          "note": "official · Heathcliff (WildBrain)",
+          "titleMatch": "Heathcliff",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Heathcliff"
+        },
+        {
+          "url": "ytsearch40:\"Starcom: The U.S. Space Force\" full episode",
+          "tier": "legit",
+          "note": "official · Starcom: The U.S. Space Force (WildBrain)",
+          "titleMatch": "Starcom",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "WildBrain",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Starcom: The U.S. Space Force"
+        },
+        {
+          "url": "ytsearch40:\"Denver, the Last Dinosaur\" full episode",
+          "tier": "legit",
+          "note": "official · Denver, the Last Dinosaur (Denver the Last Dinosaur)",
+          "titleMatch": "Denver",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "Denver the Last Dinosaur",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Denver, the Last Dinosaur"
+        },
+        {
+          "url": "ytsearch40:\"Defenders of the Earth\" full episode",
+          "tier": "legit",
+          "note": "official · Defenders of the Earth (Comics Kingdom)",
+          "titleMatch": "Defenders",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "Comics Kingdom",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Defenders of the Earth"
+        },
+        {
+          "url": "ytsearch40:\"The Raccoons\" full episode",
+          "tier": "legit",
+          "note": "official · The Raccoons (^The Raccoons$)",
+          "titleMatch": "Raccoons",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "uploaderMatch": "^The Raccoons$",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "The Raccoons"
+        },
+        {
+          "url": "ytsearch40:\"Care Bears\" full episode",
+          "tier": "legit",
+          "note": "official · Care Bears (^Care Bears$)",
+          "titleMatch": "Care Bears",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Unlock|Adventures in Care-a-Lot|2007|2019|2020|Welcome to Care-a-Lot|movie",
+          "uploaderMatch": "^Care Bears$",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 80,
+          "series": "Care Bears"
+        },
+        {
+          "url": "ytsearch40:\"Voltron\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Voltron",
+          "requireEmbedCheck": true,
+          "titleMatch": "Voltron",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Legendary|Netflix|Third Dimension|Force|Vehicle Voltron review",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Voltron"
+        },
+        {
+          "url": "ytsearch40:M.A.S.K. cartoon 1985 full episode",
+          "tier": "wild",
+          "note": "fan · search: M.A.S.K.",
+          "requireEmbedCheck": true,
+          "titleMatch": "M\\.A\\.S\\.K|MASK",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Jim Carrey|movie|face mask|Mask Singer",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "M.A.S.K."
+        },
+        {
+          "url": "ytsearch40:\"SilverHawks\" full episode",
+          "tier": "wild",
+          "note": "fan · search: SilverHawks",
+          "requireEmbedCheck": true,
+          "titleMatch": "Silver ?Hawks",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "SilverHawks"
+        },
+        {
+          "url": "ytsearch40:\"BraveStarr\" full episode",
+          "tier": "wild",
+          "note": "fan · search: BraveStarr",
+          "requireEmbedCheck": true,
+          "titleMatch": "BraveStarr|Bravestarr",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "BraveStarr"
+        },
+        {
+          "url": "ytsearch40:Centurions cartoon 1986 full episode",
+          "tier": "wild",
+          "note": "fan · search: The Centurions",
+          "requireEmbedCheck": true,
+          "titleMatch": "Centurions",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Rome|Roman|legion",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "The Centurions"
+        },
+        {
+          "url": "ytsearch40:\"Bionic Six\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Bionic Six",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bionic Six",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Bionic Six"
+        },
+        {
+          "url": "ytsearch40:\"Visionaries\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Visionaries",
+          "requireEmbedCheck": true,
+          "titleMatch": "Visionaries",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|church|conference",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Visionaries"
+        },
+        {
+          "url": "ytsearch40:\"Jayce and the Wheeled Warriors\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Jayce and the Wheeled Warriors",
+          "requireEmbedCheck": true,
+          "titleMatch": "Jayce",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Jayce and the Wheeled Warriors"
+        },
+        {
+          "url": "ytsearch40:\"The Real Ghostbusters\" full episode",
+          "tier": "wild",
+          "note": "fan · search: The Real Ghostbusters",
+          "requireEmbedCheck": true,
+          "titleMatch": "Real Ghostbusters",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|movie|Extreme|Afterlife|Frozen Empire",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "The Real Ghostbusters"
+        },
+        {
+          "url": "ytsearch40:Filmation's Ghostbusters 1986 full episode",
+          "tier": "wild",
+          "note": "fan · search: Filmation's Ghostbusters",
+          "requireEmbedCheck": true,
+          "titleMatch": "Ghostbusters",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|Real Ghostbusters|movie|Extreme|Afterlife|Frozen Empire",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Filmation's Ghostbusters"
+        },
+        {
+          "url": "ytsearch40:\"Spiral Zone\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Spiral Zone",
+          "requireEmbedCheck": true,
+          "titleMatch": "Spiral Zone",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Spiral Zone"
+        },
+        {
+          "url": "ytsearch40:\"Sectaurs\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Sectaurs",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sectaurs",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Sectaurs"
+        },
+        {
+          "url": "ytsearch40:\"Inhumanoids\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Inhumanoids",
+          "requireEmbedCheck": true,
+          "titleMatch": "Inhumanoids",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Inhumanoids"
+        },
+        {
+          "url": "ytsearch40:\"Sky Commanders\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Sky Commanders",
+          "requireEmbedCheck": true,
+          "titleMatch": "Sky Commanders",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Sky Commanders"
+        },
+        {
+          "url": "ytsearch40:Rambo The Force of Freedom cartoon full episode",
+          "tier": "wild",
+          "note": "fan · search: Rambo: The Force of Freedom",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rambo",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|movie|Stallone|First Blood|Last Blood",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Rambo: The Force of Freedom"
+        },
+        {
+          "url": "ytsearch40:\"Chuck Norris: Karate Kommandos\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Chuck Norris: Karate Kommandos",
+          "requireEmbedCheck": true,
+          "titleMatch": "Karate Kommandos",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Chuck Norris: Karate Kommandos"
+        },
+        {
+          "url": "ytsearch40:\"Popples\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Popples",
+          "requireEmbedCheck": true,
+          "titleMatch": "Popples",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|2015|Netflix",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Popples"
+        },
+        {
+          "url": "ytsearch40:\"Teddy Ruxpin\" full episode",
+          "tier": "wild",
+          "note": "fan · search: Teddy Ruxpin",
+          "requireEmbedCheck": true,
+          "titleMatch": "Teddy Ruxpin",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|screen bites|timeline|moments|hilarious|\\bchaos\\b|toy|unboxing|history of|rise and fall|entire story|\\bquiz\\b|lost media|opening|closing|credits|unboxing|repair|toy",
+          "minMinutes": 10,
+          "maxMinutes": 60,
+          "cap": 50,
+          "series": "Teddy Ruxpin"
         }
       ]
     }

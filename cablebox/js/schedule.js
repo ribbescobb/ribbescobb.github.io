@@ -80,7 +80,7 @@
 
   // Consistent hashing: the candidate whose id-hash sits nearest above the slot's target.
   // Dropping one video from a pool only disturbs the slots that would have picked it.
-  function pick(items, target, exclude, maxDur) {
+  function pickFrom(items, target, exclude, maxDur) {
     let best = null, bestD = Infinity;
     for (const it of items) {
       if ((exclude && exclude.has(it.id)) || (maxDur && it.d > maxDur)) continue;
@@ -89,11 +89,33 @@
     }
     return best;
   }
+  // Series balance: a pool with several shows picks the show first (a show's share of the ring goes by the square root
+  // of its episode count, so 437 Gadgets no longer drown 13 Galaxy Highs), then the episode within it.
+  // Walk the ring from the ticket nearest above the target; a show with nothing eligible (all of it recently aired,
+  // or too long for the slot) hands the slot to the next show on the ring, not back to the whole pool.
+  function bySeries(items, target, exclude, maxDur, choose) {
+    const tk = items.tickets; if (!tk) return null;
+    let i = 0, bestD = Infinity;
+    for (let j = 0; j < tk.length; j++) { const d = (tk[j].h - target) >>> 0; if (d < bestD) { bestD = d; i = j; } }
+    const tried = new Set();
+    for (let n = 0; n < tk.length && tried.size < items.groups.size; n++) {
+      const t = tk[(i + n) % tk.length]; if (tried.has(t.s)) continue; tried.add(t.s);
+      const r = choose(items.groups.get(t.s), mix(target, 5 + tried.size), exclude, maxDur);
+      if (r) return r;
+    }
+    return null;
+  }
+  function pick(items, target, exclude, maxDur) {
+    return bySeries(items, target, exclude, maxDur, pickFrom) || pickFrom(items, target, exclude, maxDur);
+  }
 
   function num() { for (const v of arguments) if (v != null) return v; return 0; }
 
   // Among the nearest candidates by hash, the one that wastes the least of its half-hour slot. Deterministic.
   function pickFitting(items, target, exclude, maxDur) {
+    return bySeries(items, target, exclude, maxDur, fittingFrom) || fittingFrom(items, target, exclude, maxDur);
+  }
+  function fittingFrom(items, target, exclude, maxDur) {
     const cands = [];
     for (const it of items) {
       if ((exclude && exclude.has(it.id)) || (maxDur && it.d > maxDur)) continue;
@@ -233,7 +255,17 @@
   function prepare(catalog, filler, breakSeconds, breakEvery) {
     catalog.filler = catalog.filler || filler || 'commercials';
     catalog.breakSeconds = breakSeconds; catalog.breakEvery = breakEvery;
-    for (const name in catalog.pools) for (const it of catalog.pools[name]) it.h = hash32(it.id);
+    for (const name in catalog.pools) {
+      const pool = catalog.pools[name], groups = new Map();
+      for (const it of pool) { it.h = hash32(it.id); const key = it.s || ''; if (!groups.has(key)) groups.set(key, []); groups.get(key).push(it); }
+      pool.groups = null; pool.tickets = null;
+      if (groups.size >= 2) {
+        const tickets = [];
+        for (const [key, list] of groups) { const k = Math.max(1, Math.round(Math.sqrt(list.length))); const base = hash32(key); for (let j = 0; j < k; j++) tickets.push({ h: mix(base, j), s: key }); }   // mix(): FNV of near-identical strings clusters on the ring
+        tickets.sort((a, b) => a.h - b.h);
+        pool.groups = groups; pool.tickets = tickets;
+      }
+    }
     cache.clear();
   }
 
