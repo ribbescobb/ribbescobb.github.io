@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=23bd22a').then(r => r.json()),
-      fetch('data/catalog.json?v=23bd22a').then(r => r.json())
+      fetch('data/channels.json?v=fd5accc').then(r => r.json()),
+      fetch('data/catalog.json?v=fd5accc').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -284,7 +284,7 @@
         for (const p of raw) {
           const last = progs[progs.length - 1];
           const same = last && ((p.pid != null && p.pid === last.pid) || (p.label && p.label === last.label) || (p.kind === 'off' && last.kind === 'off'));
-          if (same && p.start - last.end <= 120) last.end = p.end; else progs.push({ ...p });
+          if (same && p.start - last.end <= 300) last.end = p.end; else progs.push({ ...p });   // an act break is not a gap
         }
         let cells = '';
         for (const p of progs) {

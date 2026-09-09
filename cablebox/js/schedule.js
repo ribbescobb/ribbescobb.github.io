@@ -85,7 +85,7 @@
     const ads = every > 0 && len > 0;
     let t = 0, k = 0, lastBreak = 0;
     const due = (now) => ads && now - lastBreak >= every;
-    const doBreak = (from) => { const to = Math.min(DAY, from + len); fillBreak(out, from, to, seed, k * 1000 + out.length, catalog); lastBreak = to; return to; };
+    const doBreak = (from, length) => { const to = Math.min(DAY, from + (length || len)); fillBreak(out, from, to, seed, k * 1000 + out.length, catalog); lastBreak = to; return to; };
 
     while (t < DAY) {
       const dp = daypartAt(channel, dow, t);
@@ -100,7 +100,7 @@
 
       if (dp.block) {
         // Music television: songs back to back, a break only at a song boundary once the clock is due.
-        if (due(t)) { t = doBreak(t); k++; continue; }
+        if (due(t)) { t = doBreak(t, 90); k++; continue; }   // between songs: one or two spots, not an act break
         const win = Math.min(40, pool.length - 1), ex = new Set(recent.slice(-win));
         const song = pick(pool, target, ex, DAY - t) || pick(pool, target, null, DAY - t) || pick(pool, target, ex) || pick(pool, target);
         const end = Math.min(DAY, t + song.d);
