@@ -17,7 +17,7 @@
   const FORMS = ['Emmanuelle in {c}', 'Emmanuelle Goes to {c}', 'Emmanuelle: {c} Nights', 'Emmanuelle IV: Escape to {c}', 'Emmanuelle in {c}, Part II',
     'Emmanuelle: The {c} Affair', 'Emmanuelle Takes {c}', 'Emmanuelle: One Night in {c}'];
 
-  // The other half of the premium schedule: "[Adjective] [Profession] Pillow Fight: Part 43" (Chris).
+  // The other half of the premium schedule: "Silly Optometrist: 43" and "Librarian Pillow Fight: 52" (Chris).
   const ADJ = ['Silly', 'Sultry', 'Naughty', 'Bashful', 'Tipsy', 'Sleepy', 'Moody', 'Nervous', 'Bossy', 'Cranky', 'Clumsy', 'Giggly',
     'Frisky', 'Grumpy', 'Dizzy', 'Sassy', 'Sneaky', 'Sweaty', 'Restless', 'Chatty', 'Lonely', 'Reckless', 'Curious', 'Barefoot',
     'Overworked', 'Suburban', 'Married', 'Divorced', 'Part-Time', 'Unlicensed', 'Undercover', 'Rowdy', 'Steamy', 'Shameless', 'Blushing', 'Wicked'];
@@ -27,9 +27,9 @@
     'Beautician', 'Data Entry Clerk', 'Physical Therapist', 'Insurance Agent', 'Auditor', 'Shift Supervisor', 'Toll Collector', 'Weather Girl',
     'Piano Teacher', 'Lifeguard', 'Aerobics Instructor', 'Receptionist', 'Nurse', 'Secretary', 'Stewardess', 'Cheerleader', 'Babysitter', 'Coed'];
   const FIGHT = ['Pillow Fight', 'Tickle Fight'];
-  function fight(i) {   // deterministic: same title for the same index, everywhere
+  function fight(i) {   // deterministic: same title for the same index, everywhere. Two short forms, alternating (marquee-length matters).
     const a = ADJ[(i * 7) % ADJ.length], p = PROF[(i * 11 + 3) % PROF.length], f = FIGHT[(i * 5 + (i >> 3)) % FIGHT.length], n = 2 + ((i * 37 + 13) % 98);
-    return a + ' ' + p + ' ' + f + ': Part ' + n;
+    return (i % 2 ? p + ' ' + f : a + ' ' + p) + ': ' + n;
   }
 
   // A deterministic pool of feature-length "movies" for the scheduler. Same list for everyone, forever.
