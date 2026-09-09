@@ -156,6 +156,16 @@ body.power-off .cb-power { animation: beckon 2.2s ease-in-out infinite; }
 .seg polygon { fill: transparent; }                      /* the photo already has the dark unlit segments */
 .seg polygon.on { fill: #ff3419; filter: drop-shadow(0 0 0.28cqw rgba(255,60,30,.9)); }
 body.power-off .seg polygon.on { fill: transparent; filter: none; }
+/* The readout: a 14-segment marquee in a dark window over the box's flat panel, right of the keypad */
+.cb-marquee {
+  position: absolute; left: 71.6%; top: 31.2%; width: 25.6%; height: 43%; border-radius: 0.3cqw; background: #070000;
+  border: 0.22cqw solid #0a0a0b; box-shadow: inset 0 0 1.2cqw #000, 0 0 0 0.12cqw #2a2a2e;
+  display: flex; align-items: center; justify-content: center; gap: 0.12cqw; padding: 0 0.35cqw; pointer-events: none;
+}
+.mq { height: 56%; width: auto; flex: none; }
+.mq polygon { fill: #2b0906; }
+.mq polygon.on { fill: #ff3419; filter: drop-shadow(0 0 0.22cqw rgba(255,60,30,.9)); }
+body.power-off .mq polygon.on { fill: #2b0906; filter: none; }
 .cb-keys .hit { left: calc(39.05% + var(--c) * 7.643%); top: calc(31.82% + var(--r) * 14.665%); width: 7.08%; height: 12.34%; }
 
 /* ---------------- The set (photograph + our overlays) ---------------- */
@@ -208,8 +218,21 @@ body.phone .zoom-controls, body.phone .hint { display: none; }
   background: linear-gradient(#27272c, #121215); box-shadow: 0 -6px 18px rgba(0,0,0,.6);
 }
 body.phone.portrait .remote { display: flex; }
-body.phone.landscape .remote.open { display: flex; flex-direction: row; align-items: center; gap: 10px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
+body.phone.landscape .remote.open {
+  display: grid; grid-template-columns: auto 1fr; grid-template-areas: "mq mq" "top grid"; align-items: center; gap: 8px 10px;
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+}
+body.phone.landscape .rm-marquee { grid-area: mq; height: 38px; }
+body.phone.landscape .rm-marquee .mq { height: 26px; }
+body.phone.landscape .rm-top { grid-area: top; }
+body.phone.landscape .rm-grid { grid-area: grid; }
 .rm-top { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 10px; }
+.rm-marquee {
+  height: 46px; border-radius: 6px; background: #070000; border: 3px solid #0a0a0b; box-shadow: inset 0 0 12px #000, 0 0 0 1px #2a2a2e;
+  display: flex; align-items: center; justify-content: center; gap: 2px; padding: 0 8px;
+}
+.rm-marquee .mq { height: 30px; }
+.rm-marquee .mq polygon.on { filter: drop-shadow(0 0 3px rgba(255,60,30,.9)); }
 body.phone.landscape .rm-top { grid-template-columns: auto auto auto; flex: none; }
 .rm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 body.phone.landscape .rm-grid {

@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=fd5accc').then(r => r.json()),
-      fetch('data/catalog.json?v=fd5accc').then(r => r.json())
+      fetch('data/channels.json?v=c141cd8').then(r => r.json()),
+      fetch('data/catalog.json?v=c141cd8').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -96,6 +96,27 @@
     g: '10,34 34,34 38,38 34,42 10,42 6,38'
   };
   const DIGIT = { '0': 'abcdef', '1': 'bc', '2': 'abged', '3': 'abgcd', '4': 'fgbc', '5': 'afgcd', '6': 'afgedc', '7': 'abc', '8': 'abcdefg', '9': 'abcdfg', '-': 'g', ' ': '' };
+  // the readouts: what's on, spelled out, stepping every half second
+  const marquees = [Marquee.make($('#boxMarquee'), 12), Marquee.make($('#remoteMarquee'), 16)];
+  const setMarquee = (t) => marquees.forEach(m => m.set(t));
+  const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  function marqueeText(channel, entry) {
+    if (!power) return '';
+    if (!channel) return 'NO SIGNAL';
+    if (channel.kind === 'guide') return 'PREVUE GUIDE';
+    if (channel.kind === 'scrambled') return 'PREMIUM - SCRAMBLED SIGNAL';
+    if (!entry || entry.kind === 'off') return 'OFF AIR';
+    if (entry.kind === 'break') return channel.name;
+    if (entry.a || entry.n) return [entry.a, entry.n].filter(Boolean).join(' - ');
+    let t = entry.title || '';
+    if (entry.series) {
+      t = t.replace(new RegExp(escRe(entry.series), 'i'), '').replace(/^[\s|:\-–]+|[\s|:\-–]+$/g, '');
+      return entry.series + (t ? ' - ' + t : '');
+    }
+    return t;
+  }
+  window.Marquees = marquees;
+
   const displays = [...document.querySelectorAll('.cb-display, .rm-display')].map(d => [...d.querySelectorAll('svg.seg')]);
   displays.flat().forEach(svg => {
     svg.setAttribute('viewBox', '0 0 44 76');
@@ -173,7 +194,7 @@
   function render(force) {
     if (!power) return;
     const channel = byNum.get(ch);
-    if (!channel) { if (!glass.classList.contains('snow')) setGlass('snow'); Player.stop(); current = null; glass.classList.remove('guide-mode'); return; }
+    if (!channel) { if (!glass.classList.contains('snow')) setGlass('snow'); Player.stop(); current = null; setMarquee('NO SIGNAL'); glass.classList.remove('guide-mode'); return; }
     const now = new Date();
     const { entry, elapsed, dayStart } = Sched.at(channel, now, catalog);
     const key = channel.id + ':' + dayStart.getTime() + ':' + entry.start;
@@ -183,10 +204,11 @@
     glass.classList.toggle('guide-only', guideOnly);
     if (isGuide) Guide.tick(now);
     if (guideOnly !== lastGuideOnly) { lastGuideOnly = guideOnly; force = true; }
-    if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); return; }
-    if (channel.kind === 'scrambled') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('scramble')) setGlass('scramble'); return; }
+    if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); setMarquee(marqueeText(channel, entry)); return; }
+    if (channel.kind === 'scrambled') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('scramble')) setGlass('scramble'); setMarquee(marqueeText(channel, entry)); return; }
 
     updateCaption(entry, elapsed);
+    setMarquee(marqueeText(channel, entry));
     if (!force && current && current.key === key) {
       if (current.mode !== 'tail') Player.correct(expectedOffset(entry, elapsed));
       // No picture for 20s after asking for one: stand by rather than stare at a dead tube.
@@ -255,7 +277,7 @@
   }
   function powerOff() {
     if (!power) return;
-    power = false; thunk(); Player.stop(); current = null; clearTimeout(snowTimer); document.body.classList.add('power-off');
+    power = false; thunk(); Player.stop(); current = null; clearTimeout(snowTimer); document.body.classList.add('power-off'); setMarquee('');
     glass.classList.remove('guide-mode', 'guide-only'); setGlass('cooling'); hint.classList.remove('hidden');
     setTimeout(() => { if (!power) setGlass('off'); }, 950);
   }

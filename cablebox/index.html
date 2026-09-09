@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=fd5accc">
+<link rel="stylesheet" href="style.css?v=c141cd8">
 </head>
 <body>
 <div class="room">
@@ -31,6 +31,7 @@
         <svg class="seg" id="seg0" viewBox="0 0 44 76" aria-hidden="true"></svg>
         <svg class="seg" id="seg1" viewBox="0 0 44 76" aria-hidden="true"></svg>
       </div>
+      <div class="cb-marquee" id="boxMarquee" aria-label="now playing"></div>
       <div class="cb-keys" id="keys">
         <button class="hit" data-key="1" style="--c:0;--r:0" aria-label="1, Guide">1</button><button class="hit" data-key="2" style="--c:1;--r:0">2</button><button class="hit" data-key="3" style="--c:2;--r:0">3</button><button class="hit" data-key="up" style="--c:3;--r:0" aria-label="Channel up">CH up</button>
         <button class="hit" data-key="4" style="--c:0;--r:1">4</button><button class="hit" data-key="5" style="--c:1;--r:1">5</button><button class="hit" data-key="6" style="--c:2;--r:1">6</button><button class="hit" data-key="down" style="--c:3;--r:1" aria-label="Channel down">CH down</button>
@@ -74,6 +75,7 @@
         <div class="rm-display" aria-label="channel display"><svg class="seg" viewBox="0 0 44 76" aria-hidden="true"></svg><svg class="seg" viewBox="0 0 44 76" aria-hidden="true"></svg></div>
         <button class="rm-key rm-set" data-act="set" aria-label="Show the whole set">SET</button>
       </div>
+      <div class="rm-marquee" id="remoteMarquee" aria-label="now playing"></div>
       <div class="rm-grid">
         <button class="rm-key" data-key="1"><span>1</span><small>GUIDE</small></button><button class="rm-key" data-key="2">2</button><button class="rm-key" data-key="3">3</button>
         <button class="rm-key" data-key="4">4</button><button class="rm-key" data-key="5">5</button><button class="rm-key" data-key="6">6</button>
@@ -89,9 +91,10 @@
     <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
   </div>
 </div>
-<script src="js/schedule.js?v=fd5accc"></script>
-<script src="js/player.js?v=fd5accc"></script>
-<script src="js/scramble.js?v=fd5accc"></script>
-<script src="js/app.js?v=fd5accc"></script>
+<script src="js/schedule.js?v=c141cd8"></script>
+<script src="js/player.js?v=c141cd8"></script>
+<script src="js/scramble.js?v=c141cd8"></script>
+<script src="js/marquee.js?v=c141cd8"></script>
+<script src="js/app.js?v=c141cd8"></script>
 </body>
 </html>
