@@ -145,6 +145,16 @@ body {
 .paper-line { display: block; font: 600 .62cqw/1.3 "Poppins", Arial, sans-serif; margin-top: .22cqw; opacity: .8; letter-spacing: .02cqw; }
 .paper:hover { transform: rotate(-3deg) skewX(-6deg) translateY(-.15cqw); }
 .paper:focus-visible { outline: .2cqw solid #ffd86a; }
+.paper-under { display: none; }
+body.phone.portrait.has-paper .paper-under { /* the folded section the remote is lying on; only the masthead shows */
+  display: flex; flex-direction: column; justify-content: flex-start; position: fixed; left: 3%; right: 3%; bottom: 0; height: 120px; z-index: 4; box-sizing: border-box; padding: 66px 16px calc(9px + env(safe-area-inset-bottom)) 18px;
+  background: linear-gradient(175deg, #ded6c0 0%, #cfc6ad 55%, #b9b097 100%); color: #1a1512; text-decoration: none; overflow: hidden;
+  transform: rotate(-1.6deg); transform-origin: 50% 100%; border-radius: 2px; box-shadow: 0 -2px 10px rgba(0,0,0,.5), inset 0 2px 0 rgba(255,255,255,.35);
+}
+body.phone.portrait.has-paper .paper-under::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(0,0,0,.08) 3px 4px); mix-blend-mode: multiply; pointer-events: none; }
+.paper-under .paper-mast { font-size: 20px; letter-spacing: 1px; padding: 2px 6px; }
+.paper-under .paper-line { font-size: 10px; margin-top: 4px; letter-spacing: .3px; }
+body.phone.portrait .remote { bottom: auto; z-index: 5; }   /* the handset ends at its keypad and lies on top of the paper */
 .box-photo { display: block; width: 100%; height: auto; filter: drop-shadow(0 0.6cqw 1cqw rgba(0,0,0,.5)); }
 .hit { position: absolute; border: 0; padding: 0; background: transparent; color: transparent; font-size: 0; cursor: pointer; border-radius: 0.3cqw; outline: 0; }
 .hit:focus-visible { box-shadow: 0 0 0 0.2cqw #ffd86a; }

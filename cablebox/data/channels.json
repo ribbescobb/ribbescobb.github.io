@@ -360,7 +360,7 @@
     {
       "num": 11,
       "id": "pbs",
-      "name": "PBS KIDS",
+      "name": "KIDS",
       "dayparts": [
         {
           "from": "06:00",
@@ -408,13 +408,13 @@
           "from": "06:00",
           "to": "18:00",
           "pool": "kids",
-          "name": "PBS Kids"
+          "name": "Kids"
         },
         {
           "from": "18:00",
           "to": "24:00",
           "pool": "pbs-evening",
-          "name": "PBS Evening"
+          "name": "Evening"
         }
       ],
       "wild": true

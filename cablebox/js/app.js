@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=3023fef').then(r => r.json()),
-      fetch('data/catalog.json?v=3023fef').then(r => r.json())
+      fetch('data/channels.json?v=d2a2b4d').then(r => r.json()),
+      fetch('data/catalog.json?v=d2a2b4d').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -383,8 +383,17 @@
     scene.style.left = ((vw - g.width) / 2 - g.left) + 'px';
     if (portrait) { scene.style.top = (st + bez - g.top) + 'px'; remote.style.top = (st + g.height + 2 * bez) + 'px'; }
     else { scene.style.top = ((vh - g.height) / 2 - g.top) + 'px'; remote.style.top = ''; }
+    // the paper under the remote needs its masthead to show: hide it when the keypad runs to the bottom of the screen
+    const gap = portrait ? vh - remote.getBoundingClientRect().bottom : 0;
+    document.body.classList.toggle('has-paper', portrait && gap >= 46);
+    const under = $('#paperUnder'); if (under) { under.style.height = (Math.max(46, gap) + 60) + 'px'; under.style.paddingTop = '66px'; }   // 60px tucked under the handset, masthead just below its edge
     return true;
   }
+  // On phones and in the home-screen app the listings open in place (a new tab would leave the app); on a desk, a new tab.
+  const standalone = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  document.querySelectorAll('.paper, .paper-under').forEach((a) => a.addEventListener('click', (e) => {
+    if (phone || standalone()) { e.preventDefault(); location.href = a.getAttribute('href'); }
+  }));
   function openRemote(on) {
     remote.classList.toggle('open', on); clearTimeout(remoteTimer);
     if (on && document.body.classList.contains('landscape')) remoteTimer = setTimeout(() => remote.classList.remove('open'), 6000);
