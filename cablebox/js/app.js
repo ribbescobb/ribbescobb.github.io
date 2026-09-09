@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=a91b3cf').then(r => r.json()),
-      fetch('data/catalog.json?v=a91b3cf').then(r => r.json())
+      fetch('data/channels.json?v=71bdf5b').then(r => r.json()),
+      fetch('data/catalog.json?v=71bdf5b').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -372,6 +372,7 @@
     if (!phone) { document.body.classList.remove('portrait', 'landscape'); remote.classList.remove('open'); remote.style.top = ''; return false; }
     const vw = document.documentElement.clientWidth, vh = document.documentElement.clientHeight, portrait = vh > vw;
     document.body.classList.toggle('portrait', portrait); document.body.classList.toggle('landscape', !portrait);
+    if (portrait) peek = false;                         // portrait is always the tube: no SET view there
     document.body.classList.toggle('zoom', !peek);
     if (peek) { scene.style.width = ''; scene.style.left = ''; scene.style.top = ''; remote.style.top = ''; return true; }
     scene.style.left = '0px'; scene.style.top = '0px'; scene.style.width = '';
@@ -393,7 +394,7 @@
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.key) keyPress(b.dataset.key);
     else if (b.dataset.act === 'power') { ensureAudio(); beep(700, 60); togglePower(); }
-    else if (b.dataset.act === 'set') { peek = !peek; layoutPhone(); if (power) render(false); }
+    else if (b.dataset.act === 'set' && !document.body.classList.contains('portrait')) { peek = !peek; layoutPhone(); if (power) render(false); }
     if (document.body.classList.contains('landscape')) openRemote(true);   // keep it up while in use
   });
 
@@ -413,7 +414,7 @@
     scene.style.top = ((vh - z.height) / 2 - z.top) + 'px';
   }
   function setZoom(on) {
-    if (phone) { peek = !peek; layoutPhone(); return; }
+    if (phone) { if (document.body.classList.contains('portrait')) return; peek = !peek; layoutPhone(); if (power) render(false); return; }
     zoomed = !!on; document.body.classList.toggle('zoom', zoomed);
     try { localStorage.setItem('cablebox.zoom', zoomed ? '1' : '0'); } catch (e) {}
     layoutZoom(); if (power) render(false);
