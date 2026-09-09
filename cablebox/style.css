@@ -144,11 +144,11 @@ body {
   content: ""; position: absolute; left: 50%; top: 24%; width: 13%; aspect-ratio: 1; border-radius: 50%; transform: translateX(-50%);
   background: #ff3b1f; box-shadow: 0 0 0.5cqw #ff3b1f;
 }
-body.power-off .cb-power::before { background: #2a0806; box-shadow: none; }
-body.power-off .cb-power { animation: beckon 2.2s ease-in-out infinite; }
-@keyframes beckon {
-  0%, 100% { box-shadow: none; }
-  50% { box-shadow: 0 0 1.6cqw 0.5cqw rgba(255,190,80,.75); }
+/* Set off: the LED itself breathes gold, slowly. Nothing else on the button lights up. */
+body.power-off .cb-power::before { --led-glow: 0 0 0.7cqw 0.15cqw rgba(255,200,80,.85); animation: ledpulse 3.2s ease-in-out infinite; }
+@keyframes ledpulse {
+  0%, 100% { background: #2a0806; box-shadow: none; }
+  50% { background: #ffcf5a; box-shadow: var(--led-glow); }
 }
 .cb-display { position: absolute; left: 22.63%; top: 31.23%; width: 13.65%; height: 43.07%; pointer-events: none; }
 .seg { position: absolute; top: 15%; height: 70%; width: 30%; }
@@ -255,8 +255,7 @@ body.phone.landscape .rm-key { min-height: 44px; font-size: 17px; }
 .rm-key.rm-power, .rm-key.rm-set { background: linear-gradient(#3a3a40, #1a1a1e); font-size: 12px; letter-spacing: 1.5px; }
 .rm-key.rm-power { color: #f3d9a0; position: relative; padding-top: 10px; }
 .rm-key.rm-power::before { content: ""; position: absolute; top: 7px; left: 50%; width: 8px; height: 8px; border-radius: 50%; transform: translateX(-50%); background: #ff3b1f; box-shadow: 0 0 6px #ff3b1f; }
-body.power-off .rm-key.rm-power::before { background: #3a0b06; box-shadow: none; }
-body.power-off .rm-key.rm-power { animation: beckon 2.2s ease-in-out infinite; }
+body.power-off .rm-key.rm-power::before { --led-glow: 0 0 8px 2px rgba(255,200,80,.85); animation: ledpulse 3.2s ease-in-out infinite; }
 .rm-key.rm-set { color: #cfd4e0; }
 .rm-display { background: #070000; border: 3px solid #0a0a0b; border-radius: 6px; display: flex; justify-content: center; align-items: center; gap: 8px; padding: 4px 8px; box-shadow: inset 0 0 12px #000, 0 0 0 1px #2a2a2e; }
 .rm-display .seg { position: static; height: 42px; width: 25px; }

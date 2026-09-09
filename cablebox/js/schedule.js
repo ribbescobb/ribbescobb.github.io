@@ -20,13 +20,60 @@
   function midnight(d) { const m = new Date(d); m.setHours(0, 0, 0, 0); return m; }
   function hm(s) { const p = String(s).split(':'); return (+p[0]) * 3600 + (+(p[1] || 0)) * 60; }
 
-  function daypartAt(channel, dow, t) {
+  // Holidays. A daypart may carry "holiday": "MM-DD" | "easter" | "thanksgiving" | "mothers-day" | "fathers-day".
+  function easter(y) {
+    const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25),
+      g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30, i = Math.floor(c / 4), k = c % 4,
+      l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451),
+      mo = Math.floor((h + l - 7 * m + 114) / 31), da = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(y, mo - 1, da);
+  }
+  function nthWeekday(y, month, weekday, n) { const first = new Date(y, month - 1, 1); return new Date(y, month - 1, 1 + (weekday - first.getDay() + 7) % 7 + 7 * (n - 1)); }
+  function holidayDate(spec, y) {
+    if (spec === 'easter') return easter(y);
+    if (spec === 'thanksgiving') return nthWeekday(y, 11, 4, 4);
+    if (spec === 'mothers-day') return nthWeekday(y, 5, 0, 2);
+    if (spec === 'fathers-day') return nthWeekday(y, 6, 0, 3);
+    const p = String(spec).split('-'); return new Date(y, +p[0] - 1, +p[1]);
+  }
+  // Signed days to the nearest occurrence: negative when it just passed.
+  function daysUntil(spec, date) {
+    const today = midnight(date); let best = null;
+    for (const y of [date.getFullYear() - 1, date.getFullYear(), date.getFullYear() + 1]) {
+      const d = Math.round((holidayDate(spec, y) - today) / 86400000);
+      if (best === null || Math.abs(d) < Math.abs(best)) best = d;
+    }
+    return best;
+  }
+
+  // Which daypart is on at second t. Plain dayparts are a hard schedule: the first one covering t wins.
+  // Holiday dayparts are a soft mix: everything whose holiday lies inside the forward window (default 90 days)
+  // is in season, weighted toward the nearest, and takes `skew` (default 85%) of the picks; the rest, or the
+  // whole channel when nothing is in season, is a random smattering of all of them.
+  function daypartAt(channel, date, dow, t, seed, k, catalog) {
+    const soft = [];
     for (const dp of channel.dayparts || []) {
       if (dp.days && !dp.days.includes(dow)) continue;
       const from = dp.from ? hm(dp.from) : 0, to = dp.to ? hm(dp.to) : DAY;
-      if (t >= from && t < to) return dp;
+      if (t < from || t >= to) continue;
+      if (!dp.holiday) return dp;
+      if (catalog.pools[dp.pool] && catalog.pools[dp.pool].length) soft.push(dp);
     }
-    return null;
+    if (!soft.length) return null;
+    const window = num(channel.window, 90);
+    let total = 0;
+    const w = soft.map((dp) => {
+      const d = daysUntil(dp.holiday, date);
+      if (d > window || d < -num(dp.linger, 1)) return 0;
+      const near = (window - Math.max(d, 0)) / window;         // 0 at the edge of the window, 1 on the day
+      const x = num(dp.weight, 1) * near * near; total += x; return x;
+    });
+    const unit = (n) => mix(seed, k * 31 + n) / 4294967296;
+    if (total > 0 && unit(7) < num(channel.skew, 0.85)) {
+      let r = unit(11) * total;
+      for (let i = 0; i < soft.length; i++) { r -= w[i]; if (r < 0) return soft[i]; }
+    }
+    return soft[Math.floor(unit(13) * soft.length)];
   }
 
   // Consistent hashing: the candidate whose id-hash sits nearest above the slot's target.
@@ -88,7 +135,7 @@
     const doBreak = (from, length) => { const to = Math.min(DAY, from + (length || len)); fillBreak(out, from, to, seed, k * 1000 + out.length, catalog); lastBreak = to; return to; };
 
     while (t < DAY) {
-      const dp = daypartAt(channel, dow, t);
+      const dp = daypartAt(channel, date, dow, t, seed, k, catalog);
       const name = dp && dp.pool;
       const pool = name && catalog.pools[name];
       if (!pool || !pool.length) {

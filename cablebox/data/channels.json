@@ -1,5 +1,6 @@
 {
-  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Only tiers in `include` are built into the catalog. Rebuild with: python3 tools/build_catalog.py Commercials: shows start on the hour or half hour; the padding to the next boundary is commercials, spread as one or two act breaks inside the show (each up to breakSeconds, 150) with the rest after the credits; long broadcasts break about every 15 min. Block (music) channels break every breakEvery seconds between songs. breakEvery 0 on a channel = no commercials.",
+  "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Tiers in `include` are built for every channel; a channel marked \"wild\": true also builds the wild sources of its pools, but only while the top-level \"wild\" master switch is on: flip it to false and rebuild, and every unofficial upload leaves the catalog at once. Wild sources are admitted only after tools/embed_check.js has watched them play (data/embeddable.json). Holiday dayparts (\"holiday\": MM-DD | easter | thanksgiving) are a soft mix weighted toward whatever is coming up inside the channel's forward window (days, default 90); off season the channel plays a random smattering of all of them. Rebuild with: python3 tools/build_catalog.py Commercials: shows start on the hour or half hour; the padding to the next boundary is commercials, spread as one or two act breaks inside the show (each up to breakSeconds, 150) with the rest after the credits; long broadcasts break about every 15 min. Block (music) channels break every breakEvery seconds between songs. breakEvery 0 on a channel = no commercials.",
+  "wild": true,
   "include": [
     "legit",
     "filler"
@@ -31,6 +32,27 @@
         },
         {
           "pool": "sitcoms"
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "id": "news",
+      "name": "NEWS",
+      "wild": true,
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "10:00",
+          "pool": "news-morning"
+        },
+        {
+          "from": "20:00",
+          "to": "24:00",
+          "pool": "news-mag"
+        },
+        {
+          "pool": "news"
         }
       ]
     },
@@ -113,6 +135,48 @@
       ]
     },
     {
+      "num": 9,
+      "id": "variety",
+      "name": "VARIETY",
+      "wild": true,
+      "dayparts": [
+        {
+          "days": [
+            0,
+            6
+          ],
+          "from": "12:00",
+          "to": "18:00",
+          "pool": "variety-music"
+        },
+        {
+          "from": "06:00",
+          "to": "17:00",
+          "pool": "variety-day"
+        },
+        {
+          "from": "17:00",
+          "to": "23:30",
+          "pool": "variety-prime"
+        },
+        {
+          "from": "23:30",
+          "to": "24:00",
+          "pool": "carson"
+        },
+        {
+          "from": "00:00",
+          "to": "01:00",
+          "pool": "carson"
+        },
+        {
+          "from": "01:00",
+          "to": "02:30",
+          "pool": "letterman"
+        }
+      ]
+    },
+    {
       "num": 10,
       "id": "music-rnb",
       "name": "R&B",
@@ -122,7 +186,8 @@
           "block": true,
           "label": "Videos"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 11,
@@ -164,6 +229,32 @@
       ]
     },
     {
+      "num": 14,
+      "id": "scifi",
+      "name": "SCI-FI",
+      "dayparts": [
+        {
+          "days": [
+            6
+          ],
+          "from": "22:00",
+          "to": "24:00",
+          "pool": "mst3k"
+        },
+        {
+          "days": [
+            0
+          ],
+          "from": "00:00",
+          "to": "02:00",
+          "pool": "mst3k"
+        },
+        {
+          "pool": "scifi"
+        }
+      ]
+    },
+    {
       "num": 17,
       "id": "classics",
       "name": "CLASSICS",
@@ -172,6 +263,51 @@
           "pool": "classics",
           "block": true,
           "label": "Classic Cartoons"
+        }
+      ]
+    },
+    {
+      "num": 25,
+      "id": "seasonal",
+      "name": "SEASONAL",
+      "wild": true,
+      "window": 90,
+      "skew": 0.85,
+      "dayparts": [
+        {
+          "pool": "xmas",
+          "holiday": "12-25",
+          "weight": 2,
+          "linger": 7
+        },
+        {
+          "pool": "halloween",
+          "holiday": "10-31",
+          "weight": 1.5
+        },
+        {
+          "pool": "thanksgiving",
+          "holiday": "thanksgiving"
+        },
+        {
+          "pool": "newyear",
+          "holiday": "01-01",
+          "weight": 0.7
+        },
+        {
+          "pool": "valentines",
+          "holiday": "02-14",
+          "weight": 0.6
+        },
+        {
+          "pool": "easter",
+          "holiday": "easter",
+          "weight": 0.8
+        },
+        {
+          "pool": "july4",
+          "holiday": "07-04",
+          "weight": 0.8
         }
       ]
     },
@@ -193,7 +329,8 @@
         {
           "pool": "football"
         }
-      ]
+      ],
+      "wild": true
     },
     {
       "num": 31,
@@ -202,6 +339,35 @@
       "dayparts": [
         {
           "pool": "golf"
+        }
+      ]
+    },
+    {
+      "num": 32,
+      "id": "wideworld",
+      "name": "WIDE WORLD",
+      "wild": true,
+      "dayparts": [
+        {
+          "days": [
+            6
+          ],
+          "from": "11:00",
+          "to": "13:00",
+          "pool": "wrestling"
+        },
+        {
+          "from": "23:30",
+          "to": "24:00",
+          "pool": "wrestling"
+        },
+        {
+          "from": "00:00",
+          "to": "01:00",
+          "pool": "wrestling"
+        },
+        {
+          "pool": "sports"
         }
       ]
     },
@@ -577,10 +743,6 @@
         }
       ],
       "series": false,
-      "include": [
-        "legit",
-        "wild"
-      ],
       "_note": "NFL's own uploads refuse embedding (error 150), so this pool opens the wild door. Fan uploads are admitted only after tools/embed_check.js has seen them play; see data/embeddable.json."
     },
     "golf": {
@@ -591,6 +753,14 @@
           "note": "The Masters · Final Round Broadcasts (classic years only)",
           "titleMatch": "\\b19[6-9]\\d\\b",
           "url": "https://www.youtube.com/playlist?list=PL5bbCtDMySv8-jCobs9gDY33ZckGzGDdl"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLnU5qUEfww3cj5V3crq7J4jpvu2e3dSsN",
+          "tier": "legit",
+          "note": "USGA · Full Broadcasts playlist (70s/80s only)",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "series": "U.S. Open"
         }
       ],
       "series": false
@@ -604,6 +774,15 @@
           "url": "ytsearch30:1980s tv commercials compilation",
           "titleMatch": "commercial|\\bads\\b|advert",
           "titleExclude": "mtv|music video|syndication|episode|with commercials|full show|movie"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUsoiFs_IAf8uMoXd7vj3_Gg",
+          "tier": "filler",
+          "note": "80sCommercialVault · 80's Commercials Vol. N",
+          "titleMatch": "80'?s Commercials Vol",
+          "minMinutes": 5,
+          "limit": 800,
+          "cap": 150
         }
       ],
       "series": false
@@ -671,10 +850,6 @@
       "minMinutes": 2,
       "maxMinutes": 8,
       "series": false,
-      "include": [
-        "legit",
-        "wild"
-      ],
       "_note": "Official 80s R&B uploads are thin, so this pool opens the wild door for itself.",
       "sources": [
         {
@@ -889,6 +1064,22 @@
           "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
           "titleMatch": "Hammer House|Sapphire",
           "limit": 4000
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUUmboR4uE18uJOnpZJY-trg",
+          "tier": "legit",
+          "note": "The Elvira Vault · Movie Macabre and friends",
+          "titleMatch": "Movie Macabre|Horror Classics|Midnight Madness|13 Nights|Thriller ?Video",
+          "minMinutes": 25,
+          "cap": 60,
+          "series": {
+            "Movie Macabre": "Elvira's Movie Macabre",
+            "Midnight Madness": "Elvira's Midnight Madness",
+            "Horror Classics": "Elvira's Horror Classics",
+            "Thriller ?Video": "Elvira's ThrillerVideo",
+            "13 Nights": "13 Nights of Elvira",
+            ".": "Elvira"
+          }
         }
       ]
     },
@@ -1075,6 +1266,2361 @@
           "tier": "legit",
           "note": "King Features · Popeye and Friends Official",
           "url": "https://www.youtube.com/playlist?list=UUqvXAiNyn8pd9SVPclWfJTg"
+        }
+      ]
+    },
+    "news-morning": {
+      "series": false,
+      "_note": "A smattering of morning shows, 06:00–10:00 (Chris: news is pure novelty, keep it small). Off-air VHS = wild tier, embed-checked first.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUHBA33uj5hZFlkzC26Wx5Lg",
+          "tier": "wild",
+          "note": "fan · Yester Days (morning shows)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(Today|Good Morning America|Morning News|This Morning|Early Show|CBS Morning|Sunday Morning).*\\b19[78]\\d\\b",
+          "titleExclude": "\\bopen\\b|opening|closing|commercials|\\bads\\b|\\bpromo|teaser|preview|bumper|intro\\b|outro|tease",
+          "minMinutes": 30,
+          "limit": 3000,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUIXoqJp42oB46cxtJ8sZcVA",
+          "tier": "wild",
+          "note": "fan · pannoni14 (GMA tapes)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Good Morning America|Today|Morning",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Good Morning America 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: GMA",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Good Morning America|GMA))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:CBS Morning News 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: CBS Morning News",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Morning News))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 10
+        }
+      ]
+    },
+    "news": {
+      "series": false,
+      "_note": "Newscasts the rest of the day. A smattering by design; every wild id is embed-checked first.",
+      "sources": [
+        {
+          "url": "ytsearch40:MacNeil Lehrer NewsHour WATCH",
+          "tier": "legit",
+          "note": "PBS NewsHour · vintage MacNeil/Lehrer uploads",
+          "titleMatch": "MacNeil",
+          "uploaderMatch": "PBS NewsHour",
+          "minMinutes": 20,
+          "cap": 20,
+          "series": "MacNeil/Lehrer NewsHour"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUsosv0k3NeCHyMH3n1L7GsA",
+          "tier": "wild",
+          "note": "fan · Malgent (network newscasts by date)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d-\\d\\d-\\d\\d",
+          "titleExclude": "\\bopen\\b|opening|closing|commercials|\\bads\\b|\\bpromo|teaser|preview|bumper|intro\\b|outro|tease",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUDdIPmsA-O8PqK5bgzYmmng",
+          "tier": "wild",
+          "note": "fan · Malg (network newscasts by date)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d-\\d\\d-\\d\\d",
+          "titleExclude": "\\bopen\\b|opening|closing|commercials|\\bads\\b|\\bpromo|teaser|preview|bumper|intro\\b|outro|tease",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUpZ1VcNXMWTlNVTaCQRj1vg",
+          "tier": "wild",
+          "note": "fan · Malg2025 (network newscasts by date)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d-\\d\\d-\\d\\d",
+          "titleExclude": "\\bopen\\b|opening|closing|commercials|\\bads\\b|\\bpromo|teaser|preview|bumper|intro\\b|outro|tease",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUHBA33uj5hZFlkzC26Wx5Lg",
+          "tier": "wild",
+          "note": "fan · Yester Days (newscasts)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(News|Nightly|Evening|Newscast|CNN|Nightline|Report|Newshour).*\\b19[78]\\d\\b",
+          "titleExclude": "\\bopen\\b|opening|closing|commercials|\\bads\\b|\\bpromo|teaser|preview|bumper|intro\\b|outro|tease",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU-ssAZ6qVu0glgFUIsC8VSA",
+          "tier": "wild",
+          "note": "fan · Museum of Classic Chicago Television (newscasts)",
+          "requireEmbedCheck": true,
+          "titleMatch": "News.*\\b19[78]\\d\\b",
+          "titleExclude": "Commercial|Promo|Opening|Closing|Ending|Bumper",
+          "minMinutes": 10,
+          "limit": 4000,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU4LibjxwJ2SIwpGSUo41yOQ",
+          "tier": "wild",
+          "note": "fan · Sloan's TV Airchive (local newscasts)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(News|Nightcast|Newscast|Report|Coverage).*\\b19[78]\\d\\b",
+          "titleExclude": "\\bopen\\b|opening|closing|commercials|\\bads\\b|\\bpromo|teaser|preview|bumper|intro\\b|outro|tease",
+          "minMinutes": 15,
+          "limit": 2000,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUodkY8qccrtJCTRQb_7Pe8A",
+          "tier": "wild",
+          "note": "fan · BetaMaxBill (Nightline, Cronkite)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Nightline|News|Election|Cronkite|Koppel|Report",
+          "titleExclude": "Kennedy Center|Birthday",
+          "minMinutes": 20,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:CNN 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: CNN",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(CNN))\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:local news 198 full newscast",
+          "tier": "wild",
+          "note": "fan · search: local newscasts",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(News))\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "cap": 10
+        }
+      ]
+    },
+    "news-mag": {
+      "series": false,
+      "_note": "Prime-time newsmagazines and the odd election night, 20:00–24:00.",
+      "sources": [
+        {
+          "url": "ytsearch40:60 Minutes 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: 60 Minutes",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(60 Minutes))\\b19[78]\\d\\b",
+          "minMinutes": 25,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:20/20 198 full episode ABC",
+          "tier": "wild",
+          "note": "fan · search: 20/20",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(20/20))\\b19[78]\\d\\b",
+          "minMinutes": 25,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:Nightline 198 full ABC Koppel",
+          "tier": "wild",
+          "note": "fan · search: Nightline",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Nightline))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 15
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUu69shlUCcwLtcE36FApEiQ",
+          "tier": "wild",
+          "note": "fan · Kenneth McDonough (20/20, Nightline)",
+          "requireEmbedCheck": true,
+          "titleMatch": "20/20|Nightline|Dateline|Primetime",
+          "minMinutes": 20,
+          "cap": 15
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUy9KjHx3S7NgJWd6TEzNgrg",
+          "tier": "wild",
+          "note": "fan · Television Archive Project (election nights, inaugurations)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b198\\d\\b",
+          "minMinutes": 60,
+          "cap": 8
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUOGMy0miBOrh2l4613sGFwA",
+          "tier": "wild",
+          "note": "fan · Election Coverage (election nights)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b198\\d\\b",
+          "minMinutes": 60,
+          "cap": 8
+        }
+      ]
+    },
+    "sports": {
+      "_note": "The grab bag: motorsport, strongmen, tennis, derbies, bowling, Olympics, and whatever else ABC would have flown to. Wrestling lives in its own pool and only gets its own dayparts.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUPSc8x8cAdI6-dKk61I4tGA",
+          "tier": "legit",
+          "note": "NASCAR Classics · full races (70s/80s only)",
+          "titleMatch": "^19[78]\\d\\b",
+          "titleExclude": "Memory Lane|Hall of Fame|Safety|Highlights|Preview|Recap",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 120,
+          "series": "NASCAR"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PL948kNhk-wMtz8Sp-9GNFzu0Q1KYz2pWp",
+          "tier": "legit",
+          "note": "NTT INDYCAR SERIES · Nonstop INDYCAR Classics playlist (70s/80s only)",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "series": "INDYCAR"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PL1ZLv670mpxq9cHFwEpLoyvcWMhN6sBpG",
+          "tier": "legit",
+          "note": "The World's Strongest Man · *FULL* 1981 (event by event)",
+          "minMinutes": 10,
+          "series": "World's Strongest Man"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU-13NLXPBlZ-q7NcRrToxGA",
+          "tier": "legit",
+          "note": "Demolition Derby · own footage, Ohio county fairs",
+          "titleMatch": "\\b19[89]\\d\\b",
+          "minMinutes": 30,
+          "cap": 30,
+          "series": "Demolition Derby"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUcaJqwpmGQaov6MYPUyPg0w",
+          "tier": "wild",
+          "note": "fan · Classic Monster Trucks",
+          "requireEmbedCheck": true,
+          "titleExclude": "bloopers",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "Monster Trucks"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUPEj1sbwiNRYgps7DndW30g",
+          "tier": "wild",
+          "note": "fan · Roller Derby 1973",
+          "requireEmbedCheck": true,
+          "titleMatch": "Roller Derby 19[78]\\d",
+          "minMinutes": 10,
+          "cap": 60,
+          "series": "Roller Derby"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUwC-TTs2sddKxMjm500ZYIg",
+          "tier": "wild",
+          "note": "fan · mrbowling300 (PBA telecasts)",
+          "requireEmbedCheck": true,
+          "titleMatch": "^19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 60,
+          "series": "PBA Bowling"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUzvmXpNIPoLLQ4g-x5Iw15A",
+          "tier": "wild",
+          "note": "fan · Pizza Pizzichetti (PBA telecasts)",
+          "requireEmbedCheck": true,
+          "titleMatch": "PBA.*\\b19[78]\\d\\b|\\b19[78]\\d\\b.*PBA",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "PBA Bowling"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUyh6Wrcsij3-SlORwwBC5Sg",
+          "tier": "wild",
+          "note": "fan · Not Just Every Four Years (Olympics, Goodwill Games, track)",
+          "requireEmbedCheck": true,
+          "titleMatch": "^19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 80
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUfkZ0ECJ4gOUnTWw3kNHTVg",
+          "tier": "wild",
+          "note": "fan · Ugazzovision (USFL, World Hockey)",
+          "requireEmbedCheck": true,
+          "titleMatch": "USFL|World Hockey|Canada Cup|NHL|NBA|MLB|Boxing",
+          "minMinutes": 60,
+          "cap": 40
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUWVGrQhjY8Q0o-1DyvqNfHg",
+          "tier": "wild",
+          "note": "fan · Louie's Basement Tapes (NBA)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(NBA|Celtics|Lakers|Finals))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 40,
+          "series": "NBA"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUkAWtTgQHFfJTdN4UVl4nEg",
+          "tier": "wild",
+          "note": "fan · GO SPORTS! (NHL)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(NHL|Stanley Cup))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 40,
+          "series": "NHL"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUGF3IQXAUAvI0vLlVPqvI7Q",
+          "tier": "wild",
+          "note": "fan · Football 4 Life (college football)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Bowl|\\bvs\\b|Football))\\b19[78]\\d\\b",
+          "minMinutes": 90,
+          "cap": 40,
+          "series": "College Football"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU1slaGpNJGO4M1XUeotaQ-A",
+          "tier": "wild",
+          "note": "fan · Horse Racing",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b.*(Derby|Preakness|Belmont|Breeders)",
+          "minMinutes": 20,
+          "cap": 30,
+          "series": "Horse Racing"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUXXAy8BnYvI1lzHm33QxJhA",
+          "tier": "wild",
+          "note": "fan · HODIUSDUDE (Wide World of Sports, Evel Knievel)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Wide World of Sports|Evel Knievel",
+          "minMinutes": 15,
+          "cap": 30
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUMZfO-nVYHCNZpu-_In20qg",
+          "tier": "wild",
+          "note": "fan · Mark Austin (Wide World of Sports)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Wide World of Sports",
+          "minMinutes": 15,
+          "cap": 30
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUAf5TkW6fSaLzjP4Ad68OCA",
+          "tier": "wild",
+          "note": "fan · nascarman Archives (races with commercials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "^19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 40,
+          "series": "NASCAR"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUXrgu0q5OqhyOfPD-xztSaA",
+          "tier": "wild",
+          "note": "fan · Strongman Classics",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b.*Strong",
+          "minMinutes": 20,
+          "cap": 30,
+          "series": "World's Strongest Man"
+        },
+        {
+          "url": "ytsearch40:\"Wide World of Sports\" 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Wide World of Sports",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Wide World))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:Superstars competition 198 full ABC",
+          "tier": "wild",
+          "note": "fan · search: The Superstars",
+          "requireEmbedCheck": true,
+          "titleMatch": "Superstars",
+          "minMinutes": 20,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:Ironman Triathlon 198 full ABC",
+          "tier": "wild",
+          "note": "fan · search: Ironman",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Ironman))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:boxing 198 full fight HBO",
+          "tier": "wild",
+          "note": "fan · search: boxing",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Boxing|\\bvs\\b|Fight))\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:NBA 198 full game",
+          "tier": "wild",
+          "note": "fan · search: NBA",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(NBA))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:NHL 198 full game",
+          "tier": "wild",
+          "note": "fan · search: NHL",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(NHL|Stanley Cup))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:college football 198 full game",
+          "tier": "wild",
+          "note": "fan · search: college football",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Bowl|\\bvs\\b|Football))\\b19[78]\\d\\b",
+          "minMinutes": 90,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:Harlem Globetrotters 198 full game",
+          "tier": "wild",
+          "note": "fan · search: Globetrotters",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Globetrotters))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Kentucky Derby 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Kentucky Derby",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Derby))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:Tour de France 198 full stage",
+          "tier": "wild",
+          "note": "fan · search: Tour de France",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Tour de France))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:figure skating 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: figure skating",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Skating))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:1984 Olympics full broadcast ABC",
+          "tier": "wild",
+          "note": "fan · search: 1984 Olympics",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Olympic))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:1988 Olympics full broadcast",
+          "tier": "wild",
+          "note": "fan · search: 1988 Olympics",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Olympic))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:1980 Winter Olympics full broadcast",
+          "tier": "wild",
+          "note": "fan · search: 1980 Winter Olympics",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Olympic))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PL1ZLv670mpxp8jiF5hE4YOdBpj0WG0dAD",
+          "tier": "legit",
+          "note": "The World's Strongest Man · *FULL* 1980 show",
+          "minMinutes": 10,
+          "series": "World's Strongest Man"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1980 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1980 finals",
+          "titleMatch": "1980",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1981 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1981 finals",
+          "titleMatch": "1981",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1982 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1982 finals",
+          "titleMatch": "1982",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1983 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1983 finals",
+          "titleMatch": "1983",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1984 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1984 finals",
+          "titleMatch": "1984",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1985 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1985 finals",
+          "titleMatch": "1985",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1986 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1986 finals",
+          "titleMatch": "1986",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1987 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1987 finals",
+          "titleMatch": "1987",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1988 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1988 finals",
+          "titleMatch": "1988",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        },
+        {
+          "url": "ytsearch15:Wimbledon 1989 final full match",
+          "tier": "legit",
+          "note": "Wimbledon · 1989 finals",
+          "titleMatch": "1989",
+          "uploaderMatch": "^Wimbledon$",
+          "minMinutes": 60,
+          "series": "Wimbledon"
+        }
+      ]
+    },
+    "wrestling": {
+      "_note": "Capped by daypart: Saturday 11–13 and nightly 23:30–01:00, so it never overwhelms the other sports.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUNSnSemXKDc9UEZ7m31wY9Q",
+          "tier": "legit",
+          "note": "WWE Vault · full 70s/80s events, matches, Coliseum videos",
+          "titleMatch": "(FULL EVENT|FULL MATCH|FULL HOME VIDEO|FULL EPISODE|FULL SHOW|FULL DOCUMENTARY).*\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "limit": 4000,
+          "cap": 120,
+          "series": "WWF"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLfalIYDZtGGDBmKl0slVTSSHEbbi1iTRu",
+          "tier": "legit",
+          "note": "WWE Vault · Full-Length Events (70s/80s only)",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "series": "WWF"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLfalIYDZtGGBE0_RcI0mbcYLwyCVP6NeO",
+          "tier": "legit",
+          "note": "WWE Vault · Full Classic Royal Rumble Matches (70s/80s only)",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "series": "WWF"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLfalIYDZtGGCBhXhODKlrzKr7WGtFq1Ew",
+          "tier": "legit",
+          "note": "WWE Vault · Classic Full Home Videos (70s/80s only)",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "series": "WWF"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLfalIYDZtGGDPEYdHVoI0UY9py6gAibMU",
+          "tier": "legit",
+          "note": "WWE Vault · Full-Length Events of WWE's Golden Era (70s/80s only)",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 15,
+          "series": "WWF"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUbBA0ybji3HvujNJPQZIa7g",
+          "tier": "wild",
+          "note": "fan · Larry's Classic Sports (NWA / Mid-Atlantic)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 50,
+          "series": "NWA"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUT205hrrP-OuPGHmIzOEYNA",
+          "tier": "wild",
+          "note": "fan · Classic Wrestling stuff (NWA)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 50,
+          "series": "NWA"
+        },
+        {
+          "url": "ytsearch40:AWA All-Star Wrestling 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: AWA",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(AWA|Wrestling))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 30,
+          "series": "AWA"
+        },
+        {
+          "url": "ytsearch40:WWF Superstars 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: WWF Superstars",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(WWF|Superstars|Wrestling))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 30,
+          "series": "WWF"
+        },
+        {
+          "url": "ytsearch40:Georgia Championship Wrestling 198 full",
+          "tier": "wild",
+          "note": "fan · search: Georgia Championship Wrestling",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Wrestling))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 20,
+          "series": "NWA"
+        }
+      ]
+    },
+    "scifi": {
+      "_note": "Safe content only: rights-holders' own uploads. No wild door on this channel.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUDkpWp8ZYj__duSeTyEEKcQ",
+          "tier": "legit",
+          "note": "Doctor Who: Classic · full-story omnibus uploads",
+          "titleMatch": "FULL EPISODE",
+          "minMinutes": 40,
+          "maxMinutes": 200,
+          "limit": 2000,
+          "series": "Doctor Who"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "tier": "legit",
+          "note": "Shout! Studios · Gerry Anderson, Space: 1999, The Prisoner, Sapphire & Steel",
+          "titleMatch": "(Space: ?1999|The Prisoner|Sapphire And Steel|Thunderbirds|Captain Scarlet|Stingray|Fireball XL5|Joe 90|\\bUFO\\b|Space Precinct|Terrahawks).*(FULL EPISODE|Full Episode|Episode \\d)",
+          "titleExclude": "Trailer|Clip\\b|Spot|Marathon",
+          "minMinutes": 20,
+          "limit": 5000,
+          "cap": 300,
+          "series": {
+            "Space: ?1999": "Space: 1999",
+            "Prisoner": "The Prisoner",
+            "Sapphire": "Sapphire & Steel",
+            "Thunderbirds": "Thunderbirds",
+            "Captain Scarlet": "Captain Scarlet",
+            "Stingray": "Stingray",
+            "Fireball": "Fireball XL5",
+            "Joe 90": "Joe 90",
+            "\\bUFO\\b": "UFO",
+            "Terrahawks": "Terrahawks",
+            "Space Precinct": "Space Precinct"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUdqi7WMKsN-Mj3s7J0JXSVQ",
+          "tier": "legit",
+          "note": "Sid & Marty Krofft · Land of the Lost",
+          "titleMatch": "Land of the Lost.*Full Episode",
+          "minMinutes": 15,
+          "series": "Land of the Lost"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUi-PULMg2eD_v5AO0PlW4sg",
+          "tier": "legit",
+          "note": "Dungeons & Dragons (Wizards) · the animated series",
+          "titleMatch": "Animated Series",
+          "minMinutes": 20,
+          "series": "Dungeons & Dragons"
+        }
+      ]
+    },
+    "mst3k": {
+      "_note": "Saturday night late show.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUFzph9x-n9FR52BI94Zfgww",
+          "tier": "legit",
+          "note": "Mystery Science Theater 3000 · single episodes",
+          "titleMatch": "^MST3K \\d{3,4}:",
+          "titleExclude": "Marathon|Mixtape|Watch Party",
+          "minMinutes": 60,
+          "maxMinutes": 130,
+          "limit": 3000,
+          "cap": 100,
+          "series": "MST3K"
+        }
+      ]
+    },
+    "xmas": {
+      "series": false,
+      "_note": "In season from late September (window 90 days), lingering through New Year's week.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUWV0Qgo4Yz7E5_oNF4VJ6Rg",
+          "tier": "legit",
+          "note": "Masters of the Universe · He-Man & She-Ra Christmas Special",
+          "titleMatch": "Christmas",
+          "minMinutes": 20,
+          "titleExclude": "Commentary"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUeY4C8Sbx8B4bIyREPSvORQ",
+          "tier": "legit",
+          "note": "The Smurfs · Christmas specials and compilations",
+          "titleMatch": "Christmas|Snowy|Winter",
+          "minMinutes": 15,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUI-lg_sDdzBtYKVpebqasIA",
+          "tier": "legit",
+          "note": "Inspector Gadget (WildBrain) · Saves Christmas",
+          "titleMatch": "Christmas",
+          "minMinutes": 15,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU7DM7591Xkt1M2D3fs_wAlg",
+          "tier": "legit",
+          "note": "Sesame Street Classics · Christmas Eve on Sesame Street",
+          "titleMatch": "Christmas",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "tier": "legit",
+          "note": "Shout! Studios · Pee-wee's Christmas, Emmet Otter",
+          "titleMatch": "Pee-wee.*Christmas|Emmet Otter|Christmas.*Pee-wee",
+          "minMinutes": 20,
+          "limit": 5000,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU8IHAQMuiJdY6ALuhG7iU8Q",
+          "tier": "legit",
+          "note": "FilmRise · A Christmas Story",
+          "titleMatch": "^Christmas Story",
+          "minMinutes": 60,
+          "cap": 2
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUxcnsr1R5Ge_fbTu5ajt8DQ",
+          "tier": "legit",
+          "note": "Bob Ross · winter paintings",
+          "titleMatch": "Winter|Snow|Frost|Icy",
+          "minMinutes": 20,
+          "limit": 1000,
+          "cap": 40,
+          "series": "Bob Ross"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUtyhYyKH7rIqE3Y5xro1udQ",
+          "tier": "legit",
+          "note": "Christmas Aficionado · Remembering the 80s: The Year in Christmas",
+          "titleMatch": "Remembering the 80s",
+          "minMinutes": 20,
+          "cap": 12
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUepuqk1t-8J1nByerAKfP7g",
+          "tier": "wild",
+          "note": "fan · Lawrence Welk LPs (Christmas shows)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas",
+          "minMinutes": 25,
+          "cap": 15
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUOfxPXZ2Db58JdhrRtXqmlQ",
+          "tier": "wild",
+          "note": "fan · Aaron's Archive (Perry Como Christmas)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas",
+          "minMinutes": 30,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU5bpfNgmYsmLnh7BgAl7x1g",
+          "tier": "wild",
+          "note": "fan · andyfilm (Christmas TV specials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas",
+          "minMinutes": 30,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUYEsMGGQ0v_H_yQhjIkCPog",
+          "tier": "wild",
+          "note": "fan · Christmas Every Day (80s Christmas episodes)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\(19[78]\\d\\)",
+          "minMinutes": 20,
+          "cap": 40
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUXN6vuPIoMioK3fA4hJpWkg",
+          "tier": "wild",
+          "note": "fan · Dance Fever Christmas Special",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUUVnipEEKl0gsCsgLrztgRw",
+          "tier": "wild",
+          "note": "fan · A FUSCO (WPIX Yule Log)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Yule Log",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUBbz7wPla8yfv1dLJMFEgWA",
+          "tier": "wild",
+          "note": "fan · Parkscope (A Muppet Family Christmas)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas",
+          "minMinutes": 30,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Rankin Bass Rudolph the Red-Nosed Reindeer 1964 full",
+          "tier": "wild",
+          "note": "fan · search: Rudolph",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rudolph",
+          "minMinutes": 40,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Frosty the Snowman 1969 full special",
+          "tier": "wild",
+          "note": "fan · search: Frosty",
+          "requireEmbedCheck": true,
+          "titleMatch": "Frosty",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Santa Claus Is Comin to Town 1970 Rankin Bass full",
+          "tier": "wild",
+          "note": "fan · search: Santa Claus Is Comin",
+          "requireEmbedCheck": true,
+          "titleMatch": "Santa Claus",
+          "minMinutes": 40,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:The Year Without a Santa Claus 1974 full",
+          "tier": "wild",
+          "note": "fan · search: Year Without a Santa Claus",
+          "requireEmbedCheck": true,
+          "titleMatch": "Santa Claus",
+          "minMinutes": 40,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Claymation Christmas Celebration 1987 full",
+          "tier": "wild",
+          "note": "fan · search: Claymation Christmas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Claymation",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:The Snowman 1982 full",
+          "tier": "wild",
+          "note": "fan · search: The Snowman",
+          "requireEmbedCheck": true,
+          "titleMatch": "Snowman",
+          "minMinutes": 20,
+          "maxMinutes": 40,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:A Garfield Christmas Special 1987 full",
+          "tier": "wild",
+          "note": "fan · search: Garfield Christmas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Garfield",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Mickey's Christmas Carol 1983 full",
+          "tier": "wild",
+          "note": "fan · search: Mickey's Christmas Carol",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas Carol",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:A Very Brady Christmas 1988 full",
+          "tier": "wild",
+          "note": "fan · search: Very Brady Christmas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Brady",
+          "minMinutes": 60,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Christmas Comes to Pac-Land 1982 full",
+          "tier": "wild",
+          "note": "fan · search: Pac-Land",
+          "requireEmbedCheck": true,
+          "titleMatch": "Pac",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Alvin and the Chipmunks Christmas special 198 full",
+          "tier": "wild",
+          "note": "fan · search: Chipmunks Christmas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Chipmunk",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Care Bears Nutcracker Suite 1988 full",
+          "tier": "wild",
+          "note": "fan · search: Care Bears Nutcracker",
+          "requireEmbedCheck": true,
+          "titleMatch": "Care Bears",
+          "minMinutes": 40,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Christmas commercials 1980s compilation",
+          "tier": "wild",
+          "note": "fan · search: Christmas commercials",
+          "requireEmbedCheck": true,
+          "titleMatch": "Christmas|Holiday",
+          "minMinutes": 10,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:Christmas TV special 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Christmas specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Christmas))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:Bob Hope Christmas special 198 full",
+          "tier": "wild",
+          "note": "fan · search: Bob Hope Christmas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bob Hope",
+          "minMinutes": 40,
+          "cap": 8
+        },
+        {
+          "url": "ytsearch40:A Charlie Brown Christmas full",
+          "tier": "wild",
+          "note": "fan · search: Charlie Brown Christmas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Charlie Brown",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:WPIX Yule Log 198 full",
+          "tier": "wild",
+          "note": "fan · search: Yule Log",
+          "requireEmbedCheck": true,
+          "titleMatch": "Yule Log",
+          "minMinutes": 20,
+          "cap": 5
+        }
+      ]
+    },
+    "halloween": {
+      "series": false,
+      "_note": "In season from early August.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUrRttZIypNTA1Mrfwo745Sg",
+          "tier": "legit",
+          "note": "Paramount Plus · Garfield's Halloween Adventure",
+          "titleMatch": "Halloween",
+          "minMinutes": 15,
+          "limit": 3000,
+          "cap": 5
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUU0rIMU3k_AsVA8d6N1B03w",
+          "tier": "legit",
+          "note": "Warner Bros. Classics · Looney Tunes spooky compilations",
+          "titleMatch": "Halloween|Spooky|Witch Hazel|Gossamer|Haunted|Monster",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 20
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUUmboR4uE18uJOnpZJY-trg",
+          "tier": "legit",
+          "note": "The Elvira Vault · Movie Macabre and friends",
+          "titleMatch": "Movie Macabre|Horror Classics|Midnight Madness|13 Nights|Thriller ?Video|MTV Halloween|Knott's|Halloween",
+          "minMinutes": 25,
+          "cap": 60,
+          "series": {
+            "Movie Macabre": "Elvira's Movie Macabre",
+            "Midnight Madness": "Elvira's Midnight Madness",
+            "Horror Classics": "Elvira's Horror Classics",
+            "Thriller ?Video": "Elvira's ThrillerVideo",
+            "13 Nights": "13 Nights of Elvira",
+            ".": "Elvira"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUf5CjDJvsFvtVIhkfmKAwAA",
+          "tier": "legit",
+          "note": "Amazon MGM Studios · Halloween with the Addams Family",
+          "titleMatch": "Halloween.*(Full Episode|Full Movie)|Addams Family.*Full",
+          "minMinutes": 20,
+          "limit": 3000,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUsoiFs_IAf8uMoXd7vj3_Gg",
+          "tier": "wild",
+          "note": "fan · 80sCommercialVault (Today's Special: Halloween)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 10,
+          "limit": 1000,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUN6EXJojfxC07lgx60WChVw",
+          "tier": "wild",
+          "note": "fan · Halloween Central (70s/80s specials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\(19[78]\\d\\)|Grinch Night",
+          "minMinutes": 20,
+          "cap": 30
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUpPdVC0qb64H_3ltr16KfDQ",
+          "tier": "wild",
+          "note": "fan · Our Nostalgic Memories (Halloween ads)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 10,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUqSJYWrpPQBn2IgLB5cHWGQ",
+          "tier": "wild",
+          "note": "fan · Darth Awesome (Halloween '81 broadcast)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 60,
+          "cap": 5
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUo49JhGiEqHz8ilBninvU9w",
+          "tier": "wild",
+          "note": "fan · Casper the Ghost (Halloween compilations)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 15,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUBmgiPm4j50Z9zNTsUmb9Xw",
+          "tier": "wild",
+          "note": "fan · Garfield & Friends (Garfield's Halloween Adventure)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 15,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Halloween Is Grinch Night 1977 full",
+          "tier": "wild",
+          "note": "fan · search: Grinch Night",
+          "requireEmbedCheck": true,
+          "titleMatch": "Grinch",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:It's the Great Pumpkin Charlie Brown full",
+          "tier": "wild",
+          "note": "fan · search: Great Pumpkin",
+          "requireEmbedCheck": true,
+          "titleMatch": "Pumpkin",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:The Halloween That Almost Wasnt 1979 full",
+          "tier": "wild",
+          "note": "fan · search: Halloween That Almost Wasn't",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Disney's Halloween Treat 1982 full",
+          "tier": "wild",
+          "note": "fan · search: Disney Halloween Treat",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Paul Lynde Halloween Special 1976 full",
+          "tier": "wild",
+          "note": "fan · search: Paul Lynde Halloween",
+          "requireEmbedCheck": true,
+          "titleMatch": "Paul Lynde",
+          "minMinutes": 40,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Witch's Night Out 1978 full",
+          "tier": "wild",
+          "note": "fan · search: Witch's Night Out",
+          "requireEmbedCheck": true,
+          "titleMatch": "Witch",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Bugs Bunny's Howl-oween Special 1978 full",
+          "tier": "wild",
+          "note": "fan · search: Howl-oween",
+          "requireEmbedCheck": true,
+          "titleMatch": "Howl",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:The Worst Witch 1986 full movie",
+          "tier": "wild",
+          "note": "fan · search: The Worst Witch",
+          "requireEmbedCheck": true,
+          "titleMatch": "Worst Witch",
+          "minMinutes": 60,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Mad Monster Party 1967 full",
+          "tier": "wild",
+          "note": "fan · search: Mad Monster Party",
+          "requireEmbedCheck": true,
+          "titleMatch": "Mad Monster",
+          "minMinutes": 60,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Halloween commercials 1980s compilation",
+          "tier": "wild",
+          "note": "fan · search: Halloween commercials",
+          "requireEmbedCheck": true,
+          "titleMatch": "Halloween",
+          "minMinutes": 10,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:Halloween TV special 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Halloween specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Halloween))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:Scooby-Doo Halloween full episode",
+          "tier": "wild",
+          "note": "fan · search: Scooby Halloween",
+          "requireEmbedCheck": true,
+          "titleMatch": "Scooby",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:Garfield Halloween Adventure 1985 full",
+          "tier": "wild",
+          "note": "fan · search: Garfield Halloween",
+          "requireEmbedCheck": true,
+          "titleMatch": "Garfield",
+          "minMinutes": 20,
+          "cap": 3
+        }
+      ]
+    },
+    "thanksgiving": {
+      "series": false,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUi59miGg0zt0Qv7pjpi-btg",
+          "tier": "wild",
+          "note": "fan · Marchives (Macy's parades, 70s/80s)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 15
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUyweK7GM-gW0Sv2xmr9uiPw",
+          "tier": "wild",
+          "note": "fan · Retro Memories (1985 Macy's parade)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Thanksgiving|Macy",
+          "minMinutes": 60,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU66CmZ0OddVGXDsWIFWm67A",
+          "tier": "wild",
+          "note": "fan · MST3K Rarities Archive (Turkey Day)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Turkey Day",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUsoiFs_IAf8uMoXd7vj3_Gg",
+          "tier": "wild",
+          "note": "fan · 80sCommercialVault (Thanksgiving)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Thanksgiving",
+          "minMinutes": 10,
+          "limit": 1000,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Macy's Thanksgiving Day Parade 198 full",
+          "tier": "wild",
+          "note": "fan · search: Macy's parade",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Thanksgiving|Macy|Parade))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:A Garfield Thanksgiving 1989 full",
+          "tier": "wild",
+          "note": "fan · search: Garfield Thanksgiving",
+          "requireEmbedCheck": true,
+          "titleMatch": "Garfield",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:A Charlie Brown Thanksgiving full",
+          "tier": "wild",
+          "note": "fan · search: Charlie Brown Thanksgiving",
+          "requireEmbedCheck": true,
+          "titleMatch": "Charlie Brown",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:MST3K Turkey Day marathon full",
+          "tier": "wild",
+          "note": "fan · search: Turkey Day",
+          "requireEmbedCheck": true,
+          "titleMatch": "Turkey Day",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Thanksgiving TV special 198 full",
+          "tier": "wild",
+          "note": "fan · search: Thanksgiving specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Thanksgiving))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 20
+        },
+        {
+          "url": "ytsearch40:Thanksgiving Day football 198 full game",
+          "tier": "wild",
+          "note": "fan · search: Thanksgiving football",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Thanksgiving|Lions|Cowboys))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:The Mouse on the Mayflower 1968 full",
+          "tier": "wild",
+          "note": "fan · search: Mouse on the Mayflower",
+          "requireEmbedCheck": true,
+          "titleMatch": "Mayflower",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Thanksgiving Day parade 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: parades",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Parade))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 15
+        }
+      ]
+    },
+    "newyear": {
+      "series": false,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUoKLdATOjvzN_Y-Ovn_rfJg",
+          "tier": "wild",
+          "note": "fan · American Bandstand Again (Rockin' Eve)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rockin|New Year",
+          "minMinutes": 30,
+          "cap": 15
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUj_jB4P2rupdjvSMcm8EZQw",
+          "tier": "wild",
+          "note": "fan · Gen X TV Memories (Rockin' Eve)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rockin|New Year",
+          "minMinutes": 30,
+          "limit": 3000,
+          "cap": 15
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU1LaBW1ptqdTv15ODUNeuJQ",
+          "tier": "wild",
+          "note": "fan · Jake Allonar (Rockin' Eve)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Rockin|New Year",
+          "minMinutes": 30,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Dick Clark New Year's Rockin' Eve 198 full",
+          "tier": "wild",
+          "note": "fan · search: Rockin' Eve",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Rockin|New Year))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:New Year's Eve 198 Times Square full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Times Square",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(New Year|Times Square))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Guy Lombardo New Year's Eve full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Guy Lombardo",
+          "requireEmbedCheck": true,
+          "titleMatch": "Lombardo",
+          "minMinutes": 20,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:New Year's Eve 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: New Year's Eve",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(New Year))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 15
+        }
+      ]
+    },
+    "valentines": {
+      "series": false,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "tier": "legit",
+          "note": "Sony Classic TV Rewind · The Dating Game, The Newlywed Game",
+          "titleMatch": "Dating Game|Newlywed Game",
+          "minMinutes": 15,
+          "cap": 40,
+          "series": {
+            "Dating Game": "The Dating Game",
+            "Newlywed": "The Newlywed Game"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUXR6IKwUOnNnbCOyBusV0wg",
+          "tier": "wild",
+          "note": "fan · Ziggy (Love Connection)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Love Connection",
+          "minMinutes": 15,
+          "cap": 30,
+          "series": "Love Connection"
+        },
+        {
+          "url": "ytsearch40:Be My Valentine Charlie Brown full",
+          "tier": "wild",
+          "note": "fan · search: Charlie Brown Valentine",
+          "requireEmbedCheck": true,
+          "titleMatch": "Valentine",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Bugs Bunny's Valentine 1979 full",
+          "tier": "wild",
+          "note": "fan · search: Bugs Bunny Valentine",
+          "requireEmbedCheck": true,
+          "titleMatch": "Valentine",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Popeye Valentine Special 1979 full",
+          "tier": "wild",
+          "note": "fan · search: Popeye Valentine",
+          "requireEmbedCheck": true,
+          "titleMatch": "Valentine",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Valentine's special 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Valentine's specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "Valentine",
+          "minMinutes": 20,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:The Love Boat full episode 198",
+          "tier": "wild",
+          "note": "fan · search: The Love Boat",
+          "requireEmbedCheck": true,
+          "titleMatch": "Love Boat",
+          "minMinutes": 40,
+          "cap": 20,
+          "series": "The Love Boat"
+        }
+      ]
+    },
+    "easter": {
+      "series": false,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUM-DhOq_-lF4slOdBRQMhcg",
+          "tier": "wild",
+          "note": "fan · HolidayFavorites (Easter)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter|Cottontail",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUBApmhO5aP6ZrIsnkL-Dcng",
+          "tier": "wild",
+          "note": "fan · Lar-Reacts (Easter specials with commercials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUtnu1KH_RIYLBOPDgZvqvdA",
+          "tier": "wild",
+          "note": "fan · Desert Tape Library (Easter)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Here Comes Peter Cottontail 1971 full",
+          "tier": "wild",
+          "note": "fan · search: Peter Cottontail",
+          "requireEmbedCheck": true,
+          "titleMatch": "Cottontail",
+          "minMinutes": 40,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:It's the Easter Beagle Charlie Brown full",
+          "tier": "wild",
+          "note": "fan · search: Easter Beagle",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:The First Easter Rabbit 1976 full",
+          "tier": "wild",
+          "note": "fan · search: First Easter Rabbit",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Daffy Duck's Easter Egg-citement 1980 full",
+          "tier": "wild",
+          "note": "fan · search: Daffy Easter",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Bugs Bunny Easter Special 1977 full",
+          "tier": "wild",
+          "note": "fan · search: Bugs Bunny Easter",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Easter Fever 1980 full special",
+          "tier": "wild",
+          "note": "fan · search: Easter Fever",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Peter and the Magic Egg 1983 full",
+          "tier": "wild",
+          "note": "fan · search: Peter and the Magic Egg",
+          "requireEmbedCheck": true,
+          "titleMatch": "Magic Egg",
+          "minMinutes": 20,
+          "cap": 3
+        },
+        {
+          "url": "ytsearch40:Easter TV special 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Easter specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:Easter Parade 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Easter parades",
+          "requireEmbedCheck": true,
+          "titleMatch": "Easter",
+          "minMinutes": 20,
+          "cap": 10
+        }
+      ]
+    },
+    "july4": {
+      "series": false,
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUsoiFs_IAf8uMoXd7vj3_Gg",
+          "tier": "wild",
+          "note": "fan · 80sCommercialVault (Liberty Weekend 1986)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Liberty Weekend",
+          "minMinutes": 60,
+          "limit": 1000,
+          "cap": 5
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU1LD79zYGSOA1HIQaO5mjSA",
+          "tier": "wild",
+          "note": "fan · Hudson Valley VHS (Liberty Weekend)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Liberty|July",
+          "minMinutes": 30,
+          "cap": 5
+        },
+        {
+          "url": "ytsearch40:A Capitol Fourth 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: A Capitol Fourth",
+          "requireEmbedCheck": true,
+          "titleMatch": "Capitol Fourth",
+          "minMinutes": 40,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Fourth of July fireworks 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: fireworks",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Fireworks|Fourth|July|4th))\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:Liberty Weekend 1986 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Liberty Weekend",
+          "requireEmbedCheck": true,
+          "titleMatch": "Liberty",
+          "minMinutes": 60,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Boston Pops Fourth of July 198 full",
+          "tier": "wild",
+          "note": "fan · search: Boston Pops",
+          "requireEmbedCheck": true,
+          "titleMatch": "Pops|Fourth|July",
+          "minMinutes": 30,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Independence Day special 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: July 4th specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(July|Fourth|Independence|4th))\\b19[78]\\d\\b",
+          "minMinutes": 30,
+          "cap": 15
+        },
+        {
+          "url": "ytsearch40:1976 Bicentennial celebration full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Bicentennial",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bicentennial|1976",
+          "minMinutes": 30,
+          "cap": 10
+        }
+      ]
+    },
+    "variety-day": {
+      "_note": "Daytime: talk, celebrity game shows, and Chuck Barris.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUGSJP4R77uPAeRjcp5VqOOw",
+          "tier": "legit",
+          "note": "The Price Is Right: The Barker Era · full episodes (anything over 30 min)",
+          "minMinutes": 30,
+          "limit": 3000,
+          "cap": 150,
+          "series": "The Price Is Right"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "tier": "legit",
+          "note": "Sony Classic TV Rewind · The Gong Show, Dating Game, Newlywed Game",
+          "titleMatch": "Gong Show|Dating Game|Newlywed Game",
+          "minMinutes": 15,
+          "cap": 80,
+          "series": {
+            "Gong Show": "The Gong Show",
+            "Dating Game": "The Dating Game",
+            "Newlywed": "The Newlywed Game"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUFC8Vt3FY_7svm_SOBK5aIQ",
+          "tier": "legit",
+          "note": "The Dick Cavett Show · full episodes and long collections (anything over 40 min)",
+          "minMinutes": 40,
+          "limit": 3000,
+          "cap": 60,
+          "series": "The Dick Cavett Show"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUrPdz7Te9m0lkR8ceHSwAsA",
+          "tier": "wild",
+          "note": "fan · Game Show Tube (Hollywood Squares, Pyramid, Password Plus)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(Hollywood Squares|Pyramid|Password Plus|Classic Concentration).*\\b19[78]\\d\\b|\\b19[78]\\d\\b.*(Hollywood Squares|Pyramid|Password)",
+          "minMinutes": 15,
+          "limit": 3000,
+          "cap": 120,
+          "series": {
+            "Hollywood Squares": "Hollywood Squares",
+            "Pyramid": "The $25,000 Pyramid",
+            "Password": "Password Plus",
+            "Concentration": "Classic Concentration"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU6H2nHZVlasjvR2QZqi3KFA",
+          "tier": "wild",
+          "note": "fan · The Game Show Vault (Pyramid, Joker's Wild, Treasure Hunt, Win Lose or Draw)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Pyramid|Joker|Treasure Hunt|Gong Show|Win, Lose|Whew|Wipeout|Pass the Buck",
+          "minMinutes": 15,
+          "limit": 3000,
+          "cap": 120,
+          "series": {
+            "Pyramid": "The $25,000 Pyramid",
+            "Joker": "The Joker's Wild",
+            "Treasure Hunt": "Treasure Hunt",
+            "Gong Show": "The Gong Show",
+            "Win, Lose": "Win, Lose or Draw",
+            "Whew": "Whew!",
+            "Wipeout": "Wipeout",
+            "Pass the Buck": "Pass the Buck"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUXR6IKwUOnNnbCOyBusV0wg",
+          "tier": "wild",
+          "note": "fan · Ziggy (Love Connection, Pass the Buck)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Love Connection|Pass the Buck|Finders Keepers",
+          "minMinutes": 15,
+          "cap": 80,
+          "series": {
+            "Love Connection": "Love Connection",
+            "Pass the Buck": "Pass the Buck",
+            "Finders": "Finders Keepers"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU3kppDwVz5BwzytIZlPUhUw",
+          "tier": "wild",
+          "note": "fan · MG Productions (Password Plus, Family Feud)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Password|Feud|Card Sharks|Match Game",
+          "minMinutes": 15,
+          "cap": 60
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU5bpfNgmYsmLnh7BgAl7x1g",
+          "tier": "wild",
+          "note": "fan · andyfilm (Siskel & Ebert, Sneak Previews)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Siskel|Sneak Previews|At The Movies",
+          "minMinutes": 15,
+          "cap": 80,
+          "series": "Siskel & Ebert"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUSlSK7oXVgdLk5Ppih1R8ew",
+          "tier": "wild",
+          "note": "fan · Archy L (Cavett, Merv, Carson clips)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b",
+          "minMinutes": 20,
+          "cap": 30
+        },
+        {
+          "url": "ytsearch40:Phil Donahue 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Donahue",
+          "requireEmbedCheck": true,
+          "titleMatch": "Donahue",
+          "minMinutes": 30,
+          "cap": 30,
+          "series": "Donahue"
+        },
+        {
+          "url": "ytsearch40:Merv Griffin Show 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Merv Griffin",
+          "requireEmbedCheck": true,
+          "titleMatch": "Merv",
+          "minMinutes": 30,
+          "cap": 30,
+          "series": "The Merv Griffin Show"
+        },
+        {
+          "url": "ytsearch40:Mike Douglas Show full episode 197",
+          "tier": "wild",
+          "note": "fan · search: Mike Douglas",
+          "requireEmbedCheck": true,
+          "titleMatch": "Mike Douglas",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "The Mike Douglas Show"
+        },
+        {
+          "url": "ytsearch40:Real People 198 full episode NBC",
+          "tier": "wild",
+          "note": "fan · search: Real People",
+          "requireEmbedCheck": true,
+          "titleMatch": "Real People",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "Real People"
+        },
+        {
+          "url": "ytsearch40:Lifestyles of the Rich and Famous 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Lifestyles",
+          "requireEmbedCheck": true,
+          "titleMatch": "Lifestyles",
+          "minMinutes": 20,
+          "cap": 20,
+          "series": "Lifestyles of the Rich and Famous"
+        }
+      ]
+    },
+    "variety-prime": {
+      "_note": "Prime time: specials, Battle of the Network Stars, awards, bloopers, and whatever the networks were doing on a Saturday night.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UU6HUb2g5po58q5f1VoPUcvg",
+          "tier": "wild",
+          "note": "fan · battleofthenetworkstars (complete episodes)",
+          "requireEmbedCheck": true,
+          "minMinutes": 40,
+          "cap": 25,
+          "series": "Battle of the Network Stars"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUdueE3x_RlMvvmdbynlKFxg",
+          "tier": "wild",
+          "note": "fan · Charlies angels movies (Battle of the Network Stars)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Battle of the Network",
+          "minMinutes": 40,
+          "cap": 15,
+          "series": "Battle of the Network Stars"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU5B6GxwLS3mAfroqPTL8lxQ",
+          "tier": "wild",
+          "note": "fan · Cliporama (Battle of the Network Stars)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Battle of the Network",
+          "minMinutes": 40,
+          "cap": 15,
+          "series": "Battle of the Network Stars"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU2FYk45tydEEiKs-btM0oxQ",
+          "tier": "wild",
+          "note": "fan · NewDuracellKid (Circus of the Stars)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Circus of the Stars",
+          "minMinutes": 40,
+          "cap": 15,
+          "series": "Circus of the Stars"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUj_jB4P2rupdjvSMcm8EZQw",
+          "tier": "wild",
+          "note": "fan · Gen X TV Memories (Fridays, Solid Gold, specials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "(Fridays|Solid Gold|Special|Complete).*\\b19[78]\\d\\b",
+          "minMinutes": 40,
+          "limit": 3000,
+          "cap": 60
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUIYLGHnLz7rRdRRLzGsN6FA",
+          "tier": "wild",
+          "note": "fan · DJ Ritty (Fridays)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Fridays",
+          "minMinutes": 40,
+          "cap": 30,
+          "series": "Fridays"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUfkZ0ECJ4gOUnTWw3kNHTVg",
+          "tier": "wild",
+          "note": "fan · Ugazzovision (SCTV, Hudson Brothers, Bobby Vinton)",
+          "requireEmbedCheck": true,
+          "titleMatch": "SCTV|Hudson Brothers|Bobby Vinton|Razzle Dazzle",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": {
+            "SCTV": "SCTV",
+            "Hudson": "The Hudson Brothers Razzle Dazzle Show",
+            "Vinton": "The Bobby Vinton Show"
+          }
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUepuqk1t-8J1nByerAKfP7g",
+          "tier": "wild",
+          "note": "fan · Lawrence Welk LPs (the Saturday show)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Lawrence Welk Show",
+          "minMinutes": 40,
+          "cap": 40,
+          "series": "The Lawrence Welk Show"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUQLdkISCgiSTKZllpxpmexg",
+          "tier": "wild",
+          "note": "fan · Dennis M. Pratt (Hee Haw)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Hee Haw",
+          "minMinutes": 40,
+          "cap": 30,
+          "series": "Hee Haw"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUhSyFoetNdO7oarms-TQm7w",
+          "tier": "wild",
+          "note": "fan · Kev The Ripper (awards shows, 80s specials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d (ABC|CBS|NBC|Syndicated) Full",
+          "minMinutes": 40,
+          "limit": 2000,
+          "cap": 40
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUZu1C0s3wYQvSFnjs-cFvlA",
+          "tier": "wild",
+          "note": "fan · PageantsHeyDay (Miss America)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Miss America.*\\b19[78]\\d\\b|\\b19[78]\\d\\b.*Miss America",
+          "minMinutes": 60,
+          "cap": 15,
+          "series": "Miss America"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU-ssAZ6qVu0glgFUIsC8VSA",
+          "tier": "wild",
+          "note": "fan · Museum of Classic Chicago Television (complete broadcasts)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Complete Broadcast.*\\b19[78]\\d\\b",
+          "titleExclude": "News|Movie|Theatre|Theater|Commercial|Soap|One Life|General Hospital",
+          "minMinutes": 20,
+          "limit": 4000,
+          "cap": 100
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUrtXJjoW83E1YglsNbUF4QA",
+          "tier": "wild",
+          "note": "fan · OLD TIME TELEVISION (Solid Gold)",
+          "requireEmbedCheck": true,
+          "titleMatch": "SOLID GOLD",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "Solid Gold"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU09K02EhHqvLSVoXJlVnJ-w",
+          "tier": "wild",
+          "note": "fan · Carson Tonight Show (Bob Hope specials)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bob Hope",
+          "minMinutes": 40,
+          "cap": 20,
+          "series": "Bob Hope"
+        },
+        {
+          "url": "ytsearch40:Bob Hope special 198 full NBC",
+          "tier": "wild",
+          "note": "fan · search: Bob Hope specials",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bob Hope",
+          "minMinutes": 40,
+          "cap": 20,
+          "series": "Bob Hope"
+        },
+        {
+          "url": "ytsearch40:Circus of the Stars full 198",
+          "tier": "wild",
+          "note": "fan · search: Circus of the Stars",
+          "requireEmbedCheck": true,
+          "titleMatch": "Circus of the Stars",
+          "minMinutes": 40,
+          "cap": 15,
+          "series": "Circus of the Stars"
+        },
+        {
+          "url": "ytsearch40:That's Incredible full episode 198",
+          "tier": "wild",
+          "note": "fan · search: That's Incredible",
+          "requireEmbedCheck": true,
+          "titleMatch": "Incredible",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "That's Incredible!"
+        },
+        {
+          "url": "ytsearch40:Ripley's Believe It or Not 198 full episode Jack Palance",
+          "tier": "wild",
+          "note": "fan · search: Ripley's",
+          "requireEmbedCheck": true,
+          "titleMatch": "Ripley",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "Ripley's Believe It or Not!"
+        },
+        {
+          "url": "ytsearch40:TV's Bloopers and Practical Jokes full episode",
+          "tier": "wild",
+          "note": "fan · search: Bloopers & Practical Jokes",
+          "requireEmbedCheck": true,
+          "titleMatch": "Bloopers",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "TV's Bloopers & Practical Jokes"
+        },
+        {
+          "url": "ytsearch40:The Muppet Show full episode",
+          "tier": "wild",
+          "note": "fan · search: The Muppet Show",
+          "requireEmbedCheck": true,
+          "titleMatch": "Muppet Show",
+          "minMinutes": 20,
+          "cap": 30,
+          "series": "The Muppet Show"
+        },
+        {
+          "url": "ytsearch40:Puttin' on the Hits full episode",
+          "tier": "wild",
+          "note": "fan · search: Puttin' on the Hits",
+          "requireEmbedCheck": true,
+          "titleMatch": "Puttin",
+          "minMinutes": 20,
+          "cap": 15,
+          "series": "Puttin' on the Hits"
+        },
+        {
+          "url": "ytsearch40:Star Search 198 full episode Ed McMahon",
+          "tier": "wild",
+          "note": "fan · search: Star Search",
+          "requireEmbedCheck": true,
+          "titleMatch": "Star Search",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "Star Search"
+        },
+        {
+          "url": "ytsearch40:SCTV full episode",
+          "tier": "wild",
+          "note": "fan · search: SCTV",
+          "requireEmbedCheck": true,
+          "titleMatch": "SCTV",
+          "minMinutes": 40,
+          "cap": 20,
+          "series": "SCTV"
+        },
+        {
+          "url": "ytsearch40:Night Flight 198 full episode USA Network",
+          "tier": "wild",
+          "note": "fan · search: Night Flight",
+          "requireEmbedCheck": true,
+          "titleMatch": "Night Flight",
+          "minMinutes": 40,
+          "cap": 15,
+          "series": "Night Flight"
+        },
+        {
+          "url": "ytsearch40:Academy Awards 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Oscars",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Academy Awards|Oscars))\\b19[78]\\d\\b",
+          "minMinutes": 90,
+          "cap": 10
+        },
+        {
+          "url": "ytsearch40:Miss Universe 198 full broadcast",
+          "tier": "wild",
+          "note": "fan · search: Miss Universe",
+          "requireEmbedCheck": true,
+          "titleMatch": "(?=.*(Miss Universe))\\b19[78]\\d\\b",
+          "minMinutes": 60,
+          "cap": 10,
+          "series": "Miss Universe"
+        }
+      ]
+    },
+    "variety-music": {
+      "_note": "Weekend afternoons: the dance shows.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUoKLdATOjvzN_Y-Ovn_rfJg",
+          "tier": "wild",
+          "note": "fan · American Bandstand Again",
+          "requireEmbedCheck": true,
+          "titleMatch": "American Bandstand.*(19[78]\\d).*(Full|VH1 Cut)|Full Episode",
+          "minMinutes": 15,
+          "cap": 100,
+          "series": "American Bandstand"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUfkZ0ECJ4gOUnTWw3kNHTVg",
+          "tier": "wild",
+          "note": "fan · Ugazzovision (Soul Train)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Soul Train",
+          "minMinutes": 30,
+          "cap": 60,
+          "series": "Soul Train"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUrtXJjoW83E1YglsNbUF4QA",
+          "tier": "wild",
+          "note": "fan · OLD TIME TELEVISION (Solid Gold)",
+          "requireEmbedCheck": true,
+          "titleMatch": "SOLID GOLD",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "Solid Gold"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUXN6vuPIoMioK3fA4hJpWkg",
+          "tier": "wild",
+          "note": "fan · Dance Fever Fan Page",
+          "requireEmbedCheck": true,
+          "titleMatch": "Dance Fever",
+          "minMinutes": 15,
+          "cap": 20,
+          "series": "Dance Fever"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUGtr3e4Crtz3Ihj-8LAKokQ",
+          "tier": "wild",
+          "note": "fan · Friday Night Videos",
+          "requireEmbedCheck": true,
+          "titleMatch": "Friday Night Videos",
+          "minMinutes": 20,
+          "cap": 30,
+          "series": "Friday Night Videos"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUTcJS9msY4IbdyZcTZt70dQ",
+          "tier": "wild",
+          "note": "fan · Mone Media (Friday Night Videos)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Friday Night Videos",
+          "minMinutes": 20,
+          "cap": 20,
+          "series": "Friday Night Videos"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UULl1My6p562dDYl1dHMw__A",
+          "tier": "wild",
+          "note": "fan · Retro Radio Joe (Friday Night Videos)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Friday Night Videos",
+          "minMinutes": 20,
+          "cap": 20,
+          "series": "Friday Night Videos"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUmg8T_xaTTNGWk1ymAzHN2w",
+          "tier": "wild",
+          "note": "fan · Kids Incorporated (full episodes)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Full Episode",
+          "minMinutes": 15,
+          "limit": 1000,
+          "cap": 40,
+          "series": "Kids Incorporated"
+        },
+        {
+          "url": "ytsearch40:Solid Gold 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Solid Gold",
+          "requireEmbedCheck": true,
+          "titleMatch": "Solid Gold",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "Solid Gold"
+        },
+        {
+          "url": "ytsearch40:Soul Train 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Soul Train",
+          "requireEmbedCheck": true,
+          "titleMatch": "Soul Train",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "Soul Train"
+        },
+        {
+          "url": "ytsearch40:Puttin' on the Hits 198 full",
+          "tier": "wild",
+          "note": "fan · search: Puttin' on the Hits",
+          "requireEmbedCheck": true,
+          "titleMatch": "Puttin",
+          "minMinutes": 20,
+          "cap": 10,
+          "series": "Puttin' on the Hits"
+        },
+        {
+          "url": "ytsearch40:Star Search 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Star Search",
+          "requireEmbedCheck": true,
+          "titleMatch": "Star Search",
+          "minMinutes": 30,
+          "cap": 20,
+          "series": "Star Search"
+        }
+      ]
+    },
+    "carson": {
+      "_note": "11:30 nightly, as nature intended.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=PLtu5wgVCwlsmyXFLmPVpxMyiJbq15JYYZ",
+          "tier": "legit",
+          "note": "Johnny Carson · Full Episodes playlist",
+          "minMinutes": 30,
+          "series": "The Tonight Show"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UU7McHNOsrUL2fRxTB_xvgRQ",
+          "tier": "legit",
+          "note": "Johnny Carson · full episodes and long sets (anything over 40 min)",
+          "minMinutes": 40,
+          "limit": 4000,
+          "cap": 200,
+          "series": "The Tonight Show"
+        }
+      ]
+    },
+    "letterman": {
+      "_note": "After Carson.",
+      "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUVWmcFDWz7evOe0Zbly3l8Q",
+          "tier": "wild",
+          "note": "fan · Don Giller (Late Night collections)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Letterman|Late Night",
+          "titleExclude": "Tributes to",
+          "minMinutes": 30,
+          "limit": 3000,
+          "cap": 150,
+          "series": "Late Night with David Letterman"
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=UUh6YakrJedK4yLAJi41Fm5A",
+          "tier": "wild",
+          "note": "fan · VHS Archive (Late Night full episodes)",
+          "requireEmbedCheck": true,
+          "titleMatch": "Letterman",
+          "minMinutes": 30,
+          "cap": 40,
+          "series": "Late Night with David Letterman"
+        },
+        {
+          "url": "ytsearch40:Late Night with David Letterman 198 full episode",
+          "tier": "wild",
+          "note": "fan · search: Late Night",
+          "requireEmbedCheck": true,
+          "titleMatch": "Letterman.*\\b19[78]\\d\\b|\\b19[78]\\d\\b.*Letterman",
+          "minMinutes": 30,
+          "cap": 30,
+          "series": "Late Night with David Letterman"
         }
       ]
     }
