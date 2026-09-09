@@ -25,17 +25,37 @@
       "name": "SITCOMS",
       "dayparts": [
         {
+          "from": "20:00",
+          "to": "24:00",
+          "pool": "sitcoms-late"
+        },
+        {
           "pool": "sitcoms"
         }
       ]
     },
     {
       "num": 4,
-      "id": "drama",
-      "name": "DRAMA",
+      "id": "action",
+      "name": "ACTION",
       "dayparts": [
         {
-          "pool": "dramas"
+          "from": "21:00",
+          "to": "23:00",
+          "pool": "drama-9pm"
+        },
+        {
+          "from": "23:00",
+          "to": "24:00",
+          "pool": "late-horror"
+        },
+        {
+          "from": "00:00",
+          "to": "06:00",
+          "pool": "late-horror"
+        },
+        {
+          "pool": "action"
         }
       ]
     },
@@ -105,6 +125,23 @@
       ]
     },
     {
+      "num": 11,
+      "id": "pbs",
+      "name": "PBS KIDS",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "17:00",
+          "pool": "kids"
+        },
+        {
+          "from": "17:00",
+          "to": "24:00",
+          "pool": "pbs-evening"
+        }
+      ]
+    },
+    {
       "num": 12,
       "id": "music-rap",
       "name": "RAP",
@@ -113,6 +150,28 @@
           "pool": "music-rap",
           "block": true,
           "label": "Videos"
+        }
+      ]
+    },
+    {
+      "num": 13,
+      "id": "cartoons",
+      "name": "CARTOONS",
+      "dayparts": [
+        {
+          "pool": "cartoons80"
+        }
+      ]
+    },
+    {
+      "num": 17,
+      "id": "classics",
+      "name": "CLASSICS",
+      "dayparts": [
+        {
+          "pool": "classics",
+          "block": true,
+          "label": "Classic Cartoons"
         }
       ]
     },
@@ -163,7 +222,7 @@
   "pools": {
     "sitcoms": {
       "minMinutes": 18,
-      "maxMinutes": 40,
+      "maxMinutes": 240,
       "sources": [
         {
           "tier": "legit",
@@ -259,90 +318,106 @@
           "note": "Shout! · Mary Hartman, Mary Hartman",
           "series": "Mary Hartman, Mary Hartman",
           "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7M9pIt1djE2BSg-VEpxXHhT"
-        }
-      ]
-    },
-    "dramas": {
-      "minMinutes": 40,
-      "maxMinutes": 110,
-      "sources": [
-        {
-          "tier": "legit",
-          "note": "Sony · Hart to Hart S1",
-          "series": "Hart to Hart",
-          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZuO4jG5VyYbhgIYm4MqyV-h"
         },
         {
           "tier": "legit",
-          "note": "Sony · Starsky & Hutch",
-          "series": "Starsky & Hutch",
-          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtDjFpWq7orIwZ9UqTuopTV"
+          "note": "Sony · The Jeffersons channel",
+          "url": "https://www.youtube.com/playlist?list=UUa5dZ2uBJ1nb-q8JgnnX2Wg",
+          "series": "The Jeffersons",
+          "titleExclude": "Compilation|Best|Times|Moments|Marathon|Top \\d|Why We Love|Classic Laughs|Funniest|Iconic"
         },
         {
           "tier": "legit",
-          "note": "Sony · Family",
-          "series": "Family",
-          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtfgdq1ZgV33xluXhDHtgKS"
+          "note": "Universal · Gimme a Break channel",
+          "url": "https://www.youtube.com/playlist?list=UUDv7pmSdRYBwT69y-4c1Pnw",
+          "series": "Gimme a Break!"
         },
         {
           "tier": "legit",
-          "note": "Sony · T.J. Hooker (full eps only survive the length filter)",
-          "series": "T.J. Hooker",
-          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZsEjzDxu_vMA2iD4iyOMHr2"
+          "note": "Sony · Sanford and Son channel",
+          "url": "https://www.youtube.com/playlist?list=UU-nLPHqVwvwAZSqAihRcSlg",
+          "series": "Sanford and Son",
+          "titleExclude": "Compilation|Best|Times|Moments|Marathon|Top \\d|Why We Love|Classic Laughs|Funniest|Iconic"
         },
         {
           "tier": "legit",
-          "note": "Sony · Fantasy Island (same)",
-          "series": "Fantasy Island",
-          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZtG6R24BfKSrJkmVkK1Rsci"
+          "note": "Sony · Classic TV Rewind uploads · Diff'rent Strokes",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Diff'rent Strokes",
+          "titleMatch": "Diff'?rent Strokes",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Sony · Charlie's Angels (same)",
-          "series": "Charlie's Angels",
-          "url": "https://www.youtube.com/playlist?list=PLLd8OpOlwVZujoItgA6J2qxADDt2DjMWR"
+          "note": "Sony · Classic TV Rewind uploads · The Facts of Life",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "The Facts of Life",
+          "titleMatch": "Facts of Life",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · Hart to Hart S3",
-          "series": "Hart to Hart",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7M6Kme3vB5bdXse1-k67DAQ"
+          "note": "Sony · Classic TV Rewind uploads · What's Happening!!",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "What's Happening!!",
+          "titleMatch": "What'?s Happening",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · Hill Street Blues",
-          "series": "Hill Street Blues",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7O-AWL9IgUXJUxUQKkN2cko"
+          "note": "Sony · Classic TV Rewind uploads · Benson",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Benson",
+          "titleMatch": "\\bBenson\\b",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · The Colbys",
-          "series": "The Colbys",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7NZttDuMb3BUolp-HbBBnpk"
+          "note": "Sony · Classic TV Rewind uploads · Silver Spoons",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Silver Spoons",
+          "titleMatch": "Silver Spoons",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · Manimal",
-          "series": "Manimal",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7MrTh5XicRj_vqbs5395mY0"
+          "note": "Sony · Classic TV Rewind uploads · Soap",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Soap",
+          "titleMatch": "\\bSoap\\b",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · Automan",
-          "series": "Automan",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7OFsBViaMBnLXPdTrcf_P8p"
+          "note": "Sony · Classic TV Rewind uploads · Square Pegs",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Square Pegs",
+          "titleMatch": "Square Pegs",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · Sapphire and Steel",
-          "series": "Sapphire and Steel",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7OnuFXO2atJxrLTTWrZiKUH"
+          "note": "Sony · Classic TV Rewind uploads · Barney Miller",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Barney Miller",
+          "titleMatch": "Barney Miller",
+          "limit": 4000
         },
         {
           "tier": "legit",
-          "note": "Shout! · Hammer House of Horror",
-          "series": "Hammer House of Horror",
-          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7MHhk6MA1XoYfRT3PsTJHgQ"
+          "note": "Sony · Classic TV Rewind uploads · Good Times",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Good Times",
+          "titleMatch": "Good Times",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Classic TV Rewind uploads · Sanford and Son",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Sanford and Son",
+          "titleMatch": "Sanford",
+          "limit": 4000
         }
       ]
     },
@@ -632,6 +707,376 @@
         }
       ],
       "caption": true
+    },
+    "kids": {
+      "minMinutes": 20,
+      "maxMinutes": 90,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Fred Rogers Productions · Mister Rogers' Neighborhood uploads",
+          "url": "https://www.youtube.com/playlist?list=UUQr37RLNViAkEwli9WiaUug",
+          "series": "Mister Rogers' Neighborhood"
+        },
+        {
+          "tier": "legit",
+          "note": "PBS KIDS uploads · Mister Rogers full episodes",
+          "url": "https://www.youtube.com/playlist?list=UUrNnk0wFBnCS1awGjq_ijGQ",
+          "series": "Mister Rogers' Neighborhood",
+          "titleMatch": "Mister Rogers",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Reading Rainbow (Official) uploads",
+          "url": "https://www.youtube.com/playlist?list=UUR6Cv_7e_t6M9Sah7LveKzQ",
+          "series": "Reading Rainbow",
+          "maxMinutes": 130
+        },
+        {
+          "tier": "legit",
+          "note": "Thomas & Friends official · classic-era compilations only",
+          "url": "https://www.youtube.com/playlist?list=UU0qrcKuayvbMtPj-WXNFylA",
+          "series": "Thomas & Friends",
+          "titleMatch": "classic|1984|1985|1986|Series [1-3]\\b|Season [1-3]\\b|Ringo|Carlin",
+          "limit": 3000
+        },
+        {
+          "tier": "legit",
+          "note": "Mr. Wizard Studios · Mr. Wizard's World",
+          "url": "https://www.youtube.com/playlist?list=UUx_J_aSKyWaNcEjK-eS4Jxg",
+          "series": "Mr. Wizard's World"
+        }
+      ]
+    },
+    "pbs-evening": {
+      "minMinutes": 20,
+      "maxMinutes": 60,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Bob Ross Inc. · The Joy of Painting",
+          "url": "https://www.youtube.com/playlist?list=UUxcnsr1R5Ge_fbTu5ajt8DQ",
+          "series": "The Joy of Painting",
+          "titleMatch": "^Bob Ross - ",
+          "titleExclude": "Podcast|Hankins|Special Edition"
+        },
+        {
+          "tier": "legit",
+          "note": "Mr. Wizard Studios · Mr. Wizard's World",
+          "url": "https://www.youtube.com/playlist?list=UUx_J_aSKyWaNcEjK-eS4Jxg",
+          "series": "Mr. Wizard's World"
+        }
+      ]
+    },
+    "sitcoms-late": {
+      "minMinutes": 18,
+      "maxMinutes": 240,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Paramount+ uploads · Cheers full episodes",
+          "url": "https://www.youtube.com/playlist?list=UUrRttZIypNTA1Mrfwo745Sg",
+          "series": "Cheers",
+          "titleMatch": "\\bCheers\\b",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · The Jeffersons channel",
+          "url": "https://www.youtube.com/playlist?list=UUa5dZ2uBJ1nb-q8JgnnX2Wg",
+          "series": "The Jeffersons",
+          "titleExclude": "Compilation|Best|Times|Moments|Marathon|Top \\d|Why We Love|Classic Laughs|Funniest|Iconic"
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Sanford and Son channel",
+          "url": "https://www.youtube.com/playlist?list=UU-nLPHqVwvwAZSqAihRcSlg",
+          "series": "Sanford and Son",
+          "titleExclude": "Compilation|Best|Times|Moments|Marathon|Top \\d|Why We Love|Classic Laughs|Funniest|Iconic"
+        }
+      ]
+    },
+    "action": {
+      "minMinutes": 40,
+      "maxMinutes": 110,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Shout! uploads · Hunter",
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "series": "Hunter",
+          "titleMatch": "^Hunter: Episode",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! uploads · 21 Jump Street",
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "series": "21 Jump Street",
+          "titleMatch": "^21 Jump Street: Episode",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Starsky & Hutch",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Starsky & Hutch",
+          "titleMatch": "Starsky",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Hart to Hart",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Hart to Hart",
+          "titleMatch": "Hart to Hart",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · T.J. Hooker",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "T.J. Hooker",
+          "titleMatch": "T\\.?\\s?J\\.? Hooker",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Charlie's Angels",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Charlie's Angels",
+          "titleMatch": "Charlie'?s Angels",
+          "limit": 4000
+        }
+      ]
+    },
+    "drama-9pm": {
+      "minMinutes": 40,
+      "maxMinutes": 110,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Sony · Fantasy Island",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Fantasy Island",
+          "titleMatch": "Fantasy Island",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Sony · Hart to Hart",
+          "url": "https://www.youtube.com/playlist?list=UUwzOB_od1GTnEuR8fDZnYOA",
+          "series": "Hart to Hart",
+          "titleMatch": "Hart to Hart",
+          "limit": 4000
+        }
+      ]
+    },
+    "late-horror": {
+      "minMinutes": 40,
+      "maxMinutes": 110,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Shout! · Hammer House of Horror",
+          "series": "Hammer House of Horror",
+          "url": "https://www.youtube.com/playlist?list=PLBrrfZs-ew7MHhk6MA1XoYfRT3PsTJHgQ"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! uploads · Hammer House of Horror, Sapphire & Steel",
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "titleMatch": "Hammer House|Sapphire",
+          "limit": 4000
+        }
+      ]
+    },
+    "cartoons80": {
+      "minMinutes": 18,
+      "maxMinutes": 400,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Hasbro Pulse uploads · Transformers",
+          "url": "https://www.youtube.com/playlist?list=UUGVfFNdHrF0sfI9S4MNdaqA",
+          "series": "Transformers",
+          "titleMatch": "Transformers: Generation 1",
+          "limit": 4000,
+          "titleExclude": "Compilation|Interview|Fanstream|SDCC|Panel|Trailer",
+          "maxMinutes": 30
+        },
+        {
+          "tier": "legit",
+          "note": "Hasbro uploads · G.I. Joe",
+          "url": "https://www.youtube.com/playlist?list=UU-r13SLLdZtZNmuC2bMnlmw",
+          "series": "G.I. Joe",
+          "titleMatch": "G\\.?\\s?I\\.? Joe",
+          "limit": 4000,
+          "titleExclude": "Compilation|Marathon|Trailer|Interview"
+        },
+        {
+          "tier": "legit",
+          "note": "Paramount/Nick · TMNT channel · 1987 series",
+          "url": "https://www.youtube.com/playlist?list=UUTsgmnXbWotzbR36vU0YPrA",
+          "series": "Teenage Mutant Ninja Turtles",
+          "titleMatch": "1987|Classic|Original",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Netflix Family uploads · He-Man",
+          "url": "https://www.youtube.com/playlist?list=UUpInjhuJ1WUekcFeXPPyGGg",
+          "series": "He-Man",
+          "titleMatch": "He-Man",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Warner · GenWB uploads · Thundercats",
+          "url": "https://www.youtube.com/playlist?list=UUzWxR7srCLRQLTr1CaLStig",
+          "series": "Thundercats",
+          "titleMatch": "Thundercats",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "The Smurfs official uploads",
+          "url": "https://www.youtube.com/playlist?list=UUeY4C8Sbx8B4bIyREPSvORQ",
+          "series": "The Smurfs",
+          "limit": 3000,
+          "maxMinutes": 130
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · Inspector Gadget",
+          "url": "https://www.youtube.com/playlist?list=UUI-lg_sDdzBtYKVpebqasIA",
+          "series": "Inspector Gadget",
+          "titleMatch": "Inspector Gadget \\d{3}|CLASSIC CARTOON|Classic Cartoons|Season (One|Two)",
+          "titleExclude": "2\\.0|NEW SE|Compilation|Marathon",
+          "maxMinutes": 30
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain Kids uploads · The Littles",
+          "url": "https://www.youtube.com/playlist?list=UUbmWOFTbZoDLWqG1rvFnJ0g",
+          "series": "The Littles",
+          "titleMatch": "Littles",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · Super Mario Bros. Super Show",
+          "url": "https://www.youtube.com/playlist?list=UU3aPz2krwDUTks-8MS_WQnQ",
+          "series": "Super Mario Bros. Super Show",
+          "limit": 3000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain Hero Tower · Pole Position",
+          "url": "https://www.youtube.com/playlist?list=UUUVnfQaEmCIhFZC5d_JniyQ",
+          "series": "Pole Position",
+          "titleMatch": "Pole Position",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · C.O.P.S.",
+          "url": "https://www.youtube.com/playlist?list=UUBtokVFJmNVQFv65TZ4w1KQ",
+          "series": "C.O.P.S.",
+          "titleMatch": "C\\.?O\\.?P\\.?S",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "WildBrain · Beverly Hills Teens",
+          "url": "https://www.youtube.com/playlist?list=UUM6iX7XsCb7hvZIZ2ryq58g",
+          "series": "Beverly Hills Teens"
+        },
+        {
+          "tier": "legit",
+          "note": "TMS Official · Galaxy High",
+          "url": "https://www.youtube.com/playlist?list=UUzGf0DdUJVrsbcWL3e_tK1Q",
+          "series": "Galaxy High",
+          "titleMatch": "Galaxy High",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Mattel · Masters of the Universe channel · He-Man classic episodes",
+          "url": "https://www.youtube.com/playlist?list=UUWV0Qgo4Yz7E5_oNF4VJ6Rg",
+          "titleMatch": "^He-Man Official \\|",
+          "limit": 3000,
+          "series": "He-Man",
+          "titleExclude": "Compilation|Help Their|How He-Man|Special|Marathon|Best",
+          "maxMinutes": 26
+        },
+        {
+          "tier": "legit",
+          "note": "Mattel · Masters of the Universe channel · She-Ra classic episodes",
+          "url": "https://www.youtube.com/playlist?list=UUWV0Qgo4Yz7E5_oNF4VJ6Rg",
+          "titleMatch": "She-Ra Princess of Power",
+          "limit": 3000,
+          "series": "She-Ra: Princess of Power",
+          "titleExclude": "Compilation|Special|Marathon|Best|Help Their",
+          "maxMinutes": 26
+        }
+      ]
+    },
+    "classics": {
+      "minMinutes": 5,
+      "maxMinutes": 90,
+      "series": false,
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Warner Bros. Classics uploads (Looney Tunes, Huckleberry Hound)",
+          "url": "https://www.youtube.com/playlist?list=UUU0rIMU3k_AsVA8d6N1B03w",
+          "limit": 3000
+        },
+        {
+          "tier": "legit",
+          "note": "Warner · GenWB uploads · Hanna-Barbera classics",
+          "url": "https://www.youtube.com/playlist?list=UUzWxR7srCLRQLTr1CaLStig",
+          "titleMatch": "Flintstones|Jetsons|Yogi|Huckleberry|Tom and Jerry|Scooby|Wacky Races|Top Cat|Magilla|Quick Draw|Snagglepuss",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "Universal · Woody Woodpecker channel",
+          "url": "https://www.youtube.com/playlist?list=UUB2aeGGPNj7l5Z71bYNqX-Q"
+        },
+        {
+          "tier": "legit",
+          "note": "Felix the Cat official",
+          "url": "https://www.youtube.com/playlist?list=UU8MoY-o16cP7bAQxFdEvGaQ"
+        },
+        {
+          "tier": "legit",
+          "note": "MGM · Official Pink Panther",
+          "url": "https://www.youtube.com/playlist?list=UUFeUyPY6W8qX8w2o6oSiRmw",
+          "titleExclude": "1993|Pals|2010"
+        },
+        {
+          "tier": "legit",
+          "note": "Shout! uploads · Speed Racer, Top Cat",
+          "url": "https://www.youtube.com/playlist?list=UUpHaAKu74UHvcYCi2g_PvBQ",
+          "titleMatch": "Speed Racer|Top Cat",
+          "limit": 4000
+        },
+        {
+          "tier": "legit",
+          "note": "TokuSHOUTsu · Speed Racer",
+          "url": "https://www.youtube.com/playlist?list=UU8NdtyLr-9_Kslj4bML6SPw",
+          "titleMatch": "Speed Racer",
+          "limit": 3000
+        },
+        {
+          "tier": "legit",
+          "note": "King Features · Popeye and Friends Official",
+          "url": "https://www.youtube.com/playlist?list=UUqvXAiNyn8pd9SVPclWfJTg"
+        }
+      ]
     }
   },
   "breakSeconds": 60,
