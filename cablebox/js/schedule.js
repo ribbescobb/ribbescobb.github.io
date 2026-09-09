@@ -185,7 +185,7 @@
         if (clip) { out.push({ start: tt, end: tt + clip.d, kind: 'program', pid: k + 0.5, id: clip.id, title: clip.t, series: '', off: 0, dur: clip.d, pool: 'classics', label: 'Cartoon' }); tt += clip.d; }
       }
       if (ads && tt < slotEnd) fillBreak(out, tt, slotEnd, seed, k * 1000 + 99, catalog);
-      t = slotEnd; lastBreak = slotEnd; k++;
+      t = ads ? slotEnd : tt; lastBreak = t; k++;   // no commercials on this channel = no padding: the next program starts when this one ends
     }
     return out;
   }
@@ -203,7 +203,11 @@
     const list = dayList(channel, when, catalog);
     const s = secOfDay(when);
     let i = list.findIndex(e => s >= e.start && s < e.end);
-    if (i < 0) i = list.length - 1;
+    if (i < 0) {   // a hole: off the air until the next entry
+      const next = list.find(e => e.start > s), prev = [...list].reverse().find(e => e.end <= s);
+      const e = { start: prev ? prev.end : 0, end: next ? next.start : DAY, kind: 'off' };
+      return { entry: e, index: -1, elapsed: s - e.start, list, dayStart: midnight(when) };
+    }
     const e = list[i];
     return { entry: e, index: i, elapsed: s - e.start, list, dayStart: midnight(when) };
   }
