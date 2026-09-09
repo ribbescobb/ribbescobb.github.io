@@ -1298,7 +1298,7 @@
           "tier": "wild",
           "note": "fan · search: GMA",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Good Morning America|GMA))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Good Morning America|GMA)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 10
         },
@@ -1307,7 +1307,7 @@
           "tier": "wild",
           "note": "fan · search: CBS Morning News",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Morning News))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Morning News)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 10
         }
@@ -1380,7 +1380,8 @@
           "titleExclude": "Commercial|Promo|Opening|Closing|Ending|Bumper",
           "minMinutes": 10,
           "limit": 4000,
-          "cap": 20
+          "cap": 20,
+          "seriesFrom": "^(?:NBC|CBS|ABC|PBS|WGN|WFLD|WLS|WBBM|WMAQ)(?: Network| Channel \\d+)? - ([^-\"(]+?)\\s*(?:-|\"|\\()"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UU4LibjxwJ2SIwpGSUo41yOQ",
@@ -1398,7 +1399,7 @@
           "tier": "wild",
           "note": "fan · BetaMaxBill (Nightline, Cronkite)",
           "requireEmbedCheck": true,
-          "titleMatch": "Nightline|News|Election|Cronkite|Koppel|Report",
+          "titleMatch": "^(?=.*(Nightline|News|Election|Cronkite|Koppel|Report)).*\\b19[78]\\d\\b",
           "titleExclude": "Kennedy Center|Birthday",
           "minMinutes": 20,
           "cap": 15
@@ -1408,7 +1409,7 @@
           "tier": "wild",
           "note": "fan · search: CNN",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(CNN))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(CNN)).*\\b19[78]\\d\\b",
           "minMinutes": 15,
           "cap": 10
         },
@@ -1417,7 +1418,7 @@
           "tier": "wild",
           "note": "fan · search: local newscasts",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(News))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(News)).*\\b19[78]\\d\\b",
           "minMinutes": 15,
           "cap": 10
         }
@@ -1432,7 +1433,7 @@
           "tier": "wild",
           "note": "fan · search: 60 Minutes",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(60 Minutes))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(60 Minutes)).*\\b19[78]\\d\\b",
           "minMinutes": 25,
           "cap": 15
         },
@@ -1441,7 +1442,7 @@
           "tier": "wild",
           "note": "fan · search: 20/20",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(20/20))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(20/20)).*\\b19[78]\\d\\b",
           "minMinutes": 25,
           "cap": 15
         },
@@ -1450,7 +1451,7 @@
           "tier": "wild",
           "note": "fan · search: Nightline",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Nightline))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Nightline)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 15
         },
@@ -1459,7 +1460,7 @@
           "tier": "wild",
           "note": "fan · Kenneth McDonough (20/20, Nightline)",
           "requireEmbedCheck": true,
-          "titleMatch": "20/20|Nightline|Dateline|Primetime",
+          "titleMatch": "^(?=.*(20/20|Nightline|Primetime)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 15
         },
@@ -1584,7 +1585,7 @@
           "tier": "wild",
           "note": "fan · Louie's Basement Tapes (NBA)",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(NBA|Celtics|Lakers|Finals))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(NBA|Celtics|Lakers|Finals)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 40,
           "series": "NBA"
@@ -1594,7 +1595,7 @@
           "tier": "wild",
           "note": "fan · GO SPORTS! (NHL)",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(NHL|Stanley Cup))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(NHL|Stanley Cup)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 40,
           "series": "NHL"
@@ -1604,7 +1605,7 @@
           "tier": "wild",
           "note": "fan · Football 4 Life (college football)",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Bowl|\\bvs\\b|Football))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Bowl|\\bvs\\b|Football)).*\\b19[78]\\d\\b",
           "minMinutes": 90,
           "cap": 40,
           "series": "College Football"
@@ -1662,7 +1663,7 @@
           "tier": "wild",
           "note": "fan · search: Wide World of Sports",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Wide World))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Wide World)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 30
         },
@@ -1680,7 +1681,7 @@
           "tier": "wild",
           "note": "fan · search: Ironman",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Ironman))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Ironman)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20
         },
@@ -1689,7 +1690,7 @@
           "tier": "wild",
           "note": "fan · search: boxing",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Boxing|\\bvs\\b|Fight))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Boxing|\\bvs\\b|Fight)).*\\b19[78]\\d\\b",
           "minMinutes": 15,
           "cap": 30
         },
@@ -1698,7 +1699,7 @@
           "tier": "wild",
           "note": "fan · search: NBA",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(NBA))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(NBA)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 30
         },
@@ -1707,7 +1708,7 @@
           "tier": "wild",
           "note": "fan · search: NHL",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(NHL|Stanley Cup))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(NHL|Stanley Cup)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 30
         },
@@ -1716,7 +1717,7 @@
           "tier": "wild",
           "note": "fan · search: college football",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Bowl|\\bvs\\b|Football))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Bowl|\\bvs\\b|Football)).*\\b19[78]\\d\\b",
           "minMinutes": 90,
           "cap": 30
         },
@@ -1725,7 +1726,7 @@
           "tier": "wild",
           "note": "fan · search: Globetrotters",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Globetrotters))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Globetrotters)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 10
         },
@@ -1734,7 +1735,7 @@
           "tier": "wild",
           "note": "fan · search: Kentucky Derby",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Derby))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Derby)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20
         },
@@ -1743,7 +1744,7 @@
           "tier": "wild",
           "note": "fan · search: Tour de France",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Tour de France))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Tour de France)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20
         },
@@ -1752,7 +1753,7 @@
           "tier": "wild",
           "note": "fan · search: figure skating",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Skating))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Skating)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20
         },
@@ -1761,7 +1762,7 @@
           "tier": "wild",
           "note": "fan · search: 1984 Olympics",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Olympic))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Olympic)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20
         },
@@ -1770,7 +1771,7 @@
           "tier": "wild",
           "note": "fan · search: 1988 Olympics",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Olympic))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Olympic)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20
         },
@@ -1779,7 +1780,7 @@
           "tier": "wild",
           "note": "fan · search: 1980 Winter Olympics",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Olympic))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Olympic)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20
         },
@@ -1932,7 +1933,7 @@
           "tier": "wild",
           "note": "fan · Larry's Classic Sports (NWA / Mid-Atlantic)",
           "requireEmbedCheck": true,
-          "titleMatch": "\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(NWA|Wrestling|WCW|WCCW|Mid-Atlantic|Championship|Starrcade)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 50,
           "series": "NWA"
@@ -1942,7 +1943,7 @@
           "tier": "wild",
           "note": "fan · Classic Wrestling stuff (NWA)",
           "requireEmbedCheck": true,
-          "titleMatch": "\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(NWA|Wrestling|WCW|WCCW|AWA|WWF|Championship)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 50,
           "series": "NWA"
@@ -1952,7 +1953,7 @@
           "tier": "wild",
           "note": "fan · search: AWA",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(AWA|Wrestling))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(AWA|Wrestling)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 30,
           "series": "AWA"
@@ -1962,7 +1963,7 @@
           "tier": "wild",
           "note": "fan · search: WWF Superstars",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(WWF|Superstars|Wrestling))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(WWF|Superstars|Wrestling)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 30,
           "series": "WWF"
@@ -1972,7 +1973,7 @@
           "tier": "wild",
           "note": "fan · search: Georgia Championship Wrestling",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Wrestling))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Wrestling)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20,
           "series": "NWA"
@@ -2058,7 +2059,7 @@
           "url": "https://www.youtube.com/playlist?list=UUWV0Qgo4Yz7E5_oNF4VJ6Rg",
           "tier": "legit",
           "note": "Masters of the Universe · He-Man & She-Ra Christmas Special",
-          "titleMatch": "Christmas",
+          "titleMatch": "Christmas Special",
           "minMinutes": 20,
           "titleExclude": "Commentary"
         },
@@ -2307,7 +2308,7 @@
           "tier": "wild",
           "note": "fan · search: Christmas specials",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Christmas))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Christmas)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 30
         },
@@ -2537,7 +2538,7 @@
           "tier": "wild",
           "note": "fan · search: Halloween specials",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Halloween))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Halloween)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 30
         },
@@ -2587,9 +2588,10 @@
           "tier": "wild",
           "note": "fan · MST3K Rarities Archive (Turkey Day)",
           "requireEmbedCheck": true,
-          "titleMatch": "Turkey Day",
+          "titleMatch": "^(?=.*Turkey Day).*\\b19[78]\\d\\b",
           "minMinutes": 20,
-          "cap": 10
+          "cap": 10,
+          "maxMinutes": 200
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUsoiFs_IAf8uMoXd7vj3_Gg",
@@ -2606,7 +2608,7 @@
           "tier": "wild",
           "note": "fan · search: Macy's parade",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Thanksgiving|Macy|Parade))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Thanksgiving|Macy|Parade)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 15
         },
@@ -2633,16 +2635,17 @@
           "tier": "wild",
           "note": "fan · search: Turkey Day",
           "requireEmbedCheck": true,
-          "titleMatch": "Turkey Day",
+          "titleMatch": "^(?=.*Turkey Day).*\\b19[78]\\d\\b",
           "minMinutes": 20,
-          "cap": 10
+          "cap": 10,
+          "maxMinutes": 200
         },
         {
           "url": "ytsearch40:Thanksgiving TV special 198 full",
           "tier": "wild",
           "note": "fan · search: Thanksgiving specials",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Thanksgiving))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Thanksgiving)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20
         },
@@ -2651,7 +2654,7 @@
           "tier": "wild",
           "note": "fan · search: Thanksgiving football",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Thanksgiving|Lions|Cowboys))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Thanksgiving|Lions|Cowboys)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 15
         },
@@ -2669,7 +2672,7 @@
           "tier": "wild",
           "note": "fan · search: parades",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Parade))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Parade)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 15
         }
@@ -2711,7 +2714,7 @@
           "tier": "wild",
           "note": "fan · search: Rockin' Eve",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Rockin|New Year))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Rockin|New Year)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 15
         },
@@ -2720,7 +2723,7 @@
           "tier": "wild",
           "note": "fan · search: Times Square",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(New Year|Times Square))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(New Year|Times Square)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 10
         },
@@ -2738,7 +2741,7 @@
           "tier": "wild",
           "note": "fan · search: New Year's Eve",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(New Year))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(New Year)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 15
         }
@@ -2827,7 +2830,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter|Cottontail",
           "minMinutes": 20,
-          "cap": 10
+          "cap": 10,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUBApmhO5aP6ZrIsnkL-Dcng",
@@ -2836,7 +2840,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 10
+          "cap": 10,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUtnu1KH_RIYLBOPDgZvqvdA",
@@ -2845,7 +2850,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 10
+          "cap": 10,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Here Comes Peter Cottontail 1971 full",
@@ -2854,7 +2860,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Cottontail",
           "minMinutes": 40,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:It's the Easter Beagle Charlie Brown full",
@@ -2863,7 +2870,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:The First Easter Rabbit 1976 full",
@@ -2872,7 +2880,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Daffy Duck's Easter Egg-citement 1980 full",
@@ -2881,7 +2890,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Bugs Bunny Easter Special 1977 full",
@@ -2890,7 +2900,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Easter Fever 1980 full special",
@@ -2899,7 +2910,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Peter and the Magic Egg 1983 full",
@@ -2908,7 +2920,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Magic Egg",
           "minMinutes": 20,
-          "cap": 3
+          "cap": 3,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Easter TV special 198 full broadcast",
@@ -2917,7 +2930,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 15
+          "cap": 15,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         },
         {
           "url": "ytsearch40:Easter Parade 198 full broadcast",
@@ -2926,7 +2940,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Easter",
           "minMinutes": 20,
-          "cap": 10
+          "cap": 10,
+          "titleExclude": "Max & Ruby|Peppa|Bluey|Paw Patrol|Soundtrack|Ryan|Toy"
         }
       ]
     },
@@ -2957,7 +2972,7 @@
           "tier": "wild",
           "note": "fan · search: A Capitol Fourth",
           "requireEmbedCheck": true,
-          "titleMatch": "Capitol Fourth",
+          "titleMatch": "^(?=.*(Capitol Fourth)).*\\b19[78]\\d\\b",
           "minMinutes": 40,
           "cap": 10
         },
@@ -2966,7 +2981,7 @@
           "tier": "wild",
           "note": "fan · search: fireworks",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Fireworks|Fourth|July|4th))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Fireworks|Fourth|July|4th)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 15
         },
@@ -2975,7 +2990,7 @@
           "tier": "wild",
           "note": "fan · search: Liberty Weekend",
           "requireEmbedCheck": true,
-          "titleMatch": "Liberty",
+          "titleMatch": "^(?=.*(Liberty)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 10
         },
@@ -2984,7 +2999,7 @@
           "tier": "wild",
           "note": "fan · search: Boston Pops",
           "requireEmbedCheck": true,
-          "titleMatch": "Pops|Fourth|July",
+          "titleMatch": "^(?=.*(Pops|Fourth|July)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 10
         },
@@ -2993,7 +3008,7 @@
           "tier": "wild",
           "note": "fan · search: July 4th specials",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(July|Fourth|Independence|4th))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(July|Fourth|Independence|4th)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 15
         },
@@ -3002,7 +3017,7 @@
           "tier": "wild",
           "note": "fan · search: Bicentennial",
           "requireEmbedCheck": true,
-          "titleMatch": "Bicentennial|1976",
+          "titleMatch": "^(?=.*(Bicentennial|1976)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 10
         }
@@ -3297,7 +3312,8 @@
           "titleExclude": "News|Movie|Theatre|Theater|Commercial|Soap|One Life|General Hospital",
           "minMinutes": 20,
           "limit": 4000,
-          "cap": 100
+          "cap": 100,
+          "seriesFrom": "^(?:NBC|CBS|ABC|PBS|Syndicated|WGN|WFLD|WLS|WBBM|WMAQ) (?:Network|Channel \\d+) - ([^-\"(]+?)\\s*(?:-|\"|\\()"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUrtXJjoW83E1YglsNbUF4QA",
@@ -3424,7 +3440,7 @@
           "tier": "wild",
           "note": "fan · search: Oscars",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Academy Awards|Oscars))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Academy Awards|Oscars)).*\\b19[78]\\d\\b",
           "minMinutes": 90,
           "cap": 10
         },
@@ -3433,7 +3449,7 @@
           "tier": "wild",
           "note": "fan · search: Miss Universe",
           "requireEmbedCheck": true,
-          "titleMatch": "(?=.*(Miss Universe))\\b19[78]\\d\\b",
+          "titleMatch": "^(?=.*(Miss Universe)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 10,
           "series": "Miss Universe"
