@@ -92,26 +92,30 @@ body {
 /* ---------------- Guide (channel 1) ---------------- */
 .glass.guide-mode { background: #0a0aa4; }
 .glass.guide-mode .raster, .glass.guide-mode .static, .glass.guide-mode .standby, .glass.guide-mode .testpattern {
-  inset: auto; top: 1.4cqw; left: 50%; transform: translateX(-50%);
-  height: max(20cqw, 200px); width: calc(max(20cqw, 200px) * 4 / 3);   /* a 4:3 promo window; YouTube's floor is 200px */
+  inset: auto; top: 1.2cqw; left: 50%; transform: translateX(-50%);
+  height: 200px; width: 267px;   /* the promo window, at YouTube's 200px floor so the grid gets the room */
 }
 .glass.guide-mode .standby { font-size: 2.6cqw; }
 .glass.guide-mode .testpattern .signoff { font-size: 1.6cqw; }
 .guide {
-  position: absolute; left: 4%; right: 4%; top: calc(max(20cqw, 200px) + 2.4cqw); bottom: 4%; display: none; flex-direction: column;
-  background: #0a0aa4; color: #fff; font-family: VT323, "Courier New", monospace; font-size: 2.05cqw; line-height: 2.7cqw;
+  position: absolute; left: 4%; right: 4%; top: calc(200px + 2cqw); bottom: 4%; display: none; flex-direction: column;
+  background: #0a0aa4; color: #fff; font-family: VT323, "Courier New", monospace; font-size: 1.9cqw; line-height: 2.5cqw;
   border-top: 0.3cqw solid #0a0aa4;
 }
 .glass.guide-mode .guide { display: flex; }
-.guide-head, .grow { display: grid; grid-template-columns: 10.5cqw repeat(4, 1fr); }
+.guide-head { display: grid; grid-template-columns: 10.5cqw repeat(4, 1fr); }
+.grow { display: grid; grid-template-columns: 10.5cqw 1fr; }
 .guide-head { background: #3d3de0; color: #fff; height: 2.9cqw; align-items: center; flex: none; }
 .guide-head .gclock { color: #ffe600; padding-left: 0.6cqw; }
 .guide-head div { padding-left: 0.5cqw; border-left: 0.15cqw solid #1c1cb8; overflow: hidden; white-space: nowrap; }
 .guide-head div:first-child { border-left: 0; }
 .guide-viewport { flex: 1; overflow: hidden; position: relative; }
 .guide-rows { will-change: transform; }
-.grow { height: 3.1cqw; align-items: center; border-top: 0.15cqw solid #2a2acc; }
-.grow .gch { color: #ffe600; padding-left: 0.6cqw; white-space: nowrap; overflow: hidden; }
+.grow { height: 2.75cqw; align-items: stretch; border-top: 0.15cqw solid #2a2acc; }
+.gtl { position: relative; overflow: hidden; background: repeating-linear-gradient(90deg, transparent 0 calc(25% - 0.15cqw), #2a2acc calc(25% - 0.15cqw) 25%); }   /* half-hour lines behind the cells */
+.grow .gp { position: absolute; top: 0; bottom: 0; display: flex; align-items: center; box-sizing: border-box; }
+.grow .gp.tiny { color: transparent; }
+.grow .gch { color: #ffe600; padding-left: 0.6cqw; white-space: nowrap; overflow: hidden; display: flex; align-items: center; }
 .grow .gch b { color: #fff; margin-right: 0.5cqw; font-weight: 400; }
 .grow .gp { padding: 0 0.5cqw; border-left: 0.15cqw solid #2a2acc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .grow .gp.off { color: #8c8cff; }
@@ -121,7 +125,8 @@ body {
 /* Compact screens: the guide takes the whole tube, no promo window, larger type. */
 .glass.guide-only .raster, .glass.guide-only .static, .glass.guide-only .standby, .glass.guide-only .testpattern { display: none; }
 .glass.guide-only .guide { top: 4%; font-size: 3.1cqw; line-height: 3.9cqw; }
-.glass.guide-only .guide-head, .glass.guide-only .grow { grid-template-columns: 15cqw repeat(4, 1fr); }
+.glass.guide-only .guide-head { grid-template-columns: 15cqw repeat(4, 1fr); }
+.glass.guide-only .grow { grid-template-columns: 15cqw 1fr; }
 .glass.guide-only .guide-head { height: 4.2cqw; }
 .glass.guide-only .grow { height: 4.5cqw; }
 

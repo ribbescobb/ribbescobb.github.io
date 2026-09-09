@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=788dc00').then(r => r.json()),
-      fetch('data/catalog.json?v=788dc00').then(r => r.json())
+      fetch('data/channels.json?v=c2c4531').then(r => r.json()),
+      fetch('data/catalog.json?v=c2c4531').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -264,27 +264,21 @@
     function label(p) { if (!p) return ''; if (p.kind === 'off') return 'Off Air'; return p.label || p.series || p.title; }
     const same = (a, b) => a === b || (a && b && ((a.pid != null && a.pid === b.pid) || (a.label && a.label === b.label) || (a.kind === 'off' && b.kind === 'off')));
     function build(now) {
-      const start = Math.floor(now.getTime() / 1000 / 1800) * 1800;
+      const start = Math.floor(now.getTime() / 1000 / 1800) * 1800, span = 7200;
       windowStart = start;
       head.innerHTML = '<div class="gclock"></div>' + [0, 1, 2, 3].map(i => `<div>${fmt(start + i * 1800)}</div>`).join('');
       const list = channels.filter(c => c.kind !== 'guide').sort((a, b) => a.num - b.num);
       let html = '';
       for (const c of list) {
-        const progs = Sched.programsBetween(c, new Date(start * 1000), 7200, catalog);
-        const cols = [];
-        for (let i = 0; i < 4; i++) {
-          const cs = start + i * 1800, ce = cs + 1800;
-          cols.push(progs.find(x => x.start <= cs && x.end > cs) || progs.find(x => x.start >= cs && x.start < ce) || null);
-        }
+        const progs = Sched.programsBetween(c, new Date(start * 1000), span, catalog);
         let cells = '';
-        for (let i = 0; i < 4;) {
-          let j = i + 1;
-          while (j < 4 && cols[i] && cols[j] && same(cols[i], cols[j])) j++;
-          const p = cols[i];
-          cells += `<div class="gp${p && p.kind === 'off' ? ' off' : ''}" style="grid-column: span ${j - i}">${esc(label(p))}</div>`;
-          i = j;
+        for (const p of progs) {
+          const s0 = Math.max(p.start, start), e0 = Math.min(p.end, start + span);
+          if (e0 - s0 < 90) continue;                                   // slivers at the window edges
+          const left = (100 * (s0 - start) / span).toFixed(2), width = (100 * (e0 - s0) / span).toFixed(2);
+          cells += `<div class="gp${p.kind === 'off' ? ' off' : ''}${e0 - s0 < 480 ? ' tiny' : ''}" style="left:${left}%;width:${width}%">${esc(label(p))}</div>`;
         }
-        html += `<div class="grow"><div class="gch"><b>${c.num}</b>${esc(c.name)}</div>${cells}</div>`;
+        html += `<div class="grow"><div class="gch"><b>${c.num}</b>${esc(c.name)}</div><div class="gtl">${cells}</div></div>`;
       }
       html += `<div class="grow spacer"><div class="gch">CABLEBOX &nbsp;·&nbsp; ${now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase()}</div></div>`;
       rows.innerHTML = html + html;
