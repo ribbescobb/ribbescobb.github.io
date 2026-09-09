@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=f3a4d56').then(r => r.json()),
-      fetch('data/catalog.json?v=f3a4d56').then(r => r.json())
+      fetch('data/channels.json?v=a367ac4').then(r => r.json()),
+      fetch('data/catalog.json?v=a367ac4').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -131,7 +131,14 @@
     clearTimeout(snowTimer);
     snowTimer = setTimeout(() => render(true), 380);
   }
-  function step(dir) { tune(((ch - 1 + dir + MAX_CH) % MAX_CH) + 1); }
+  // CH up/down walk the channels that exist, in number order, wrapping. Dead numbers are for punching in on purpose.
+  function step(dir) {
+    const nums = channels.map(x => x.num).sort((a, b) => a - b);
+    const i = nums.indexOf(ch);
+    const next = i < 0 ? (dir > 0 ? nums.find(n => n > ch) ?? nums[0] : [...nums].reverse().find(n => n < ch) ?? nums[nums.length - 1])
+                       : nums[(i + dir + nums.length) % nums.length];
+    tune(next);
+  }
   function keyPress(k) {
     ensureAudio(); beep();
     if (k === 'up') return step(1);
