@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=284fd97').then(r => r.json()),
-      fetch('data/catalog.json?v=284fd97').then(r => r.json())
+      fetch('data/channels.json?v=00d2239').then(r => r.json()),
+      fetch('data/catalog.json?v=00d2239').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -104,7 +104,7 @@
     if (!power) return '';
     if (!channel) return 'NO SIGNAL';
     if (channel.kind === 'guide') return 'PREVUE GUIDE';
-    if (channel.kind === 'scrambled') return 'PREMIUM - SCRAMBLED SIGNAL';
+    if (channel.kind === 'scrambled') return entry && entry.title ? entry.title : 'PREMIUM';   // the whole joke is the title
     if (!entry || entry.kind === 'off') return 'OFF AIR';
     if (entry.kind === 'break') return channel.name;
     if (entry.a || entry.n) return [entry.a, entry.n].filter(Boolean).join(' - ');
