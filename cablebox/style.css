@@ -144,6 +144,7 @@ body {
 .paper:hover { transform: rotate(-2.2deg) translateY(-.15cqw); }
 .paper:focus-visible { outline: .2cqw solid #ffd86a; }
 .paper-under { display: none; }
+body.phone .paper, body.phone .paper-under { display: none !important; }   /* the paper is a desk thing (Chris): phones don't get it */
 body.phone.portrait.has-paper .paper-under { /* the folded section the handset is lying on: only the masthead shows (assets/paper-flat-2.webp) */
   display: block; position: fixed; left: 3%; right: 3%; bottom: 0; height: 120px; z-index: 4; transform: rotate(-1.6deg); transform-origin: 50% 100%;
   background: url(assets/paper-flat-2.webp) no-repeat center 0 / 100% auto; filter: drop-shadow(0 -2px 8px rgba(0,0,0,.45));
