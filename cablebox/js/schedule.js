@@ -80,14 +80,32 @@
 
   // Consistent hashing: the candidate whose id-hash sits nearest above the slot's target.
   // Dropping one video from a pool only disturbs the slots that would have picked it.
-  function pickFrom(items, target, exclude, maxDur) {
+  // The seasonal nudge (Chris): tagged candidates count for NUDGE each in the draw instead of one. News leans toward
+  // broadcasts from this calendar month; everything else leans toward this month's and next month's holidays. Music
+  // channels and the SEASONAL channel (which has its own weighting) are exempt. Set per channel-day by build().
+  const NUDGE = 10;
+  let PREFER = null;
+  const wanted = (it) => !!PREFER && ((PREFER.tags && it.hol && PREFER.tags.has(it.hol)) || (PREFER.month && it.m === PREFER.month));
+  function eligible(items, exclude, maxDur) {
+    const out = [];
+    for (const it of items) if (!((exclude && exclude.has(it.id)) || (maxDur && it.d > maxDur))) out.push(it);
+    return out;
+  }
+  // Deterministically decide whether this slot draws from the tagged candidates; returns the list to draw from.
+  function nudged(cands, target) {
+    if (!PREFER || cands.length < 2) return cands;
+    const tagged = cands.filter(wanted); const T = tagged.length;
+    if (!T || T === cands.length) return cands;
+    const share = (T * NUDGE) / ((cands.length - T) + T * NUDGE);
+    return (mix(target, 17) / 4294967296) < share ? tagged : cands;
+  }
+  function nearest(cands, target) {
     let best = null, bestD = Infinity;
-    for (const it of items) {
-      if ((exclude && exclude.has(it.id)) || (maxDur && it.d > maxDur)) continue;
-      const dist = (it.h - target) >>> 0;
-      if (dist < bestD) { bestD = dist; best = it; }
-    }
+    for (const it of cands) { const dist = (it.h - target) >>> 0; if (dist < bestD) { bestD = dist; best = it; } }
     return best;
+  }
+  function pickFrom(items, target, exclude, maxDur) {
+    return nearest(nudged(eligible(items, exclude, maxDur), target), target);
   }
   // Series balance: a pool with several shows picks the show first (a show's share of the ring goes by the square root
   // of its episode count, so 437 Gadgets no longer drown 13 Galaxy Highs), then the episode within it.
@@ -116,11 +134,7 @@
     return bySeries(items, target, exclude, maxDur, fittingFrom) || fittingFrom(items, target, exclude, maxDur);
   }
   function fittingFrom(items, target, exclude, maxDur) {
-    const cands = [];
-    for (const it of items) {
-      if ((exclude && exclude.has(it.id)) || (maxDur && it.d > maxDur)) continue;
-      cands.push([(it.h - target) >>> 0, it]);
-    }
+    const cands = nudged(eligible(items, exclude, maxDur), target).map((it) => [(it.h - target) >>> 0, it]);
     if (!cands.length) return null;
     cands.sort((a, b) => a[0] - b[0]);
     const near = cands.slice(0, 6);
@@ -148,7 +162,17 @@
   // by default). Regular programs are interrupted and resume where they left off, unless the program ends within
   // three minutes of the mark, in which case the break waits for the end. Block-mode (music) channels only break
   // between songs. breakEvery 0 = no commercials on that channel.
+  const HOLIDAYS = { xmas: '12-25', halloween: '10-31', thanksgiving: 'thanksgiving', valentines: '02-14', easter: 'easter', newyear: '01-01', july4: '07-04' };
+  function preferenceFor(channel, date) {
+    const pools = (channel.dayparts || []).map((dp) => dp.pool);
+    if (channel.kind === 'guide' || channel.kind === 'scrambled' || pools.some((p) => /^music-/.test(p)) || (channel.dayparts || []).some((dp) => dp.holiday)) return null;
+    if (pools.some((p) => /^news/.test(p))) return { month: date.getMonth() + 1 };
+    const m = date.getMonth(), y = date.getFullYear(), tags = new Set();
+    for (const key in HOLIDAYS) for (const yy of [y, y + 1]) { const d = holidayDate(HOLIDAYS[key], yy); const dm = d.getMonth() + (d.getFullYear() - y) * 12; if (dm === m || dm === m + 1) tags.add(key); }
+    return tags.size ? { tags } : null;
+  }
   function build(channel, date, catalog) {
+    PREFER = preferenceFor(channel, date);
     const seed = hash32(channel.id + '|' + ymd(date));
     const dow = date.getDay();
     const out = [], recent = [];
