@@ -4796,7 +4796,7 @@
           "tier": "wild",
           "note": "fan · Classic Monster Trucks",
           "requireEmbedCheck": true,
-          "titleExclude": "bloopers",
+          "titleExclude": "bloopers|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator",
           "minMinutes": 20,
           "cap": 40,
           "series": "Monster Trucks"
@@ -4809,7 +4809,8 @@
           "titleMatch": "Roller Derby 19[78]\\d",
           "minMinutes": 10,
           "cap": 60,
-          "series": "Roller Derby"
+          "series": "Roller Derby",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUwC-TTs2sddKxMjm500ZYIg",
@@ -4819,7 +4820,8 @@
           "titleMatch": "^19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 60,
-          "series": "PBA Bowling"
+          "series": "PBA Bowling",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUzvmXpNIPoLLQ4g-x5Iw15A",
@@ -4829,7 +4831,8 @@
           "titleMatch": "PBA.*\\b19[78]\\d\\b|\\b19[78]\\d\\b.*PBA",
           "minMinutes": 20,
           "cap": 40,
-          "series": "PBA Bowling"
+          "series": "PBA Bowling",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUyh6Wrcsij3-SlORwwBC5Sg",
@@ -4838,7 +4841,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "^19[78]\\d\\b",
           "minMinutes": 20,
-          "cap": 80
+          "cap": 80,
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUfkZ0ECJ4gOUnTWw3kNHTVg",
@@ -4847,7 +4851,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "USFL|World Hockey|Canada Cup|NHL|NBA|MLB|Boxing",
           "minMinutes": 60,
-          "cap": 40
+          "cap": 40,
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUWVGrQhjY8Q0o-1DyvqNfHg",
@@ -4857,7 +4862,8 @@
           "titleMatch": "^(?=.*(NBA|Celtics|Lakers|Finals)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 40,
-          "series": "NBA"
+          "series": "NBA",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUkAWtTgQHFfJTdN4UVl4nEg",
@@ -4867,7 +4873,8 @@
           "titleMatch": "^(?=.*(NHL|Stanley Cup)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 40,
-          "series": "NHL"
+          "series": "NHL",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUGF3IQXAUAvI0vLlVPqvI7Q",
@@ -4877,7 +4884,8 @@
           "titleMatch": "^(?=.*(Bowl|\\bvs\\b|Football)).*\\b19[78]\\d\\b",
           "minMinutes": 90,
           "cap": 40,
-          "series": "College Football"
+          "series": "College Football",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UU1slaGpNJGO4M1XUeotaQ-A",
@@ -4887,7 +4895,8 @@
           "titleMatch": "\\b19[78]\\d\\b.*(Derby|Preakness|Belmont|Breeders)",
           "minMinutes": 20,
           "cap": 30,
-          "series": "Horse Racing"
+          "series": "Horse Racing",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUXXAy8BnYvI1lzHm33QxJhA",
@@ -4896,7 +4905,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Wide World of Sports|Evel Knievel",
           "minMinutes": 15,
-          "cap": 30
+          "cap": 30,
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUMZfO-nVYHCNZpu-_In20qg",
@@ -4905,7 +4915,8 @@
           "requireEmbedCheck": true,
           "titleMatch": "Wide World of Sports",
           "minMinutes": 15,
-          "cap": 30
+          "cap": 30,
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUAf5TkW6fSaLzjP4Ad68OCA",
@@ -4915,7 +4926,8 @@
           "titleMatch": "^19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 40,
-          "series": "NASCAR"
+          "series": "NASCAR",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUXrgu0q5OqhyOfPD-xztSaA",
@@ -4925,7 +4937,8 @@
           "titleMatch": "\\b19[78]\\d\\b.*Strong",
           "minMinutes": 20,
           "cap": 30,
-          "series": "World's Strongest Man"
+          "series": "World's Strongest Man",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:\"Wide World of Sports\" 198 full episode",
@@ -4935,7 +4948,7 @@
           "titleMatch": "^(?=.*(Wide World)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 30,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:Superstars competition 198 full ABC",
@@ -4945,7 +4958,7 @@
           "titleMatch": "Superstars",
           "minMinutes": 20,
           "cap": 30,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:Ironman Triathlon 198 full ABC",
@@ -4955,7 +4968,7 @@
           "titleMatch": "^(?=.*(Ironman)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:boxing 198 full fight HBO",
@@ -4965,7 +4978,7 @@
           "titleMatch": "^(?=.*(Boxing|\\bvs\\b|Fight)).*\\b19[78]\\d\\b",
           "minMinutes": 15,
           "cap": 30,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:NBA 198 full game",
@@ -4975,7 +4988,7 @@
           "titleMatch": "^(?=.*(NBA)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 30,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:NHL 198 full game",
@@ -4985,7 +4998,7 @@
           "titleMatch": "^(?=.*(NHL|Stanley Cup)).*\\b19[78]\\d\\b",
           "minMinutes": 60,
           "cap": 30,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:college football 198 full game",
@@ -4995,7 +5008,7 @@
           "titleMatch": "^(?=.*(Bowl|\\bvs\\b|Football)).*\\b19[78]\\d\\b",
           "minMinutes": 90,
           "cap": 30,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:Harlem Globetrotters 198 full game",
@@ -5005,7 +5018,7 @@
           "titleMatch": "^(?=.*(Globetrotters)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 10,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:Kentucky Derby 198 full broadcast",
@@ -5015,7 +5028,7 @@
           "titleMatch": "^(?=.*(Derby)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:Tour de France 198 full stage",
@@ -5025,7 +5038,7 @@
           "titleMatch": "^(?=.*(Tour de France)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:figure skating 198 full broadcast",
@@ -5035,7 +5048,7 @@
           "titleMatch": "^(?=.*(Skating)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:1984 Olympics full broadcast ABC",
@@ -5045,7 +5058,7 @@
           "titleMatch": "^(?=.*(Olympic)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:1988 Olympics full broadcast",
@@ -5055,7 +5068,7 @@
           "titleMatch": "^(?=.*(Olympic)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:1980 Winter Olympics full broadcast",
@@ -5065,7 +5078,7 @@
           "titleMatch": "^(?=.*(Olympic)).*\\b19[78]\\d\\b",
           "minMinutes": 30,
           "cap": 20,
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=PL1ZLv670mpxp8jiF5hE4YOdBpj0WG0dAD",
@@ -5219,7 +5232,8 @@
           "titleMatch": "^(?=.*(NWA|Wrestling|WCW|WCCW|Mid-Atlantic|Championship|Starrcade)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 50,
-          "series": "NWA"
+          "series": "NWA",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "https://www.youtube.com/playlist?list=UUT205hrrP-OuPGHmIzOEYNA",
@@ -5229,7 +5243,8 @@
           "titleMatch": "^(?=.*(NWA|Wrestling|WCW|WCCW|AWA|WWF|Championship)).*\\b19[78]\\d\\b",
           "minMinutes": 20,
           "cap": 50,
-          "series": "NWA"
+          "series": "NWA",
+          "titleExclude": "gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:AWA All-Star Wrestling 198 full episode",
@@ -5240,7 +5255,7 @@
           "minMinutes": 20,
           "cap": 30,
           "series": "AWA",
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:WWF Superstars 198 full episode",
@@ -5251,7 +5266,7 @@
           "minMinutes": 20,
           "cap": 30,
           "series": "WWF",
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         },
         {
           "url": "ytsearch40:Georgia Championship Wrestling 198 full",
@@ -5262,7 +5277,7 @@
           "minMinutes": 20,
           "cap": 20,
           "series": "NWA",
-          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay"
+          "titleExclude": "trailer|facts you|facts about|didn'?t know|things you|then and now|where are they now|what happened to|weird facts|wild facts|cast of the|the cast of|secrets|revealed|tragic|obituary|passed away|SYFY WIRE|Exclusive CGI|EXCLUSIVE CLIP|Face the Nation|Meet the Press|\\bCNN\\b|MSNBC|Fox News|let'?s watch|watch ?along|first time watching|watching for the first|blind reaction|retrospective|episode review|\\branking\\b|analysis|discussion|\\bvlog\\b|deep dive|video essay|gameplay|simulator|BeamNG|Madness \\d|Monster Truck Madness|Xbox|PlayStation|N64|Nintendo|Sega|walkthrough|playthrough|emulator"
         }
       ]
     },
