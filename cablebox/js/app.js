@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=5969f7e').then(r => r.json()),
-      fetch('data/catalog.json?v=5969f7e').then(r => r.json())
+      fetch('data/channels.json?v=0e0294d').then(r => r.json()),
+      fetch('data/catalog.json?v=0e0294d').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -322,7 +322,7 @@
       const premiumTitle = onPremium && onPremium.title ? onPremium.title : '';
       let html = '', adN = 0;
       for (const c of list) {
-        if (list.indexOf(c) > 0 && list.indexOf(c) % 6 === 0 && window.Ads) html += `<div class="grow ad"><div class="gad" data-n="${adN++}"></div></div>`;
+        if (list.indexOf(c) > 0 && list.indexOf(c) % 6 === 0 && window.Bulletins) html += `<div class="grow bulletin"><div class="gbul" data-n="${adN++}"></div></div>`;
         const raw = Sched.programsBetween(c, new Date(start * 1000), span, catalog);
         // one cell per program or block: segments of one program (split around breaks), consecutive songs of a
         // block, and consecutive off-air slots all merge; a commercial break between them is not a gap
@@ -344,15 +344,15 @@
       html += `<div class="grow spacer"><div class="gch">CABLEBOX &nbsp;·&nbsp; ${now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase()}</div></div>`;
       rows.innerHTML = html + html;
       setH = rows.scrollHeight / 2;
-      adTitle = premiumTitle; lastPass = -1; refreshAds();
+      adTitle = premiumTitle; lastPass = -1; refreshBulletins();
     }
     // The crawl is anchored to the clock (same position on every set), so "which trip is this" is shared too; the ad
     // rows re-munge on every trip: the first copy of the list shows this trip's ads, the second copy the next trip's.
     let adTitle = '', lastPass = -1;
-    function refreshAds() {
-      if (!window.Ads) return;
-      const bucket = Math.floor(windowStart / 1800), ads = rows.querySelectorAll('.grow.ad .gad'), half = ads.length / 2;
-      ads.forEach((el, i) => { el.textContent = Ads.line(+el.dataset.n, bucket, adTitle, lastPass + (i < half ? 0 : 1)); });
+    function refreshBulletins() {
+      if (!window.Bulletins) return;
+      const bucket = Math.floor(windowStart / 1800), ads = rows.querySelectorAll('.grow.bulletin .gbul'), half = ads.length / 2;
+      ads.forEach((el, i) => { el.textContent = Bulletins.line(+el.dataset.n, bucket, adTitle, lastPass + (i < half ? 0 : 1)); });
     }
     function step(t) {
       lastT = t;
@@ -360,7 +360,7 @@
       const elapsed = Date.now() / 1000 - windowStart, trip = 2.8 * n;   // one row every 2.8 seconds: painfully slow, as requested
       const pass = Math.floor(elapsed / trip);
       y = setH ? ((elapsed % trip) / trip) * setH : 0;
-      if (pass !== lastPass) { lastPass = pass; refreshAds(); }
+      if (pass !== lastPass) { lastPass = pass; refreshBulletins(); }
       rows.style.transform = `translateY(${-y}px)`;
       raf = glass.classList.contains('guide-mode') && power ? requestAnimationFrame(step) : null;
     }

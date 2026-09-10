@@ -120,8 +120,8 @@ body {
 .grow .gch b { color: #fff; margin-right: 0.5cqw; font-weight: 400; }
 .grow .gp { padding: 0 0.5cqw; border-left: 0.15cqw solid #2a2acc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: #0a0aa4; }   /* opaque: a program that spans slots is one cell; the half-hour lines only show between programs */
 .grow .gp.off { color: #8c8cff; }
-.grow.ad { grid-template-columns: 1fr; background: #f2c81c; color: #14145e; height: 5.5cqw; }   /* the cable system's panel: yellow, dark text, two rows tall like the real ones */
-.grow.ad .gad { grid-column: 1 / -1; display: flex; align-items: center; padding: 0 1cqw; font-weight: 700; white-space: normal; line-height: 1.15; overflow: hidden; letter-spacing: 0.02cqw; }   /* spans every column, wraps to two lines */
+.grow.bulletin { grid-template-columns: 1fr; background: #f2c81c; color: #14145e; height: 5.5cqw; }   /* the cable system's panel: yellow, dark text, two rows tall like the real ones */
+.grow.bulletin .gbul { grid-column: 1 / -1; display: flex; align-items: center; padding: 0 1cqw; font-weight: 700; white-space: normal; line-height: 1.15; overflow: hidden; letter-spacing: 0.02cqw; }   /* spans every column, wraps to two lines */
 .grow.spacer { background: #3d3de0; color: #fff; }
 .grow.spacer .gch { color: #fff; grid-column: 1 / -1; text-align: center; }
 
@@ -132,7 +132,7 @@ body {
 .glass.guide-only .grow { grid-template-columns: 15cqw 1fr; }
 .glass.guide-only .guide-head { height: 4.2cqw; }
 .glass.guide-only .grow { height: 4.5cqw; }
-.glass.guide-only .grow.ad { height: 9cqw; }   /* the ad panel stays two rows tall on phones too */
+.glass.guide-only .grow.bulletin { height: 9cqw; }   /* the ad panel stays two rows tall on phones too */
 
 
 /* ---------------- Cable box (photograph + our LED digits + hit targets) ---------------- */
