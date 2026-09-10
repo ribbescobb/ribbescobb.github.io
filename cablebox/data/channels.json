@@ -6592,6 +6592,42 @@
           "maxMinutes": 70,
           "cap": 40,
           "series": "The Richard Pryor Show"
+        },
+        {
+          "url": "ytsearch40:Real People NBC 1980 full episode Sarah Purcell",
+          "tier": "wild",
+          "note": "fan · search: Real People NBC 1980 full episode Sarah Purcell",
+          "requireEmbedCheck": true,
+          "titleMatch": "Real People",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down|Skip Stephenson interview",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Real People"
+        },
+        {
+          "url": "ytsearch40:Real People 1982 NBC full episode",
+          "tier": "wild",
+          "note": "fan · search: Real People 1982 NBC full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Real People",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Real People"
+        },
+        {
+          "url": "ytsearch40:\"Real People\" 1979 episode Byron Allen",
+          "tier": "wild",
+          "note": "fan · search: \"Real People\" 1979 episode Byron Allen",
+          "requireEmbedCheck": true,
+          "titleMatch": "Real People",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Real People"
         }
       ]
     },
@@ -7125,6 +7161,54 @@
           "maxMinutes": 70,
           "cap": 40,
           "series": "Hollywood Palace"
+        },
+        {
+          "url": "ytsearch40:That's Incredible 1980 ABC full episode John Davidson",
+          "tier": "wild",
+          "note": "fan · search: That's Incredible 1980 ABC full episode John Davidson",
+          "requireEmbedCheck": true,
+          "titleMatch": "Incredible",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down|Hulk|Marvel",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "That's Incredible!"
+        },
+        {
+          "url": "ytsearch40:That's Incredible 1982 full episode Fran Tarkenton",
+          "tier": "wild",
+          "note": "fan · search: That's Incredible 1982 full episode Fran Tarkenton",
+          "requireEmbedCheck": true,
+          "titleMatch": "Incredible",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down|Hulk|Marvel",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "That's Incredible!"
+        },
+        {
+          "url": "ytsearch40:\"That's Incredible\" 1983 episode Cathy Lee Crosby",
+          "tier": "wild",
+          "note": "fan · search: \"That's Incredible\" 1983 episode Cathy Lee Crosby",
+          "requireEmbedCheck": true,
+          "titleMatch": "Incredible",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down|Hulk|Marvel",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "That's Incredible!"
+        },
+        {
+          "url": "ytsearch40:Real People 1982 NBC full episode",
+          "tier": "wild",
+          "note": "fan · search: Real People 1982 NBC full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "Real People",
+          "titleExclude": "trailer|\\bclip\\b|review|reaction|recap|\\bintro\\b|theme song|commentary|podcast|behind the scenes|documentary|best of|compilation|reunion|interview|reboot|remake|\\b20[012]\\d\\b|explained|top \\d+|ranked|full series in|every episode|\\bevery\\b|memorabilia|timeline|moments|hilarious|\\bchaos\\b|taking down",
+          "minMinutes": 20,
+          "maxMinutes": 100,
+          "cap": 40,
+          "series": "Real People"
         }
       ]
     },
