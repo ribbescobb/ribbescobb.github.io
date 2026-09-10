@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=ac7b257').then(r => r.json()),
-      fetch('data/catalog.json?v=ac7b257').then(r => r.json())
+      fetch('data/channels.json?v=f2adffa').then(r => r.json()),
+      fetch('data/catalog.json?v=f2adffa').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -317,8 +317,12 @@
       windowStart = start;
       head.innerHTML = '<div class="gclock"></div>' + [0, 1, 2, 3].map(i => `<div>${fmt(start + i * 1800)}</div>`).join('');
       const list = channels.filter(c => c.kind !== 'guide').sort((a, b) => a.num - b.num);
-      let html = '';
+      // the yellow rows: every sixth channel, the cable system gets a word in (what's scrambled, a lost dog, a stupid store)
+      const premium = channels.find(c => c.kind === 'scrambled'), onPremium = premium ? Sched.at(premium, now, catalog).entry : null;
+      const premiumTitle = onPremium && onPremium.title ? onPremium.title : '';
+      let html = '', adN = 0;
       for (const c of list) {
+        if (list.indexOf(c) > 0 && list.indexOf(c) % 6 === 0 && window.Ads) html += `<div class="grow ad"><div class="gad">${esc(Ads.line(adN++, Math.floor(start / 1800), premiumTitle))}</div></div>`;
         const raw = Sched.programsBetween(c, new Date(start * 1000), span, catalog);
         // one cell per program or block: segments of one program (split around breaks), consecutive songs of a
         // block, and consecutive off-air slots all merge; a commercial break between them is not a gap
