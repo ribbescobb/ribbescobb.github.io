@@ -11018,6 +11018,17 @@
           "cap": 300
         },
         {
+          "url": "https://www.youtube.com/playlist?list=UUqXk3Lmgjj_hbN9cb6ht4wA",
+          "tier": "legit",
+          "note": "Rockpalast (WDR) uploads · single 70s/80s performances",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "titleExclude": "lyric|karaoke|\\bcover\\b|slowed|reverb|\\b8d\\b|nightcore|tribute|reaction|official audio|audio only|\\baudio\\b|visuali[sz]er|slideshow|\\b20[012]\\d\\b|compilation|instrumental|megamix|mashup|sped up|vinyl|cassette|reissue|- topic|interview|documentary|behind the|making of|\\bdemo\\b|rehearsal|bootleg audio|soundboard|\\bSBD\\b|\\bAUD\\b|FLAC|\\bLP\\b|full album|\\bremaster(ed)? audio|hq audio|\\bmix\\b|drum cam|guitar cam|multicam edit|fan cam|fancam|isolated|reaction",
+          "minMinutes": 2,
+          "maxMinutes": 15,
+          "limit": 4000,
+          "cap": 150
+        },
+        {
           "url": "ytsearch40:Queen live 198 official",
           "tier": "legit",
           "note": "official · Queen live",
@@ -13379,6 +13390,17 @@
       "maxMinutes": 200,
       "series": false,
       "sources": [
+        {
+          "url": "https://www.youtube.com/playlist?list=UUqXk3Lmgjj_hbN9cb6ht4wA",
+          "tier": "legit",
+          "note": "Rockpalast (WDR) uploads · full 70s/80s concerts",
+          "titleMatch": "\\b19[78]\\d\\b",
+          "titleExclude": "lyric|karaoke|\\bcover\\b|slowed|reverb|\\b8d\\b|nightcore|tribute|reaction|official audio|audio only|\\baudio\\b|visuali[sz]er|slideshow|\\b20[012]\\d\\b|compilation|instrumental|megamix|mashup|sped up|vinyl|cassette|reissue|- topic|interview|documentary|behind the|making of|\\bdemo\\b|rehearsal|bootleg audio|soundboard|\\bSBD\\b|\\bAUD\\b|FLAC|\\bLP\\b|full album|\\bremaster(ed)? audio|hq audio|\\bmix\\b|drum cam|guitar cam|multicam edit|fan cam|fancam|isolated|reaction",
+          "minMinutes": 30,
+          "maxMinutes": 200,
+          "limit": 4000,
+          "cap": 250
+        },
         {
           "url": "ytsearch30:Rockpalast 1980 full concert",
           "tier": "legit",
