@@ -10,7 +10,7 @@
   const load = () => { try { Object.assign(st, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {} };
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   function init(c) {
-    cfg = Object.assign({ enabled: false, url: '#', label: 'KO-FI.COM/YOUR-CABLE-OPERATOR', minutes: 20, changes: 15, cooldownDays: 7, slateSeconds: 12, bulletinShare: 4 }, c || {});
+    cfg = Object.assign({ enabled: false, url: '#', label: 'EXAMPLE.COM/PLEDGE', minutes: 20, changes: 15, cooldownDays: 7, slateSeconds: 12, bulletinShare: 4 }, c || {});
     load();
     const q = new URLSearchParams(location.search).get('pledge');
     if (q === 'now') forced = true;
