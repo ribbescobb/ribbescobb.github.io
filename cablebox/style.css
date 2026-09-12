@@ -260,6 +260,8 @@ body.zoom .zoom-controls { display: flex; }
 .zoom-controls button:active { transform: translateY(1px); }
 
 .hint { margin-top: 1.2cqw; text-align: center; color: #5a5048; font-size: 1.15cqw; letter-spacing: 0.04cqw; }
+.hint .about { color: #8a7d6e; text-decoration: underline; text-underline-offset: .2cqw; margin-left: .6cqw; }
+.hint .about:hover { color: #ffd86a; }
 .hint.hidden { visibility: hidden; }
 
 /* Small screens: let it scroll rather than crush. */
