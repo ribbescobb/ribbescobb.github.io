@@ -874,7 +874,7 @@
     {
       "num": 32,
       "id": "wideworld",
-      "name": "WIDE WORLD",
+      "name": "SPORTS",
       "wild": true,
       "dayparts": [
         {
@@ -902,7 +902,8 @@
           "pool": "sports",
           "name": "Wide World of Sports (L)"
         }
-      ]
+      ],
+      "_note": "Renamed from WIDE WORLD 2026-09-12 (ABC's mark; NBC owned \"SportsWorld\"). Plain SPORTS is nobody's."
     },
     {
       "num": 69,
