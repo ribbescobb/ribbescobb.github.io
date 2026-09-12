@@ -62,6 +62,9 @@
   td.off { font-weight: 400; font-style: italic; opacity: .55; }
   tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th { background-image: radial-gradient(rgba(20,15,10,.28) .55px, transparent .6px); background-size: 3px 3px; }
   td.cont { text-align: left; }
+  .notice { margin: 10px 0 0; border: 2px solid var(--ink); padding: 6px 10px; font: 700 12px/1.3 "Roboto Condensed", sans-serif; letter-spacing: .3px; text-align: center; background: #efe9d8; }
+  .notice b { letter-spacing: 2px; }
+  .notice a { color: inherit; }
   .foot { font: 400 10px/1.3 "Roboto Condensed", sans-serif; margin-top: 10px; opacity: .8; display: flex; justify-content: space-between; }
   @media print { html, body { background: #fff; padding: 0; } .nav { display: none; } .sheet-wrap { filter: none; max-width: none; } .sheet { transform: none; clip-path: none; padding: 8px; } .sheet::before { display: none; } }
 </style>
@@ -92,11 +95,12 @@
     <div class="mast"><div class="day" id="dayName">THURSDAY</div><div class="copy">© 1985 CableBox Listing Inc.<br>Ribbescobb, MN</div><div class="date" id="dateName">SEPTEMBER 10</div></div>
     <h2>EVENING</h2><table id="evening"></table>
     <h2>DAYTIME</h2><table id="daytime"></table>
+    <div class="notice" id="pledgeNotice" hidden><b>PLEDGE WEEK</b> &nbsp; This listing is made possible by viewers like you. Support your local cable operator &nbsp;·&nbsp; Pledge line <a id="pledgeNoticeLink" href="#" target="_blank" rel="noopener">KO-FI.COM/PLACEHOLDER</a></div>
     <div class="foot"><span><a href="index.html" class="back" style="color:inherit">← Back to the set</a> &nbsp; ★ Ratings are the listing service's opinion and are not open to appeal. &nbsp; Premium channels require a descrambler.</span><span>Schedules subject to change without notice, and they will.</span></div>
   </div>
 </div></div></div>
-<script src="js/schedule.js?v=e9d576b"></script>
-<script src="js/scramble.js?v=e9d576b"></script>
+<script src="js/schedule.js?v=a1f3d75"></script>
+<script src="js/scramble.js?v=a1f3d75"></script>
 <script>
 (async () => {
   // Inside the set (an iframe) the back links close the paper instead of navigating, and the sheet scales to the frame.
@@ -167,6 +171,7 @@
   }
   grid('evening', 18, 26);
   grid('daytime', 6, 18);
+  if (cfg.pledge && cfg.pledge.enabled) { const n = document.getElementById('pledgeNotice'), a = document.getElementById('pledgeNoticeLink'); a.href = cfg.pledge.url; a.textContent = cfg.pledge.label; n.hidden = false; }
   fit(); document.fonts && document.fonts.ready.then(fit);
 })();
 </script>

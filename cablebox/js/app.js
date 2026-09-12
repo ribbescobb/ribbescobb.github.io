@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=e9d576b').then(r => r.json()),
-      fetch('data/catalog.json?v=e9d576b').then(r => r.json())
+      fetch('data/channels.json?v=a1f3d75').then(r => r.json()),
+      fetch('data/catalog.json?v=a1f3d75').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -25,6 +25,7 @@
     channels.forEach(x => byNum.set(x.num, x));
     MAX_CH = Math.max(36, ...channels.map(x => x.num));
     startChannel = c.startChannel || 1; ch = startChannel;   // the box always wakes up on the guide
+    if (window.Pledge) Pledge.init(c.pledge);
     try { const v = localStorage.getItem('cablebox.vol'); if (v !== null && v !== '') Player.setVolume(+v); } catch (e) {}
   }
 
@@ -44,7 +45,8 @@
   }
 
   // ---------------- glass states ----------------
-  const STATES = ['off', 'warming', 'cooling', 'on', 'snow', 'standby', 'offair', 'scramble'];
+  const STATES = ['off', 'warming', 'cooling', 'on', 'snow', 'standby', 'offair', 'scramble', 'pledge'];
+  let pledgeUntil = 0;
   const level = () => (Player.muted ? 0 : Player.volume / 100);
   function setGlass(state) {
     STATES.forEach(s => glass.classList.toggle(s, s === state));
@@ -126,6 +128,7 @@
     if (channel.kind === 'guide') return 'PREVUE GUIDE';
     if (channel.kind === 'scrambled') return entry && entry.title ? entry.title : 'PREMIUM';   // the whole joke is the title
     if (!entry || entry.kind === 'off') return 'OFF AIR';
+    if (current && current.mode === 'pledge') return 'PLEDGE BREAK';
     if (entry.kind === 'break') return channel.name;
     if (entry.a || entry.n) return [entry.a, entry.n].filter(Boolean).join(' - ');
     let t = entry.title || '';
@@ -167,6 +170,7 @@
     const changed = n !== ch;
     ch = n; showDigits(String(ch));
     if (!power || !changed) return;
+    if (window.Pledge) Pledge.changed();
     Player.stop(); current = null;
     setGlass('snow');
     clearTimeout(snowTimer);
@@ -180,7 +184,9 @@
                        : nums[(i + dir + nums.length) % nums.length];
     tune(next);
   }
+  function endPledge() { if (current && current.mode === 'pledge') { pledgeUntil = 0; render(false); } }
   function keyPress(k) {
+    endPledge();
     ensureAudio(); beep();
     if (k === 'up') return step(1);
     if (k === 'down') return step(-1);
@@ -227,6 +233,12 @@
     if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); setMarquee(marqueeText(channel, entry)); return; }
     if (channel.kind === 'scrambled') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('scramble')) setGlass('scramble'); setMarquee(marqueeText(channel, entry)); return; }
 
+    // The pledge break holds the slate for its seconds, then hands back to the clock (which resumes the commercial or
+    // the program at the right offset). Any key, a channel change, or power ends it early.
+    if (current && current.mode === 'pledge') {
+      if (Date.now() < pledgeUntil && current.key === key) { setMarquee('PLEDGE BREAK'); return; }
+      current = null; force = true;
+    }
     updateCaption(entry, elapsed);
     setMarquee(marqueeText(channel, entry));
     if (!force && current && current.key === key) {
@@ -236,6 +248,13 @@
       return;
     }
     if (entry.kind === 'off') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('offair'); return; }
+    if (window.Pledge && !isGuide && (Pledge.takePreview() || (entry.kind === 'break' && Pledge.due()))) {
+      const left = entry.end - entry.start - elapsed, secs = Math.min(Pledge.cfg.slateSeconds || 12, entry.kind === 'break' ? left - 2 : 999);
+      if (secs >= 6 || entry.kind !== 'break') {
+        pledgeUntil = Date.now() + Math.max(6, secs) * 1000; current = { key, entry, channel, mode: 'pledge' };
+        Player.stop(); setGlass('pledge'); setMarquee('PLEDGE BREAK'); Pledge.shown(); return;
+      }
+    }
     const sub = subs.get(key);
     current = { key, entry, channel, mode: sub ? 'sub' : 'sched', sub };
     if (key !== deadSlotKey) { deadInSlot = 0; deadSlotKey = key; recovering = false; }
@@ -387,6 +406,7 @@
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (paperOpen) { if (e.key === 'Escape') closePaper(); return; }
+    if (current && current.mode === 'pledge' && !/^[0-9]$/.test(e.key) && e.key !== 'ArrowUp' && e.key !== 'ArrowDown') { endPledge(); e.preventDefault(); return; }
     if (/^[0-9]$/.test(e.key)) { keyPress(e.key); e.preventDefault(); }
     else if (e.key === 'ArrowUp' || e.key === 'PageUp') { keyPress('up'); e.preventDefault(); }
     else if (e.key === 'ArrowDown' || e.key === 'PageDown') { keyPress('down'); e.preventDefault(); }
@@ -517,6 +537,7 @@
   loadData().then(() => {
     showDigits(String(ch));
     if (!layoutPhone()) { try { if (localStorage.getItem('cablebox.zoom') === '1') setZoom(true); } catch (e) {} }
-    setInterval(() => { render(false); maybeRefresh(new Date()); }, 1000);
+    setInterval(() => { render(false); maybeRefresh(new Date()); if (window.Pledge) Pledge.tick(power && Player.playing && current && current.mode !== 'pledge'); }, 1000);
+    $('#pledge').addEventListener('click', (e) => { if (!e.target.closest('a')) endPledge(); });
   }).catch(err => { console.error(err); hint.textContent = 'Could not load the channel data.'; });
 })();

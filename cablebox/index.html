@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=e9d576b">
+<link rel="stylesheet" href="style.css?v=a1f3d75">
 </head>
 <body>
 <div class="room">
@@ -52,6 +52,18 @@
         <canvas class="scrambled" id="scrambled" width="320" height="240"></canvas>
         <div class="lower-third" id="lowerThird" aria-live="off"><div class="lt-artist"></div><div class="lt-song"></div><div class="lt-year"></div></div>
         <div class="standby" id="standby"><span>PLEASE<br>STAND BY</span></div>
+        <!-- The pledge break: the cable operator's character-generator slate at an act break. -->
+        <div class="pledge-slate" id="pledge">
+          <div class="pl-head">A MESSAGE FROM YOUR CABLE OPERATOR</div>
+          <div class="pl-body">
+            <div class="pl-line">THIS CHANNEL IS MADE POSSIBLE</div>
+            <div class="pl-line">BY VIEWERS LIKE YOU</div>
+            <div class="pl-ask">SUPPORT YOUR LOCAL CABLE OPERATOR</div>
+            <div class="pl-phone">PLEDGE LINE &nbsp;<a id="pledgeLink" href="#" target="_blank" rel="noopener">KO-FI.COM/PLACEHOLDER</a></div>
+            <div class="pl-foot">WE NOW RETURN YOU TO YOUR PROGRAM &nbsp;·&nbsp; <span class="pl-key">PRESS ANY KEY</span><span class="pl-tap">TAP TO RETURN</span></div>
+          </div>
+          <div class="pl-bars"></div>
+        </div>
         <div class="testpattern" id="testpattern"><div class="bars"></div><div class="bars2"></div><div class="signoff">CB-36 &nbsp;·&nbsp; OFF AIR</div></div>
         <div class="guide" id="guide">
           <div class="guide-head" id="guideHead"></div>
@@ -105,11 +117,12 @@
     <button class="paperlift-close" id="paperClose" aria-label="Put the paper down">✕</button>
   </div>
 </div>
-<script src="js/schedule.js?v=e9d576b"></script>
-<script src="js/player.js?v=e9d576b"></script>
-<script src="js/scramble.js?v=e9d576b"></script>
-<script src="js/bulletins.js?v=e9d576b"></script>
-<script src="js/marquee.js?v=e9d576b"></script>
-<script src="js/app.js?v=e9d576b"></script>
+<script src="js/schedule.js?v=a1f3d75"></script>
+<script src="js/player.js?v=a1f3d75"></script>
+<script src="js/scramble.js?v=a1f3d75"></script>
+<script src="js/bulletins.js?v=a1f3d75"></script>
+<script src="js/pledge.js?v=a1f3d75"></script>
+<script src="js/marquee.js?v=a1f3d75"></script>
+<script src="js/app.js?v=a1f3d75"></script>
 </body>
 </html>

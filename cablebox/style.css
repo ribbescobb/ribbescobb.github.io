@@ -83,6 +83,23 @@ body {
 }
 .glass.standby .standby { display: flex; }
 
+/* the pledge slate: a cable operator's character generator, blue field, yellow bar, VT323 */
+.pledge-slate { position: absolute; inset: 0; display: none; flex-direction: column; background: #0a0aa4; color: #fff; font-family: VT323, monospace; text-transform: uppercase; }
+.glass.pledge .pledge-slate { display: flex; }
+.glass.pledge .raster { visibility: hidden; }
+.pledge-slate::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 .28cqw, rgba(0,0,0,.18) .28cqw .4cqw); }
+.pledge-slate .pl-head { flex: 0 0 auto; margin: 5% 6% 0; padding: .6cqw 1.2cqw; background: #f2c81c; color: #101060; font-size: 2.3cqw; letter-spacing: .25cqw; text-align: center; }
+.pledge-slate .pl-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4cqw; text-shadow: .15cqw .15cqw 0 #000; }
+.pledge-slate .pl-line { font-size: 3.4cqw; letter-spacing: .2cqw; line-height: 1.05; }
+.pledge-slate .pl-ask { margin-top: 2.2cqw; font-size: 2.2cqw; color: #f2c81c; letter-spacing: .25cqw; }
+.pledge-slate .pl-phone { font-size: 3cqw; letter-spacing: .15cqw; }
+.pledge-slate .pl-phone a { color: #fff; text-decoration: none; border-bottom: .25cqw solid #f2c81c; padding: 0 .3cqw; }
+.pledge-slate .pl-phone a:hover { background: #f2c81c; color: #101060; }
+.pledge-slate .pl-foot { margin-top: 2.6cqw; font-size: 1.6cqw; color: #b9c1ff; letter-spacing: .2cqw; }
+.pledge-slate .pl-bars { flex: 0 0 5%; background: linear-gradient(90deg, #c0c0c0 0 14.28%, #c0c000 0 28.57%, #00c0c0 0 42.85%, #00c000 0 57.14%, #c000c0 0 71.42%, #c00000 0 85.71%, #0000c0 0 100%); }
+/* phones: the scene is scaled up, so cqw runs large; pull the slate's type back in */
+body.phone .pledge-slate .pl-head { font-size: 1.7cqw; margin-top: 3%; } body.phone .pledge-slate .pl-line { font-size: 2.5cqw; } body.phone .pledge-slate .pl-phone { font-size: 2.2cqw; } body.phone .pledge-slate .pl-ask { font-size: 1.6cqw; margin-top: 1.4cqw; } body.phone .pledge-slate .pl-foot { font-size: 1.2cqw; margin-top: 1.6cqw; }
+.pledge-slate .pl-tap { display: none; } body.phone .pledge-slate .pl-tap { display: inline; } body.phone .pledge-slate .pl-key { display: none; }
 .testpattern { position: absolute; inset: 0; display: none; flex-direction: column; background: #111; }
 .glass.offair .testpattern { display: flex; }
 .testpattern .bars { flex: 3; background: linear-gradient(90deg, #c0c0c0 0 14.28%, #c0c000 0 28.57%, #00c0c0 0 42.85%, #00c000 0 57.14%, #c000c0 0 71.42%, #c00000 0 85.71%, #0000c0 0 100%); }

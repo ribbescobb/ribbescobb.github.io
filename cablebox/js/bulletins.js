@@ -19,7 +19,10 @@
   // One ad line for row slot n at half-hour bucket t (epoch seconds / 1800). Kind rotates with the row and the half hour.
   function line(n, t, premiumTitle, pass) {   // pass: which trip of the crawl this is; a fresh munge every time the row comes around
     const h = hash(n + '|' + t + '|' + (pass || 0));
-    const kind = (n + t + (pass || 0)) % 3;
+    const pledge = window.Pledge && Pledge.enabled ? Pledge.bulletin(h) : null;   // the operator's pledge line, one bulletin in bulletinShare
+    const share = pledge ? (Pledge.cfg.bulletinShare || 4) : 3;
+    const kind = (n + t + (pass || 0)) % share;
+    if (pledge && kind === share - 1) return pledge;
     if (kind === 0 && premiumTitle) return 'ORDER NOW ON PAY-PER-VIEW: ' + premiumTitle.toUpperCase() + ' · CALL ' + phone(h);
     if (kind === 1) return 'LOST DOG: "' + pickFrom(DOGS, h, 3) + '" · REWARD · ' + phone(h >>> 3);
     const owner = pickFrom(OWNERS, h, 5), goods = pickFrom(GOODS, h, 7), kind2 = pickFrom(KINDS, h, 11), deal = pickFrom(DEALS, h, 13);
