@@ -18063,6 +18063,78 @@
           "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|Public Domain|Little Picture House|Cult Cinema Classics|Golden Reel Classics",
           "titleMatch": "\\(19[3-6]\\d\\)|\\b19[3-6]\\d\\b",
           "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "Free Vintage Movies · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUPNxe02Fu1UXLvoR3zRVyDQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "The Little Picture House · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUdMVK2x0LEqoOOAtlASZBeQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Cult Cinema Classics · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUycDFnpMeWzaITQSD1dWsOA",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Public Domain · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUOlnhpLYIP4v2x4oPc28YhQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Timeless Hollywood Movies · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUUxSyeDr-FCtHADGH5ko7rA",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Vintage Vault · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUU31urqslSujUd6PAAopcaw",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Golden Reel Classics · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUWn5Ji81YxFt-OvHp6cfnQQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "RareClassicMovies · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUNkoatx1lxeHZUyoZ4PE_Nw",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "The Film Detective · uploads (public-domain packager; year in the title) — westerns",
+          "url": "https://www.youtube.com/playlist?list=UUWNH6WeWgwMaWbO_5VfhiTQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
         }
       ]
     },
@@ -18111,6 +18183,78 @@
           "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
           "titleMatch": "\\b19[3-6]\\d\\b",
           "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "Free Vintage Movies · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUPNxe02Fu1UXLvoR3zRVyDQ",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "The Little Picture House · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUdMVK2x0LEqoOOAtlASZBeQ",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "Cult Cinema Classics · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUycDFnpMeWzaITQSD1dWsOA",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "Public Domain · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUOlnhpLYIP4v2x4oPc28YhQ",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "Timeless Hollywood Movies · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUUxSyeDr-FCtHADGH5ko7rA",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "Vintage Vault · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUU31urqslSujUd6PAAopcaw",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "Golden Reel Classics · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUWn5Ji81YxFt-OvHp6cfnQQ",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "RareClassicMovies · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUNkoatx1lxeHZUyoZ4PE_Nw",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
+        },
+        {
+          "tier": "legit",
+          "note": "The Film Detective · uploads (public-domain packager; year in the title)",
+          "url": "https://www.youtube.com/playlist?list=UUWNH6WeWgwMaWbO_5VfhiTQ",
+          "limit": 600,
+          "titleMatch": "\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d|noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense|western|cowboy|john wayne|rides|trail|gun|sheriff|rancher|outlaw|cattle|texas|arizona|frontier|stagecoach|rangers"
         }
       ]
     },
@@ -18152,6 +18296,78 @@
           "titleMatch": "\\b19[5-7]\\d\\b",
           "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|1990|frankenstein unbound",
           "cap": 20
+        },
+        {
+          "tier": "legit",
+          "note": "Free Vintage Movies · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUPNxe02Fu1UXLvoR3zRVyDQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "The Little Picture House · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUdMVK2x0LEqoOOAtlASZBeQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Cult Cinema Classics · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUycDFnpMeWzaITQSD1dWsOA",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Public Domain · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUOlnhpLYIP4v2x4oPc28YhQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Timeless Hollywood Movies · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUUxSyeDr-FCtHADGH5ko7rA",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Vintage Vault · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUU31urqslSujUd6PAAopcaw",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "Golden Reel Classics · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUWn5Ji81YxFt-OvHp6cfnQQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "RareClassicMovies · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUNkoatx1lxeHZUyoZ4PE_Nw",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
+        },
+        {
+          "tier": "legit",
+          "note": "The Film Detective · uploads (public-domain packager; year in the title) — the Late Show titles",
+          "url": "https://www.youtube.com/playlist?list=UUWNH6WeWgwMaWbO_5VfhiTQ",
+          "limit": 600,
+          "titleMatch": "^(?=.*(noir|horror|terror|vampire|zombie|creature|monster|killer|murder|dead|haunted|ghost|sci-?fi|science fiction|space|invasion|alien|atomic|mutant|beast|blood|night of|curse|scream|mystery|thriller|crime|detective|gangster|suspense)).*\\b19[2-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|colorized|triple feature|double feature|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|cartoon|serial|chapter \\d"
         }
       ]
     },
