@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=a89e9ef').then(r => r.json()),
-      fetch('data/catalog.json?v=a89e9ef').then(r => r.json())
+      fetch('data/channels.json?v=0b947fc').then(r => r.json()),
+      fetch('data/catalog.json?v=0b947fc').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -386,6 +386,7 @@
   $('#volume').addEventListener('click', () => { Player.setMuted(!Player.muted); noise(glass.classList.contains('snow')); if (glass.classList.contains('scramble')) Scramble.audio(true, ac, level()); flash(Player.muted ? 'Muted' : 'Sound on, volume ' + Player.volume); });
   document.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (paperOpen) { if (e.key === 'Escape') closePaper(); return; }
     if (/^[0-9]$/.test(e.key)) { keyPress(e.key); e.preventDefault(); }
     else if (e.key === 'ArrowUp' || e.key === 'PageUp') { keyPress('up'); e.preventDefault(); }
     else if (e.key === 'ArrowDown' || e.key === 'PageDown') { keyPress('down'); e.preventDefault(); }
@@ -428,11 +429,28 @@
     }
     return true;
   }
-  // On phones and in the home-screen app the listings open in place (a new tab would leave the app); on a desk, a new tab.
-  const standalone = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  document.querySelectorAll('.paper, .paper-under').forEach((a) => a.addEventListener('click', (e) => {
-    if (phone || standalone()) { e.preventDefault(); location.href = a.getAttribute('href'); }
-  }));
+  // The paper: pick it up and it comes up over the set (an iframe of tvweek.html), the picture and sound carrying on
+  // behind it. Put it down by clicking outside, the corner button, Escape, or the phone's back button.
+  const lift = $('#paperLift'), paperFrame = $('#paperFrame');
+  let paperOpen = false;
+  function openPaper(href) {
+    if (paperOpen) return;
+    const want = href || 'tvweek.html';
+    if (paperFrame.getAttribute('src') !== want) paperFrame.setAttribute('src', want);
+    lift.hidden = false; paperOpen = true; document.body.classList.add('paper-open');
+    try { history.pushState({ paper: 1 }, ''); } catch (e) {}
+    $('#paperClose').focus({ preventScroll: true });
+  }
+  function closePaper(fromHistory) {
+    if (!paperOpen) return;
+    lift.hidden = true; paperOpen = false; document.body.classList.remove('paper-open');
+    if (!fromHistory && history.state && history.state.paper) history.back();
+  }
+  document.querySelectorAll('.paper, .paper-under, .paper-tab, .rm-paper').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); openPaper(a.getAttribute('href')); }));
+  lift.addEventListener('click', (e) => { if (e.target === lift) closePaper(); });
+  $('#paperClose').addEventListener('click', () => closePaper());
+  window.addEventListener('popstate', () => { if (paperOpen) closePaper(true); });
+  window.addEventListener('message', (e) => { if (e.data && e.data.paper === 'close') closePaper(); });
   function openRemote(on) {
     remote.classList.toggle('open', on); clearTimeout(remoteTimer);
     if (on && document.body.classList.contains('landscape')) remoteTimer = setTimeout(() => remote.classList.remove('open'), 6000);

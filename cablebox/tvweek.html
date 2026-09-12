@@ -16,8 +16,10 @@
   .nav a { color: #b9ad94; text-decoration: none; margin: 0 8px; }
   .nav a.on { color: #fff; border-bottom: 2px solid #fff; padding-bottom: 3px; }
   .nav a.back { float: left; color: #8f8470; }
-  .sheet-wrap { min-width: 1100px; }
-  .sheet-wrap { max-width: 1240px; margin: 0 auto; filter: drop-shadow(0 18px 28px rgba(0,0,0,.55)); }
+  .sheet-wrap { width: 1240px; margin: 0 auto; filter: drop-shadow(0 18px 28px rgba(0,0,0,.55)); transform-origin: 0 0; }
+  .stage { position: relative; margin: 0 auto; }
+  body.embed { padding: 14px 0 24px; }
+  body.embed .nav .back { cursor: pointer; }
   .sheet {
     position: relative; background: var(--paper); padding: 22px 26px 30px; transform: rotate(-.35deg);
     clip-path: polygon(0 .6%, 1.5% 0, 12% .5%, 31% 0, 47% .7%, 66% .1%, 84% .6%, 100% 0, 99.6% 18%, 100% 42%, 99.5% 67%, 100% 100%, 88% 99.4%, 71% 100%, 52% 99.3%, 34% 100%, 15% 99.5%, 0 100%, .5% 71%, 0 40%, .4% 20%);
@@ -30,6 +32,7 @@
       url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0.45  0 0 0 0 0.32  0 0 0 0 0.12  0 0 0 .35 0'/></filter><rect width='900' height='900' filter='url(%23g)'/></svg>");
   }
   .ink { filter: url(#ink); mix-blend-mode: multiply; position: relative; }
+  @supports (font: -apple-system-body) and (-webkit-appearance: none) { .ink { filter: url(#ink-wk); } }   /* WebKit only: see #ink-wk */
   .mast { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background: #0f0d0b; color: #efe9d8; border: 2px solid var(--ink); padding: 6px 14px; position: relative; }
   .mast::after { /* a solid black never printed solid: halftone dots and a wash of lighter ink */
     content: ""; position: absolute; inset: 0; pointer-events: none;
@@ -53,7 +56,9 @@
   th.ch { width: 82px; }
   tbody th { text-align: left; font: 700 10.5px/1.05 "Roboto Condensed", sans-serif; letter-spacing: .3px; text-transform: uppercase; padding: 4px 3px 3px; }
   tbody th .num { display: inline-block; width: 19px; height: 19px; border-radius: 50%; background: var(--ink); color: #efe9d8; text-align: center; font: 700 12px/19px "Roboto Condensed", sans-serif; margin-top: 3px; letter-spacing: 0; }
-  td { font: 700 13px/1.12 "Roboto Condensed", sans-serif; height: 30px; }
+  td { font: 700 13px/1.12 "Roboto Condensed", sans-serif; height: 30px; white-space: nowrap; text-overflow: clip; }
+  td.movie::before { content: "Mov: "; }
+  td.block { font-weight: 400; }
   td.off { font-weight: 400; font-style: italic; opacity: .55; }
   tbody tr:nth-child(odd) td, tbody tr:nth-child(odd) th { background-image: radial-gradient(rgba(20,15,10,.28) .55px, transparent .6px); background-size: 3px 3px; }
   td.cont { text-align: left; }
@@ -74,24 +79,43 @@
     <feComponentTransfer in="density" result="dmask"><feFuncA type="table" tableValues=".58 1 1"/></feComponentTransfer>
     <feComposite in="rough" in2="dmask" operator="in"/>
   </filter>
+  <!-- WebKit paints nothing through a primitive fed by feTurbulence, so Safari and every iOS browser get the bleed without the grain -->
+  <filter id="ink-wk" x="-2%" y="-2%" width="104%" height="104%" color-interpolation-filters="sRGB">
+    <feMorphology operator="dilate" radius=".18" in="SourceGraphic" result="fat"/>
+    <feGaussianBlur stdDeviation=".3" in="fat" result="soft"/>
+    <feComponentTransfer in="soft"><feFuncA type="table" tableValues="0 0 .3 .9 1 1"/></feComponentTransfer>
+  </filter>
 </svg>
 <div class="nav"><a href="index.html" class="back">← THE SET</a><span id="nav"></span></div>
-<div class="sheet-wrap"><div class="sheet">
+<div class="stage" id="stage"><div class="sheet-wrap" id="sheetWrap"><div class="sheet">
   <div class="ink">
     <div class="mast"><div class="day" id="dayName">THURSDAY</div><div class="copy">© 1985 CableBox Listing Inc.<br>Ribbescobb, MN</div><div class="date" id="dateName">SEPTEMBER 10</div></div>
     <h2>EVENING</h2><table id="evening"></table>
     <h2>DAYTIME</h2><table id="daytime"></table>
-    <div class="foot"><span><a href="index.html" style="color:inherit">← Back to the set</a> &nbsp; (L) Live &nbsp; ★ Ratings are the listing service's opinion and are not open to appeal. &nbsp; Premium channels require a descrambler.</span><span>Schedules subject to change without notice, and they will.</span></div>
+    <div class="foot"><span><a href="index.html" class="back" style="color:inherit">← Back to the set</a> &nbsp; ★ Ratings are the listing service's opinion and are not open to appeal. &nbsp; Premium channels require a descrambler.</span><span>Schedules subject to change without notice, and they will.</span></div>
   </div>
-</div></div>
-<script src="js/schedule.js?v=a89e9ef"></script>
-<script src="js/scramble.js?v=a89e9ef"></script>
+</div></div></div>
+<script src="js/schedule.js?v=0b947fc"></script>
+<script src="js/scramble.js?v=0b947fc"></script>
 <script>
 (async () => {
-  const cfg = await fetch('data/channels.json?v=' + Date.now()).then(r => r.json());
+  // Inside the set (an iframe) the back links close the paper instead of navigating, and the sheet scales to the frame.
+  const EMBED = window.self !== window.top;
+  if (EMBED) {
+    document.body.classList.add('embed');
+    document.addEventListener('click', (e) => { const a = e.target.closest('a.back'); if (a) { e.preventDefault(); parent.postMessage({ paper: 'close' }, '*'); } });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') parent.postMessage({ paper: 'close' }, '*'); });
+  }
+  const fit = () => {                                   // scale the 1240px sheet to the window, but never below 3/4: narrow phones pan instead
+    const wrap = document.getElementById('sheetWrap'), stage = document.getElementById('stage');
+    const k = Math.min(1, Math.max(0.75, (document.documentElement.clientWidth - 8) / 1240));
+    wrap.style.transform = `scale(${k})`; stage.style.width = Math.round(1240 * k) + 'px'; stage.style.height = Math.round(wrap.offsetHeight * k) + 'px';
+  };
+  window.addEventListener('resize', fit);
+
+  const [cfg, cat] = await Promise.all([fetch('data/channels.json?v=' + Date.now()).then(r => r.json()), fetch('data/catalog.json').then(r => r.json())]);
   const DAYS = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
   const MONTHS = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
-  const hm = (s) => { const p = String(s).split(':'); return (+p[0]) * 3600 + (+(p[1] || 0)) * 60; };
   const today = new Date(); today.setHours(12, 0, 0, 0);
   const want = new URLSearchParams(location.search).get('day');
   const date = new Date(today); if (want !== null && !isNaN(+want)) date.setDate(date.getDate() + (((+want - date.getDay()) % 7) + 7) % 7);
@@ -100,36 +124,32 @@
   document.getElementById('dayName').textContent = DAYS[date.getDay()];
   document.getElementById('dateName').textContent = MONTHS[date.getMonth()] + ' ' + date.getDate();
 
-  // the premium channel's features come from the same generator the set uses
-  const catalog = { pools: { scrambled: Scramble.pool() }, filler: 'commercials' };
-  Sched.prepare(catalog, 'commercials', 0, 0);
-  const scrambled = {};
-  for (const ch of cfg.channels) if (ch.kind === 'scrambled') scrambled[ch.num] = { today: Sched.dayList(ch, date, catalog), next: Sched.dayList(ch, next, catalog) };
+  // The listings are the real schedule: the same deterministic clock the set runs on, built for this date and the
+  // next morning. The premium channel's features come from the same generator too. Series names print, not episodes.
+  cat.pools.scrambled = Scramble.pool();
+  Sched.prepare(cat, cfg.filler || 'commercials', cfg.breakSeconds, cfg.breakEvery);
+  const days = {};
+  for (const ch of cfg.channels) days[ch.num] = { today: Sched.dayList(ch, date, cat), next: Sched.dayList(ch, next, cat) };
+  const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const isProg = (p) => p.kind === 'program' && p.label !== 'Cartoon';
+  const isMovie = (p) => /movie|film|horror/.test(p.pool || '');   // 'Mov:' only where the lineup runs movies; a long newscast is not a movie
 
-  function cell(ch, sec) {                              // what the listing prints for channel ch at second-of-day sec (may exceed 24h)
-    const d = sec >= 86400 ? next : date, t = sec % 86400, dow = d.getDay();
-    if (ch.kind === 'scrambled') {
-      const list = (sec >= 86400 ? scrambled[ch.num].next : scrambled[ch.num].today).filter(p => p.kind === 'program');
-      const p = list.find(p => p.start <= t && p.end > t);
-      return p ? { key: 'scr' + p.pid + (sec >= 86400 ? 'n' : ''), text: 'Mov: ' + p.title + ' ★★' } : { key: 'off', text: 'Off Air', off: true };
-    }
-    if (ch.dayparts && ch.dayparts.some(dp => dp.holiday)) {
-      const on = Sched.inSeason(ch, d).slice(0, 2).map(dp => dp.name || dp.pool);
-      const text = on.length ? on.join(' & ') + ' Specials' : 'Holiday Specials';
-      return { key: text, text };
-    }
-    for (const dp of ch.dayparts || []) {
-      if (dp.days && !dp.days.includes(dow)) continue;
-      const from = dp.from ? hm(dp.from) : 0, to = dp.to ? hm(dp.to) : 86400;
-      if (t >= from && t < to) { const text = dp.name || dp.pool; return { key: text + (dp.days ? dow : ''), text }; }
-    }
-    return { key: 'off', text: 'Off Air', off: true };
+  function cell(ch, sec) {                              // what the listing prints for channel ch in the half hour starting at sec (may exceed 24h)
+    if (ch.kind === 'guide') return { key: 'guide', text: 'Listings', block: true };
+    const list = sec >= 86400 ? days[ch.num].next : days[ch.num].today, t = sec % 86400;
+    // the program that starts in this slot wins (a gap cartoon may run first); otherwise the one still running from earlier
+    const p = list.find(p => isProg(p) && p.start >= t && p.start < t + 1800) || list.find(p => isProg(p) && p.start <= t && p.end > t);
+    if (!p) { const o = list.find(p => p.start <= t && p.end > t); return o && o.kind !== 'off' ? { key: 'brk', text: ch.name, block: true } : { key: 'off', text: 'Off Air', off: true }; }
+    if (ch.kind === 'scrambled') return { key: 'scr' + p.pid + (sec >= 86400 ? 'n' : ''), text: p.title + ' ★★', movie: true };
+    if (p.label) return { key: 'lbl' + p.label, text: p.label, block: true };
+    return { key: 'p' + p.pid + (sec >= 86400 ? 'n' : ''), text: p.series || p.title, movie: isMovie(p) };
   }
   function grid(id, startH, endH) {
     const slots = []; for (let h = startH; h < endH; h += 0.5) slots.push(h);
     const cols = endH - startH;
     const label = (h) => { const hh = h % 24, whole = Math.floor(hh), half = hh !== whole; const twelve = ((whole + 11) % 12) + 1; if (half) return cols > 20 ? ':30' : `${twelve}:30`; const mer = whole < 12 ? 'AM' : 'PM'; return (cols > 20 && h !== startH && whole !== 12) ? String(twelve) : `${twelve} ${mer}`; };
     let html = '<thead><tr><th class="ch"></th>' + slots.map(h => `<th class="${h % 1 ? 'half' : ''}">${label(h)}</th>`).join('') + '</tr></thead><tbody>';
+    const td = (r) => `<td colspan="${r.span}" class="${r.off ? 'off' : ''}${r.movie ? ' movie' : ''}${r.block ? ' block' : ''}">${esc(r.text)}</td>`;
     for (const ch of cfg.channels) {
       html += `<tr><th>${ch.name}<br><span class="num">${ch.num}</span></th>`;
       let run = null;
@@ -137,16 +157,17 @@
       for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
         if (run && run.key === c.key) { run.span++; continue; }
-        if (run) html += `<td colspan="${run.span}" class="${run.off ? 'off' : ''}">${run.text}</td>`;
-        run = { key: c.key, text: c.text, off: c.off, span: 1 };
+        if (run) html += td(run);
+        run = Object.assign({ span: 1 }, c);
       }
-      if (run) html += `<td colspan="${run.span}" class="${run.off ? 'off' : ''}">${run.text}</td>`;
+      if (run) html += td(run);
       html += '</tr>';
     }
     document.getElementById(id).innerHTML = html + '</tbody>';
   }
   grid('evening', 18, 26);
   grid('daytime', 6, 18);
+  fit(); document.fonts && document.fonts.ready.then(fit);
 })();
 </script>
 </body>

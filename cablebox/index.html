@@ -16,14 +16,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Dancing+Script:wght@600&family=VT323&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=a89e9ef">
+<link rel="stylesheet" href="style.css?v=0b947fc">
 </head>
 <body>
 <div class="room">
   <div class="scene">
 
     <!-- This week's listings: the TV section, folded, lying on the console. Opens the newsprint grid. -->
-    <a class="paper" id="paper" href="tvweek.html" target="_blank" rel="noopener" aria-label="TV Week listings"><img src="assets/paper-console-2.webp" alt="" draggable="false"></a>
+    <a class="paper" id="paper" href="tvweek.html" aria-label="TV Week listings"><img src="assets/paper-console-2.webp" alt="" draggable="false"></a>
 
     <!-- Cable converter box, on top of the set. A photograph; the LED digits and the hit targets are ours. -->
     <div class="cablebox" id="cablebox">
@@ -77,6 +77,7 @@
         <button class="rm-key rm-power" data-act="power" aria-label="Power">POWER</button>
         <div class="rm-display" aria-label="channel display"><svg class="seg" viewBox="0 0 44 76" aria-hidden="true"></svg><svg class="seg" viewBox="0 0 44 76" aria-hidden="true"></svg></div>
         <button class="rm-key rm-set" data-act="set" aria-label="Show the whole set">SET</button>
+        <a class="rm-key rm-paper" href="tvweek.html" aria-label="TV Week listings">TV<br>WEEK</a>
       </div>
       <div class="rm-marquee" id="remoteMarquee" aria-label="now playing"></div>
       <div class="rm-grid">
@@ -87,6 +88,7 @@
       </div>
     </div>
     <button class="rm-toggle" id="remoteToggle" aria-label="Show the remote">REMOTE</button>
+    <a class="paper-tab" id="paperTab" href="tvweek.html" aria-label="TV Week listings">TV WEEK</a>
     <!-- Portrait phones: the remote lies on the TV section; the masthead peeks out below it. -->
     <a class="paper-under" id="paperUnder" href="tvweek.html" aria-label="TV Week listings"></a>
     <div id="safeProbe" aria-hidden="true"></div>
@@ -96,11 +98,18 @@
     <div class="hint" id="hint">Turn the VOL/ON knob. Type a channel on the box, or use the keys. Guide is channel 1.</div>
   </div>
 </div>
-<script src="js/schedule.js?v=a89e9ef"></script>
-<script src="js/player.js?v=a89e9ef"></script>
-<script src="js/scramble.js?v=a89e9ef"></script>
-<script src="js/bulletins.js?v=a89e9ef"></script>
-<script src="js/marquee.js?v=a89e9ef"></script>
-<script src="js/app.js?v=a89e9ef"></script>
+<!-- The paper, held up: this week's listings over the set, with the picture and sound still going behind it. -->
+<div class="paperlift" id="paperLift" hidden>
+  <div class="paperlift-sheet">
+    <iframe id="paperFrame" title="TV Week listings"></iframe>
+    <button class="paperlift-close" id="paperClose" aria-label="Put the paper down">✕</button>
+  </div>
+</div>
+<script src="js/schedule.js?v=0b947fc"></script>
+<script src="js/player.js?v=0b947fc"></script>
+<script src="js/scramble.js?v=0b947fc"></script>
+<script src="js/bulletins.js?v=0b947fc"></script>
+<script src="js/marquee.js?v=0b947fc"></script>
+<script src="js/app.js?v=0b947fc"></script>
 </body>
 </html>
