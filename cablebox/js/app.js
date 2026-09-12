@@ -16,8 +16,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=0b947fc').then(r => r.json()),
-      fetch('data/catalog.json?v=0b947fc').then(r => r.json())
+      fetch('data/channels.json?v=e9d576b').then(r => r.json()),
+      fetch('data/catalog.json?v=e9d576b').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -416,7 +416,10 @@
     const k = portrait ? vw / g0.width : Math.min(vh / g0.height, vw / g0.width);
     scene.style.width = (w0 * k) + 'px';
     const g = glass.getBoundingClientRect(), bez = g.height * 0.07, st = safeTop();
-    scene.style.left = ((vw - g.width) / 2 - g.left) + 'px';
+    // centre the tube, but never leave black beside the cabinet: a wider-than-screen scene is clamped to the edges
+    // (the set is wider on the knob side than the other, so centring the glass alone left a gap on the left)
+    const sw = w0 * k, centred = (vw - g.width) / 2 - g.left;
+    scene.style.left = (sw >= vw ? Math.min(0, Math.max(vw - sw, centred)) : (vw - sw) / 2) + 'px';
     if (portrait) { scene.style.top = (st + bez - g.top) + 'px'; remote.style.top = (st + g.height + 2 * bez) + 'px'; }
     else { scene.style.top = ((vh - g.height) / 2 - g.top) + 'px'; remote.style.top = ''; }
     // the paper under the remote needs its masthead to show: hide it when the keypad runs to the bottom of the screen
