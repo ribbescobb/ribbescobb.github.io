@@ -659,6 +659,77 @@
       ]
     },
     {
+      "num": 18,
+      "id": "science",
+      "name": "SCIENCE",
+      "wild": true,
+      "_note": "Period science and the animal kingdom. Wild Kingdom, Wild America, Caltech, the film archives and The Computer Chronicles are legit; Cosmos, NOVA, Cousteau, Connections and the specials come through the wild door.",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "09:00",
+          "pool": "nature-classic",
+          "name": "Animal Kingdom"
+        },
+        {
+          "from": "09:00",
+          "to": "12:00",
+          "pool": "science-films",
+          "name": "Science Films"
+        },
+        {
+          "from": "12:00",
+          "to": "13:00",
+          "pool": "science-shorts",
+          "block": true,
+          "label": "Newsreels",
+          "name": "Newsreels"
+        },
+        {
+          "from": "13:00",
+          "to": "15:00",
+          "pool": "computer-chronicles",
+          "name": "Computer Chronicles"
+        },
+        {
+          "from": "15:00",
+          "to": "18:00",
+          "pool": "nature-classic",
+          "name": "Animal Kingdom"
+        },
+        {
+          "from": "18:00",
+          "to": "19:00",
+          "pool": "science-films",
+          "name": "Science Films"
+        },
+        {
+          "from": "19:00",
+          "to": "21:00",
+          "pool": "science-prime",
+          "name": "Science Hour"
+        },
+        {
+          "from": "21:00",
+          "to": "23:00",
+          "pool": "nature-prime",
+          "name": "Nature Special"
+        },
+        {
+          "from": "23:00",
+          "to": "24:00",
+          "pool": "science-prime",
+          "name": "Science Hour"
+        },
+        {
+          "from": "00:00",
+          "to": "06:00",
+          "pool": "science-films",
+          "name": "Science Films"
+        }
+      ]
+    },
+    {
       "num": 20,
       "id": "access",
       "name": "PUBLIC ACCESS",
@@ -17024,6 +17095,316 @@
           "url": "https://www.youtube.com/playlist?list=PLYluSfNh3SDtVZXJEENQbvYwBPj4yHieM",
           "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
           "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        }
+      ]
+    },
+    "nature-classic": {
+      "minMinutes": 8,
+      "_note": "Animal Kingdom: Mutual of Omaha's Wild Kingdom and Wild America post their own vintage episodes; the rest of the 70s syndicated nature half-hours come in through the wild door.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Mutual of Omaha's Wild Kingdom · official uploads (episodes, not clips)",
+          "url": "https://www.youtube.com/playlist?list=UUYiHsWQTLY0lw5vl4qVB1Nw",
+          "limit": 600,
+          "minMinutes": 18,
+          "titleExclude": "Moments|Trailer|Promo|Podcast|Interview|Behind|Shorts|Protecting the Wild|2[0-2]\\d\\d",
+          "series": "Wild Kingdom"
+        },
+        {
+          "tier": "legit",
+          "note": "Wild America · official channel, full episodes",
+          "url": "https://www.youtube.com/playlist?list=UURrD7xqN9bcilS0yB6Th5bQ",
+          "limit": 600,
+          "minMinutes": 20,
+          "titleMatch": "Full Episode",
+          "titleExclude": "Trailer|Promo",
+          "series": "Wild America"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Untamed World (1969–1975 syndicated)",
+          "url": "ytsearch60:The Untamed World full episode 197",
+          "requireEmbedCheck": true,
+          "titleMatch": "untamed world",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "cap": 40,
+          "series": "The Untamed World"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Lorne Greene's New Wilderness",
+          "url": "ytsearch60:Lorne Greene's New Wilderness episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "new wilderness",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "cap": 30,
+          "series": "Lorne Greene's New Wilderness"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Wild Wild World of Animals",
+          "url": "ytsearch40:Wild Wild World of Animals episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "wild wild world of animals",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "cap": 30,
+          "series": "Wild Wild World of Animals"
+        }
+      ]
+    },
+    "nature-prime": {
+      "minMinutes": 30,
+      "_note": "The hour-long nature specials: Cousteau, the National Geographic Specials, PBS Nature, Life on Earth. Wild only; nobody official posts these.",
+      "sources": [
+        {
+          "tier": "wild",
+          "note": "fan · The Undersea World of Jacques Cousteau",
+          "url": "ytsearch60:The Undersea World of Jacques Cousteau full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "cousteau",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer|legacy|fascinating underwater world",
+          "cap": 40,
+          "series": "The Undersea World of Jacques Cousteau"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Specials 1975–1989",
+          "url": "ytsearch60:National Geographic Special 198 full",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "cap": 40,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Specials, 70s",
+          "url": "ytsearch40:National Geographic 197 full documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b197\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "cap": 20,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature, 1980s",
+          "url": "ytsearch60:PBS Nature documentary 198",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "cap": 40,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Life on Earth (1979)",
+          "url": "ytsearch40:Life on Earth 1979 Attenborough full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*life on earth).*(episode|ep\\b|\\bep\\d| e\\d\\d|part)",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer|first life|story behind|making of",
+          "minMinutes": 40,
+          "cap": 15,
+          "series": "Life on Earth"
+        }
+      ]
+    },
+    "science-prime": {
+      "minMinutes": 30,
+      "_note": "Hard science in prime time: Cosmos, NOVA, Connections, The Ascent of Man (wild) and The Mechanical Universe (Caltech, legit).",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Caltech · The Mechanical Universe (official uploads via search)",
+          "url": "ytsearch60:The Mechanical Universe caltech episode",
+          "uploaderMatch": "^caltech$",
+          "titleMatch": "mechanical universe",
+          "series": "The Mechanical Universe",
+          "minMinutes": 20
+        },
+        {
+          "tier": "legit",
+          "note": "Caltech · The Mechanical Universe, second search",
+          "url": "ytsearch60:Mechanical Universe episode Newton caltech",
+          "uploaderMatch": "^caltech$",
+          "titleMatch": "mechanical universe",
+          "series": "The Mechanical Universe",
+          "minMinutes": 20
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Cosmos (1980)",
+          "url": "ytsearch60:Carl Sagan Cosmos 1980 episode full",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*cosmos).*(episode|ep\\b|ep\\d|part)",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer|tyson|2014|spacetime odyssey|possible worlds",
+          "minMinutes": 45,
+          "cap": 26,
+          "series": "Cosmos"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA, 1974–1989",
+          "url": "ytsearch80:NOVA PBS 198 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "minMinutes": 40,
+          "cap": 50,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA, 70s",
+          "url": "ytsearch40:NOVA 197 PBS documentary full",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b197\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "minMinutes": 40,
+          "cap": 20,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Connections (1978)",
+          "url": "ytsearch40:James Burke Connections 1978 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*connections).*(ep\\b|ep\\.|episode|s1)",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "minMinutes": 40,
+          "cap": 12,
+          "series": "Connections"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Day the Universe Changed (1985)",
+          "url": "ytsearch30:The Day the Universe Changed James Burke episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "day the universe changed",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "minMinutes": 40,
+          "cap": 12,
+          "series": "The Day the Universe Changed"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Ascent of Man (1973)",
+          "url": "ytsearch30:The Ascent of Man Bronowski episode full",
+          "requireEmbedCheck": true,
+          "titleMatch": "ascent of man",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "minMinutes": 40,
+          "cap": 14,
+          "series": "The Ascent of Man"
+        }
+      ]
+    },
+    "science-films": {
+      "minMinutes": 8,
+      "maxMinutes": 60,
+      "_note": "The classroom and industrial films: PeriscopeFilm's restorations, the AT&T Archives, the National Film Board. All official uploads by the archives that hold them.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "PeriscopeFilm · science and space films (official uploads via search)",
+          "url": "ytsearch80:PeriscopeFilm science film 1960s",
+          "uploaderMatch": "^PeriscopeFilm$",
+          "titleMatch": "\\b19[5-8]\\d\\b",
+          "titleExclude": "war|military|army|navy|combat|weapon|nuclear test",
+          "series": "Science Film"
+        },
+        {
+          "tier": "legit",
+          "note": "PeriscopeFilm · space films",
+          "url": "ytsearch80:PeriscopeFilm NASA space film 1960s 1970s",
+          "uploaderMatch": "^PeriscopeFilm$",
+          "titleMatch": "\\b19[5-8]\\d\\b",
+          "titleExclude": "war|military|army|navy|combat|weapon",
+          "series": "Space Film"
+        },
+        {
+          "tier": "legit",
+          "note": "PeriscopeFilm · electronics, chemistry, physics classroom films",
+          "url": "ytsearch80:PeriscopeFilm educational film physics chemistry electronics",
+          "uploaderMatch": "^PeriscopeFilm$",
+          "titleMatch": "\\b19[5-8]\\d\\b",
+          "titleExclude": "war|military|army|navy|combat|weapon",
+          "series": "Science Film"
+        },
+        {
+          "tier": "legit",
+          "note": "PeriscopeFilm · Bell System Science Series and nature films",
+          "url": "ytsearch60:PeriscopeFilm Bell System Science Series film",
+          "uploaderMatch": "^PeriscopeFilm$",
+          "titleMatch": "\\b19[5-8]\\d\\b",
+          "series": "Science Film"
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · AT&T Archives (uploads)",
+          "url": "https://www.youtube.com/playlist?list=UUnpDurxReTSpFs5-AhDo8Kg",
+          "limit": 800,
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Ad\\b|Commercial|Innovation Today|Bots|2[0-2]\\d\\d",
+          "series": "AT&T Archives"
+        },
+        {
+          "tier": "legit",
+          "note": "National Film Board of Canada · science documentaries (official uploads via search)",
+          "url": "ytsearch60:NFB National Film Board science documentary",
+          "uploaderMatch": "^NFB$",
+          "titleExclude": "war|animated|animation|trailer",
+          "minMinutes": 10,
+          "series": "NFB"
+        }
+      ]
+    },
+    "computer-chronicles": {
+      "minMinutes": 20,
+      "_note": "The Computer Chronicles, official channel, 1983–1989 only.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "The Computer Chronicles · official channel",
+          "url": "https://www.youtube.com/playlist?list=UUkJ6eQKpHZgsZBla4JgKj3A",
+          "limit": 700,
+          "titleMatch": "\\b198\\d\\b",
+          "titleExclude": "Trailer|Promo|Shorts",
+          "series": "The Computer Chronicles"
+        }
+      ]
+    },
+    "science-shorts": {
+      "minMinutes": 1,
+      "maxMinutes": 10,
+      "series": false,
+      "_note": "Newsreel and archive shorts between the programs.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "British Pathé · science and technology newsreels (official uploads via search)",
+          "url": "ytsearch80:British Pathe science technology 1970",
+          "uploaderMatch": "^British Pathé$",
+          "titleMatch": "\\(19[5-7]\\d",
+          "titleExclude": "war|royal|fashion|sport"
+        },
+        {
+          "tier": "legit",
+          "note": "British Pathé · space and computers",
+          "url": "ytsearch60:British Pathe space computer rocket 1960s",
+          "uploaderMatch": "^British Pathé$",
+          "titleMatch": "\\(19[5-7]\\d",
+          "titleExclude": "war|royal|fashion|sport"
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · short archive pieces",
+          "url": "https://www.youtube.com/playlist?list=UUnpDurxReTSpFs5-AhDo8Kg",
+          "limit": 800,
+          "maxMinutes": 10,
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Ad\\b|Commercial|Innovation Today|2[0-2]\\d\\d"
         }
       ]
     }
