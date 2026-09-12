@@ -730,6 +730,69 @@
       ]
     },
     {
+      "num": 19,
+      "id": "oldies",
+      "name": "OLDIES",
+      "wild": true,
+      "_note": "The 50s and 60s: black-and-white television by day and evening, the Sullivan and Motown archive as music blocks, the dance shows in the afternoon.",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "10:00",
+          "pool": "classic-tv",
+          "name": "Classic TV"
+        },
+        {
+          "from": "10:00",
+          "to": "12:00",
+          "pool": "music-oldies",
+          "block": true,
+          "label": "Oldies",
+          "name": "Oldies"
+        },
+        {
+          "from": "12:00",
+          "to": "15:00",
+          "pool": "classic-tv",
+          "name": "Classic TV"
+        },
+        {
+          "from": "15:00",
+          "to": "17:00",
+          "pool": "dance-party",
+          "name": "Dance Party"
+        },
+        {
+          "from": "17:00",
+          "to": "20:00",
+          "pool": "classic-tv",
+          "name": "Classic TV"
+        },
+        {
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "music-oldies",
+          "block": true,
+          "label": "Oldies",
+          "name": "Oldies"
+        },
+        {
+          "from": "22:00",
+          "to": "24:00",
+          "pool": "classic-tv",
+          "name": "Classic TV"
+        },
+        {
+          "from": "00:00",
+          "to": "06:00",
+          "pool": "music-oldies",
+          "block": true,
+          "label": "Oldies",
+          "name": "Oldies"
+        }
+      ]
+    },
+    {
       "num": 20,
       "id": "access",
       "name": "PUBLIC ACCESS",
@@ -780,6 +843,167 @@
           "block": true,
           "label": "Weather Scan",
           "name": "Local Forecast"
+        }
+      ]
+    },
+    {
+      "num": 22,
+      "id": "westerns",
+      "name": "WESTERNS",
+      "wild": true,
+      "_note": "Half-hours in the morning and at supper, hour-longs afternoons and prime, a public-domain western feature at noon and at 10.",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "12:00",
+          "pool": "westerns-half",
+          "name": "Westerns"
+        },
+        {
+          "from": "12:00",
+          "to": "14:00",
+          "pool": "westerns-movies",
+          "name": "Western Matinee"
+        },
+        {
+          "from": "14:00",
+          "to": "18:00",
+          "pool": "westerns-hour",
+          "name": "Westerns"
+        },
+        {
+          "from": "18:00",
+          "to": "20:00",
+          "pool": "westerns-half",
+          "name": "Westerns"
+        },
+        {
+          "from": "20:00",
+          "to": "22:00",
+          "pool": "westerns-hour",
+          "name": "Westerns"
+        },
+        {
+          "from": "22:00",
+          "to": "24:00",
+          "pool": "westerns-movies",
+          "name": "Western Matinee"
+        },
+        {
+          "from": "00:00",
+          "to": "06:00",
+          "pool": "westerns-hour",
+          "name": "Westerns"
+        }
+      ]
+    },
+    {
+      "num": 23,
+      "id": "movies",
+      "name": "MOVIES",
+      "wild": true,
+      "_note": "Public-domain features all day; the Late Show is noir, horror and science fiction.",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "12:00",
+          "pool": "movies-classic",
+          "name": "Morning Movie"
+        },
+        {
+          "from": "12:00",
+          "to": "20:00",
+          "pool": "movies-classic",
+          "name": "Matinee"
+        },
+        {
+          "from": "20:00",
+          "to": "23:00",
+          "pool": "movies-classic",
+          "name": "Movie"
+        },
+        {
+          "from": "23:00",
+          "to": "24:00",
+          "pool": "movies-late",
+          "name": "Late Show"
+        },
+        {
+          "from": "00:00",
+          "to": "06:00",
+          "pool": "movies-late",
+          "name": "Late Late Show"
+        }
+      ]
+    },
+    {
+      "num": 24,
+      "id": "howto",
+      "name": "HOW-TO",
+      "wild": true,
+      "_note": "Weekday public television at 2 PM: the kitchen, the workshop, the garden, the easel, and MotorWeek at 5.",
+      "dayparts": [
+        {
+          "from": "06:00",
+          "to": "09:00",
+          "pool": "howto-kitchen",
+          "name": "The Kitchen"
+        },
+        {
+          "from": "09:00",
+          "to": "12:00",
+          "pool": "howto-shop",
+          "name": "The Workshop"
+        },
+        {
+          "from": "12:00",
+          "to": "13:00",
+          "pool": "howto-garden",
+          "name": "The Garden"
+        },
+        {
+          "from": "13:00",
+          "to": "15:00",
+          "pool": "howto-kitchen",
+          "name": "The Kitchen"
+        },
+        {
+          "from": "15:00",
+          "to": "17:00",
+          "pool": "howto-shop",
+          "name": "The Workshop"
+        },
+        {
+          "from": "17:00",
+          "to": "18:00",
+          "pool": "motorweek",
+          "block": true,
+          "label": "MotorWeek",
+          "name": "MotorWeek"
+        },
+        {
+          "from": "18:00",
+          "to": "19:00",
+          "pool": "howto-paint",
+          "name": "The Easel"
+        },
+        {
+          "from": "19:00",
+          "to": "22:00",
+          "pool": "howto-shop",
+          "name": "The Workshop"
+        },
+        {
+          "from": "22:00",
+          "to": "24:00",
+          "pool": "howto-kitchen",
+          "name": "The Kitchen"
+        },
+        {
+          "from": "00:00",
+          "to": "06:00",
+          "pool": "howto-paint",
+          "name": "The Easel"
         }
       ]
     },
@@ -17671,6 +17895,582 @@
           "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
           "series": "AT&T Archives",
           "maxMinutes": 10
+        }
+      ]
+    },
+    "westerns-half": {
+      "minMinutes": 18,
+      "maxMinutes": 35,
+      "_note": "The half-hour westerns. The Lone Ranger's own channel, FilmRise's licensed Rifleman, and the public-domain packagers (Grjngo, Classic TV Channel, Western Mania, 1950s TV) for Cisco Kid, Roy Rogers, Annie Oakley, Death Valley Days, Bat Masterson.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "The Lone Ranger · official channel (episodes only)",
+          "url": "https://www.youtube.com/playlist?list=UUtP4hdLEzPZV3ZLnZRmEQXA",
+          "limit": 400,
+          "titleMatch": "S\\d\\d E\\d\\d",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|Hour|Favourite|Favorite",
+          "series": "The Lone Ranger"
+        },
+        {
+          "tier": "legit",
+          "note": "FilmRise Television · The Rifleman (licensed distributor)",
+          "url": "ytsearch60:The Rifleman FilmRise Season Episode Full",
+          "uploaderMatch": "^FilmRise Television$",
+          "titleMatch": "rifleman",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The Rifleman"
+        },
+        {
+          "tier": "legit",
+          "note": "FilmRise Television · The Rifleman, second pass",
+          "url": "ytsearch60:The Rifleman Season 2 Episode FilmRise",
+          "uploaderMatch": "^FilmRise Television$",
+          "titleMatch": "rifleman",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The Rifleman"
+        },
+        {
+          "tier": "legit",
+          "note": "Grjngo · The Cisco Kid (public domain packager)",
+          "url": "ytsearch60:The Cisco Kid Grjngo episode",
+          "uploaderMatch": "^Grjngo",
+          "titleMatch": "cisco kid",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The Cisco Kid"
+        },
+        {
+          "tier": "legit",
+          "note": "Grjngo · Annie Oakley (public domain packager)",
+          "url": "ytsearch40:Annie Oakley Grjngo episode",
+          "uploaderMatch": "^Grjngo",
+          "titleMatch": "annie oakley",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "Annie Oakley"
+        },
+        {
+          "tier": "legit",
+          "note": "Classic TV Channel · The Roy Rogers Show (public domain packager)",
+          "url": "ytsearch60:Roy Rogers Show Season Episode Classic TV Channel",
+          "uploaderMatch": "^Classic TV Channel$",
+          "titleMatch": "roy rogers",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The Roy Rogers Show"
+        },
+        {
+          "tier": "legit",
+          "note": "Western Mania · Death Valley Days and Bat Masterson (public domain packager)",
+          "url": "ytsearch60:Western Mania full episode classic western",
+          "uploaderMatch": "^Western Mania$",
+          "titleMatch": "death valley days|bat masterson|wyatt earp|cimarron",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "seriesFrom": "^(.{4,44}?)(?: - | – | \\| |: |\\(|,| Season| S\\d| Ep| Episode)"
+        },
+        {
+          "tier": "legit",
+          "note": "1950s TV · Death Valley Days, Wyatt Earp (public domain packager)",
+          "url": "ytsearch60:1950s TV Death Valley Days Wyatt Earp episode",
+          "uploaderMatch": "^1950s TV$",
+          "titleMatch": "death valley|wyatt earp|bat masterson",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "seriesFrom": "^(.{4,44}?)(?: - | – | \\| |: |\\(|,| Season| S\\d| Ep| Episode)"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Have Gun Will Travel, Wanted Dead or Alive, Maverick",
+          "url": "ytsearch60:Have Gun Will Travel full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "have gun|wanted dead or alive|maverick",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 30,
+          "seriesFrom": "^(.{4,44}?)(?: - | – | \\| |: |\\(|,| Season| S\\d| Ep| Episode)"
+        }
+      ]
+    },
+    "westerns-hour": {
+      "minMinutes": 40,
+      "maxMinutes": 70,
+      "_note": "The hour-longs: Bonanza and Wagon Train from the packagers, The Big Valley, Laramie, Rawhide through the wild door.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Grjngo · Bonanza (public domain episodes)",
+          "url": "ytsearch80:Bonanza Grjngo Episode",
+          "uploaderMatch": "^Grjngo",
+          "titleMatch": "bonanza",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "Bonanza"
+        },
+        {
+          "tier": "legit",
+          "note": "Grjngo · Bonanza, second pass",
+          "url": "ytsearch80:Bonanza Classic Western Series Grjngo",
+          "uploaderMatch": "^Grjngo",
+          "titleMatch": "bonanza",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "Bonanza"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Wagon Train",
+          "url": "ytsearch60:Wagon Train S0 episode full",
+          "requireEmbedCheck": true,
+          "titleMatch": "wagon train",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "series": "Wagon Train"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Big Valley",
+          "url": "ytsearch60:The Big Valley Season Episode full",
+          "requireEmbedCheck": true,
+          "titleMatch": "big valley",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "series": "The Big Valley"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Rawhide, Laramie, The Virginian",
+          "url": "ytsearch60:Rawhide full episode 1960",
+          "requireEmbedCheck": true,
+          "titleMatch": "rawhide|laramie|virginian|cimarron strip",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "seriesFrom": "^(.{4,44}?)(?: - | – | \\| |: |\\(|,| Season| S\\d| Ep| Episode)"
+        }
+      ]
+    },
+    "westerns-movies": {
+      "minMinutes": 50,
+      "maxMinutes": 130,
+      "series": false,
+      "_note": "Public-domain western features: the 1930s John Wayne pictures and their neighbours.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "public domain · John Wayne 1930s westerns (Timeless Hollywood Movies, Vintage Vault)",
+          "url": "ytsearch60:John Wayne public domain western full movie 1930s",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|Public Domain|Little Picture House|Cult Cinema Classics",
+          "titleMatch": "\\(19[3-5]\\d\\)|\\b19[3-5]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · classic westerns 1940s–50s",
+          "url": "ytsearch60:public domain western full movie 1950",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|Public Domain|Little Picture House|Cult Cinema Classics|Golden Reel Classics",
+          "titleMatch": "\\(19[3-6]\\d\\)|\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        }
+      ]
+    },
+    "movies-classic": {
+      "minMinutes": 55,
+      "maxMinutes": 150,
+      "series": false,
+      "_note": "The matinee: public-domain features 1930–1969 from the packagers who specialise in them (uploader-matched), years in the title.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "public domain · classic features (comedy, drama, adventure)",
+          "url": "ytsearch80:public domain full movie 1940s classic",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · classic features, 1950s",
+          "url": "ytsearch80:full movie 1950s public domain drama",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · comedies",
+          "url": "ytsearch60:public domain comedy full movie 1930s 1940s",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · Hitchcock's British pictures",
+          "url": "ytsearch30:Hitchcock public domain full movie",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[2-4]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · British 1950s (Free Vintage Movies)",
+          "url": "ytsearch60:Free Vintage Movies British 1950s full movie",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        }
+      ]
+    },
+    "movies-late": {
+      "minMinutes": 55,
+      "maxMinutes": 130,
+      "series": false,
+      "_note": "The Late Show: noir, horror and science fiction from the same public-domain packagers, plus Corman through the wild door.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "public domain · film noir",
+          "url": "ytsearch80:film noir full movie 1940s public domain",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-5]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · horror and science fiction 1950s",
+          "url": "ytsearch80:1950s science fiction horror full movie public domain",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|triple feature|double feature"
+        },
+        {
+          "tier": "legit",
+          "note": "public domain · monster pictures",
+          "url": "ytsearch60:public domain monster movie full 1950s 1960s",
+          "uploaderMatch": "Timeless Hollywood Movies|Vintage Vault|Free Vintage Movies|^Public Domain$|Little Picture House|Cult Cinema Classics|Golden Reel Classics|RareClassicMovies|The Film Detective|PizzaFlix",
+          "titleMatch": "\\b19[3-6]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|triple feature|double feature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Roger Corman pictures",
+          "url": "ytsearch40:Roger Corman full movie 1960s",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[5-7]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|1990|frankenstein unbound",
+          "cap": 20
+        }
+      ]
+    },
+    "music-oldies": {
+      "minMinutes": 1,
+      "maxMinutes": 8,
+      "series": false,
+      "caption": true,
+      "_note": "50s and 60s performances: The Ed Sullivan Show's own archive (the deepest legit pool on the dial), Motown's official channel, and the labels' official 60s videos.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "The Ed Sullivan Show · official uploads",
+          "url": "https://www.youtube.com/playlist?list=UUDUNe-NZaknJOGyulc4Ohvg",
+          "limit": 1500,
+          "titleExclude": "Trailer|Promo|Podcast|Interview|#shorts|Shorts|Compilation|Best of|Coming|Announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Motown · official 60s videos via search",
+          "url": "ytsearch80:Motown official video 1960s Supremes Temptations",
+          "uploaderMatch": "Motown|VEVO|Records|Official",
+          "titleMatch": "\\b19[56]\\d\\b|supremes|temptations|four tops|marvin gaye|stevie wonder|martha|smokey|miracles|jackson 5",
+          "titleExclude": "lyric|audio|visuali[sz]er|remaster(ed)? audio|live 20|reaction"
+        },
+        {
+          "tier": "legit",
+          "note": "labels · official 50s/60s clips via search",
+          "url": "ytsearch80:official video 1960s rock n roll Vevo",
+          "uploaderMatch": "VEVO|Records|Official",
+          "titleMatch": "\\b19[56]\\d\\b",
+          "titleExclude": "lyric|audio|visuali[sz]er|reaction|20[12]\\d"
+        }
+      ]
+    },
+    "dance-party": {
+      "minMinutes": 20,
+      "maxMinutes": 70,
+      "_note": "The dance shows, whole episodes: Bandstand, Shindig, Hullabaloo. Wild.",
+      "sources": [
+        {
+          "tier": "wild",
+          "note": "fan · American Bandstand full episodes (YouCanDanceToit!)",
+          "url": "ytsearch60:American Bandstand 196 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*bandstand).*\\b19[5-7]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "series": "American Bandstand"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Shindig!",
+          "url": "ytsearch40:Shindig 1965 full show",
+          "requireEmbedCheck": true,
+          "titleMatch": "shindig",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 30,
+          "series": "Shindig!"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Hullabaloo",
+          "url": "ytsearch40:Hullabaloo 1965 complete episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "hullabaloo",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 30,
+          "series": "Hullabaloo"
+        }
+      ]
+    },
+    "classic-tv": {
+      "minMinutes": 18,
+      "maxMinutes": 35,
+      "_note": "Black and white: FilmRise's Dick Van Dyke, The Film Detective's Burns and Allen, the public-domain packagers' Jack Benny and Ozzie and Harriet; Lucy, Hillbillies, Petticoat Junction, Mister Ed, Dragnet through the wild door.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "FilmRise Television · The Dick Van Dyke Show",
+          "url": "ytsearch80:The Dick Van Dyke Show FilmRise Season Episode",
+          "uploaderMatch": "^FilmRise Television$",
+          "titleMatch": "dick van dyke",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|FULL EPISODES",
+          "series": "The Dick Van Dyke Show"
+        },
+        {
+          "tier": "legit",
+          "note": "FilmRise Television · The Dick Van Dyke Show, second pass",
+          "url": "ytsearch80:Dick Van Dyke Show Season 3 Episode FilmRise",
+          "uploaderMatch": "^FilmRise Television$",
+          "titleMatch": "dick van dyke",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|FULL EPISODES",
+          "series": "The Dick Van Dyke Show"
+        },
+        {
+          "tier": "legit",
+          "note": "The Film Detective · Burns and Allen",
+          "url": "ytsearch40:George Burns Gracie Allen Show Film Detective",
+          "uploaderMatch": "^The Film Detective$",
+          "titleMatch": "burns",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The George Burns and Gracie Allen Show"
+        },
+        {
+          "tier": "legit",
+          "note": "PD TV · The Jack Benny Program",
+          "url": "ytsearch60:Jack Benny Program Season Episode PD TV",
+          "uploaderMatch": "^PD TV$|Free The Kinescopes",
+          "titleMatch": "jack benny",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The Jack Benny Program"
+        },
+        {
+          "tier": "legit",
+          "note": "Classic TV Channel · Ozzie and Harriet",
+          "url": "ytsearch60:Adventures of Ozzie and Harriet Season Episode Classic TV Channel",
+          "uploaderMatch": "^Classic TV Channel$",
+          "titleMatch": "ozzie",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "series": "The Adventures of Ozzie and Harriet"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Lucy Show",
+          "url": "ytsearch60:The Lucy Show S0 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "lucy show",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "series": "The Lucy Show"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Beverly Hillbillies",
+          "url": "ytsearch60:The Beverly Hillbillies Season Episode full",
+          "requireEmbedCheck": true,
+          "titleMatch": "hillbillies",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "series": "The Beverly Hillbillies"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Petticoat Junction",
+          "url": "ytsearch60:Petticoat Junction Season Episode full",
+          "requireEmbedCheck": true,
+          "titleMatch": "petticoat",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 30,
+          "series": "Petticoat Junction"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Mister Ed",
+          "url": "ytsearch40:Mister Ed S01E full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "mister ed",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 30,
+          "series": "Mister Ed"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Dragnet 1954",
+          "url": "ytsearch40:Dragnet 1954 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*dragnet).*\\b195\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|1966|1967|1968|1969|highway dragnet",
+          "cap": 30,
+          "series": "Dragnet"
+        }
+      ]
+    },
+    "howto-kitchen": {
+      "minMinutes": 18,
+      "maxMinutes": 35,
+      "_note": "Julia Child's own channel (The French Chef, the 1960s and 70s runs); Yan and the Frugal Gourmet wild.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Julia Child on PBS · official channel",
+          "url": "https://www.youtube.com/playlist?list=UUMTX9qQThpdcleLKIUm9uEw",
+          "limit": 600,
+          "titleMatch": "French Chef|Julia Child",
+          "titleExclude": "Trailer|Promo|Shorts|#shorts|Clip|Compilation|Highlights|Best of",
+          "series": "The French Chef"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Yan Can Cook",
+          "url": "ytsearch40:Yan Can Cook full episode 198",
+          "requireEmbedCheck": true,
+          "titleMatch": "yan can cook",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 24,
+          "series": "Yan Can Cook"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Frugal Gourmet",
+          "url": "ytsearch40:The Frugal Gourmet full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "frugal gourmet",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 24,
+          "series": "The Frugal Gourmet"
+        }
+      ]
+    },
+    "howto-shop": {
+      "minMinutes": 18,
+      "maxMinutes": 100,
+      "_note": "The New Yankee Workshop's own channel; This Old House's 80s seasons, Hometime and The Woodwright's Shop through the wild door.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "The New Yankee Workshop · official channel",
+          "url": "https://www.youtube.com/playlist?list=UUnWRRwGB6-QZ9rxcWifx5Lg",
+          "limit": 400,
+          "titleMatch": "S\\d+ ?E\\d+",
+          "titleExclude": "Trailer|Promo|Shorts|#shorts",
+          "series": "The New Yankee Workshop"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · This Old House, 1980s (Bob Vila years)",
+          "url": "ytsearch60:This Old House 198 full episode Bob Vila",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*this old house).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 40,
+          "series": "This Old House"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Hometime",
+          "url": "ytsearch40:Hometime how to 198 full",
+          "requireEmbedCheck": true,
+          "titleMatch": "hometime",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 24,
+          "series": "Hometime"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Woodwright's Shop",
+          "url": "ytsearch40:The Woodwright's Shop Roy Underhill full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "woodwright",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+|reveals|at 74",
+          "cap": 30,
+          "series": "The Woodwright's Shop"
+        }
+      ]
+    },
+    "howto-garden": {
+      "minMinutes": 18,
+      "maxMinutes": 35,
+      "_note": "GBH's own Victory Garden uploads, plus the VHS-era ones.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "GBH · The Victory Garden (official uploads via search)",
+          "url": "ytsearch60:Victory Garden GBH episode",
+          "uploaderMatch": "^GBH$",
+          "titleMatch": "victory garden",
+          "titleExclude": "Trailer|Promo|Shorts",
+          "series": "The Victory Garden"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Victory Garden with Roger Swain (VHS)",
+          "url": "ytsearch40:The Victory Garden Roger Swain episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "victory garden",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|marathon|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|colorized|4 hours|\\d+ hours|full season|complete season|episodes? \\d+-\\d+|ep ?\\d+-\\d+",
+          "cap": 30,
+          "series": "The Victory Garden"
+        }
+      ]
+    },
+    "howto-paint": {
+      "minMinutes": 20,
+      "maxMinutes": 35,
+      "_note": "Bob Ross's own channel.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Bob Ross · The Joy of Painting (official uploads via search)",
+          "url": "ytsearch80:Bob Ross The Joy of Painting Season Episode",
+          "uploaderMatch": "^Bob Ross$",
+          "titleMatch": "joy of painting|season \\d+ episode",
+          "titleExclude": "Trailer|Promo|Shorts|#shorts|Marathon|Compilation|Hours",
+          "series": "The Joy of Painting"
+        }
+      ]
+    },
+    "motorweek": {
+      "minMinutes": 3,
+      "maxMinutes": 20,
+      "series": false,
+      "_note": "MotorWeek's own Retro Reviews, the 1981–1989 tests. A block.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "MotorWeek · Retro Review (official uploads via search)",
+          "url": "ytsearch80:MotorWeek Retro Review 198",
+          "uploaderMatch": "^MotorWeek$",
+          "titleMatch": "^(?=.*retro).*\\b198\\d\\b",
+          "titleExclude": "Trailer|Promo|Shorts"
+        },
+        {
+          "tier": "legit",
+          "note": "MotorWeek · Retro Review, second pass",
+          "url": "ytsearch80:MotorWeek Retro Review 1984 1986 1988",
+          "uploaderMatch": "^MotorWeek$",
+          "titleMatch": "^(?=.*retro).*\\b198\\d\\b",
+          "titleExclude": "Trailer|Promo|Shorts"
         }
       ]
     }
