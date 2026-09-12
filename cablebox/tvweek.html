@@ -96,11 +96,12 @@
     <h2>EVENING</h2><table id="evening"></table>
     <h2>DAYTIME</h2><table id="daytime"></table>
     <div class="notice" id="pledgeNotice" hidden><b>PLEDGE WEEK</b> &nbsp; This listing is made possible by viewers like you. Support your local cable operator &nbsp;·&nbsp; Pledge line <a id="pledgeNoticeLink" href="#" target="_blank" rel="noopener">EXAMPLE.COM/PLEDGE</a></div>
-    <div class="foot"><span><a href="index.html" class="back" style="color:inherit">← Back to the set</a> &nbsp; ★ Ratings are the listing service's opinion and are not open to appeal. &nbsp; Premium channels require a descrambler.</span><span>Schedules subject to change without notice, and they will.</span></div>
+    <div class="foot"><span><a href="index.html" class="back" style="color:inherit">← Back to the set</a> &nbsp; <a href="about.html" style="color:inherit" target="_top">About the set</a> &nbsp; ★ Ratings are the listing service's opinion and are not open to appeal. &nbsp; Premium channels require a descrambler.</span><span>Schedules subject to change without notice, and they will.</span></div>
   </div>
 </div></div></div>
-<script src="js/schedule.js?v=2db66f9"></script>
-<script src="js/scramble.js?v=2db66f9"></script>
+<script src="js/schedule.js?v=0c2d897"></script>
+<script src="js/scramble.js?v=0c2d897"></script>
+<script src="js/slates.js?v=0c2d897"></script>
 <script>
 (async () => {
   // Inside the set (an iframe) the back links close the paper instead of navigating, and the sheet scales to the frame.
@@ -130,7 +131,7 @@
 
   // The listings are the real schedule: the same deterministic clock the set runs on, built for this date and the
   // next morning. The premium channel's features come from the same generator too. Series names print, not episodes.
-  cat.pools.scrambled = Scramble.pool();
+  cat.pools.scrambled = Scramble.pool(); cat.pools.weather = Slates.pool('weather'); cat.pools.bulletinboard = Slates.pool('bulletin');
   Sched.prepare(cat, cfg.filler || 'commercials', cfg.breakSeconds, cfg.breakEvery);
   const days = {};
   for (const ch of cfg.channels) days[ch.num] = { today: Sched.dayList(ch, date, cat), next: Sched.dayList(ch, next, cat) };
@@ -140,6 +141,7 @@
 
   function cell(ch, sec) {                              // what the listing prints for channel ch in the half hour starting at sec (may exceed 24h)
     if (ch.kind === 'guide') return { key: 'guide', text: 'Listings', block: true };
+    if (ch.kind === 'weather') return { key: 'wx', text: 'Local Forecast', block: true };
     const list = sec >= 86400 ? days[ch.num].next : days[ch.num].today, t = sec % 86400;
     // the program that starts in this slot wins (a gap cartoon may run first); otherwise the one still running from earlier
     const p = list.find(p => isProg(p) && p.start >= t && p.start < t + 1800) || list.find(p => isProg(p) && p.start <= t && p.end > t);

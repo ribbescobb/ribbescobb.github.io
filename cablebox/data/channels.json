@@ -1,7 +1,16 @@
 {
   "_readme": "The lineup. Channel numbers are what you punch into the box. Each channel plays from named pools by daypart (days: 0=Sun..6=Sat, local time); gaps between dayparts are off-air (test pattern). Pools list YouTube sources: playlist/channel/video URLs or ytsearchN:query. Every source has a tier: legit (official uploader), wild (unofficial), filler (commercials, bumpers). Tiers in `include` are built for every channel; a channel marked \"wild\": true also builds the wild sources of its pools, but only while the top-level \"wild\" master switch is on: flip it to false and rebuild, and every unofficial upload leaves the catalog at once. Wild sources are admitted only after tools/embed_check.js has watched them play (data/embeddable.json). Holiday dayparts (\"holiday\": MM-DD | easter | thanksgiving) are a soft mix weighted toward whatever is coming up inside the channel's forward window (days, default 90); off season the channel plays a random smattering of all of them. Rebuild with: python3 tools/build_catalog.py Commercials: shows start on the hour or half hour; the padding to the next boundary is commercials, spread as one or two act breaks inside the show (each up to breakSeconds, 150) with the rest after the credits; long broadcasts break about every 15 min. Block (music) channels break every breakEvery seconds between songs. breakEvery 0 on a channel = no commercials.",
-  "pledge": { "_": "The pledge drive (js/pledge.js). enabled=false switches off the slate, the guide line and the TV Week notice at once. url/label are the tip jar; minutes watched or channel changes trigger the slate at the next act break, then not again for cooldownDays. bulletinShare 4 = one guide bulletin in four.",
-              "enabled": true, "url": "https://example.com/pledge", "label": "EXAMPLE.COM/PLEDGE", "minutes": 20, "changes": 15, "cooldownDays": 7, "slateSeconds": 12, "bulletinShare": 4 },
+  "pledge": {
+    "_": "The pledge drive (js/pledge.js). enabled=false switches off the slate, the guide line and the TV Week notice at once. url/label are the tip jar; minutes watched or channel changes trigger the slate at the next act break, then not again for cooldownDays. bulletinShare 4 = one guide bulletin in four.",
+    "enabled": true,
+    "url": "https://example.com/pledge",
+    "label": "EXAMPLE.COM/PLEDGE",
+    "minutes": 20,
+    "changes": 15,
+    "cooldownDays": 7,
+    "slateSeconds": 12,
+    "bulletinShare": 4
+  },
   "wild": true,
   "include": [
     "legit",
@@ -616,6 +625,27 @@
       ]
     },
     {
+      "num": 16,
+      "id": "music-country",
+      "name": "COUNTRY",
+      "wild": true,
+      "_note": "Videos all day; Live from Austin at 9. Legit-only music; the wild door is for the ACL episodes.",
+      "dayparts": [
+        {
+          "from": "21:00",
+          "to": "22:00",
+          "pool": "country-live",
+          "name": "Live from Austin"
+        },
+        {
+          "pool": "music-country",
+          "block": true,
+          "label": "Videos",
+          "name": "Videos"
+        }
+      ]
+    },
+    {
       "num": 17,
       "id": "classics",
       "name": "CLASSICS",
@@ -625,6 +655,60 @@
           "block": true,
           "label": "Classic Cartoons",
           "name": "Classic Cartoons"
+        }
+      ]
+    },
+    {
+      "num": 20,
+      "id": "access",
+      "name": "PUBLIC ACCESS",
+      "wild": true,
+      "breakEvery": 0,
+      "_note": "Era-appropriate low-quality television. No commercials (public access never had any). Overnight and mornings are the Community Bulletin Board, a generated text slate (js/slates.js); the rest is the archives.",
+      "dayparts": [
+        {
+          "from": "00:00",
+          "to": "09:00",
+          "pool": "bulletinboard",
+          "block": true,
+          "label": "Community Bulletin Board",
+          "name": "Community Bulletin Board"
+        },
+        {
+          "from": "09:00",
+          "to": "17:00",
+          "pool": "access-shows",
+          "name": "Public Access"
+        },
+        {
+          "from": "17:00",
+          "to": "18:00",
+          "pool": "access-clips",
+          "block": true,
+          "label": "Local Shorts",
+          "name": "Local Shorts"
+        },
+        {
+          "from": "18:00",
+          "to": "24:00",
+          "pool": "access-shows",
+          "name": "Public Access"
+        }
+      ]
+    },
+    {
+      "num": 21,
+      "id": "weather",
+      "name": "WEATHER",
+      "kind": "weather",
+      "breakEvery": 0,
+      "_note": "Weather Scan: a generated forecast slate (js/slates.js) from the National Weather Service's open API. Ten fixed cities on a clock, Minneapolis most; the viewer's location is never asked for.",
+      "dayparts": [
+        {
+          "pool": "weather",
+          "block": true,
+          "label": "Weather Scan",
+          "name": "Local Forecast"
         }
       ]
     },
@@ -712,7 +796,9 @@
           "pool": "golf",
           "name": "Golf (L)"
         }
-      ]
+      ],
+      "_note": "Vintage golf, the Masters one voice among several. Wild door open for the Skins Games, Shell's and the instructional tapes.",
+      "wild": true
     },
     {
       "num": 32,
@@ -1139,24 +1225,173 @@
       "_note": "NFL's own uploads refuse embedding (error 150), so this pool opens the wild door. Fan uploads are admitted only after tools/embed_check.js has seen them play; see data/embeddable.json."
     },
     "golf": {
-      "minMinutes": 45,
+      "minMinutes": 20,
+      "series": false,
+      "_note": "Vintage golf. The Masters is one voice, not the whole channel. Legit: USGA, The R&A, PGA TOUR (which posts the 1983 Skins Game and the 1962 Shell's episodes itself), Ryder Cup, LPGA. Wild: the Skins Games, Shell's Wonderful World of Golf, and the instructional VHS tapes that filled Sunday mornings. Years through 1992 only.",
       "sources": [
         {
           "tier": "legit",
           "note": "The Masters · Final Round Broadcasts (classic years only)",
-          "titleMatch": "\\b19[6-9]\\d\\b",
-          "url": "https://www.youtube.com/playlist?list=PL5bbCtDMySv8-jCobs9gDY33ZckGzGDdl"
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "url": "https://www.youtube.com/playlist?list=PL5bbCtDMySv8-jCobs9gDY33ZckGzGDdl",
+          "cap": 16,
+          "series": "The Masters"
         },
         {
-          "url": "https://www.youtube.com/playlist?list=PLnU5qUEfww3cj5V3crq7J4jpvu2e3dSsN",
           "tier": "legit",
-          "note": "USGA · Full Broadcasts playlist (70s/80s only)",
-          "titleMatch": "\\b19[78]\\d\\b",
-          "minMinutes": 60,
+          "note": "USGA · U.S. Open Final Rounds playlist (70s/80s/early 90s)",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "url": "https://www.youtube.com/playlist?list=PLnU5qUEfww3cHSrxERUJQugF99gHTaPRF",
           "series": "U.S. Open"
+        },
+        {
+          "tier": "legit",
+          "note": "USGA · Full Broadcasts playlist",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "url": "https://www.youtube.com/playlist?list=PLnU5qUEfww3cj5V3crq7J4jpvu2e3dSsN",
+          "series": "U.S. Open"
+        },
+        {
+          "tier": "legit",
+          "note": "USGA · U.S. Women's Open Final Rounds (vintage)",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "url": "https://www.youtube.com/playlist?list=PLnU5qUEfww3e9SANBDkwGQDETRLStJ-Ig",
+          "series": "U.S. Women's Open"
+        },
+        {
+          "tier": "legit",
+          "note": "The R&A · classic Open final rounds in full (official uploads via search)",
+          "url": "ytsearch60:The Open final round in full 198",
+          "uploaderMatch": "^The R&A$",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "titleExclude": "highlights|best of",
+          "series": "The Open"
+        },
+        {
+          "tier": "legit",
+          "note": "The R&A · classic Open final rounds in full, 70s (official uploads via search)",
+          "url": "ytsearch60:The Open Championship 197 final round in full",
+          "uploaderMatch": "^The R&A$",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "titleExclude": "highlights|best of",
+          "series": "The Open"
+        },
+        {
+          "tier": "legit",
+          "note": "The R&A · Classic Playoffs playlist",
+          "url": "https://www.youtube.com/playlist?list=PL89_Zci9o-HmdOujMEplRy_62w96Ttp1U",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "minMinutes": 8,
+          "series": "The Open"
+        },
+        {
+          "tier": "legit",
+          "note": "PGA TOUR · Skins Game full broadcasts (official uploads via search)",
+          "url": "ytsearch40:PGA TOUR Skins Game FULL Round Broadcast 198",
+          "uploaderMatch": "^PGA Tour$",
+          "titleMatch": "\\b19[89]\\d\\b",
+          "series": "Skins Game"
+        },
+        {
+          "tier": "legit",
+          "note": "PGA TOUR · Shell's Wonderful World of Golf (official uploads via search)",
+          "url": "ytsearch40:Shell's Wonderful World of Golf PGA TOUR",
+          "uploaderMatch": "^PGA Tour$",
+          "series": "Shell's Wonderful World of Golf"
+        },
+        {
+          "tier": "legit",
+          "note": "PGA TOUR · classic full round broadcasts (official uploads via search)",
+          "url": "ytsearch60:PGA TOUR classic full broadcast 1980s final round",
+          "uploaderMatch": "^PGA Tour$",
+          "titleMatch": "\\b19[6-8]\\d\\b",
+          "series": "PGA Tour"
+        },
+        {
+          "tier": "legit",
+          "note": "Ryder Cup · Classic Matches, Flashbacks, extended highlights (vintage)",
+          "url": "https://www.youtube.com/playlist?list=PLPDNf3_Z1ueouqqz2Y4peg9Oi4wNrFReu",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "minMinutes": 8,
+          "series": "Ryder Cup"
+        },
+        {
+          "tier": "legit",
+          "note": "Ryder Cup · Flashbacks playlist (vintage)",
+          "url": "https://www.youtube.com/playlist?list=PLPDNf3_Z1ueohLhg_rtQKSlNp9nYjsSkz",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "minMinutes": 8,
+          "series": "Ryder Cup"
+        },
+        {
+          "tier": "legit",
+          "note": "Ryder Cup · extended full event highlights (vintage)",
+          "url": "https://www.youtube.com/playlist?list=PLPDNf3_Z1ueqLWgErHy_aQ4b__L_xlyIf",
+          "titleMatch": "(\\b19[6-8]\\d\\b|\\b199[0-2]\\b)",
+          "minMinutes": 8,
+          "series": "Ryder Cup"
+        },
+        {
+          "tier": "legit",
+          "note": "LPGA · Full Round Replays (vintage years only)",
+          "url": "https://www.youtube.com/playlist?list=PLOvfOnGBxX7Fk7Um8AW-Z4WjRQ9VRsqOH",
+          "titleMatch": "(\\b19[7-8]\\d\\b|\\b199[0-2]\\b)",
+          "series": "LPGA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Skins Game broadcasts (Rocio Suastegui and friends)",
+          "url": "ytsearch60:Skins Game 198 golf full broadcast",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*skins).*\\b19[89]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "cap": 24,
+          "series": "Skins Game"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Shell's Wonderful World of Golf episodes",
+          "url": "ytsearch60:Shell's Wonderful World of Golf full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "shell",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "cap": 30,
+          "series": "Shell's Wonderful World of Golf"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · VHS Golf Lesson Gems (a whole channel of instructional tapes)",
+          "url": "https://www.youtube.com/playlist?list=UU_KlK-QKvDREY-1QQviiWnA",
+          "requireEmbedCheck": true,
+          "limit": 200,
+          "minMinutes": 15,
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "cap": 30,
+          "series": "Golf Lesson"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Golf My Way and the instructional VHS era",
+          "url": "ytsearch40:golf instructional VHS 198 full",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b|vhs",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "minMinutes": 20,
+          "cap": 16,
+          "series": "Golf Lesson"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Ryder Cup 1985/87/89 full coverage",
+          "url": "ytsearch30:Ryder Cup 198 full coverage",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*ryder).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "minMinutes": 30,
+          "cap": 10,
+          "series": "Ryder Cup"
         }
-      ],
-      "series": false
+      ]
     },
     "commercials": {
       "minMinutes": 25,
@@ -16009,6 +16244,786 @@
           "minMinutes": 30,
           "maxMinutes": 200,
           "cap": 12
+        }
+      ]
+    },
+    "access-shows": {
+      "minMinutes": 8,
+      "_note": "Public access, the real thing: archives that own their tapes and post them. Media Burn (Chicago independent video), Stairway to Stardom, Beyond Vaudeville, the Scott and Gary Show, and the Chicago television museum's long-form local shows. Wild searches around them.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Media Burn Archive · uploads",
+          "url": "https://www.youtube.com/playlist?list=UU-VU2FwExGkSd9XUESLsplA",
+          "limit": 1500,
+          "titleExclude": "What is Media Burn|Welcome to the Media Burn|Highlights from the Media Burn|Live Stream|Livestream|on Media Burn$|Trailer|Virtual Talks|Virtual|Zoom|Livestream|Live Stream|Webinar|Panel Discussion|20[12]\\d|Q&A",
+          "seriesFrom": "^(.{4,40}?)(?: - | – |: |\\(|,| Episode| Ep\\.| #)"
+        },
+        {
+          "tier": "legit",
+          "note": "Stairway to Stardom · the archive",
+          "url": "https://www.youtube.com/playlist?list=UUeL-U-8_wO-eK8o_XF5Bf1g",
+          "limit": 600,
+          "series": "Stairway to Stardom"
+        },
+        {
+          "tier": "legit",
+          "note": "Beyond Vaudeville · official episodes",
+          "url": "https://www.youtube.com/playlist?list=UUI9XO6PLvHRpLzaAMz96X_A",
+          "limit": 600,
+          "titleExclude": "Live Stream|Livestream|Q&A|Zoom",
+          "series": "Beyond Vaudeville"
+        },
+        {
+          "tier": "legit",
+          "note": "The Scott and Gary Show · official channel",
+          "url": "https://www.youtube.com/playlist?list=UUCsrQ0l8xgWy726JeH6bXUg",
+          "limit": 300,
+          "titleExclude": "Trailer|Screening|Teaser",
+          "series": "The Scott and Gary Show"
+        },
+        {
+          "tier": "legit",
+          "note": "Museum of Classic Chicago Television · local station and college-cable shows only (no network broadcasts, no games, no newscasts)",
+          "url": "https://www.youtube.com/playlist?list=UU-ssAZ6qVu0glgFUIsC8VSA",
+          "limit": 3000,
+          "minMinutes": 15,
+          "titleExclude": "Commercial|PSA|broken|Promo|Bumper|News|Newscast|Night ?Beat|Cubs|White Sox|Bulls|Bears|Blackhawks| vs\\.? |Cardinals|Movie|Sports|Sportsc|Election|Weather",
+          "seriesFrom": "^(?:[A-Z]{3,4} (?:Channel \\d+|Network)|Triton College) - (.{3,40}?)(?: - | \\(|,|\"|$)",
+          "titleMatch": "^(WGN|WLS|WFLD|WTTW|WBBM|WMAQ|WCIU|WSNS|WPWR|WGBO|Triton College) "
+        },
+        {
+          "tier": "wild",
+          "note": "fan · public access full shows",
+          "url": "ytsearch80:public access television show 198 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b|public access|cable access",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "cap": 40,
+          "seriesFrom": "^(.{4,40}?)(?: - | – |: |\\(|,|\\|)"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · cable access oddities",
+          "url": "ytsearch80:cable access show 1980s vhs full",
+          "requireEmbedCheck": true,
+          "titleMatch": "\\b19[78]\\d\\b|access",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "cap": 40,
+          "seriesFrom": "^(.{4,40}?)(?: - | – |: |\\(|,|\\|)"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Uncle Floyd full shows",
+          "url": "ytsearch40:Uncle Floyd Show full episode 198",
+          "requireEmbedCheck": true,
+          "titleMatch": "floyd",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "cap": 20,
+          "series": "The Uncle Floyd Show"
+        }
+      ]
+    },
+    "access-clips": {
+      "minMinutes": 1,
+      "maxMinutes": 12,
+      "series": false,
+      "_note": "Short local pieces between the shows.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Uncle Floyd Show · official clips",
+          "url": "https://www.youtube.com/playlist?list=UUGXN_HBlsni3oe1kKc-5B-A",
+          "limit": 400
+        },
+        {
+          "tier": "legit",
+          "note": "Media Burn Archive · short pieces",
+          "url": "https://www.youtube.com/playlist?list=UU-VU2FwExGkSd9XUESLsplA",
+          "limit": 1500,
+          "maxMinutes": 8,
+          "titleExclude": "What is Media Burn|Welcome to the Media Burn|Highlights from the Media Burn|Live Stream|Trailer|Virtual Talks|Virtual|Zoom|Livestream|Live Stream|Webinar|Panel Discussion|20[12]\\d|Q&A"
+        }
+      ]
+    },
+    "music-country": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "caption": true,
+      "yearRange": [
+        1972,
+        1991
+      ],
+      "_note": "80s country, legit only: the Nashville labels posted their video archives. Curated 80s playlists restricted to official uploaders, plus every artist's own channel; the artist channels carry 90s and modern videos too, so tools/prune_years.py drops anything outside yearRange (or without a year) after enrich_music runs. Rebuild order: music-country-core, then music-country, then enrich_music.py (or mb_years.py when YouTube is throttling per-video fetches), then prune_years.py music-country --keep-from music-country-core.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Shawn Cann · '80s Country Music Videos (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PL4vaEQyCxJhreXfIEnK3yU-xQKkSegOOn",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Shawn Cann · '80s Country Music Videos II (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PL4vaEQyCxJhr6tgP-7FrVjF1yHE88bQE6",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "BPMONKMAN · 80s Country Videos (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PLmtnEIEGJ0FBOMKFm2HjAeu3TfyskGY20",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "applepiegwendy · 1980s Country Music (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PL94AB012CF117CC86",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Taste of Country · Best 80s Country Songs (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PLLDVfSPfze0s_wTDowgniyXQiPtsebIhk",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Chadster · late 70s and early 80s country (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PLYluSfNh3SDtVZXJEENQbvYwBPj4yHieM",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Alabama · official uploads (Alabama Band); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUAzIJmKDk5ZZDxEH3M_2USg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "George Strait · official uploads (George Strait); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUOmZHz5W3F17HraXlJveEJA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Randy Travis · official uploads (Randy Travis); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU0ZeCRlZUeirgDc3sQ823Gw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Reba McEntire · official uploads (Reba McEntire); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUGXGYb_04vkGQ9_7HXTywsw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Hank Williams Jr · official uploads (Hank Williams, Jr.); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUOI7A4WThuqaxDAxwc8kliw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Dwight Yoakam · official uploads (Dwight Yoakam); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU4Ue06SGYbJ-_HSy585ki1A",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "The Judds · official uploads (The Judds); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU5iMmKj5q5ixSNdWqffynXQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Rosanne Cash · official uploads (Rosanne Cash); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUe2CLJ5sYIHkFo7iUWm-SEQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Kenny Rogers · official uploads (Kenny Rogers); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUKRlpS2Z3rHf8glxuGhblyQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Dolly Parton · official uploads (Dolly Parton); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUuGuRQHrvoNsD-AolV0X39g",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Willie Nelson · official uploads (Willie Nelson); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUdBD6uy0ZuX7sLK4__Ll6LQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Waylon Jennings · official uploads (Waylon Jennings); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUfRZjWOt4ZsS2Zg6EQ9rHTQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "The Highwaymen · official uploads (The Highwaymen); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU56KsEfymWJj4cWUx4va6LQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Ricky Skaggs · official uploads (RickySkaggsVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUkXLPS1Y4VQmybi5-BnxeRA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Oak Ridge Boys · official uploads (The Oak Ridge Boys); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUu7FbLHkryjNAS8REUqxg0w",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Ronnie Milsap · official uploads (Ronnie Milsap); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUTHKd2aIEeQDn4gNWKEV_eg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Barbara Mandrell · official uploads (Barbara Mandrell); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU6PqMYLREnEcIt1LCOg1DfA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Steve Earle · official uploads (Steve Earle); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUPPWVL3JnDB1wfdviNoTPBg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Juice Newton · official uploads (JuiceNewtonVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUyZ76wfLlITXyvYCAhz0FXA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Ricky Van Shelton · official uploads (RickyVanSheltonVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUsgjFCDDfTIkVM6_mPRmKlQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Keith Whitley · official uploads (Keith Whitley); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUPZk380Uf1MdwtnsAfPeBxQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Restless Heart · official uploads (RestlessHeartVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUmVBxzlOPh9-aBYDa2PV0PA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Sawyer Brown · official uploads (Sawyer Brown); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUqrDREcMsgSz5PP7yLESwTw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Exile band · official uploads (ExileVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUE_cZQl3Jzb2_h4D9f8BqPQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Lee Greenwood · official uploads (Lee Greenwood); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUUirHVm-DcBsG-wrk88ooCw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Anne Murray · official uploads (Anne Murray); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUe8_cuJBW3GgcoUWv95B3SA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Tanya Tucker · official uploads (Tanya Tucker); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUssST5bP-PT1dhXe0r7WQmQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Vince Gill · official uploads (Vince Gill); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU-TOzskHjtkTyR7uxITK9FA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Marty Stuart · official uploads (Marty Stuart); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUlBFY3bLBbvZTMlfCFRcUPw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "k.d. lang · official uploads (kdlangvideos); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU17FROpngAvTfonqB4EeAxg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Lyle Lovett · official uploads (Lyle Lovett); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU-bQj67atWmItTUBqCKu6hQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Nanci Griffith · official uploads (Nanci Griffith); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUK0Xqh1MsQk0Nzoa7jz1JNg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Kathy Mattea · official uploads (KathyMatteaVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUlvIPeXR-RwhKGeuHtcVvMw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Patty Loveless · official uploads (PattyLovelessVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUghhxFLekfL-iBaX0poj6lQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Desert Rose Band · official uploads (thedesertroseband); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUsfuVDsGFw9_J6kTJH30wLA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Charlie Daniels Band · official uploads (Charlie Daniels); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUnP_Ay2yk_rd_BS2hNKqbPQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Merle Haggard · official uploads (Merle Haggard); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUtA4x7RHBz8fx9TDeq6xu2A",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "George Jones · official uploads (GeorgeJonesOfficial); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUTxhikr_oQB9cfDIUF9sqJA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Johnny Cash · official uploads (Johnny Cash); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UULwdOhL6TKbmjRtZ8wIr-Bg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Rodney Crowell · official uploads (Rodney Crowell); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUvq2Ky0JMaRDKf4n0FT3Frw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Earl Thomas Conley · official uploads (Earl Thomas Conley); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUAOablv6EImvlVgY1gyMXAg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "John Anderson · official uploads (John Anderson); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUXPU8tvxoi20sjgx7Ym9MUQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Gary Morris · official uploads (Gary Morris); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUKTkCbfs2VopDeHrytJcdZQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "T.G. Sheppard · official uploads (TG Sheppard); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU8mejAwZZQSHmNI6KfnHMRQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Mickey Gilley · official uploads (MickeyGilleyVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UULJFvrOlYNEMGcY_E7YE8SQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Janie Fricke · official uploads (JANIEFRICKEVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU8XTM_QqA0KskHO8F_RFcEw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Sylvia · official uploads (SylviaVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUbU7HOBrq4jfEg3oD5Hh7BQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Dan Seals · official uploads (Dan Seals); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUNoJfkQK5NUrV5P73peUBKA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Steve Wariner · official uploads (Steve Wariner); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUiAACicMvy5QkbzFH3KiqKw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Clint Black · official uploads (Clint Black); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUgsC1KV_ktDukGWIbFhDxAw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Kentucky Headhunters · official uploads (KentuckyHeadhuntVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUzQNqbOFiDuYwwvufQeNKuQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Travis Tritt · official uploads (Travis Tritt); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UURax-dtd_mhOlR1vijJfK4g",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Alan Jackson · official uploads (Alan Jackson); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUChNoYrjZP3ymvjh2BKBPbA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Suzy Bogguss · official uploads (suzybogguss); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUDEQsSnUtcDVMIzGi9q0jcQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Baillie and the Boys · official uploads (BaillieAndBoysVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUW0jQNRqbQAm6kG_lQN2UKg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "The Bellamy Brothers · official uploads (BellamyBrothers); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUYIoTZ3JI_7-XHSZwAgCmWw",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Statler Brothers · official uploads (StatlerBrothersVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU9s4vibHSa5VG0qZSqWYz0A",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Don Williams · official uploads (Don Williams); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUCoVvN5yhKE6t71-ghkmkbg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Glen Campbell · official uploads (Glen Campbell); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUJXKFn_FtlA3eJ94Bp2dLlA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Tammy Wynette · official uploads (TammyWynettemusic); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU-mjaOGvAP7j13I8f-ZVDeQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Charley Pride · official uploads (Charley Pride); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUXlYVzvJj15X3PLC6ePVnVg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Larry Gatlin · official uploads (LarryGatlinVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUqflVEpefQQqHluiajrJSJQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Razzy Bailey · official uploads (RazzyBaileyVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUeUQ4z5JQ3HN1OJDyO_4rhg",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Louise Mandrell · official uploads (LouiseMandrellVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUqShHcfKaLj9SOGkDmS0rOQ",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Sweethearts of the Rodeo · official uploads (SweetheartsRodeoVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUYSwqzK_wwJBXzEgDw4-2ew",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "O'Kanes · official uploads (TheOKanesVEVO); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUbxh1MBTJBwH5Ie6n5xPEuA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Kris Kristofferson · official uploads (Kris Kristofferson); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UUYD7qYGXi-62hcqfI4f927Q",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        },
+        {
+          "tier": "legit",
+          "note": "Jimmy Buffett · official uploads (Jimmy Buffett Official); years pruned after enrichment",
+          "url": "https://www.youtube.com/playlist?list=UU0eBaEhPFgFoxMp7vMolCEA",
+          "limit": 250,
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement",
+          "yearPrune": true
+        }
+      ]
+    },
+    "country-live": {
+      "minMinutes": 3,
+      "maxMinutes": 70,
+      "_note": "Live from Austin: the official Classic ACL playlist, and fan uploads of full 70s/80s episodes.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Austin City Limits · Classic ACL playlist",
+          "url": "https://www.youtube.com/playlist?list=PLQqvr5WFHRfDKuISwyMVQhCFV0a5k8et0",
+          "series": "Austin City Limits"
+        },
+        {
+          "tier": "legit",
+          "note": "Austin City Limits · ACL Turns 50 playlist",
+          "url": "https://www.youtube.com/playlist?list=PLQqvr5WFHRfCtESrTgLxKL9U1IAleJy0s",
+          "series": "Austin City Limits",
+          "titleMatch": "\\b19[78]\\d\\b"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · Austin City Limits full episodes 1976–1989",
+          "url": "ytsearch60:Austin City Limits 198 full episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*austin city limits).*\\b19[78]\\d\\b",
+          "titleExclude": "react|review|interview|festival|acl fest",
+          "minMinutes": 20,
+          "cap": 40,
+          "series": "Austin City Limits"
+        }
+      ]
+    },
+    "music-country-core": {
+      "minMinutes": 2,
+      "maxMinutes": 8,
+      "series": false,
+      "caption": false,
+      "_note": "Helper, not scheduled: the six curated 80s playlists alone. Their ids are 80s by curation, so prune_years.py --keep-from music-country-core spares them when the artist channels' undated videos are dropped.",
+      "sources": [
+        {
+          "tier": "legit",
+          "note": "Shawn Cann · '80s Country Music Videos (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PL4vaEQyCxJhreXfIEnK3yU-xQKkSegOOn",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Shawn Cann · '80s Country Music Videos II (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PL4vaEQyCxJhr6tgP-7FrVjF1yHE88bQE6",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "BPMONKMAN · 80s Country Videos (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PLmtnEIEGJ0FBOMKFm2HjAeu3TfyskGY20",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "applepiegwendy · 1980s Country Music (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PL94AB012CF117CC86",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Taste of Country · Best 80s Country Songs (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PLLDVfSPfze0s_wTDowgniyXQiPtsebIhk",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
+        },
+        {
+          "tier": "legit",
+          "note": "Chadster · late 70s and early 80s country (official uploaders only)",
+          "url": "https://www.youtube.com/playlist?list=PLYluSfNh3SDtVZXJEENQbvYwBPj4yHieM",
+          "uploaderMatch": "VEVO|^(Alabama\\ Band|George\\ Strait|Randy\\ Travis|Reba\\ McEntire|Hank\\ Williams,\\ Jr\\.|Dwight\\ Yoakam|The\\ Judds|Rosanne\\ Cash|Kenny\\ Rogers|Dolly\\ Parton|Willie\\ Nelson|Waylon\\ Jennings|The\\ Highwaymen|RickySkaggsVEVO|The\\ Oak\\ Ridge\\ Boys|Ronnie\\ Milsap|Barbara\\ Mandrell|Steve\\ Earle|JuiceNewtonVEVO|RickyVanSheltonVEVO|Keith\\ Whitley|RestlessHeartVEVO|Sawyer\\ Brown|ExileVEVO|Lee\\ Greenwood|Anne\\ Murray|Tanya\\ Tucker|Vince\\ Gill|Marty\\ Stuart|kdlangvideos|Lyle\\ Lovett|Nanci\\ Griffith|KathyMatteaVEVO|PattyLovelessVEVO|thedesertroseband|Charlie\\ Daniels|Merle\\ Haggard|GeorgeJonesOfficial|Johnny\\ Cash|Rodney\\ Crowell|Earl\\ Thomas\\ Conley|John\\ Anderson|Gary\\ Morris|TG\\ Sheppard|MickeyGilleyVEVO|JANIEFRICKEVEVO|SylviaVEVO|Dan\\ Seals|Steve\\ Wariner|Clint\\ Black|KentuckyHeadhuntVEVO|Travis\\ Tritt|Alan\\ Jackson|suzybogguss|BaillieAndBoysVEVO|BellamyBrothers|StatlerBrothersVEVO|Don\\ Williams|Glen\\ Campbell|TammyWynettemusic|Charley\\ Pride|LarryGatlinVEVO|RazzyBaileyVEVO|LouiseMandrellVEVO|SweetheartsRodeoVEVO|TheOKanesVEVO|Kris\\ Kristofferson|Jimmy\\ Buffett\\ Official)$",
+          "titleExclude": "live|lyric|audio\\b|visuali[sz]er|interview|trailer|behind the|making of|acoustic|karaoke|remix|reaction|20[0-2]\\d|feat\\.? (Cody Johnson|Luke Bryan|Jason Aldean|Chris Stapleton|Kane Brown|Post Malone|Miranda Lambert|Luke Combs|Lainey Wilson|Jelly Roll)|vault|unplugged|sessions?\\b|teaser|announcement"
         }
       ]
     }

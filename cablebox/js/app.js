@@ -16,11 +16,12 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=2db66f9').then(r => r.json()),
-      fetch('data/catalog.json?v=2db66f9').then(r => r.json())
+      fetch('data/channels.json?v=0c2d897').then(r => r.json()),
+      fetch('data/catalog.json?v=0c2d897').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
+    catalog.pools.weather = Slates.pool('weather'); catalog.pools.bulletinboard = Slates.pool('bulletin');   // the text channels
     Sched.prepare(catalog, c.filler || 'commercials', c.breakSeconds, c.breakEvery);
     channels.forEach(x => byNum.set(x.num, x));
     MAX_CH = Math.max(36, ...channels.map(x => x.num));
@@ -33,7 +34,7 @@
   async function refreshCatalog() {
     try {
       const k = await fetch('data/catalog.json' + '?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
-      k.pools.scrambled = Scramble.pool();
+      k.pools.scrambled = Scramble.pool(); k.pools.weather = Slates.pool('weather'); k.pools.bulletinboard = Slates.pool('bulletin');
       catalog = k; Sched.prepare(catalog, lineup.filler || 'commercials', lineup.breakSeconds, lineup.breakEvery);
       Guide.invalidate(); current = null; if (power) render(true);
       console.log('[cablebox] catalog refreshed', k.built, k.swept || '');
@@ -45,7 +46,7 @@
   }
 
   // ---------------- glass states ----------------
-  const STATES = ['off', 'warming', 'cooling', 'on', 'snow', 'standby', 'offair', 'scramble', 'pledge'];
+  const STATES = ['off', 'warming', 'cooling', 'on', 'snow', 'standby', 'offair', 'scramble', 'pledge', 'weather', 'bulletin'];
   let pledgeUntil = 0;
   const level = () => (Player.muted ? 0 : Player.volume / 100);
   function setGlass(state) {
@@ -53,6 +54,8 @@
     if (state !== 'on') glass.classList.remove('squeeze');
     if (state === 'snow') startStatic(); else stopStatic();
     if (state === 'scramble') Scramble.start($('#scrambled'), ac, level()); else Scramble.stop(ac);
+    if (state === 'weather') Slates.weatherStart($('#weatherSlate')); else Slates.weatherStop();
+    if (state === 'bulletin') Slates.boardStart($('#boardSlate'), boardLines); else Slates.boardStop();
   }
 
   // ---------------- static ----------------
@@ -125,6 +128,8 @@
   function marqueeText(channel, entry) {
     if (!power) return '';
     if (!channel) return 'NO SIGNAL';
+    if (channel.kind === 'weather') return 'WEATHER SCAN - ' + Slates.weatherLine();
+    if (entry && entry.pool === 'bulletinboard') return 'COMMUNITY BULLETIN BOARD';
     if (channel.kind === 'guide') return 'PREVUE GUIDE';
     if (channel.kind === 'scrambled') return entry && entry.title ? entry.title : 'PREMIUM';   // the whole joke is the title
     if (!entry || entry.kind === 'off') return 'OFF AIR';
@@ -217,6 +222,16 @@
     glass.classList.toggle('squeeze', show);
   }
 
+  // the public access bulletin board's notices: the same generator as the guide's yellow rows, six per page
+  function boardLines(pageNo) {
+    const premium = channels.find(c => c.kind === 'scrambled'), on = premium ? Sched.at(premium, new Date(), catalog).entry : null;
+    const bucket = Math.floor(Date.now() / 1800000), out = []; let pledged = false;
+    for (let i = 0; out.length < 6 && i < 24; i++) {                // one pledge line per page at most; the rest are the town's business
+      const l = Bulletins.line(100 + i * 7, bucket, on && on.title, pageNo), isPledge = /PLEDGE|CABLE OPERATOR|VIEWERS LIKE YOU/.test(l);
+      if (isPledge && pledged) continue; if (isPledge) pledged = true; out.push(l);
+    }
+    return out;
+  }
   function render(force) {
     if (!power) return;
     const channel = byNum.get(ch);
@@ -232,6 +247,9 @@
     if (guideOnly !== lastGuideOnly) { lastGuideOnly = guideOnly; force = true; }
     if (guideOnly) { current = { key, entry, channel, mode: 'sched' }; Player.stop(); setGlass('on'); setMarquee(marqueeText(channel, entry)); return; }
     if (channel.kind === 'scrambled') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('scramble')) setGlass('scramble'); setMarquee(marqueeText(channel, entry)); return; }
+    // the text channels: no video, a slate that runs on its own clock; the marquee follows the city
+    if (channel.kind === 'weather') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('weather')) setGlass('weather'); setMarquee(marqueeText(channel, entry)); return; }
+    if (entry.pool === 'bulletinboard') { current = { key, entry, channel, mode: 'sched' }; Player.stop(); if (!glass.classList.contains('bulletin')) setGlass('bulletin'); setMarquee(marqueeText(channel, entry)); return; }
 
     // The pledge break holds the slate for its seconds, then hands back to the clock (which resumes the commercial or
     // the program at the right offset). Any key, a channel change, or power ends it early.

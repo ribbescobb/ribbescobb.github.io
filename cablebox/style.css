@@ -83,6 +83,29 @@ body {
 }
 .glass.standby .standby { display: flex; }
 
+/* the text channels: the same character generator as the pledge slate */
+.slate { position: absolute; inset: 0; display: none; flex-direction: column; background: #0a0aa4; color: #fff; font-family: VT323, monospace; text-transform: uppercase; }
+.glass.weather .weather-slate, .glass.bulletin .board-slate { display: flex; }
+.glass.weather .raster, .glass.bulletin .raster { visibility: hidden; }
+.slate::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0 .28cqw, rgba(0,0,0,.18) .28cqw .4cqw); }
+.slate .sl-head { flex: 0 0 auto; margin: 3.5% 5% 0; padding: .5cqw 1.2cqw; background: #f2c81c; color: #101060; font-size: 2.2cqw; letter-spacing: .25cqw; text-align: center; }
+.slate .sl-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 6%; gap: .6cqw; text-shadow: .15cqw .15cqw 0 #000; }
+.slate .sl-now { display: flex; align-items: center; gap: 2cqw; margin-bottom: .6cqw; }
+.slate .sl-temp { font-size: 7cqw; line-height: 1; color: #fff; }
+.slate .sl-cond { font-size: 2.6cqw; line-height: 1.1; color: #f2c81c; }
+.slate .sl-cond small { font-size: 1.5cqw; color: #b9c1ff; letter-spacing: .15cqw; }
+.slate .sl-rows { display: flex; flex-direction: column; gap: .2cqw; border-top: .15cqw solid #4a52c8; padding-top: .6cqw; }
+.slate .sl-row { display: grid; grid-template-columns: 12cqw 4.5cqw 1fr; font-size: 1.9cqw; letter-spacing: .12cqw; }
+.slate .sl-row span:nth-child(2) { color: #f2c81c; text-align: right; padding-right: 1cqw; }
+.slate .sl-big { font-size: 3.2cqw; text-align: center; letter-spacing: .2cqw; }
+.slate .sl-sub { font-size: 2cqw; text-align: center; color: #f2c81c; letter-spacing: .25cqw; }
+.slate .sl-board { gap: .9cqw; }
+.slate .sl-item { font-size: 2cqw; line-height: 1.15; letter-spacing: .1cqw; padding-left: 1.6cqw; text-indent: -1.6cqw; }
+.slate .sl-item::before { content: "▶ "; color: #f2c81c; }
+.slate .sl-foot { flex: 0 0 auto; margin: 0 5% 1.2cqw; font-size: 1.3cqw; color: #b9c1ff; letter-spacing: .18cqw; text-align: center; white-space: nowrap; overflow: hidden; }
+.slate .pl-bars { flex: 0 0 5%; background: linear-gradient(90deg, #c0c0c0 0 14.28%, #c0c000 0 28.57%, #00c0c0 0 42.85%, #00c000 0 57.14%, #c000c0 0 71.42%, #c00000 0 85.71%, #0000c0 0 100%); }
+body.phone .slate .sl-head { font-size: 1.9cqw; } body.phone .slate .sl-temp { font-size: 6.2cqw; } body.phone .slate .sl-cond { font-size: 2.4cqw; } body.phone .slate .sl-cond small { font-size: 1.35cqw; }
+body.phone .slate .sl-row { font-size: 1.75cqw; grid-template-columns: 11cqw 4cqw 1fr; } body.phone .slate .sl-item { font-size: 1.8cqw; } body.phone .slate .sl-foot { font-size: 1.1cqw; } body.phone .slate .sl-big { font-size: 2.8cqw; } body.phone .slate .sl-sub { font-size: 1.8cqw; }
 /* the pledge slate: a cable operator's character generator, blue field, yellow bar, VT323 */
 .pledge-slate { position: absolute; inset: 0; display: none; flex-direction: column; background: #0a0aa4; color: #fff; font-family: VT323, monospace; text-transform: uppercase; }
 .glass.pledge .pledge-slate { display: flex; }
