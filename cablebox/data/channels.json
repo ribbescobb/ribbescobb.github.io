@@ -17113,22 +17113,41 @@
         },
         {
           "tier": "legit",
-          "note": "Wild America · official channel, full episodes",
-          "url": "https://www.youtube.com/playlist?list=UURrD7xqN9bcilS0yB6Th5bQ",
-          "limit": 600,
-          "minMinutes": 20,
-          "titleMatch": "Full Episode",
+          "note": "Wild America · official channel via search (its uploads list is all Shorts newest-first)",
+          "url": "ytsearch60:Wild America Marty Stouffer full episode",
+          "uploaderMatch": "^Wild America Animal Channel$",
+          "titleMatch": "full episode",
           "titleExclude": "Trailer|Promo",
+          "minMinutes": 20,
+          "series": "Wild America"
+        },
+        {
+          "tier": "legit",
+          "note": "Wild America · official channel via search, second pass",
+          "url": "ytsearch60:Wild America S1 full episode HD",
+          "uploaderMatch": "^Wild America Animal Channel$",
+          "titleMatch": "full episode",
+          "minMinutes": 20,
           "series": "Wild America"
         },
         {
           "tier": "wild",
-          "note": "fan · The Untamed World (1969–1975 syndicated)",
-          "url": "ytsearch60:The Untamed World full episode 197",
+          "note": "fan · The Untamed World (TVOR's run)",
+          "url": "ytsearch60:The Untamed World TVOR S0",
           "requireEmbedCheck": true,
           "titleMatch": "untamed world",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
           "cap": 40,
+          "series": "The Untamed World"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · The Untamed World, second pass",
+          "url": "ytsearch40:\"The Untamed World\" 1970 episode",
+          "requireEmbedCheck": true,
+          "titleMatch": "untamed world",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 30,
           "series": "The Untamed World"
         },
         {
@@ -17169,36 +17188,6 @@
         },
         {
           "tier": "wild",
-          "note": "fan · National Geographic Specials 1975–1989",
-          "url": "ytsearch60:National Geographic Special 198 full",
-          "requireEmbedCheck": true,
-          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
-          "cap": 40,
-          "series": "National Geographic Special"
-        },
-        {
-          "tier": "wild",
-          "note": "fan · National Geographic Specials, 70s",
-          "url": "ytsearch40:National Geographic 197 full documentary",
-          "requireEmbedCheck": true,
-          "titleMatch": "^(?=.*national geographic).*\\b197\\d\\b",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
-          "cap": 20,
-          "series": "National Geographic Special"
-        },
-        {
-          "tier": "wild",
-          "note": "fan · PBS Nature, 1980s",
-          "url": "ytsearch60:PBS Nature documentary 198",
-          "requireEmbedCheck": true,
-          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
-          "cap": 40,
-          "series": "Nature"
-        },
-        {
-          "tier": "wild",
           "note": "fan · Life on Earth (1979)",
           "url": "ytsearch40:Life on Earth 1979 Attenborough full episode",
           "requireEmbedCheck": true,
@@ -17207,6 +17196,156 @@
           "minMinutes": 40,
           "cap": 15,
           "series": "Life on Earth"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1975",
+          "url": "ytsearch30:National Geographic Special 1975",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1977",
+          "url": "ytsearch30:National Geographic Special 1977",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1979",
+          "url": "ytsearch30:National Geographic Special 1979",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1981",
+          "url": "ytsearch30:National Geographic Special 1981",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1983",
+          "url": "ytsearch30:National Geographic Special 1983",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1985",
+          "url": "ytsearch30:National Geographic Special 1985",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1987",
+          "url": "ytsearch30:National Geographic Special 1987",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · National Geographic Special 1989",
+          "url": "ytsearch30:National Geographic Special 1989",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*national geographic).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "National Geographic Special"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1982",
+          "url": "ytsearch30:PBS Nature 1982 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1983",
+          "url": "ytsearch30:PBS Nature 1983 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1984",
+          "url": "ytsearch30:PBS Nature 1984 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1985",
+          "url": "ytsearch30:PBS Nature 1985 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1986",
+          "url": "ytsearch30:PBS Nature 1986 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1987",
+          "url": "ytsearch30:PBS Nature 1987 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · PBS Nature 1988",
+          "url": "ytsearch30:PBS Nature 1988 documentary",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nature).*\\b198\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "cap": 8,
+          "series": "Nature"
         }
       ]
     },
@@ -17245,28 +17384,6 @@
         },
         {
           "tier": "wild",
-          "note": "fan · NOVA, 1974–1989",
-          "url": "ytsearch80:NOVA PBS 198 full episode",
-          "requireEmbedCheck": true,
-          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
-          "minMinutes": 40,
-          "cap": 50,
-          "series": "NOVA"
-        },
-        {
-          "tier": "wild",
-          "note": "fan · NOVA, 70s",
-          "url": "ytsearch40:NOVA 197 PBS documentary full",
-          "requireEmbedCheck": true,
-          "titleMatch": "^(?=.*nova).*\\b197\\d\\b",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax|remastered in 4k trailer",
-          "minMinutes": 40,
-          "cap": 20,
-          "series": "NOVA"
-        },
-        {
-          "tier": "wild",
           "note": "fan · Connections (1978)",
           "url": "ytsearch40:James Burke Connections 1978 episode",
           "requireEmbedCheck": true,
@@ -17297,6 +17414,116 @@
           "minMinutes": 40,
           "cap": 14,
           "series": "The Ascent of Man"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1978",
+          "url": "ytsearch40:NOVA PBS 1978",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1980",
+          "url": "ytsearch40:NOVA PBS 1980",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1982",
+          "url": "ytsearch40:NOVA PBS 1982",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1983",
+          "url": "ytsearch40:NOVA PBS 1983",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1984",
+          "url": "ytsearch40:NOVA PBS 1984",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1985",
+          "url": "ytsearch40:NOVA PBS 1985",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1986",
+          "url": "ytsearch40:NOVA PBS 1986",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1987",
+          "url": "ytsearch40:NOVA PBS 1987",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1988",
+          "url": "ytsearch40:NOVA PBS 1988",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
+        },
+        {
+          "tier": "wild",
+          "note": "fan · NOVA 1989",
+          "url": "ytsearch40:NOVA PBS 1989",
+          "requireEmbedCheck": true,
+          "titleMatch": "^(?=.*nova).*\\b19[78]\\d\\b",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|podcast|interview|trailer|teaser|shorts?$|#shorts|slideshow|tribute|compilation|best of|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|prophecy|9/11|debunk|conspiracy|hoax",
+          "minMinutes": 40,
+          "cap": 10,
+          "series": "NOVA"
         }
       ]
     },
@@ -17342,21 +17569,48 @@
         },
         {
           "tier": "legit",
-          "note": "AT&T Tech Channel · AT&T Archives (uploads)",
-          "url": "https://www.youtube.com/playlist?list=UUnpDurxReTSpFs5-AhDo8Kg",
-          "limit": 800,
-          "titleMatch": "Archives|19[5-8]\\d",
-          "titleExclude": "Ad\\b|Commercial|Innovation Today|Bots|2[0-2]\\d\\d",
-          "series": "AT&T Archives"
-        },
-        {
-          "tier": "legit",
           "note": "National Film Board of Canada · science documentaries (official uploads via search)",
           "url": "ytsearch60:NFB National Film Board science documentary",
           "uploaderMatch": "^NFB$",
           "titleExclude": "war|animated|animation|trailer",
           "minMinutes": 10,
           "series": "NFB"
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · AT&T Archives via search (AT&T Archives Bell Labs film)",
+          "url": "ytsearch60:AT&T Archives Bell Labs film",
+          "uploaderMatch": "^AT&T Tech Channel$",
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
+          "series": "AT&T Archives"
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · AT&T Archives via search (AT&T Tech Channel archives 1960s 1970s film)",
+          "url": "ytsearch60:AT&T Tech Channel archives 1960s 1970s film",
+          "uploaderMatch": "^AT&T Tech Channel$",
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
+          "series": "AT&T Archives"
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · AT&T Archives via search (AT&T Archives telephone 1950s film)",
+          "url": "ytsearch60:AT&T Archives telephone 1950s film",
+          "uploaderMatch": "^AT&T Tech Channel$",
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
+          "series": "AT&T Archives"
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · AT&T Archives via search (AT&T Archives computers UNIX Bell Labs)",
+          "url": "ytsearch60:AT&T Archives computers UNIX Bell Labs",
+          "uploaderMatch": "^AT&T Tech Channel$",
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
+          "series": "AT&T Archives"
         }
       ]
     },
@@ -17399,12 +17653,23 @@
         },
         {
           "tier": "legit",
-          "note": "AT&T Tech Channel · short archive pieces",
-          "url": "https://www.youtube.com/playlist?list=UUnpDurxReTSpFs5-AhDo8Kg",
-          "limit": 800,
-          "maxMinutes": 10,
+          "note": "AT&T Tech Channel · AT&T Archives via search (AT&T Archives short 1960s)",
+          "url": "ytsearch60:AT&T Archives short 1960s",
+          "uploaderMatch": "^AT&T Tech Channel$",
           "titleMatch": "Archives|19[5-8]\\d",
-          "titleExclude": "Ad\\b|Commercial|Innovation Today|2[0-2]\\d\\d"
+          "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
+          "series": "AT&T Archives",
+          "maxMinutes": 10
+        },
+        {
+          "tier": "legit",
+          "note": "AT&T Tech Channel · AT&T Archives via search (AT&T Archives Bell System film)",
+          "url": "ytsearch60:AT&T Archives Bell System film",
+          "uploaderMatch": "^AT&T Tech Channel$",
+          "titleMatch": "Archives|19[5-8]\\d",
+          "titleExclude": "Secure Connections|Innovation Today|2[0-2]\\d\\d",
+          "series": "AT&T Archives",
+          "maxMinutes": 10
         }
       ]
     }
