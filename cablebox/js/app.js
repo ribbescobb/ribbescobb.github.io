@@ -5,6 +5,7 @@
   let MAX_CH = 36, startChannel = 1;
   let channels = [], byNum = new Map(), catalog = null, lineup = null, refreshedOn = '';
   let power = false, ch = 2, digits = '', digitTimer = null, snowTimer = null;
+  let nameUntil = 0;                                   // after a tune the marquee holds the channel's name for a beat before the program crawls
   let current = null;            // { key, entry, channel, mode: 'sched'|'sub'|'tail', sub, tailStart }
   let askedAt = 0;               // when we last asked the player for a picture
   let recovering = false, deadInSlot = 0, deadSlotKey = '';   // after a dead video, stay in stand-by until a picture actually arrives
@@ -16,8 +17,8 @@
   // ---------------- data ----------------
   async function loadData() {
     const [c, k] = await Promise.all([
-      fetch('data/channels.json?v=32a11ad').then(r => r.json()),
-      fetch('data/catalog.json?v=32a11ad').then(r => r.json())
+      fetch('data/channels.json?v=1f427a5').then(r => r.json()),
+      fetch('data/catalog.json?v=1f427a5').then(r => r.json())
     ]);
     channels = c.channels; catalog = k; lineup = c;
     catalog.pools.scrambled = Scramble.pool();           // channel 69's schedule exists only in the browser
@@ -128,6 +129,7 @@
   function marqueeText(channel, entry) {
     if (!power) return '';
     if (!channel) return 'NO SIGNAL';
+    if (Date.now() < nameUntil && channel.kind !== 'guide') return channel.name;
     if (channel.kind === 'weather') return 'WEATHER SCAN - ' + Slates.weatherLine();
     if (entry && entry.pool === 'bulletinboard') return 'COMMUNITY BULLETIN BOARD';
     if (channel.kind === 'guide') return 'PREVUE GUIDE';
@@ -175,6 +177,7 @@
     const changed = n !== ch;
     ch = n; showDigits(String(ch));
     if (!power || !changed) return;
+    nameUntil = Date.now() + 3500;
     if (window.Pledge) Pledge.changed();
     Player.stop(); current = null;
     setGlass('snow');

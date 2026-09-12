@@ -44,6 +44,7 @@
       }
     }
     function set(t) {
+      container.dataset.text = normalize(t);   // readable by tests and screen readers
       const nt = normalize(t);
       if (nt === text) return;
       text = nt; pos = 0; paint();

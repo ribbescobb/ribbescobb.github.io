@@ -16249,7 +16249,7 @@
     },
     "access-shows": {
       "minMinutes": 8,
-      "_note": "Public access, the real thing: archives that own their tapes and post them. Media Burn (Chicago independent video), Stairway to Stardom, Beyond Vaudeville, the Scott and Gary Show, and the Chicago television museum's long-form local shows. Wild searches around them.",
+      "_note": "Public access, the real thing: archives that own their tapes and post them (Media Burn, Stairway to Stardom, Beyond Vaudeville, the Scott and Gary Show) plus Triton College's cable show. Truly amateur only: no local-station captures (they ran syndicated network reruns; the Partridge Family turned up here once), and wild searches must say public/cable/community access in the title.",
       "sources": [
         {
           "tier": "legit",
@@ -16284,21 +16284,21 @@
         },
         {
           "tier": "legit",
-          "note": "Museum of Classic Chicago Television · local station and college-cable shows only (no network broadcasts, no games, no newscasts)",
+          "note": "Museum of Classic Chicago Television · Triton College cable only (the local stations ran syndicated network reruns, which is not the flavor)",
           "url": "https://www.youtube.com/playlist?list=UU-ssAZ6qVu0glgFUIsC8VSA",
           "limit": 3000,
           "minMinutes": 15,
           "titleExclude": "Commercial|PSA|broken|Promo|Bumper|News|Newscast|Night ?Beat|Cubs|White Sox|Bulls|Bears|Blackhawks| vs\\.? |Cardinals|Movie|Sports|Sportsc|Election|Weather",
           "seriesFrom": "^(?:[A-Z]{3,4} (?:Channel \\d+|Network)|Triton College) - (.{3,40}?)(?: - | \\(|,|\"|$)",
-          "titleMatch": "^(WGN|WLS|WFLD|WTTW|WBBM|WMAQ|WCIU|WSNS|WPWR|WGBO|Triton College) "
+          "titleMatch": "^Triton College "
         },
         {
           "tier": "wild",
           "note": "fan · public access full shows",
           "url": "ytsearch80:public access television show 198 full episode",
           "requireEmbedCheck": true,
-          "titleMatch": "\\b19[78]\\d\\b|public access|cable access",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "titleMatch": "public access|cable access|community access|local access|access tv|access television|community television|leased access|access channel",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|documentary|history of|explained|the rise|the fall|retrospective|remember|nostalgia|compilation|best of|top \\d",
           "cap": 40,
           "seriesFrom": "^(.{4,40}?)(?: - | – |: |\\(|,|\\|)"
         },
@@ -16307,8 +16307,8 @@
           "note": "fan · cable access oddities",
           "url": "ytsearch80:cable access show 1980s vhs full",
           "requireEmbedCheck": true,
-          "titleMatch": "\\b19[78]\\d\\b|access",
-          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary",
+          "titleMatch": "public access|cable access|community access|local access|access tv|access television|community television|leased access|access channel",
+          "titleExclude": "react|reaction|review|top \\d|ranked|explained|breakdown|tier list|podcast|interview|trailer|teaser|shorts?$|#shorts|remaster(ed)? audio|lyric|slideshow|tribute|compilation|best of|highlights? only|documentary about|iceberg|weird facts|then and now|let'?s watch|watch ?along|commentary|documentary|history of|explained|the rise|the fall|retrospective|remember|nostalgia|compilation|best of|top \\d",
           "cap": 40,
           "seriesFrom": "^(.{4,40}?)(?: - | – |: |\\(|,|\\|)"
         },
