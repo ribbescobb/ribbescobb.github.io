@@ -250,7 +250,8 @@ body.zoom { overflow: hidden; }
 body.zoom .room { display: block; position: relative; overflow: hidden; }
 body.zoom .scene { position: absolute; }
 body.zoom .hint { display: none; }
-body.zoom .cablebox, body.zoom .paper, body.zoom .badge, body.zoom .dial, body.zoom .logo, body.zoom .knob-label, body.zoom .knob-hit { visibility: hidden; }
+body.zoom .cablebox, body.zoom .paper, body.zoom .knob-hit { visibility: hidden; }
+body.zoom:not(.phone) .badge, body.zoom:not(.phone) .dial, body.zoom:not(.phone) .logo, body.zoom:not(.phone) .knob-label { visibility: hidden; }   /* desktop zoom crops the panel; phones show it whole, so the badge and dial labels stay */
 .zoom-controls { display: none; position: fixed; right: 1rem; bottom: 1rem; gap: .4rem; z-index: 5; }
 body.zoom .zoom-controls { display: flex; }
 .zoom-controls button {
