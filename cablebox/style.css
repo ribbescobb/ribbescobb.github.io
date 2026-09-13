@@ -1,4 +1,4 @@
-/* CableBox — the Heathkit 25 console, a converter box on top, and what shows in the glass.
+/* CableBox — the TeleKit 25 console (an idealized Heathkit 25), a converter box on top, and what shows in the glass.
    Everything is sized in cqw (1cqw = 1% of the scene width) so the set scales as one object. */
 
 :root { --w: min(96vw, 130vh); --w: min(96vw, 130svh); }   /* svh: the viewport with the browser's bars showing */

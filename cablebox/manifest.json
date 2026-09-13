@@ -1,7 +1,7 @@
 {
   "name": "CableBox",
   "short_name": "CableBox",
-  "description": "A Heathkit 25, a converter box, and channels that run on the clock.",
+  "description": "A TeleKit 25 console, a converter box, and channels that run on the clock.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
