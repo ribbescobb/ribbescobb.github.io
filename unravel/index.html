@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@300;500;700&family=Source+Sans+3:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="style.css?v=380dc5d">
+  <link rel="stylesheet" href="style.css?v=1255a9e">
 </head>
 <body>
   <header class="top">
@@ -71,7 +71,7 @@
         <li>Every move must be a real word. No repeats.</li>
         <li><span class="sw green"></span> still where it started. <span class="sw yellow"></span> a start letter that's come back somewhere. <span class="sw grey"></span> gone.</li>
         <li><strong>All grey wins.</strong> As many moves as you need. Fewer is better.</li>
-        <li><strong>Par</strong> is the shortest way through in common words. Beat it and you've gone off the map.</li>
+        <li><strong>Shortest path</strong> is the fewest moves it can be done in using common words. You can see it after you finish. Beat it and you've gone off the map.</li>
         <li><strong>Warm-up</strong> is three letters, <strong>Easy</strong> is four, <strong>Standard</strong> is five. Each has its own daily puzzle and stats.</li>
       </ul>
       <p class="fine">One puzzle a day, new at midnight. Born in a family Wordle thread.</p>
@@ -89,6 +89,8 @@
       <h2 id="result-title"></h2>
       <p id="result-body"></p>
       <div class="mini" id="result-path"></div>
+      <div id="result-shortest"></div>
+      <button class="tut-replay" id="btn-shortest" hidden>Show the shortest path</button>
       <div class="stats" id="stats"></div>
       <div class="actions">
         <button class="primary" id="btn-share">Share</button>
@@ -96,8 +98,8 @@
     </div>
   </div>
 
-  <script src="words.js?v=380dc5d"></script>
-  <script src="puzzles.js?v=380dc5d"></script>
-  <script src="app.js?v=380dc5d"></script>
+  <script src="words.js?v=1255a9e"></script>
+  <script src="puzzles.js?v=1255a9e"></script>
+  <script src="app.js?v=1255a9e"></script>
 </body>
 </html>
