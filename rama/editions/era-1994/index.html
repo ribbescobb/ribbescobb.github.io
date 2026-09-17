@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RAMA — VGA Adventure Edition</title>
+<link rel="stylesheet" href="../static-graphical/styles.css">
+<link rel="stylesheet" href="styles.css?v=20260911-1">
+</head>
+<body>
+<section id="edition-boot" class="edition-boot" data-edition="era-1994" role="dialog" aria-modal="true" aria-labelledby="boot-heading">
+  <div class="vga-desktop">
+    <div class="vga-desk-label" id="boot-heading">1994 · THE MULTIMEDIA PC</div>
+    <div class="vga-hardware">
+      <div class="vga-speaker" aria-hidden="true"><i></i><b></b></div>
+      <div class="vga-monitor">
+        <div class="vga-bezel">
+          <div class="vga-crt">
+            <div class="vga-dos" aria-live="polite">
+              <span class="vga-line vga-dos-start">Starting MS-DOS...</span>
+              <span class="vga-line vga-command">C:\RAMA&gt;RAMA.EXE</span>
+              <span class="vga-line vga-program">RAMA · VGA ADVENTURE EDITION</span>
+              <span class="vga-line vga-mode">320 × 200 · 256 COLORS</span>
+              <span class="vga-line vga-sound">FM MUSIC · DIGITAL SOUND</span>
+              <span class="vga-line vga-read">Reading title picture...</span>
+            </div>
+            <div class="vga-palette" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="vga-program-splash" aria-hidden="true"><span>FICTION ARCHAEOLOGY</span><strong>RAMA</strong><small>VGA ADVENTURE EDITION</small></div>
+          </div>
+        </div>
+        <div class="vga-monitor-badge">VGA COLOR DISPLAY <i aria-hidden="true"></i></div>
+      </div>
+      <div class="vga-speaker" aria-hidden="true"><i></i><b></b></div>
+    </div>
+    <div class="vga-system" aria-hidden="true"><span>486</span><div class="vga-disk-drive"><i></i><b></b></div><div class="vga-case-vents"></div><em></em></div>
+    <p class="vga-boot-instruction">Switch on the PC. DOS gives way to the VGA picture and an FM overture.</p>
+    <div class="boot-controls">
+      <button id="boot-power" type="button">Switch on PC</button>
+      <button id="boot-mute" type="button" aria-pressed="false">Sound on</button>
+      <button id="boot-skip" type="button">Skip boot</button>
+      <span id="boot-status" role="status">POWER OFF</span>
+    </div>
+    <audio id="boot-audio" preload="auto" src="assets/era-1994-boot.wav"></audio>
+  </div>
+</section>
+<main id="machine" aria-label="RAMA 1994 static graphical parser edition">
+  <div id="title">
+    <div class="vga-title-program">
+      <div class="vga-title-picture">
+        <img class="launch-art" src="assets/launch-screen.png" alt="A VGA-era view across Rama's immense enclosed sea and machine wall.">
+        <div class="vga-title-card">
+          <h1 class="vga-pixel-wordmark" aria-label="RAMA"><svg viewBox="0 0 95 25" role="presentation" aria-hidden="true" shape-rendering="crispEdges"><defs><linearGradient id="vga-title-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1bd"/><stop offset=".4" stop-color="#e3ba67"/><stop offset=".41" stop-color="#a96a36"/><stop offset="1" stop-color="#f0ce88"/></linearGradient></defs><path fill-rule="evenodd" fill="url(#vga-title-gold)" d="M2 23V2H17V5H20V12H17V15H14V17H17V20H20V23H14V20H11V17H8V23ZM8 6V11H14V6ZM27 23V8H30V5H33V2H42V5H45V8H48V23H42V17H33V23ZM33 11V14H42V11H39V8H36V11ZM55 23V2H61V5H64V8H67V5H70V2H76V23H70V11H67V17H64V11H61V23ZM79 23V8H82V5H85V2H94V5H97V8H100V23H94V17H85V23ZM85 11V14H94V11H91V8H88V11Z" transform="scale(.91 1)"/></svg></h1>
+          <div class="sub">VGA ADVENTURE EDITION</div>
+          <div class="vga-title-tagline">ENTER THE CYLINDER</div>
+        </div>
+        <div class="vga-title-imprint">FICTION ARCHAEOLOGY SOFTWARE</div>
+      </div>
+      <div class="launch-copy">
+        <div class="vga-menu-label">THE VOYAGE</div>
+        <div class="vga-title-menu">
+          <button id="btn-begin" type="button">Begin new voyage</button>
+          <button id="btn-continue" class="secondary" type="button" style="display:none">Continue voyage</button>
+        </div>
+        <div class="credit">256 COLOR VGA · FM / DIGITAL SOUND</div>
+      </div>
+    </div>
+  </div>
+  <div id="status"><span class="loc" id="st-loc"></span><span id="st-act"></span></div>
+  <figure id="scene-panel" hidden><div class="scene-label" id="scene-label"></div><button id="scene-skip" type="button" hidden>Show current scene</button><img id="scene-art" alt=""></figure>
+  <div id="scene-fallback" role="status" hidden>Graphical plate unavailable. Canonical text presentation continues.</div>
+  <div id="scrollwrap"><div id="transcript"></div></div>
+  <div id="inputbar"><div id="chips"></div><div id="inrow"><span id="prompt">&gt;</span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Command"></div></div>
+</main>
+<script src="../text/core/output.js"></script>
+<script src="../text/core/state.js"></script>
+<script src="../text/core/vocabulary.js"></script>
+<script src="../text/core/resolve.js"></script>
+<script src="../text/core/questions.js"></script>
+<script src="../text/core/parser.js"></script>
+<script src="../text/core/verbs.js"></script>
+<script src="../text/core/persistence.js"></script>
+<script src="../text/core/turn.js"></script>
+<script src="../text/content/world.js"></script>
+<script src="../text/content/log.js"></script>
+<script src="../../session/edition-registry.js"></script>
+<script src="../../session/voyage-session.js"></script>
+<script src="../../scenes/identity-core.js"></script>
+<script src="../../renderers/contract-core.js"></script>
+<script src="../text/ui/renderer.js"></script>
+<script src="../static-graphical/ui/renderer.js"></script>
+<script src="ui/renderer.js"></script>
+<script src="../text/ui/adapter.js"></script>
+<script src="../../session/edition-boot.js"></script>
+<script src="../../session/edition-session.js"></script>
+<script src="ui/session.js"></script>
+</body>
+</html>

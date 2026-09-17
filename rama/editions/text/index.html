@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>RAMA — Interactive Fiction</title>
+<style>
+:root{
+  --void:#07090c; --hull:#0e131a; --line:#1d2530;
+  --ink:#d6d2c4; --dim:#78818d; --rama:#7fd0c0; --warn:#c9a23f;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  --serif:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+[hidden]{display:none!important}
+body{
+  background:var(--void); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.62;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#status{
+  flex:0 0 auto; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--dim);
+  border-bottom:1px solid var(--line); background:var(--hull);
+  padding:10px 16px; display:flex; justify-content:space-between; gap:12px;
+  padding-top:calc(10px + env(safe-area-inset-top));
+}
+#status .loc{color:var(--rama)}
+#scrollwrap{flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-behavior:smooth}
+#transcript{max-width:46rem; margin:0 auto; padding:28px 20px 40px}
+#transcript p{margin:0 0 .85em}
+#transcript p:last-child{margin-bottom:0}
+.roomtitle{
+  font-family:var(--mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--rama); margin:1.6em 0 .5em;
+}
+.echo{font-family:var(--mono); font-size:13.5px; color:var(--dim); margin:1.3em 0 .6em}
+.echo::before{content:"> "}
+.sys{font-family:var(--mono); font-size:13.5px; color:var(--dim)}
+.alert{color:var(--warn)}
+.acthead{
+  text-align:center; margin:3.2em 0;
+}
+.acthead .rule{width:64px; height:1px; background:var(--line); margin:0 auto 1.4em}
+.acthead .actnum{font-family:var(--mono); font-size:11px; letter-spacing:.34em; color:var(--dim); text-transform:uppercase}
+.acthead .actname{font-family:var(--mono); font-size:22px; letter-spacing:.42em; color:var(--ink); text-transform:uppercase; margin-top:.55em}
+.acthead .rule2{width:64px; height:1px; background:var(--line); margin:1.4em auto 0}
+.fin{ text-align:center; font-family:var(--mono); letter-spacing:.4em; color:var(--dim); margin:3em 0}
+#inputbar{
+  flex:0 0 auto; border-top:1px solid var(--line); background:var(--hull);
+  padding:10px 16px calc(12px + env(safe-area-inset-bottom));
+}
+#chips{max-width:46rem; margin:0 auto 8px; display:flex; flex-wrap:wrap; gap:6px}
+#chips button{
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--dim);
+  background:transparent; border:1px solid var(--line); border-radius:3px;
+  padding:5px 9px; cursor:pointer;
+}
+#chips button:active{color:var(--rama); border-color:var(--rama)}
+#inrow{max-width:46rem; margin:0 auto; display:flex; align-items:baseline; gap:8px}
+#prompt{font-family:var(--mono); color:var(--rama); font-size:15px}
+#cmd{
+  flex:1; background:transparent; border:none; outline:none; color:var(--ink);
+  font-family:var(--mono); font-size:15px; caret-color:var(--rama);
+}
+#title{
+  position:fixed; inset:0; background:var(--void); z-index:10;
+  display:grid; place-items:center; padding:clamp(22px,6vw,64px);
+}
+#title .title-terminal{width:min(46rem,100%);font-family:var(--mono);text-align:left}
+#title .title-system{font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+#title .axis{width:100%;height:1px;background:var(--line);margin:12px 0 clamp(30px,6vh,52px)}
+#title h1{font-family:var(--mono);font-weight:400;font-size:clamp(40px,9vw,66px);letter-spacing:.48em;margin-left:.48em;color:var(--ink);text-align:center}
+#title .sub{margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-align:center;text-transform:uppercase;color:var(--rama)}
+#title .title-rule{margin:clamp(28px,5vh,44px) 0 18px;color:var(--line);overflow:hidden;white-space:nowrap;letter-spacing:.08em}
+#title .credit{font-family:var(--mono);font-size:13px;color:var(--dim);max-width:42rem;line-height:1.65}
+#title .title-menu{display:flex;align-items:flex-start;flex-direction:column;gap:4px;margin-top:22px}
+#title button{
+  width:100%;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-align:left;text-transform:uppercase;
+  color:var(--rama);background:transparent;border:0;border-left:2px solid transparent;
+  padding:7px 10px;cursor:pointer;
+}
+#title button:hover,#title button:focus-visible{outline:0;border-left-color:var(--rama);background:rgba(127,208,192,.045)}
+#title button.secondary{color:var(--dim)}
+#title .choice-key{display:inline-block;width:3.2em;color:var(--ink)}
+.postlude #status,.postlude #chips{opacity:.25; transition:opacity 3s}
+.ended #inrow{display:none}
+.chip{display:inline-block; font-family:var(--mono); font-size:12px; color:var(--dim); border:1px solid var(--line); border-radius:999px; padding:.28em .8em; margin:0 .35em .45em 0; cursor:pointer; user-select:none; background:transparent}
+.chip:active{color:var(--rama); border-color:var(--rama)}
+.launcher-session #status{padding-right:250px}
+#return-to-launcher{
+  position:fixed; top:8px; right:12px; z-index:8; border:1px solid var(--line); border-radius:3px;
+  padding:6px 9px; background:var(--hull); color:var(--dim); cursor:pointer;
+  font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase;
+}
+#return-to-launcher:hover,#return-to-launcher:focus-visible{color:var(--rama); border-color:var(--rama)}
+#return-to-launcher:disabled{cursor:wait; opacity:.55}
+#return-without-saving,#take-over-voyage{
+  position:fixed; left:50%; bottom:24px; z-index:12; transform:translateX(-50%);
+  border:1px solid var(--line); border-radius:3px; padding:9px 12px;
+  background:var(--hull); color:var(--ink); cursor:pointer; font-family:var(--mono);
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+}
+#take-over-voyage{bottom:64px;color:var(--warn);border-color:var(--warn)}
+#session-status{
+  position:fixed; right:12px; bottom:78px; z-index:8; max-width:20rem; padding:8px 10px;
+  border:1px solid var(--line); background:var(--hull); color:var(--dim);
+  font-family:var(--mono); font-size:10px; line-height:1.4;
+}
+#session-status.is-error{color:var(--warn); border-color:var(--warn)}
+.edition-boot{
+  position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:24px;
+  background:#000;color:#a0caa0;font-family:var(--mono);text-align:left;
+}
+.boot-screen{width:min(48rem,94vw)}
+.cpm-display{
+  position:relative;min-height:min(18rem,48vh);padding:clamp(20px,4vw,34px);
+  border:1px solid #172619;background:#010302;overflow:hidden;
+  box-shadow:inset 0 0 72px rgba(116,177,116,.025);
+}
+.cpm-display::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:#a7d2a7;
+}
+.is-running .cpm-display{animation:cpm-power-on .22s steps(2,end) forwards}
+.is-running .cpm-display::after{animation:cpm-flash .16s steps(2,end)}
+@keyframes cpm-power-on{from{background:#000}to{background:#010302}}
+@keyframes cpm-flash{0%{opacity:.08}100%{opacity:0}}
+.boot-lines{min-height:9em;font:15px/1.55 var(--mono);color:#9bc79a;text-shadow:0 0 8px rgba(132,190,132,.12)}
+.boot-line{display:block;visibility:hidden;white-space:pre}
+.is-running .boot-sign-on{animation:cpm-line-in .01s steps(1,end) 1.08s forwards}
+.is-running .boot-prompt{animation:cpm-line-in .01s steps(1,end) 1.38s forwards}
+.boot-command{display:inline-block;width:0;overflow:hidden;vertical-align:bottom;white-space:nowrap}
+.is-running .boot-command{animation:cpm-type-command .38s steps(4,end) 1.72s forwards}
+.boot-cursor{display:inline-block;opacity:0;width:.7em;color:#b6ddb5}
+.is-running .boot-cursor{animation:cpm-cursor .56s steps(1,end) 1.38s 2 forwards}
+@keyframes cpm-line-in{to{visibility:visible}}
+@keyframes cpm-type-command{to{width:4ch}}
+@keyframes cpm-cursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+.boot-machine-panel{display:flex;align-items:center;gap:14px;min-height:34px;padding:8px 2px 0;color:#4f6751;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.boot-machine-id{margin-right:auto}
+.boot-lamp{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.boot-lamp::before{content:"";width:6px;height:6px;border-radius:50%;background:#172218;box-shadow:0 0 0 1px #253629}
+.is-running .power-lamp::before{background:#668e64;box-shadow:0 0 6px rgba(114,159,110,.45)}
+.is-running .drive-lamp::before{animation:cpm-drive 3.35s steps(1,end) forwards}
+@keyframes cpm-drive{
+  0%,31%,62%,96%{background:#af9a55;box-shadow:0 0 7px rgba(192,164,84,.62)}
+  32%,61%,97%,100%{background:#172218;box-shadow:0 0 0 1px #253629}
+}
+.boot-kicker{font-size:10px;letter-spacing:.14em;color:#657b67;margin:20px 0 5px}
+.boot-instruction{color:#485b4a;font-size:10px;line-height:1.5}
+.boot-controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px}
+.boot-controls button{
+  border:1px solid #304833;background:#010302;color:#8fba8e;padding:7px 10px;cursor:pointer;
+  font:10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+}
+.boot-controls button:hover,.boot-controls button:focus-visible{outline:0;border-color:#8fba8e}
+.boot-controls button:disabled{opacity:.38;cursor:default}
+#boot-status{margin-left:auto;color:#566b58;font-size:9px;letter-spacing:.1em}
+@media (prefers-reduced-motion:reduce){
+  #scrollwrap{scroll-behavior:auto}
+  .is-running .cpm-display,.is-running .cpm-display::after,.is-running .boot-command,.is-running .boot-cursor,.is-running .drive-lamp::before{animation:none}
+  .is-running .boot-line{visibility:visible}
+  .is-running .boot-command{width:4ch}
+}
+@media (max-width:520px){
+  body{font-size:16px}#transcript{padding:22px 16px 34px}.launcher-session #status{padding-right:16px}#return-to-launcher{top:auto;bottom:74px}
+  .edition-boot{padding:16px}.cpm-display{min-height:15rem}.boot-machine-id{display:none}.boot-controls{align-items:stretch}.boot-controls button{flex:1 1 auto}#boot-status{flex-basis:100%;margin:4px 0 0}
+  #title{padding:20px}#title .credit{font-size:12px}#title .title-system{font-size:9px}
+}
+</style>
+</head>
+<body>
+<section id="edition-boot" class="edition-boot" data-edition="text" role="dialog" aria-modal="true" aria-labelledby="boot-heading" aria-describedby="boot-instruction">
+  <div class="boot-screen">
+    <div class="cpm-display" aria-label="CP/M console">
+      <div class="boot-lines" aria-live="polite" aria-atomic="true">
+        <span class="boot-line boot-sign-on">CP/M VER 2.2</span>
+        <span class="boot-line" aria-hidden="true">&nbsp;</span>
+        <span class="boot-line boot-prompt">A&gt;<span class="boot-command">RAMA</span><span class="boot-cursor" aria-hidden="true">█</span></span>
+      </div>
+    </div>
+    <div class="boot-machine-panel" aria-hidden="true">
+      <span class="boot-machine-id">64K SYSTEM · CONSOLE 80×24</span>
+      <span class="boot-lamp power-lamp">Power</span>
+      <span class="boot-lamp drive-lamp">Drive A</span>
+    </div>
+    <div class="boot-kicker" id="boot-heading">CP/M Adventure System</div>
+    <p class="boot-instruction" id="boot-instruction">System disk is in drive A. Apply power to cold-start the machine.</p>
+    <div class="boot-controls">
+      <button id="boot-power" type="button">Apply power</button>
+      <button id="boot-mute" type="button" aria-pressed="false">Sound on</button>
+      <button id="boot-skip" type="button">Skip boot</button>
+      <span id="boot-status" role="status">POWER OFF</span>
+    </div>
+    <audio id="boot-audio" preload="auto" src="assets/cpm-storage-chatter.wav"></audio>
+  </div>
+</section>
+<div id="title">
+  <div class="title-terminal">
+    <div class="title-system">Fiction Archaeology Software · CP/M 2.2 · 64K</div>
+    <div class="axis" aria-hidden="true"></div>
+    <h1>RAMA</h1>
+    <div class="sub">An interactive novel</div>
+    <div class="title-rule" aria-hidden="true">--------------------------------------------------------------------------</div>
+    <div class="credit">You are Nicole des Jardins, life-sciences officer of the Newton expedition. Explore RAMA through prose and short commands. Type HELP at any time. The voyage saves automatically.</div>
+    <div class="title-menu">
+      <button id="btn-begin"><span class="choice-key" aria-hidden="true">[N]</span>Begin new voyage</button>
+      <button id="btn-continue" class="secondary" style="display:none"><span class="choice-key" aria-hidden="true">[C]</span>Continue saved voyage</button>
+    </div>
+  </div>
+</div>
+<div id="status"><span class="loc" id="st-loc"></span><span id="st-act"></span></div>
+<div id="scrollwrap"><div id="transcript"></div></div>
+<div id="inputbar">
+  <div id="chips"></div>
+  <div id="inrow"><span id="prompt">&gt;</span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Command"></div>
+</div>
+<script src="core/output.js"></script>
+<script src="core/state.js"></script>
+<script src="core/vocabulary.js"></script>
+<script src="core/resolve.js"></script>
+<script src="core/questions.js"></script>
+<script src="core/parser.js"></script>
+<script src="core/verbs.js"></script>
+<script src="core/persistence.js"></script>
+<script src="core/turn.js"></script>
+<script src="content/world.js"></script>
+<script src="content/log.js"></script>
+<script src="../../session/edition-registry.js"></script>
+<script src="../../session/voyage-session.js"></script>
+<script src="../../scenes/identity-core.js"></script>
+<script src="../../renderers/contract-core.js"></script>
+<script src="ui/renderer.js"></script>
+<script src="ui/adapter.js"></script>
+<script src="../../session/edition-boot.js"></script>
+<script src="../../session/edition-session.js"></script>
+<script src="ui/session.js"></script>
+</body>
+</html>

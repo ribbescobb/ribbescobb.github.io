@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>RAMA — Illustrated Adventure Edition</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<section id="edition-boot" class="edition-boot" data-edition="illustrated" role="dialog" aria-modal="true" aria-labelledby="boot-heading">
+  <div class="boot-console">
+    <div class="boot-maker" id="boot-heading">
+      <span>FICTION ARCHAEOLOGY</span>
+      <span>48K COLOR ADVENTURE SYSTEM</span>
+    </div>
+    <div class="boot-television">
+      <div class="boot-bezel">
+        <div class="boot-crt">
+          <div class="boot-bloom" aria-hidden="true"></div>
+          <div class="boot-lines" aria-live="polite">
+            <span class="boot-line boot-publisher">FICTION ARCHAEOLOGY SOFTWARE</span>
+            <span class="boot-line boot-program">RAMA ILLUSTRATED ADVENTURE</span>
+            <span class="boot-line boot-memory">48K · COLOR DISPLAY · DISK</span>
+            <div class="boot-picture" aria-hidden="true">
+              <span class="boot-cylinder"></span>
+              <span class="boot-horizon"></span>
+              <span class="boot-axis"></span>
+              <span class="boot-person"></span>
+            </div>
+            <span class="boot-line boot-reading">READING RAMA PICTURE DISK...</span>
+            <span class="boot-line boot-ready">PRESS RETURN TO BEGIN</span>
+          </div>
+        </div>
+      </div>
+      <div class="boot-hardware">
+        <span class="boot-speaker" aria-hidden="true"></span>
+        <span class="boot-model">COLOR VIDEO DISPLAY</span>
+        <span class="boot-power-lamp" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="boot-controls">
+      <button id="boot-power" class="power-switch" type="button">Apply power</button>
+      <button id="boot-mute" type="button" aria-pressed="false">Sound on</button>
+      <button id="boot-skip" type="button">Skip boot</button>
+      <span id="boot-status" role="status">POWER OFF</span>
+    </div>
+    <audio id="boot-audio" preload="auto" src="assets/illustrated-power-crt.wav"></audio>
+  </div>
+</section>
+<main id="machine" aria-label="RAMA Illustrated Adventure Edition opening arc">
+  <div id="title">
+    <div class="title-program">
+      <div class="title-picture">
+        <img class="launch-art" src="assets/launch-screen.png" alt="A sparse early-computer illustration of Nicole inside Rama's immense artificial world.">
+        <div class="launch-masthead">
+          <div class="launch-pixel-wordmark" role="img" aria-label="RAMA"><pre aria-hidden="true">████    ███   █   █   ███
+█   █  █   █  ██ ██  █   █
+█   █  █   █  █ █ █  █   █
+████   █████  █   █  █████
+█ █    █   █  █   █  █   █
+█  █   █   █  █   █  █   █
+█   █  █   █  █   █  █   █</pre></div>
+          <div class="sub">Illustrated Adventure Edition</div>
+        </div>
+        <div class="picture-number">PICTURE 01</div>
+      </div>
+      <div class="launch-copy">
+        <div class="title-prompt">SELECT VOYAGE</div>
+        <div class="title-menu">
+          <button id="btn-begin" type="button"><span class="choice-key">1</span> Begin a new voyage</button>
+          <button id="btn-continue" class="secondary" type="button" style="display:none"><span class="choice-key">2</span> Continue saved voyage</button>
+        </div>
+        <div class="credit">APPLE II · COMMODORE 64 · 48K · COLOR DISPLAY · DISK</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="status"><span class="loc" id="st-loc"></span><span id="st-act"></span></div>
+
+  <figure id="scene-panel" hidden>
+    <div class="scene-label" id="scene-label"></div>
+    <button id="scene-skip" type="button" hidden>Show current scene</button>
+    <img id="scene-art" alt="">
+  </figure>
+  <div id="scene-fallback" role="status" hidden>Illustration unavailable. Text presentation continues.</div>
+
+  <div id="scrollwrap"><div id="transcript"></div></div>
+  <div id="inputbar">
+    <div id="chips"></div>
+    <div id="inrow"><span id="prompt">&gt;</span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Command"></div>
+  </div>
+</main>
+
+<script src="../text/core/output.js"></script>
+<script src="../text/core/state.js"></script>
+<script src="../text/core/vocabulary.js"></script>
+<script src="../text/core/resolve.js"></script>
+<script src="../text/core/questions.js"></script>
+<script src="../text/core/parser.js"></script>
+<script src="../text/core/verbs.js"></script>
+<script src="../text/core/persistence.js"></script>
+<script src="../text/core/turn.js"></script>
+<script src="../text/content/world.js"></script>
+<script src="../text/content/log.js"></script>
+<script src="../../session/edition-registry.js"></script>
+<script src="../../session/voyage-session.js"></script>
+<script src="../../scenes/identity-core.js"></script>
+<script src="../../renderers/contract-core.js"></script>
+<script src="../text/ui/renderer.js"></script>
+<script src="ui/renderer.js"></script>
+<script src="../text/ui/adapter.js"></script>
+<script src="../../session/edition-boot.js"></script>
+<script src="../../session/edition-session.js"></script>
+<script src="ui/session.js"></script>
+</body>
+</html>

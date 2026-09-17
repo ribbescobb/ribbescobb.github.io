@@ -1,0 +1,130 @@
+:root{
+  --void:#080810;--panel:#11121d;--panel-raised:#1b1d2d;--line:#6a6977;
+  --ink:#e5dfc9;--dim:#9b998c;--accent:#e3b652;--bright:#fff0b3;--warn:#ed8461;
+  --body:"Palatino Linotype",Palatino,Georgia,serif;
+}
+#machine{image-rendering:pixelated;background:#080810}
+#scene-art{image-rendering:pixelated;filter:saturate(.84) contrast(1.08)}
+.roomtitle,.echo,.sys{font-family:var(--mono)}
+
+/* 1989 PC ritual: a separate physical and software language from the earlier home computer. */
+.edition-boot{
+  padding:18px;background:radial-gradient(ellipse at 50% 46%,#34332d 0,#161714 47%,#030404 82%);
+  color:#d8d0b7;text-align:left;
+}
+.boot-pc{width:min(49rem,95vw)}
+.boot-desk-label{
+  display:flex;justify-content:space-between;gap:18px;margin:0 7% 9px;
+  color:#918a76;font-size:8px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+}
+.boot-hardware{display:grid;grid-template-columns:minmax(0,1fr) 10.4rem;align-items:end;gap:12px}
+.boot-monitor{
+  padding:14px 14px 8px;border:1px solid #b4aa8c;border-radius:9px 9px 5px 5px;
+  background:linear-gradient(145deg,#d4c9a9,#88816c 51%,#bbb093);box-shadow:0 22px 48px rgba(0,0,0,.63),inset 0 0 0 2px #5d584a;
+}
+.boot-bezel{
+  padding:15px 17px;border:2px solid #4e4a3f;border-radius:7px;background:linear-gradient(145deg,#78715e,#aaa187 50%,#5e594b);
+  box-shadow:inset 0 0 15px #2f2d27;
+}
+.boot-crt{
+  position:relative;aspect-ratio:4/3;overflow:hidden;border:2px solid #1d1e1b;border-radius:3%/4%;
+  background:#030407;box-shadow:inset 0 0 42px 8px #000,0 0 0 2px #706a59;
+}
+.boot-crt::after{
+  content:"";position:absolute;inset:0;z-index:8;pointer-events:none;opacity:.18;
+  background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(178,193,255,.14) 4px);box-shadow:inset 0 0 52px 14px #000;
+}
+.boot-phosphor-flash{
+  position:absolute;left:5%;right:5%;top:50%;z-index:7;height:2px;opacity:0;background:#e7ebff;
+  box-shadow:0 0 14px 6px rgba(182,194,255,.82);transform:scaleX(.02);
+}
+.boot-dos{
+  position:absolute;inset:7% 7%;z-index:3;overflow:hidden;color:#c9cfe5;
+  font-size:clamp(8px,1.24vw,12px);line-height:1.55;letter-spacing:.035em;text-shadow:0 0 4px rgba(191,201,255,.62);
+}
+.boot-line{display:block;opacity:0}
+.boot-command{margin-top:2.2%;color:#e7e9f1}.boot-command b{color:#efbd54;font-weight:400}
+.boot-program{margin-top:4%;color:#f1c963;font-size:1.12em;font-weight:700;letter-spacing:.13em}
+.boot-video{color:#89bdcf;font-size:.82em}.boot-reading{margin-top:1.4%;color:#a8acd7;font-size:.86em}.boot-ready{color:#efbd54;font-size:.86em}
+.boot-ega-test{position:absolute;left:7%;right:7%;bottom:7%;z-index:4;display:grid;grid-template-columns:repeat(8,1fr);height:8px;opacity:0}
+.boot-ega-test i:nth-child(1){background:#000}.boot-ega-test i:nth-child(2){background:#00a}.boot-ega-test i:nth-child(3){background:#0a0}.boot-ega-test i:nth-child(4){background:#0aa}.boot-ega-test i:nth-child(5){background:#a00}.boot-ega-test i:nth-child(6){background:#a0a}.boot-ega-test i:nth-child(7){background:#a50}.boot-ega-test i:nth-child(8){background:#aaa}
+.monitor-badge{padding:8px 8px 0;color:#514c40;font-size:7px;font-weight:700;letter-spacing:.15em;text-align:right}
+.boot-system-unit{
+  position:relative;height:16.8rem;padding:19px 17px;border:1px solid #a69d82;border-radius:5px;
+  background:linear-gradient(135deg,#cbbf9f,#847c68 58%,#b2a789);box-shadow:0 22px 42px rgba(0,0,0,.58),inset 0 0 0 2px #5b5547;
+}
+.case-badge{color:#4e483b;font-size:11px;font-weight:700;letter-spacing:.12em;text-align:center}.case-badge small{font-size:6px;letter-spacing:.08em}
+.drive-bay{position:relative;height:44px;margin-top:30px;border:2px solid #4f4c43;background:#6e695a;box-shadow:inset 0 0 7px #292824;color:#c9bea0;font-size:7px}
+.drive-bay span{position:absolute;left:6px;top:5px}.drive-bay i{position:absolute;left:19%;right:8%;bottom:9px;height:4px;background:#232422;box-shadow:0 1px #aaa184}
+.drive-lamp{position:absolute;right:21px;top:121px;width:6px;height:6px;border-radius:50%;background:#37382f;border:1px solid #565346}
+.case-vents{height:34px;margin-top:20px;background:repeating-linear-gradient(to bottom,#625d4f 0 2px,transparent 2px 7px);opacity:.72}
+.case-switch{position:absolute;right:18px;bottom:17px;width:19px;height:12px;border:1px solid #4b473d;background:#77705e;box-shadow:inset 0 -4px #504c41}
+.boot-instruction{margin:12px 7% 0;color:#918a76;font-size:8px;letter-spacing:.07em}
+.boot-controls{padding:0 7%}.boot-controls .power-switch{border-color:#b59855;color:#efd27b;box-shadow:inset 0 -2px #050505}
+.edition-boot .boot-controls button{background:#161713;color:#c5bda6}.edition-boot #boot-status{color:#8e8774}
+.edition-boot.is-running .boot-phosphor-flash{animation:ega-crt-bloom .5s ease-out forwards}
+.edition-boot.is-running .boot-msdos{animation:ega-line-in .01s steps(1,end) .36s forwards}
+.edition-boot.is-running .boot-command{animation:ega-line-in .01s steps(1,end) .76s forwards}
+.edition-boot.is-running .boot-program{animation:ega-line-in .01s steps(1,end) 1.16s forwards}
+.edition-boot.is-running .boot-video{animation:ega-line-in .01s steps(1,end) 1.4s forwards}
+.edition-boot.is-running .boot-reading{animation:ega-line-in .01s steps(1,end) 1.7s forwards}
+.edition-boot.is-running .boot-ega-test{animation:ega-palette-in .58s steps(8,end) 1.88s forwards}
+.edition-boot.is-running .boot-ready{animation:ega-line-in .01s steps(1,end) 2.64s forwards}
+.edition-boot.is-running .drive-lamp{animation:ega-drive-lamp .18s steps(1,end) .72s 9 alternate}
+@keyframes ega-crt-bloom{0%{opacity:0;transform:scaleX(.02)}30%{opacity:1;transform:scaleX(.12)}68%{opacity:.92;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+@keyframes ega-line-in{to{opacity:1}}
+@keyframes ega-palette-in{from{opacity:1;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes ega-drive-lamp{to{background:#d7a433;box-shadow:0 0 6px #e3b341}}
+
+/* Direct entry is an EGA program title, not the premium painting printed on its box. */
+#title{display:block;background:#000;text-align:left}
+.ega-title-program{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;padding:7px;background:#03030a}
+.ega-title-picture{position:relative;min-height:0;overflow:hidden;border:2px ridge #555769;background:#000}
+.launch-art{display:block;width:100%;height:100%;object-fit:cover;image-rendering:pixelated;image-rendering:crisp-edges;filter:saturate(.9) contrast(1.08) brightness(.86)}
+.ega-title-picture::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.1;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(190,200,255,.14) 4px)}
+.ega-title-card{
+  position:absolute;left:5%;top:6%;z-index:2;width:min(46%,355px);padding:10px 13px 11px;text-align:center;
+  border:3px double #d7a644;background:#060713;box-shadow:5px 5px 0 rgba(0,0,0,.75),inset 0 0 0 1px #57294a;
+}
+#title h1{
+  color:#f0bd4c;font-family:var(--mono);font-size:clamp(30px,6vw,56px);font-weight:800;line-height:.95;letter-spacing:.11em;margin-left:.11em;
+  text-shadow:3px 0 #a44358,0 3px #a44358,3px 3px #34214b,-2px -2px #ece4b6;
+}
+#title .sub{margin-top:8px;color:#e3d6a4;font:700 clamp(7px,.9vw,10px) var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.title-rule{height:3px;margin:9px 4% 7px;background:linear-gradient(90deg,#4058aa 0 25%,#ac405d 25% 50%,#c4983f 50% 75%,#3b9da2 75%)}
+.title-tagline{color:#8b91bf;font:700 clamp(6px,.78vw,8px) var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.ega-copyright{position:absolute;right:9px;bottom:7px;z-index:2;color:#6f7598;font:7px var(--mono);letter-spacing:.08em}
+.launch-copy{
+  position:relative;z-index:2;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;width:auto;margin:0;padding:9px 12px 10px;
+  border:2px ridge #555769;border-top:0;background:#0a0a15;box-shadow:none;
+}
+.title-prompt{color:#e2bb5d;font:8px var(--mono);letter-spacing:.14em;white-space:nowrap}
+.title-menu{display:flex;align-items:center;justify-content:center;gap:7px}
+#title .credit{max-width:none;margin:0;color:#777b9d;font:7px var(--mono);letter-spacing:.06em;text-align:right;white-space:nowrap}
+#title button{padding:6px 9px;border:1px solid #6d708d;background:#111325;color:#d9d2b8;font:9px var(--mono);letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+#title button:hover,#title button:focus-visible{outline:1px solid #e0b858;outline-offset:1px;border-color:#b64c65;color:#f2c859}
+#title button.secondary{margin-left:0;color:#aeb0c4;border-color:#565972}
+#title .choice-key{display:inline-block;margin-right:5px;color:#efbd54}
+
+#scene-skip{
+  position:absolute;right:8px;top:8px;z-index:2;padding:6px 8px;
+  border:1px solid #a9aac3;background:#08091a;color:#eee9d5;
+  font:12px var(--mono);cursor:pointer;
+}
+#scene-skip[hidden]{display:none}
+#scene-skip:focus-visible{outline:2px solid #efbd54;outline-offset:2px}
+
+@media (prefers-reduced-motion:reduce){
+  .edition-boot.is-running .boot-line,.edition-boot.is-running .boot-ega-test{animation:none;opacity:1;clip-path:none}.edition-boot.is-running .boot-phosphor-flash{display:none}.edition-boot.is-running .drive-lamp{animation:none;background:#d7a433}
+}
+@media (max-width:700px){
+  .boot-hardware{grid-template-columns:minmax(0,1fr) 7rem}.boot-system-unit{height:13rem;padding:14px 11px}.drive-lamp{top:99px}.case-vents{margin-top:14px}
+  .launch-copy{grid-template-columns:auto 1fr}.launch-copy .credit{display:none}.title-menu{justify-content:flex-start}
+}
+@media (max-width:520px){
+  .boot-hardware{display:block}.boot-system-unit{display:none}.boot-desk-label{font-size:6px}.boot-controls{padding:0}.boot-instruction{margin-left:0;margin-right:0}.ega-title-card{width:56%}.title-prompt{display:none}.launch-copy{grid-template-columns:1fr}.title-menu{justify-content:center}
+}
+@media (max-height:620px){
+  .boot-pc{width:min(38rem,90vw)}.boot-desk-label,.boot-instruction{display:none}.boot-monitor{padding:8px 9px 5px}.boot-bezel{padding:8px 9px}.boot-system-unit{height:12.3rem}.boot-controls{margin-top:8px}
+  #scene-panel{flex-basis:40%}#transcript{padding-top:9px}.launch-copy .credit{display:none}
+}
