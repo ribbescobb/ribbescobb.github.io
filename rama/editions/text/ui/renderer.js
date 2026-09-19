@@ -77,9 +77,12 @@ function createTextRenderer(){
       if(frame.ui.inputEnabled&&frame.ui.mode==="question") EL.cmd.focus();
     },
     consume:function(records){
-      if(!textDomReady() || !TEXT_RENDERER_TARGET.started) return;
+      if(!textDomReady() || !TEXT_RENDERER_TARGET.started || !records.length) return;
+      // One response at a time; retain every event/dialogue record in this batch.
+      // Ignore empty follow-up flushes (notably after a confirmed restart).
+      EL.transcript.innerHTML="";
       for(const record of records) EL.transcript.appendChild(textOutputElement(record));
-      EL.scrollwrap.scrollTop=EL.scrollwrap.scrollHeight;
+      EL.scrollwrap.scrollTop=0;
     },
     destroy:function(){
       TEXT_RENDERER_TARGET=null; TEXT_RENDERER_SERVICES=null; EL=null;

@@ -819,11 +819,11 @@ CHARS.richard={name:"Richard Wakefield",alias:["richard","wakefield"],loc:"hub",
     camera:function(){ out("He scrolls her imagery with the reverence other men save for scripture. \"Good eye. Good *eye*, des Jardins.\""); return endTurn(); },
     scarf:function(){ out("\"Your father's?\" he asks — he remembers everything she has ever told him, she is beginning to notice. \"It suits the expedition. A little defiant color.\""); relUp("richard",1); return endTurn(); }
   },
-  kiss:function(){
+  on:{kiss:function(){
     if(S.act===1&&!F().rescued){ out("Not yet. There is a carefulness between them still, a bridge neither has tested with full weight."); return endTurn(); }
     if(S.act===1){ out("She kisses him — brief, sure, entirely against regulations that no longer apply to anyone. Richard blinks like a man handed a star. \"Well,\" he manages. \"Marooned properly, then.\""); relUp("richard",2); F().kissed=true; return endTurn(); }
     out("She kisses her husband. Some experiments one simply replicates, for rigor."); relUp("richard",1); return endTurn();
-  }
+  }}
 };
 CHARS.michael={name:"Michael O'Toole",alias:["michael","otoole","o'toole","general"],loc:"camp_alpha",pron:"his",
   desc:function(){ return S.act===1?"General Michael O'Toole, USAF: silver-haired, unhurried, the expedition's ballast. He carries a worn rosary in a thigh pocket and the entire weight of two governments' expectations without visibly stooping.":S.act===2?"Michael O'Toole — older, lighter somehow, as if the vacuum between stars had taken only the things he didn't need. He conducts a small mass every Sunday for a congregation of five, two of whom are children and one of whom is an atheist who comes for the singing.":"Michael, remembered: silver and kindness and certainty worn soft."; },
@@ -1049,7 +1049,7 @@ WORLD.camp_alpha.onEnter=function(){
   }
   return false;
 };
-function doLookInline(){ const rm=here(); outTitle(rm.name); out(typeof rm.desc==="function"?rm.desc():rm.desc); const cs=charsAt(S.loc); if(cs.length) out(cs.map(c=>{const h=CHARS[c].here;const v=typeof h==="function"?h():h;return v||(CHARS[c].name+" is here.");}).join(" ")); const ex=exitsOf(rm); if(ex.length) outSys("Exits: "+ex.join(", ")+"."); S.visited[S.loc]=true; }
+function doLookInline(listExits=true){ const rm=here(); outTitle(rm.name); out(typeof rm.desc==="function"?rm.desc():rm.desc); const cs=charsAt(S.loc); if(cs.length) out(cs.map(c=>{const h=CHARS[c].here;const v=typeof h==="function"?h():h;return v||(CHARS[c].name+" is here.");}).join(" ")); const ex=exitsOf(rm); if(listExits && ex.length) outSys("Exits: "+ex.join(", ")+"."); S.visited[S.loc]=true; }
 
 WORLD.beta_shore.onEnter=function(){
   if(!F().betaIntro){
@@ -1211,7 +1211,7 @@ function registerActOneEvents(){
 THINK={
   arrival:"Down first — thirty thousand steps to the plain, and the camp lights to the east at the bottom. The survey can't start at the top of a stairway.",
   survey:function(){ return "Assignments: sample the plain, get imagery of the biots on the track south"+(K().k_biots?" — done; the crew should hear about the hoppers":"")+". London stands southwest, sealed and unassigned, which is Richard-speak for irresistible."+((K().k_biots&&!F().reportedBiots)?" Tell someone about the biots.":""); },
-  borzov:"Borzov is her patient now. Examine him, ask about the pain, and SCAN him — diagnosis before decision, always.",
+  borzov:function(){ return (S.loc==="medlab"?"Borzov is on the table beside her.":"Borzov is in the medical hut at Camp Alpha. Go IN from camp to reach him.")+" Examine him, ask about the pain, and SCAN BORZOV — diagnosis before decision, always."; },
   borzov_decide:"The scan says appendix, hours to spare, none to waste. Operate here with a field kit and steady hands, or stabilize and evacuate him up thirty thousand steps to the Newton's theater. His history matters; so does the climb. Her call. (OPERATE or EVACUATE.)",
   storm_prep:"The sea next. East from camp when she's ready.",
   storm:function(){ return "Richard's dawn is coming, and wind with it. The Resolution needs securing (TIE BOAT)"+(F().boatSecured?" — done":"")+", and Camp Alpha should be warned (TELL MICHAEL ABOUT THE STORM)"+(F().stormWarned?" — done":"")+". Then: witness it."; },
@@ -1225,6 +1225,7 @@ HINTS={
   survey:["The assignment: a sample from the plain, and imagery of biots on the southern track. USE SAMPLER on the plain; wait where the track runs.","Biots travel the polished track SOUTH of the stairway's foot. Be present, be patient, and PHOTOGRAPH them when they come. London (southwest) rewards a close look at its one imperfect shed.","1) At the plain: USE SAMPLER. 2) Go SOUTH, WAIT for the procession, PHOTOGRAPH BIOT. 3) In London, EXAMINE SHED, then PHOTOGRAPH SLOT. 4) Return to camp and TELL RICHARD ABOUT BIOTS."],
   borzov:["A physician's order of operations: history, examination, imaging.","ASK BORZOV ABOUT THE PAIN, then SCAN BORZOV in the medical hut.","SCAN BORZOV. The scanner will put the decision in front of you."],
   borzov_decide:["Both paths can save him; they cost different things. His clean history favors boldness; the thirty-thousand-step climb punishes delay.","Asking about his HISTORY firms the surgical case. Then commit: OPERATE or EVACUATE.","Type OPERATE (field surgery, Nicole's hands) or EVACUATE (stabilize and hoist him to the Newton). Both succeed; the expedition remembers differently."],
+  storm_prep:["The expedition is moving toward the Cylindrical Sea.","Return to Camp Alpha; the rover route runs east from there.","OUT from the medical hut, then EAST from Camp Alpha to Beta Camp."],
   storm:["Two verbs protect two things: the boat, and the camp.","TIE BOAT secures the Resolution. TELL MICHAEL ABOUT THE STORM sends the warning east.","1) TIE BOAT. 2) TELL MICHAEL ABOUT STORM. 3) WAIT for the dawn. It is worth being outside for."],
   crossing:["If the boat took damage, camp stores held a patch kit (SEARCH CRATES at Alpha — or it may already be in the bag).","USE PATCH ON BOAT at Beta if she's holed. Then GO SOUTH.","Repair if needed (USE PATCH ON BOAT), then SOUTH across the sea."],
   newyork:["The city wants examining: the octahedron, the towers, the hum. The story wants the latticed way, east of the plaza.","EXAMINE the octahedron; TOUCH it if her nerve holds. Then EAST to the lattice. What happens at the shaft is not her fault.","Go EAST from the plaza. EXAMINE the SHAFT. The rest is Rama."],
@@ -1297,8 +1298,9 @@ CHARS.simone={name:"Simone",alias:["simone","daughter"],loc:"limbo",pron:"her",
     treat:function(){ if(S.phase==="simone_fever"&&!F().feverCured){ out("Antipyretics, fluids, cool cloths — the rearguard actions. They buy hours. The answer is east, in the Tailor's Room, behind three colors."); return endTurn(); } out("Nothing to treat; the treaty holds."); return endTurn(); },
     touch:function(){ out(S.phase==="simone_fever"&&!F().feverCured?"Simone's skin is fever-hot beneath Nicole's hand, dry at the forehead and damp at the hairline. The cool cloth is already losing ground.":"Warm skin, steady pulse. Simone squeezes her mother's hand before Nicole can pretend this was not a checkup."); return endTurn(); }
   },
-  tell:{}, show:{}, kiss:function(){ out("She kisses her daughter's hair. Simone permits this with the gravity of a treaty."); relUp("simone",1); return endTurn(); }
+  tell:{}, show:{}
 };
+CHARS.simone.on.kiss=function(){ out("She kisses her daughter's hair. Simone permits this with the gravity of a treaty."); relUp("simone",1); return endTurn(); };
 
 CHARS.katie={name:"Katie",alias:["katie","catherine","katherine","kate"],loc:"limbo",pron:"her",
   desc:function(){
@@ -1328,8 +1330,8 @@ CHARS.katie={name:"Katie",alias:["katie","catherine","katherine","kate"],loc:"li
     "herself|drugs|kokomo":[{if:()=>S.act===3,text:"Her chin lifts. \"I'm exactly where everyone always said I'd end up. There's a comfort in arriving.\" The pupils say the rest; the daughter dares the doctor to say it aloud."}]
   },
   tell:{}, show:{},
-  kiss:function(){ if(S.act===3){ if(S.rel.katie>=4){ out("She kisses her daughter's cheek before the armor can decide. Katie goes rigid — then, for one broken second, leans in. \"...Go home, maman,\" she whispers. \"It's not safe for you here.\""); F().katieWarned=true; } else { out("Katie steps back from the kiss, smooth as choreography. \"We're past that, Mother.\""); } return endTurn(); }
-    out("She catches the comet and kisses it. \"MamAN,\" Katie protests, delighted."); relUp("katie",1); return endTurn(); }
+  on:{kiss:function(){ if(S.act===3){ if(S.rel.katie>=4){ out("She kisses her daughter's cheek before the armor can decide. Katie goes rigid — then, for one broken second, leans in. \"...Go home, maman,\" she whispers. \"It's not safe for you here.\""); F().katieWarned=true; } else { out("Katie steps back from the kiss, smooth as choreography. \"We're past that, Mother.\""); } return endTurn(); }
+    out("She catches the comet and kisses it. \"MamAN,\" Katie protests, delighted."); relUp("katie",1); return endTurn(); }}
 };
 /* ---- Act II events: Katie lost, arrival at the Node ---- */
 function registerActTwoEvents(){
@@ -1404,11 +1406,12 @@ WORLD.node_hall={
   onEnter:function(){
     if(!K().k_eagleMet){
       S.phase="act2_eagle";
-      doLookInline();
+      doLookInline(false);
       K().k_eagleMet=true; CHARS.eagle.loc="node_hall"; CHARS.eagle.gone=false;
       out("It comes through the tall doorway without haste, and Nicole's mind performs the assessments of her two professions at once. The body: humanoid, two and a half meters, functional, engineered. The head: an eagle's — feathered, gold-eyed, beaked — chosen, she understands immediately, from Earth's own inventory of forms, the way a host chooses a language. It is not pretending to be alive. It is not pretending anything.");
       out("\"Nicole des Jardins.\" Its voice is even, neither warm nor cold — calibrated. \"Richard Wakefield. Michael O'Toole. Simone. Katherine. You are the first of your species to reach a Node. You will have questions. I am configured to answer some of them.\" A measured pause. \"I also have questions. That is, in the end, what all of this is for.\"");
       outSys("The Eagle. TALK to it; ASK it ABOUT anything. When you are ready to be questioned in return, TELL THE EAGLE ABOUT HUMANITY.");
+      outSys("Exits: "+exitsOf(here()).join(", ")+".");
       endTurn(true);
       return true;
     }
@@ -1786,7 +1789,7 @@ function startActIII(){
 
 WORLD.eden_home={
   name:"New Eden — The Wakefield House, Beauvois",
-  desc:function(){ return "A house in the village she named for her father's: whitewashed panels, Richard's workshop annex leaking gadgets onto the porch, Simone's drawing framed by the door — the woman with the scarf, larger than her sun. "+(F().richardMissing?"Richard's workshop stands exactly as he left it, which is the loudest thing in the house.":"")+(CHARS.benjy.loc==="eden_home"?" Benjy is here, at the table, sorting his seed cards into constellations only he can see.":""); },
+  desc:function(){ return "A house in the village she named for her father's: whitewashed panels, Richard's workshop annex leaking gadgets onto the porch, Simone's drawing framed by the door — the woman with the scarf, larger than her sun."+(F().richardMissing?" Richard's workshop stands exactly as he left it, which is the loudest thing in the house.":"")+(CHARS.benjy.loc==="eden_home"?" Benjy is here, at the table, sorting his seed cards into constellations only he can see.":""); },
   brief:"Home, in Beauvois.",
   scenery:["workshop","drawing2","eden_house","home_table","seed_cards","home_ambient","home_missing_details"],
   sound:"Village sounds through the window: a well pump, children, someone's argument about water allocations conducted at neighborly volume. The weather engine gives them birdsong at fixed hours. Nobody has told Benjy it is recorded, because for Benjy it isn't.",
@@ -1825,7 +1828,7 @@ CHARS.benjy={name:"Benjy",alias:["benjy","benjamin","son"],loc:"limbo",pron:"his
     "papa|richard|father":[{if:()=>F().richardMissing,text:"\"Papa is being quiet somewhere,\" Benjy says, untroubled, certain. \"Quiet is not gone.\" Nicole holds that sentence for days, the way you hold a coal in winter."},{if:()=>true,text:"\"Papa makes things wake up,\" Benjy says approvingly."}]
   },
   tell:{}, show:{},
-  kiss:function(){ out("She kisses the top of his head. Benjy pats her arm twice — his seal of state — and returns to the republic of the cards."); relUp("community",0); return endTurn(); }
+  on:{kiss:function(){ out("She kisses the top of his head. Benjy pats her arm twice — his seal of state — and returns to the republic of the cards."); relUp("community",0); return endTurn(); }}
 };
 WORLD.eden_plaza={
   name:"New Eden — Central Plaza",
@@ -1884,7 +1887,7 @@ CHARS.patrick={name:"Patrick",alias:["patrick","son2"],loc:"limbo",pron:"his",
       {if:()=>F().waterDone,text:"\"Flowing,\" Patrick says. \"Loudly, in certain bathhouses' absence.\""}
     ]
   },
-  show:{}, kiss:function(){ out("She kisses her son's cheek. \"Maman,\" he protests, exactly as his father protests nothing."); return endTurn(); }
+  show:{}, on:{kiss:function(){ out("She kisses her son's cheek. \"Maman,\" he protests, exactly as his father protests nothing."); return endTurn(); }}
 };
 
 WORLD.eden_clinic={
@@ -1965,7 +1968,7 @@ CHARS.ellie={name:"Ellie",alias:["ellie","eleanor","daughter2"],loc:"limbo",pron
     "katie|sister":"Ellie's mouth thins. \"I go up there once a month with a med kit and my temper on a leash. She lets me check her over. She doesn't let me *see* her. There's a difference and it's the size of Vegas.\"",
     "nakamura":"\"He sent the clinic a donation last quarter. I banked it and published the receipt. Papa said that was the most political thing anyone in this family has ever done.\""
   },
-  tell:{}, show:{}, kiss:function(){ out("She kisses her daughter's forehead — colleague to colleague, which between these two is the tenderest available rank."); relUp("ellie",1); return endTurn(); }
+  tell:{}, show:{}, on:{kiss:function(){ out("She kisses her daughter's forehead — colleague to colleague, which between these two is the tenderest available rank."); relUp("ellie",1); return endTurn(); }}
 };
 WORLD.eden_clinic.scenery.push("redsq","bluesq","greensq");
 WORLD.vegas={
@@ -2615,7 +2618,7 @@ CHARS.eagle.finalAsk=function(topic){
   if(F().finalAsked) { out("The Eagle inclines its head: the question was one, and it has been spent well. The light is beginning to feel less like a place and more like a direction."); return endTurn(); }
   F().finalAsked=true;
   const opening = S.eagleAnswers.fear==="honestly" ?
-    "\"You told me once,\" the Eagle says, \"that your species dies, and and so tells stories longer than itself. You were standing in one, you said. You still are. It does not end here; it widens.\"" :
+    "\"You told me once,\" the Eagle says, \"that your species dies, and so tells stories longer than itself. You were standing in one, you said. You still are. It does not end here; it widens.\"" :
     S.eagleAnswers.fear==="refuse" ?
     "\"You told me once to ask you about endings when it was closer.\" The gold eyes hold hers. \"It is closer. And I find, Nicole, that you have already answered — you answered with the whole of the intervening years.\"" :
     "\"You gave me, once, your species' noble account of endings,\" the Eagle says. \"I have carried it up the hierarchy. Annotated: *the witness undersold it.*\"";
@@ -2643,7 +2646,7 @@ function finishGame(ending){
 /* ---------------- THINK & HINTS (Acts II–IV) ---------------- */
 Object.assign(THINK,{
   act2_voyage:"Years underway, a family grown, and Richard hovering about something in the atrium, east of the lair. Humor him. It's usually worth it.",
-  katie_lost:"Katie is somewhere in the Avian Vertical — north of the lair — alone. Go. Now. Sound carries in that shaft.",
+  katie_lost:function(){ return S.loc==="avian_shaft"?"She is in the Avian Vertical now. Sound carries: SHOUT for Katie.": "Katie is somewhere in the Avian Vertical — north of the lair — alone. Go. Now. Sound carries in that shaft."; },
   act2_node_wait:"Katie is safe; Sirius is close. The family's world is about to get a second act. Live in it a little — the answer will arrive on its own schedule.",
   act2_arrival:"A corridor of light has opened from the lair. OUT, then. All of them together.",
   act2_eagle:"The Eagle receives questions in the pearl hall. Ask it everything — and when she's ready to be the one examined, TELL THE EAGLE ABOUT HUMANITY.",
@@ -2656,9 +2659,13 @@ Object.assign(THINK,{
   act3_open:function(){ const p=[]; if(!F().serumDone) p.push("the RV-41 ward (the clinic, east of the plaza)"); if(!F().waterDone) p.push("the water (Patrick, at the plaza well-house)"); if(F().voteCalled&&!F().voteDone) p.push("the assembly (the hall, north)"); if(F().richardMissing&&!F().readNote) p.push("Richard's note (at home)"); return p.length?("Pressing: "+p.join("; ")+".") : "The colony holds its breath between crises. Family is also a clinic: Benjy at home, Ellie at the ward, Patrick at the plaza, Katie in Vegas."; },
   act3_serum:"The dispensary speaks the old language: PUSH RED, then BLUE, then GREEN. Then medicine can start being medicine again.",
   act3_alloc:"Not enough serum, all at once, for everyone: allocate to the SICKEST first, the CHILDREN first, or by public LOTTERY. Each is defensible. Each has a bill.",
-  act3_vote:"Election eve, at the hall north of the plaza. The horseshoe wants a speech: HONESTLY, CURATED, or REFUSE the floor.",
+  act3_vote:function(){ return !F().voteDone?"Election eve, at the hall north of the plaza. The horseshoe wants a speech: HONESTLY, CURATED, or REFUSE the floor.":!F().richardMissing?"The speech is over and the vote counted. Return to the family; the morning will bring its own news.":!F().readNote?"Richard is missing. READ his NOTE at home before deciding what comes next.":"Richard's note has been read. Keep the family and the ward steady; the new administration has not finished with her."; },
   act3_trial:"Her own hall, turned courtroom. One statement: HONESTLY, CURATED, or REFUSE. The verdict is written; the record is not.",
-  act3_escape:function(){ return F().cellOpen?"The service door stands open: OUT, into the original dark, north across the old plain — the route she has walked in two other lives.":"Held at the gatehouse. The night is long, and this town has more Wakefields in it than the warrant counted. WAIT."; },
+  act3_escape:function(){
+    if(!F().cellOpen) return "Held at the gatehouse. The night is long, and this town has more Wakefields in it than the warrant counted. WAIT.";
+    const route={eden_gate:"The service door stands open: OUT into the original dark.",tunnel:"Clear of New Eden. NORTH leads to the old Central Plain.",plain_north:"On the old plain now. EAST to the remains of Camp Alpha.",camp_alpha:"The camp is behind her life now. EAST along the old rover route to Beta Camp.",beta_shore:"Richard's skiff waits at the old mooring. ENTER SKIFF to cross the sea."};
+    return route[S.loc]||"Keep moving toward the old camps and the Cylindrical Sea. Richard left a way across.";
+  },
   act3_sanctuary:function(){ return F().grillOpened?"Below the world, among the landlords, with Richard. Talk. Rest. And when she is truly ready — SLEEP.":"The old address: down the latticed way, to the gallery with the painted wall. Three colors, Rama's oldest order, at the grill."; },
   act3_twilight:"Rest now.",
   postlude:"One question was always reserved for her. ASK THE EAGLE — ABOUT GOD, ABOUT RAMA, ABOUT HER FAMILY, or ABOUT THE PURPOSE."
@@ -2678,9 +2685,9 @@ Object.assign(HINTS,{
   act3_open:["THINK lists what's pressing; the map is small and the troubles are labeled.","Clinic east; well-house at the plaza; Vegas northeast; home south. Family in all four.","Work the list: the clinic's dispensary; Patrick's water; then the hall when the assembly is called."],
   act3_serum:["The dispensary's pulse is the same old greeting.","Red. Blue. Green. In that order.","PUSH RED, PUSH BLUE, PUSH GREEN at the dispensary."],
   act3_alloc:["Triage is a values question wearing a clinical coat.","SICKEST is medicine's oldest answer; CHILDREN is a mother's; LOTTERY is a citizen's.","Type SICKEST, CHILDREN, or LOTTERY."],
-  act3_vote:["The hall is north of the plaza; the speech is one word.","HONESTLY names the man; CURATED serves the town; REFUSE lets silence testify.","Type HONESTLY, CURATED, or REFUSE. The count is not the point; the record is."],
+  act3_vote:function(){ return F().voteDone?[THINK.act3_vote()]:["The hall is north of the plaza; the speech is one word.","HONESTLY names the man; CURATED serves the town; REFUSE lets silence testify.","Type HONESTLY, CURATED, or REFUSE. The count is not the point; the record is."]; },
   act3_trial:["Same three doors as every hard room this year.","Her statement shapes what the town does after — and one line of the ending.","Type HONESTLY, CURATED, or REFUSE."],
-  act3_escape:["Cells in this colony have more exits than the architect filed.","WAIT for midnight; this family does not leave people in rooms.","WAIT. When the door opens: OUT, then NORTH across the plain, EAST to the old camps, and the shore beyond."],
+  act3_escape:function(){ return F().cellOpen?[THINK.act3_escape()]:["Cells in this colony have more exits than the architect filed.","WAIT for midnight; this family does not leave people in rooms.","WAIT. When the door opens: OUT, then NORTH across the plain, EAST to the old camps, and the shore beyond."]; },
   act3_sanctuary:["The route is a memory: plain, camp, shore, sea, island, lattice, down.","At the grill: the phrase Rama has been teaching her since the pit.","PUSH RED, PUSH BLUE, PUSH GREEN at the grill. Then, when whole: SLEEP."],
   act3_twilight:["SLEEP.","SLEEP.","SLEEP. It has been a long seventy years, and the last room is lit."],
   postlude:["One question, four doors: GOD, RAMA, FAMILY, PURPOSE.","There is no best answer; there is the one Nicole would ask.","ASK EAGLE ABOUT GOD / RAMA / FAMILY / PURPOSE. Then let go of the keyboard gently."]

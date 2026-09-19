@@ -13,6 +13,8 @@ function freshState(){
     pit:{ water:3, hurt:false, splinted:false, signaled:false, waitTurns:0 },
     eagleAnswers:{},         // war, faith, fear -> honest|curated|defiant
     habitat:{},              // charter, margin, garden
+    // Legacy v2 compatibility record; gameplay decisions live in flags.
+    // Do not infer water/vote/Katie/trial progress from these placeholders.
     eden:{ serum:"", water:"", vote:"", katie:"", trial:[] },
     history:[]
   };

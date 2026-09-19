@@ -18,12 +18,12 @@ function needObj(r, verbLabel){
   if(!r){ outSys(cap(verbLabel)+" what?"); return true; }
   if(r.kind==="unknown"){ outSys("Nicole doesn't see any \""+r.phrase+"\" — perhaps another word for it?"); return true; }
   if(r.kind==="absentchar"){ outSys(CHARS[r.id].name+" isn't here."); return true; }
-  if(r.kind==="absent"){ const nm=ITEMS[r.id]?ITEMS[r.id].name:(SCENERY[r.id]?SCENERY[r.id].name:"thing"); outSys("The "+nm+" isn't here."); return true; }
+  if(r.kind==="absent"){ const nm=ITEMS[r.id]?ITEMS[r.id].name:(SCENERY[r.id]?SCENERY[r.id].name:"thing"); outSys(cap(articleName(nm,true))+" isn't here."); return true; }
   return false;
 }
 function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
 
-function execute(verb, obj, obj2, prep, firstText){
+function execute(verb, obj, obj2, prep){
   // room-level interceptor (puzzle scenes)
   const rm = here();
   if(rm.onCmd && rm.onCmd(verb,obj,obj2,prep)===true) return;
@@ -132,7 +132,7 @@ function doLook(force){
   S.visited[S.loc]=true;
   if(force) endTurn(true);
 }
-function aName(i){ const n=ITEMS[i].name; return (/^[aeiou]/i.test(n)?"an ":"a ")+n; }
+function aName(i){ return articleName(ITEMS[i].name,false); }
 function exitsOf(rm){
   const ex=[];
   for(const d in (rm.exits||{})){

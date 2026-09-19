@@ -21,7 +21,18 @@ function restore(json){
     if(!d || d.version!==2 || !d.S || typeof d.S!=="object") return false;
     if(!WORLD[d.S.loc]) return false;
     if(!(d.S.act>=1&&d.S.act<=4)) return false;
-    const ns = Object.assign(freshState(), d.S);
+    const defaults=freshState();
+    const ns = Object.assign({}, defaults, d.S);
+    // Backfill known record defaults without changing the v2 envelope or
+    // concatenating arrays. Complete saves retain their exact values.
+    for(const key of Object.keys(defaults)){
+      const value=defaults[key];
+      if(value && typeof value==="object" && !Array.isArray(value)){
+        const saved=d.S[key];
+        if(saved!==undefined && (!saved || typeof saved!=="object" || Array.isArray(saved))) return false;
+        ns[key]=Object.assign({},value,saved);
+      }
+    }
     ns.inv = (ns.inv||[]).filter(id=>ITEMS[id]);
     if(ns.pendingQuestion && !QUESTION_HANDLERS[ns.pendingQuestion.id]) ns.pendingQuestion=null;
     if(ns.phase==="act2_interview"&&!ns.pendingQuestion){

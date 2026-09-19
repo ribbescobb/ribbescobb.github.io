@@ -111,14 +111,16 @@ function doCommandInner(raw){
 
   // split off prepositional second object: VERB X with/on Y
   let first=rest, prep=null, second=null;
-  for(const p of PREPS){
-    const idx = (" "+rest+" ").indexOf(" "+p+" ");
-    if(idx>=0){
-      first = rest.slice(0, idx).trim();
-      prep = p;
-      second = rest.slice(idx+p.length+1).trim();
-      break;
-    }
+  const words=rest.split(" ");
+  // Leading prepositions introduce the direct object (KNOCK ON DOOR).
+  if(PREPS.has(words[0])) words.shift();
+  const idx=words.findIndex(word=>PREPS.has(word));
+  if(idx>=0){
+    first=words.slice(0,idx).join(" ");
+    prep=words[idx];
+    second=words.slice(idx+1).join(" ");
+  } else {
+    first=words.join(" ");
   }
   let obj=null, obj2=null;
   if(first){ obj = resolveNoun(first,{}); }
@@ -133,7 +135,7 @@ function doCommandInner(raw){
     outSys("Which do you mean: "+obj2.amb.map(theName).join(", ")+"?");
     return;
   }
-  execute(verb, obj, obj2, prep, first);
+  execute(verb, obj, obj2, prep);
 }
 
 function failVerb(w){

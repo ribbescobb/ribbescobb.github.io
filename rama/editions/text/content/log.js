@@ -2,6 +2,10 @@
 
 /* ---------- derived expedition log ---------- */
 const LOG_ENTRIES = [
+  {id:"reach_alpha", active:()=>S.phase==="arrival",
+    text:"Descend to the Central Plain, then go east to Camp Alpha for the survey assignment."},
+  {id:"report_survey", active:()=>S.phase==="survey"&&K().k_sample&&K().k_biots&&!F().reportedBiots,
+    text:"Report the biot observations to Richard or the crew at Camp Alpha."},
   {id:"survey_sample", active:()=>S.phase==="survey"&&!K().k_sample,
     text:"Collect a survey sample from Rama's plain."},
   {id:"survey_biots", active:()=>S.phase==="survey"&&!K().k_biots,
@@ -17,6 +21,8 @@ const LOG_ENTRIES = [
     text:"Secure the Resolution before Raman dawn."},
   {id:"warn_alpha", active:()=>S.phase==="storm"&&!F().stormWarned,
     text:"Warn Camp Alpha about the approaching weather."},
+  {id:"witness_dawn", active:()=>S.phase==="storm"&&F().boatSecured&&F().stormWarned,
+    text:"The boat and camp are prepared. Wait to witness Raman dawn."},
   {id:"repair_resolution", active:()=>S.phase==="crossing"&&F().boatDamaged&&!F().boatFixed,
     text:"Make the Resolution seaworthy again."},
   {id:"cross_sea", active:()=>S.phase==="crossing",
@@ -35,7 +41,7 @@ const LOG_ENTRIES = [
   {id:"richard_discovery", active:()=>S.phase==="act2_voyage",
     text:"Review Richard's discovery in the atrium."},
   {id:"find_katie", active:()=>S.phase==="katie_lost",
-    text:"Find Katie in the Avian Vertical."},
+    text:()=>S.loc==="avian_shaft"?"SHOUT for Katie in the Avian Vertical.":"Find Katie in the Avian Vertical."},
   {id:"approach_sirius", active:()=>S.phase==="act2_node_wait",
     text:"Remain with the family while Rama completes its approach to Sirius."},
   {id:"enter_node", active:()=>S.phase==="act2_arrival",
@@ -70,7 +76,7 @@ const LOG_ENTRIES = [
   {id:"wait_for_release", active:()=>S.phase==="act3_escape"&&!F().cellOpen,
     text:"Hold steady until a way out presents itself."},
   {id:"find_richard", active:()=>S.phase==="act3_escape"&&F().cellOpen,
-    text:"Leave New Eden and find Richard."},
+    text:()=>THINK.act3_escape()},
   {id:"reach_sanctuary", active:()=>S.phase==="act3_sanctuary"&&!F().grillOpened,
     text:"Find Richard in the old lair beneath New York."},
   {id:"rest_with_richard", active:()=>S.phase==="act3_sanctuary"&&F().grillOpened,
@@ -80,7 +86,15 @@ const LOG_ENTRIES = [
 ];
 
 function expeditionLog(){
+  if(S.ended) return {active:[]};
+  const active=LOG_ENTRIES.filter(entry=>entry.active()).map(entry=>({id:entry.id,text:typeof entry.text==="function"?entry.text():entry.text}));
+  // Between sub-objectives the phase is still live. Reuse the read-only,
+  // progress-aware THINK guidance rather than inventing another quest state.
+  if(!active.length && THINK[S.phase]){
+    const guidance=THINK[S.phase];
+    active.push({id:"continue_"+S.phase,text:typeof guidance==="function"?guidance():guidance});
+  }
   return {
-    active:LOG_ENTRIES.filter(entry=>entry.active()).map(entry=>({id:entry.id,text:entry.text}))
+    active
   };
 }

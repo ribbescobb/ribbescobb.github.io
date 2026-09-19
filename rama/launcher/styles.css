@@ -37,7 +37,7 @@ button { font: inherit; }
 .masthead {
   width: min(92rem, calc(100% - 3rem));
   margin: 0 auto;
-  min-height: 5.5rem;
+  min-height: 4.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -70,12 +70,12 @@ button { font: inherit; }
 main {
   width: min(92rem, calc(100% - 3rem));
   margin: 0 auto;
-  padding: clamp(3.5rem, 8vw, 7.5rem) 0 3rem;
+  padding: clamp(1.5rem, 3vh, 2.5rem) 0 1.25rem;
 }
 
 .intro {
   max-width: 46rem;
-  margin-bottom: clamp(3rem, 6vw, 5.5rem);
+  margin-bottom: clamp(1.5rem, 3vh, 2.25rem);
 }
 
 .eyebrow, .availability {
@@ -91,7 +91,7 @@ h1, h2, p { margin-top: 0; }
 
 h1 {
   margin-bottom: 1.2rem;
-  font-size: clamp(2.5rem, 6vw, 5.6rem);
+  font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 300;
   letter-spacing: -0.045em;
   line-height: 0.95;
@@ -118,7 +118,6 @@ h1 {
   --box-accent: #c1af79;
   --box-stock: #d8c79e;
   --box-ink: #302b22;
-  --box-width: 85%;
   --box-ratio: 979 / 1606;
   --box-depth: clamp(22px, 10cqw, 42px);
   --half-depth: calc(var(--box-depth) / 2);
@@ -135,7 +134,6 @@ h1 {
   --box-accent: #8caeca;
   --box-stock: #24364f;
   --box-ink: #e6c884;
-  --box-width: 96%;
   --box-ratio: 1055 / 1491;
 }
 
@@ -143,7 +141,6 @@ h1 {
   --box-accent: #aaabd7;
   --box-stock: #123853;
   --box-ink: #f0cf80;
-  --box-width: 96%;
   --box-ratio: 1060 / 1484;
 }
 
@@ -153,7 +150,8 @@ h1 {
   display: grid;
   place-items: center;
   width: 100%;
-  aspect-ratio: 0.68;
+  /* Leave room for the adjacent Play action, including on short screens. */
+  height: min(clamp(13rem, calc(100svh - 27rem), 28rem), 140cqw);
   padding: 0;
   border: 0;
   background: transparent;
@@ -186,7 +184,9 @@ h1 {
 .box-object {
   position: relative;
   display: block;
-  width: var(--box-width);
+  width: auto;
+  height: 100%;
+  max-width: 100%;
   aspect-ratio: var(--box-ratio);
   transform: rotateX(4deg) rotateY(-6deg);
   transform-style: preserve-3d;
@@ -332,32 +332,31 @@ h1 {
 
 .edition-card.is-selected .card-meta { color: var(--text); }
 
-.selection {
-  min-height: 10rem;
-  margin-top: clamp(3rem, 7vw, 6rem);
-  padding: 2rem 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  display: flex;
+.card-play {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
+  justify-content: center;
+  gap: 0.65rem;
+  width: min(100%, 11rem);
+  min-height: 2.75rem;
+  border: 1px solid color-mix(in srgb, var(--box-accent) 70%, transparent);
+  padding: 0.7rem 1rem;
+  background: color-mix(in srgb, var(--box-accent) 12%, var(--bg));
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
-
-.selection h2 {
-  margin-bottom: 0.55rem;
-  font-size: clamp(1.6rem, 3vw, 2.5rem);
-  font-weight: 350;
+.card-play span { color: var(--box-accent); font-size: 0.85em; }
+.card-play:hover:not(:disabled), .card-play:focus-visible {
+  border-color: var(--box-accent);
+  background: color-mix(in srgb, var(--box-accent) 24%, var(--bg));
 }
+.card-play:disabled { opacity: 0.4; cursor: not-allowed; }
 
-.selection > div > p:last-child {
-  max-width: 42rem;
-  margin-bottom: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.primary-action,
 .dialog-card button,
 .warning-actions button {
   border: 1px solid var(--line-strong);
@@ -365,19 +364,6 @@ h1 {
   color: var(--text);
   cursor: pointer;
 }
-
-.primary-action {
-  flex: 0 0 auto;
-  min-width: 13rem;
-  padding: 1rem 1.4rem;
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.primary-action:hover:not(:disabled), .primary-action:focus-visible { border-color: var(--accent); color: var(--accent); }
-.primary-action:disabled { color: var(--quiet); cursor: not-allowed; }
 
 footer {
   width: min(92rem, calc(100% - 3rem));
@@ -646,10 +632,8 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
 @media (max-width: 560px) {
   .masthead, main, footer, .launcher-status { width: min(100% - 2rem, 92rem); }
   .masthead > p, .wordmark span { display: none; }
-  main { padding-top: 3.5rem; }
+  main { padding-top: 1.5rem; }
   .collection { gap: 1rem; row-gap: 2rem; }
-  .selection { align-items: flex-start; flex-direction: column; gap: 1.5rem; }
-  .primary-action { width: 100%; }
   footer { flex-direction: column; }
   .warning-actions { flex-direction: column; }
   .viewer-header { align-items: flex-start; flex-direction: column; gap: 0.8rem; }

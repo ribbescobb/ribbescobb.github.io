@@ -62,9 +62,13 @@ function pickBest(cands){
   if(uniq.length===1) return uniq[0];
   return {amb:uniq};
 }
+function articleName(name, definite){
+  if(/^[A-Z]|['’]s\b|^the\s/.test(name)) return name;
+  return (definite?"the ":(/^[aeiou]/i.test(name)?"an ":"a "))+name;
+}
 function theName(r){
   if(r.kind==="char") return CHARS[r.id].name;
-  if(r.kind==="item") return "the "+ITEMS[r.id].name;
-  if(r.kind==="scenery") return "the "+SCENERY[r.id].name;
+  if(r.kind==="item") return articleName(ITEMS[r.id].name,true);
+  if(r.kind==="scenery") return articleName(SCENERY[r.id].name,true);
   return "that";
 }

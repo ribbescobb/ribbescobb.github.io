@@ -13,10 +13,6 @@
     eventTarget:window
   });
   const cards=Array.from(document.querySelectorAll(".edition-card"));
-  const title=document.getElementById("selection-title");
-  const status=document.getElementById("selection-status");
-  const description=document.getElementById("selection-description");
-  const playButton=document.getElementById("play-edition");
   const saveStatus=document.getElementById("save-status");
   const launcherStatus=document.getElementById("launcher-status");
   const packageViewer=document.getElementById("package-viewer");
@@ -76,13 +72,16 @@
       card.classList.toggle("is-selected",isSelected);
       card.querySelector(".box-select").setAttribute("aria-pressed",String(isSelected));
     }
-    title.textContent=edition.shortLabel;
-    status.textContent=edition.status;
-    description.textContent=edition.description;
     sessionEditionLabel.textContent=edition.shortLabel;
-    playButton.disabled=!edition.launcherAvailable;
-    playButton.textContent=edition.launcherAvailable?"Play this edition":"Coming later";
     announce("",false);
+    return true;
+  }
+
+  function openEditionSession(id){
+    if(!registry.launcherEdition(id))return false;
+    selectEdition(id);
+    updateSaveStatus();
+    sessionDialog.showModal();
     return true;
   }
 
@@ -368,6 +367,9 @@
     card.querySelector(".box-select").addEventListener("click",function(){selectEdition(card.dataset.edition);});
     card.querySelector(".zoom-control").addEventListener("click",function(){showPackage(card);});
     card.querySelector(".flip-control").addEventListener("click",function(){flipPackage(card);});
+    const play=card.querySelector(".card-play");
+    play.disabled=!registry.launcherEdition(card.dataset.edition);
+    play.addEventListener("click",function(){openEditionSession(card.dataset.edition);});
     updatePackageControls(card);
   }
 
@@ -394,12 +396,6 @@
   viewerCopy.addEventListener("click",function(){showPackageTranscript(packageTranscript.hidden);});
   packageViewerImage.addEventListener("dblclick",function(){
     setViewerMode(viewerMode==="fit"?"actual":"fit");
-  });
-
-  playButton.addEventListener("click",function(){
-    if(!registry.launcherEdition(selected))return;
-    updateSaveStatus();
-    sessionDialog.showModal();
   });
 
   newButton.addEventListener("click",function(){

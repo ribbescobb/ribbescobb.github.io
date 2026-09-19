@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RAMA — Fiction Archaeology</title>
   <meta name="description" content="Choose a preserved RAMA edition and continue one canonical voyage.">
-  <link rel="stylesheet" href="styles.css?v=20260917-3">
+  <link rel="stylesheet" href="styles.css?v=20260918-1">
 </head>
 <body>
   <header class="masthead">
@@ -41,6 +41,7 @@
         </button>
         <div class="card-meta">
           <p class="version-label">Version: <strong>1979</strong></p>
+          <button class="card-play" type="button" aria-label="Play Text Edition"><span aria-hidden="true">▶</span> Play</button>
           <span class="selection-marker" aria-hidden="true">Selected artifact</span>
           <div class="card-controls">
             <button class="zoom-control" type="button" aria-label="View Text Edition box front at full size">Full size</button>
@@ -66,6 +67,7 @@
         </button>
         <div class="card-meta">
           <p class="version-label">Version: <strong>1984</strong></p>
+          <button class="card-play" type="button" aria-label="Play Illustrated Edition"><span aria-hidden="true">▶</span> Play</button>
           <span class="selection-marker" aria-hidden="true">Selected artifact</span>
           <div class="card-controls">
             <button class="zoom-control" type="button" aria-label="View Illustrated Edition box front at full size">Full size</button>
@@ -91,6 +93,7 @@
         </button>
         <div class="card-meta">
           <p class="version-label">Version: <strong>1989</strong></p>
+          <button class="card-play" type="button" aria-label="Play 1989 Edition"><span aria-hidden="true">▶</span> Play</button>
           <span class="selection-marker" aria-hidden="true">Selected artifact</span>
           <div class="card-controls">
             <button class="zoom-control" type="button" aria-label="View 1989 Edition box front at full size">Full size</button>
@@ -116,6 +119,7 @@
         </button>
         <div class="card-meta">
           <p class="version-label">Version: <strong>1994</strong></p>
+          <button class="card-play" type="button" aria-label="Play 1994 Edition"><span aria-hidden="true">▶</span> Play</button>
           <span class="selection-marker" aria-hidden="true">Selected artifact</span>
           <div class="card-controls">
             <button class="zoom-control" type="button" aria-label="View 1994 Edition box front at full size">Full size</button>
@@ -125,14 +129,6 @@
       </article>
     </section>
 
-    <section class="selection" aria-live="polite" aria-labelledby="selection-title">
-      <div>
-        <p class="availability" id="selection-status">Available edition</p>
-        <h2 id="selection-title">Text Edition</h2>
-        <p id="selection-description">The canonical parser-driven RAMA voyage, preserved behind its original textual interface.</p>
-      </div>
-      <button class="primary-action" id="play-edition" type="button">Play this edition</button>
-    </section>
   </main>
 
   <footer>
@@ -212,6 +208,6 @@
   <script src="../session/edition-registry.js"></script>
   <script src="../session/voyage-session.js"></script>
   <script src="package-copy.js?v=20260911-1"></script>
-  <script src="launcher.js?v=20260917-3"></script>
+  <script src="launcher.js?v=20260918-1"></script>
 </body>
 </html>
