@@ -109,6 +109,10 @@ const ILLUSTRATED_OPENING_ARC_SCENES=Object.freeze({
     label:"The Threshold",
     alt:"Sparse pale-field computer illustration of empty-handed Nicole beside the Eagle in a fading non-place, with a distant grey cylinder held in a cradle."
   }),
+  "ending_god":Object.freeze({src:"assets/ending-god.png",label:"The Threshold — Attention",alt:"Sparse early-computer line illustration of Nicole and the Eagle beneath ordered points of golden light at Rama's threshold."}),
+  "ending_rama":Object.freeze({src:"assets/ending-rama.png",label:"The Threshold — The Instrument",alt:"Sparse early-computer line illustration of Nicole and the Eagle watching a warm human household within Rama's immense curve."}),
+  "ending_family":Object.freeze({src:"assets/ending-family.png",label:"The Threshold — The Living",alt:"Sparse early-computer line illustration of Nicole and the Eagle looking toward a future garden, homes, and a wall of names."}),
+  "ending_purpose":Object.freeze({src:"assets/ending-purpose.png",label:"The Threshold — The Finding",alt:"Sparse early-computer line illustration of Nicole and the Eagle before a luminous doorway opening on distant stars and ships."}),
   "medical_hut_quiet":Object.freeze({
     src:"assets/medical-hut-quiet.png",
     label:"Camp Alpha — Quiet Medical Hut",

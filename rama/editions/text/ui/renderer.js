@@ -7,6 +7,16 @@ let EL=null;
 let TEXT_RENDERER_TARGET=null, TEXT_RENDERER_SERVICES=null;
 
 function textDomReady(){ return typeof document!=="undefined" && EL; }
+function touchFirstViewport(){ return typeof matchMedia==="function" && matchMedia("(pointer: coarse)").matches; }
+function focusCommandAfterSuggestion(){
+  // Suggested actions are the touch-first control surface. Keeping a hidden
+  // text cursor focused here would summon the software keyboard after every tap.
+  if(touchFirstViewport()){
+    if(typeof EL.cmd.blur==="function") EL.cmd.blur();
+    return;
+  }
+  EL.cmd.focus();
+}
 
 function textOutputElement(record){
   let element;
@@ -69,7 +79,7 @@ function createTextRenderer(){
       for(const available of frame.actions){
         const chip=document.createElement("span"); chip.className="chip"; chip.textContent=available.label;
         if(available.enabled){
-          chip.addEventListener("click",()=>{ TEXT_RENDERER_SERVICES.dispatch(available.action); EL.cmd.focus(); });
+          chip.addEventListener("click",()=>{ TEXT_RENDERER_SERVICES.dispatch(available.action); focusCommandAfterSuggestion(); });
         }
         EL.chips.appendChild(chip);
       }

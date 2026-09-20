@@ -29,6 +29,10 @@
     { id: "assembly_hall_election_eve", source: "state", status: "resolved" },
     { id: "lair_sanctuary_octospiders", source: "state", status: "resolved" },
     { id: "threshold_of_light", source: "state", status: "resolved" },
+    { id: "ending_god", source: "state", status: "resolved" },
+    { id: "ending_rama", source: "state", status: "resolved" },
+    { id: "ending_family", source: "state", status: "resolved" },
+    { id: "ending_purpose", source: "state", status: "resolved" },
     { id: "london_sealed_city", source: "state", status: "resolved" },
     { id: "pit_falstaff_contact", source: "state", status: "resolved" },
     { id: "camp_alpha_ruins", source: "state", status: "resolved" },
@@ -74,6 +78,7 @@
   const DESCENT_LOCATIONS = new Set(["stair_top"]);
   const BORZOV_LOCATIONS = new Set(["camp_alpha", "medlab"]);
   const BORZOV_PHASES = new Set(["borzov", "borzov_decide"]);
+  const ENDING_IDS = new Set(["god", "rama", "family", "purpose"]);
 
   function identity(id) {
     return Object.freeze({ id });
@@ -116,6 +121,14 @@
     const flags = facts.flags || {};
     const knowledge = facts.knowledge || {};
     const items = facts.items || {};
+
+    // Distinct end plates are derived entirely from canonical end-state facts.
+    if (
+      facts.act === 4 && facts.phase === "postlude" && facts.location === "pl_shore" &&
+      facts.ended === true && ENDING_IDS.has(facts.ending)
+    ) {
+      return identity(`ending_${facts.ending}`);
+    }
 
     if (facts.act === 1 && facts.phase === "arrival" && facts.location === "hub") {
       return identity("alpha_airlock_first_arrival");
@@ -541,6 +554,14 @@
     return id ? Object.freeze({context: identity(id), beats: Object.freeze([])}) : null;
   }
 
+  // The postlude has one canonical room, but its four final answers are distinct
+  // player-visible conclusions. This packet only selects visual presentation.
+  function resolvePostludePresentation(facts) {
+    const resolved = resolve(facts);
+    if (!resolved || !facts || facts.act !== 4 || facts.phase !== "postlude") return null;
+    return Object.freeze({context: resolved, beats: Object.freeze([])});
+  }
+
   global.RamaSceneIdentity = Object.freeze({
     SCENE_DEFINITIONS,
     SCENE_IDS,
@@ -554,6 +575,7 @@
     resolveActTwoPresentation,
     ACT_THREE_CONTEXT_IDS,
     resolveActThreePresentation,
+    resolvePostludePresentation,
     resolve
   });
 })(globalThis);

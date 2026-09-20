@@ -22,12 +22,17 @@ function textAnswerAction(questionId,label,choice){
   return {id:"answer-"+choice,label,enabled:true,action:{type:"answer",questionId,choice}};
 }
 
+function textTouchFirstViewport(){
+  return typeof matchMedia==="function"&&matchMedia("(pointer: coarse)").matches;
+}
+
 function textSceneFacts(actors){
   return {
     act:S.act,
     phase:S.phase,
     location:S.loc,
     ended:S.ended===true,
+    ending:S.ending||null,
     inventoryEmpty:S.inv.length===0,
     community:S.rel.community,
     borzovStatus:S.borzov,
@@ -162,6 +167,7 @@ function readTextFrame(){
     ? globalThis.RamaSceneIdentity.resolveActOnePresentation(facts,TEXT_PRESENTATION_RECORDS.length?TEXT_PRESENTATION_RECORDS:BUF)
       ||(["act-two-continuity","act-three-continuity"].includes(profile)?globalThis.RamaSceneIdentity.resolveActTwoPresentation(facts):null)
       ||(profile==="act-three-continuity"?globalThis.RamaSceneIdentity.resolveActThreePresentation(facts):null)
+      ||(profile==="act-three-continuity"?globalThis.RamaSceneIdentity.resolvePostludePresentation(facts):null)
     : null;
   const objects=[];
   for(const id of itemsAt(S.loc)){
@@ -257,7 +263,9 @@ function bootTextAdapter(){
       elements.title.style.display="none";
       const started=intent==="new"?target.onBegin():target.onContinue();
       if(started===false&&intent==="continue") TEXT_SESSION_WRITABLE=false;
-      if(TEXT_SESSION_WRITABLE) elements.cmd.focus();
+      // Let mobile players start by tapping suggestions without opening the
+      // software keyboard over the newly opened game.
+      if(TEXT_SESSION_WRITABLE&&!textTouchFirstViewport()) elements.cmd.focus();
       return started!==false;
     }
   };

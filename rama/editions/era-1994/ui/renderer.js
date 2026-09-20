@@ -116,6 +116,10 @@ const ERA_1994_SCENES=Object.freeze({
     label:"The Threshold · VGA plate",
     alt:"A luminous painted 256-color adventure-game non-place where empty-handed Nicole stands beside the Eagle and a distant grey cylinder rests in a cradle."
   }),
+  ending_god:Object.freeze({src:"assets/ending-god.png",label:"The Threshold — Attention · VGA plate",alt:"A painted 256-color adventure-game image of Nicole and the Eagle beneath ordered points of light at Rama's threshold."}),
+  ending_rama:Object.freeze({src:"assets/ending-rama.png",label:"The Threshold — The Instrument · VGA plate",alt:"A painted 256-color adventure-game image of Nicole and the Eagle watching a human household within Rama's vast curve."}),
+  ending_family:Object.freeze({src:"assets/ending-family.png",label:"The Threshold — The Living · VGA plate",alt:"A painted 256-color adventure-game image of Nicole and the Eagle looking toward a future garden, homes, and wall of names."}),
+  ending_purpose:Object.freeze({src:"assets/ending-purpose.png",label:"The Threshold — The Finding · VGA plate",alt:"A painted 256-color adventure-game image of Nicole and the Eagle before a luminous doorway opening on stars and ships."}),
   london_sealed_city:Object.freeze({
     src:"assets/london-sealed-city.png",
     label:"London — Sealed City · VGA plate",
