@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "date": "2026-09-19",
+  "scope": "1994 VGA Act II visual-continuity plates; canonical simulation and Text fallback unchanged",
+  "status": "implemented-candidate-awaiting-user-review",
+  "assets": [
+    {"sceneId":"atrium_undeciphered","runtimePath":"rama/editions/era-1994/assets/atrium-undeciphered.png","productionSource":"rosetta/art/production/era-1994/atrium-undeciphered.png","sourceGeneration":"exec-3e3a0741-3c77-4568-af81-49b785e031b8","sha256":"db05d8d29e834c4afa9a4b605ed830094bc302c6b395fffb7de8cde08943dd1a"},
+    {"sceneId":"node_hall_conversation","runtimePath":"rama/editions/era-1994/assets/node-hall-conversation.png","productionSource":"rosetta/art/production/era-1994/node-hall-conversation.png","sourceGeneration":"exec-cce8525d-bae7-4858-8d85-96f77c42e650","sha256":"5e3d69e443759148ad97c31f693264928dcabe1102996baa5b2e7719c9a91e30"},
+    {"sceneId":"node_observation_quiet","runtimePath":"rama/editions/era-1994/assets/node-observation-quiet.png","productionSource":"rosetta/art/production/era-1994/node-observation-quiet.png","sourceGeneration":"exec-6ec1e36d-c586-4bf1-947e-76f67b63407a","sha256":"ffe742c5e8297358540463076607660d90f1eb9b6b4c3ae85c39848897ca94be"},
+    {"sceneId":"node_hangar_quiet","runtimePath":"rama/editions/era-1994/assets/node-hangar-quiet.png","productionSource":"rosetta/art/production/era-1994/node-hangar-quiet.png","sourceGeneration":"exec-58a90d69-9a5a-49c8-b4f3-6bc6e47f4356","sha256":"0f6a4fcd96aeeb4ac9421b1ff0030d6948792f9fc1e0db3524de5290d2c66e45"},
+    {"sceneId":"node_quarters_fever","runtimePath":"rama/editions/era-1994/assets/node-quarters-fever.png","productionSource":"rosetta/art/production/era-1994/node-quarters-fever.png","sourceGeneration":"exec-e9e07a47-3115-4fcf-ad77-e3751e21daeb","sha256":"2d01051d554c00d9921871cbb8626ab6177d9cc08abc9136d2e288e28367462f"},
+    {"sceneId":"design_atelier_detail","runtimePath":"rama/editions/era-1994/assets/design-atelier-detail.png","productionSource":"rosetta/art/production/era-1994/design-atelier-detail.png","sourceGeneration":"exec-ede9f266-0f15-4ee0-9eec-f276abadac31","sha256":"33505d122abbceb9543585cbcaede464accd33a4e147e4f538e2be2cb24235be"},
+    {"sceneId":"node_departure_context","runtimePath":"rama/editions/era-1994/assets/node-departure.png","productionSource":"rosetta/art/production/era-1994/node-departure.png","sourceGeneration":"exec-f0084416-b692-4048-b9f9-6614f9a0966f","sha256":"82f292deda48a3ac73f62deeb03c4657991947c3f7414543e68006c174f7b3b5"}
+  ],
+  "reusedExistingAssets": ["katie-lost-vertical.png", "node-family-quarters.png", "tailors-room.png"],
+  "fallback": "canonical Text presentation on missing or failed asset"
+}

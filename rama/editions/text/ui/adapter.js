@@ -54,6 +54,7 @@ function textSceneFacts(actors){
       designOpen:F().designOpen===true,
       designStarted:F().designStarted===true,
       designDone:F().designDone===true,
+      feverCured:F().feverCured===true,
       waterDone:F().waterDone===true,
       clinicIntro:F().clinicIntro===true,
       serumMade:F().serumMade===true,
@@ -154,8 +155,13 @@ function readTextFrame(){
   }));
   const actors=charsAt(S.loc).map(id=>({id,label:CHARS[id].name}));
   const scene=textCanonicalScene(actors);
-  const presentation=globalThis.RamaEditionPresentationProfile==="act-one-continuity"
-    ? globalThis.RamaSceneIdentity.resolveActOnePresentation(textSceneFacts(actors),TEXT_PRESENTATION_RECORDS.length?TEXT_PRESENTATION_RECORDS:BUF)
+  const profile=globalThis.RamaEditionPresentationProfile;
+  const continuity=profile==="act-one-continuity"||profile==="act-two-continuity"||profile==="act-three-continuity";
+  const facts=continuity?textSceneFacts(actors):null;
+  const presentation=continuity
+    ? globalThis.RamaSceneIdentity.resolveActOnePresentation(facts,TEXT_PRESENTATION_RECORDS.length?TEXT_PRESENTATION_RECORDS:BUF)
+      ||(["act-two-continuity","act-three-continuity"].includes(profile)?globalThis.RamaSceneIdentity.resolveActTwoPresentation(facts):null)
+      ||(profile==="act-three-continuity"?globalThis.RamaSceneIdentity.resolveActThreePresentation(facts):null)
     : null;
   const objects=[];
   for(const id of itemsAt(S.loc)){

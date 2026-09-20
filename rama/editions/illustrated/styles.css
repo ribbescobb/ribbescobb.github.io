@@ -227,6 +227,40 @@ body{
 @media (prefers-reduced-motion:reduce){
   #scrollwrap{scroll-behavior:auto}.is-running .boot-line,.is-running .boot-lines,.is-running .boot-picture{animation:none;opacity:1;clip-path:none}.is-running .boot-bloom{display:none}
 }
+/* On phones RAMA becomes a deliberate portrait play surface instead of a
+   shrunken, vertically-centred 4:3 computer.  The plate is always visible at
+   the top; only the room prose scrolls, with the command row remaining above
+   the iOS keyboard's dynamic viewport. */
+@media (max-width:700px) and (orientation:portrait){
+  html,body{height:100%;height:100dvh}
+  body{align-items:stretch;justify-content:stretch;overflow:hidden}
+  #machine{
+    width:100vw;height:100vh;height:100dvh;min-width:0;min-height:0;
+    border-left:0;border-right:0;box-shadow:none;
+  }
+  /* Keep the machine readout, but let it float over the plate rather than
+     stealing vertical space from a phone-sized scene. */
+  #status{
+    position:absolute;top:0;left:0;right:0;z-index:22;
+    padding:calc(7px + env(safe-area-inset-top)) 10px 7px;font-size:9px;
+    background:linear-gradient(to bottom,rgba(7,16,8,.96),rgba(7,16,8,.72));
+  }
+  #scene-panel{flex:0 0 50dvh;min-height:0}
+  #scene-art{object-fit:cover}
+  #scrollwrap{
+    min-height:0;overflow-y:auto;overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  #transcript{padding:13px 16px 20px}
+  #inputbar{position:relative;z-index:21;padding:7px 10px max(9px,env(safe-area-inset-bottom))}
+  #chips{flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;padding-bottom:1px}
+  .chip{flex:0 0 auto;padding:5px 8px}
+  #inrow{min-height:30px}
+  .launcher-session #status{padding-right:156px}
+  #return-to-launcher{top:calc(5px + env(safe-area-inset-top));right:8px;font-size:7px}
+  /* A recovery note is useful, but it must never cover the command row. */
+  #session-status{top:calc(45px + env(safe-area-inset-top));right:8px;bottom:auto;max-width:min(19rem,calc(100vw - 16px))}
+}
 @media (max-width:700px){
   .launch-copy{grid-template-columns:auto 1fr}.title-menu{justify-content:flex-start}.launch-copy .credit{display:none}
 }

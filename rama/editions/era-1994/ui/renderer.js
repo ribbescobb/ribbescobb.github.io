@@ -278,7 +278,29 @@ const ERA_1994_ACT_ONE_CONTEXTS=Object.freeze({
   pit_waiting:ERA_1994_SCENES.the_pit_stranded,
   pit_contact_context:ERA_1994_SCENES.pit_falstaff_contact,
   pit_rescue_cable:vgaContextAsset("pit-rescue-cable","The Pit — Rescue Cable","A thin rescue cable reaches the seated Nicole beneath the same three empty tunnels and remote shaft light."),
-  lair_first_shelter:vgaContextAsset("lair-first-shelter","Under New York — First Shelter","Three castaways find their first sparse shelter in the banded gallery beneath New York.")
+  lair_first_shelter:vgaContextAsset("lair-first-shelter","Under New York — First Shelter","Three castaways find their first sparse shelter in the banded gallery beneath New York."),
+  atrium_undeciphered:vgaContextAsset("atrium-undeciphered","The Atrium — Unread Display","A wall of abstract glyphs, one plain star and an unexplained elliptical path."),
+  avian_search_context:ERA_1994_SCENES.katie_lost_vertical,
+  node_hall_conversation:vgaContextAsset("node-hall-conversation","The Node — Hall of Reception","The pearl-grey hall with its dark doorway and food table, deliberately without a fixed cast."),
+  node_observation_quiet:vgaContextAsset("node-observation-quiet","The Node — Observation Gallery","The quiet gallery faces the paired stars without a foreground family tableau."),
+  node_hangar_quiet:vgaContextAsset("node-hangar-quiet","The Node — Hangar of Light","Rama rests in its cradle, with neutral nearby berths establishing the Node's scale."),
+  node_departure_context:vgaContextAsset("node-departure","The Node — Before Departure","Five family figures pause together beside the radiant corridor; nobody has yet left."),
+  node_quarters_domestic:ERA_1994_SCENES.node_family_quarters,
+  node_quarters_fever:vgaContextAsset("node-quarters-fever","The Node — Simone's Fever","Simone rests under a blanket while Katie keeps watch; no cure is implied."),
+  tailor_workspace:ERA_1994_SCENES.tailors_room,
+  design_atelier_detail:vgaContextAsset("design-atelier-detail","The Node — Design Atelier","A neutral close view of the model table and its small lake, excluding variable city plans."),
+  eden_home_quiet:ERA_1994_SCENES.wakefield_house,
+  eden_plaza_civic:ERA_1994_SCENES.new_eden_plaza,
+  eden_clinic_recovered_context:ERA_1994_SCENES.eden_clinic_recovered,
+  eden_hall_council:ERA_1994_SCENES.assembly_hall_election_eve,
+  gatehouse_escape_katie:ERA_1994_SCENES.gatehouse_rescue_katie,
+  gatehouse_escape_siblings:ERA_1994_SCENES.gatehouse_rescue_siblings,
+  central_plain_return:vgaContextAsset("central-plain-return","Central Plain — Return","The old stairway and empty plain after the expedition's years."),
+  camp_alpha_ruins_context:ERA_1994_SCENES.camp_alpha_ruins,
+  beta_shore_return_context:ERA_1994_SCENES.beta_shore_skiff_return,
+  new_york_return_context:vgaContextAsset("new-york-return","New York — Return","The silent seawall and city with a returning skiff."),
+  lair_return_grill:vgaContextAsset("lair-return-grill","Under New York — The Closed Grill","The family gallery before the sanctuary opens."),
+  vegas_council_floor:ERA_1994_SCENES.vegas_floor
 });
 
 globalThis.RamaEditionRendererFactory=function(){
@@ -286,5 +308,5 @@ globalThis.RamaEditionRendererFactory=function(){
     id:"era-1994",scenes:ERA_1994_SCENES,contexts:ERA_1994_ACT_ONE_CONTEXTS,continuity:true
   });
 };
-globalThis.RamaEditionPresentationProfile="act-one-continuity";
+globalThis.RamaEditionPresentationProfile="act-three-continuity";
 globalThis.__RAMA_ERA_1994=Object.freeze({scenes:ERA_1994_SCENES,fallback:"canonical-text"});

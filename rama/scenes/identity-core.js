@@ -462,6 +462,85 @@
     return Object.freeze({context: identity(id), beats: Object.freeze(beats)});
   }
 
+  // Act II continuity is separately opt-in. These are presentation identities,
+  // not game phases: reading them cannot advance events, knowledge or choices.
+  const ACT_TWO_CONTEXT_IDS = Object.freeze([
+    "atrium_undeciphered", "avian_search_context", "node_hall_conversation",
+    "node_observation_quiet", "node_hangar_quiet", "node_departure_context",
+    "node_quarters_domestic", "node_quarters_fever", "tailor_workspace",
+    "design_atelier_detail"
+  ]);
+
+  function resolveActTwoPresentation(facts) {
+    if (!facts || facts.act !== 2 || facts.ended) return null;
+    const flags = facts.flags || {};
+    const knowledge = facts.knowledge || {};
+    const familyPresent = ["richard", "michael", "simone", "katie"]
+      .every(id => includesActor(facts, id));
+    let id = null;
+    switch (facts.location) {
+      case "lair": id = facts.phase === "act2_voyage" ? "act_ii_voyage_years" : "lair_family_home"; break;
+      case "atrium": id = knowledge.sirius ? "atrium_sirius_revealed" : "atrium_undeciphered"; break;
+      case "avian_shaft": id = facts.phase === "katie_lost" ? "avian_search_context" : "avian_vertical"; break;
+      case "node_dock":
+        id = facts.phase === "act2_farewell" && familyPresent ? "node_departure_context"
+          : resolve(facts)?.id || "node_hangar_quiet";
+        break;
+      case "node_hall": id = resolve(facts)?.id || "node_hall_conversation"; break;
+      case "node_obs": id = resolve(facts)?.id || "node_observation_quiet"; break;
+      case "node_med": id = "tailor_workspace"; break;
+      case "node_quarters":
+        id = facts.phase === "simone_fever" && !flags.feverCured &&
+          includesActor(facts, "simone") && includesActor(facts, "katie")
+          ? "node_quarters_fever" : "node_quarters_domestic";
+        break;
+      // A near-table/lake detail deliberately leaves variable doors, housing
+      // density and garden plots outside the view, for every design branch.
+      case "node_design": id = "design_atelier_detail"; break;
+    }
+    return id ? Object.freeze({context: identity(id), beats: Object.freeze([])}) : null;
+  }
+
+  // Act III carries the player through communities that visibly change. These
+  // identities isolate only what a renderer may safely show at each location.
+  const ACT_THREE_CONTEXT_IDS = Object.freeze([
+    "eden_home_quiet", "eden_plaza_civic", "eden_clinic_recovered_context",
+    "eden_hall_council", "gatehouse_escape_katie", "gatehouse_escape_siblings",
+    "central_plain_return", "camp_alpha_ruins_context", "beta_shore_return_context",
+    "new_york_return_context", "lair_return_grill", "vegas_council_floor"
+  ]);
+
+  function resolveActThreePresentation(facts) {
+    if (!facts || facts.act !== 3 || facts.ended) return null;
+    const flags = facts.flags || {};
+    let id = null;
+    switch (facts.location) {
+      case "eden_home": id = "eden_home_quiet"; break;
+      case "eden_plaza": id = "eden_plaza_civic"; break;
+      case "eden_clinic":
+        id = flags.serumDone ? "eden_clinic_recovered_context" : "eden_clinic_ward";
+        break;
+      case "eden_hall":
+        id = facts.phase === "act3_trial" ? "assembly_hall_trial" : "eden_hall_council";
+        break;
+      case "eden_gate":
+        if (facts.phase === "act3_escape" && flags.rescuer === "katie") id = "gatehouse_escape_katie";
+        else if (facts.phase === "act3_escape" && flags.rescuer === "ellie") id = "gatehouse_escape_siblings";
+        else id = "new_eden_gatehouse";
+        break;
+      case "tunnel": id = "service_dark"; break;
+      case "plain_north": id = "central_plain_return"; break;
+      case "camp_alpha": id = "camp_alpha_ruins_context"; break;
+      case "beta_shore": id = "beta_shore_return_context"; break;
+      case "ny_dock": id = "new_york_return_context"; break;
+      case "ny_plaza": id = "octahedron_plaza"; break;
+      case "ny_lattice": id = "latticed_way_shaft"; break;
+      case "lair": id = flags.grillOpened ? "lair_sanctuary_octospiders" : "lair_return_grill"; break;
+      case "vegas": id = "vegas_council_floor"; break;
+    }
+    return id ? Object.freeze({context: identity(id), beats: Object.freeze([])}) : null;
+  }
+
   global.RamaSceneIdentity = Object.freeze({
     SCENE_DEFINITIONS,
     SCENE_IDS,
@@ -471,6 +550,10 @@
     resolveOutput,
     ACT_ONE_CONTEXT_IDS,
     resolveActOnePresentation,
+    ACT_TWO_CONTEXT_IDS,
+    resolveActTwoPresentation,
+    ACT_THREE_CONTEXT_IDS,
+    resolveActThreePresentation,
     resolve
   });
 })(globalThis);

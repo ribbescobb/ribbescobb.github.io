@@ -204,6 +204,35 @@ const ILLUSTRATED_ACT_ONE_CONTEXTS=Object.freeze({
   lair_first_shelter:illustratedContextAsset("lair-first-shelter","Under New York — First Shelter","Three castaways shelter in a sparse, color-banded machine gallery beneath New York.")
 });
 
+const ILLUSTRATED_ACT_TWO_CONTEXTS=Object.freeze({
+  atrium_undeciphered:illustratedContextAsset("atrium-undeciphered","The Atrium — Unread Display","Drifting glyphs surround one plain star, a long ellipse and a moving point; the destination is not yet identified."),
+  avian_search_context:illustratedContextAsset("avian-vertical","The Avian Vertical — Searching for Katie","Grey-winged avians circle an immense shaft; the ledges remain dark, with no child revealed in the view."),
+  node_hall_conversation:illustratedContextAsset("node-hall-conversation","The Node — Hall of Reception","The familiar dark doorway, curved dome, simple seats and food table, in an architectural view with no fixed cast."),
+  node_observation_quiet:illustratedContextAsset("node-observation-quiet","The Node — Observation Gallery","The gallery opens onto Sirius and its companion, with tiny traffic lights and no foreground family tableau."),
+  node_hangar_quiet:illustratedContextAsset("node-hangar-quiet","The Node — Hangar of Light","Rama rests in its vast cradle against a flat field of radiance; nearby berths establish the impossible scale."),
+  node_departure_context:illustratedContextAsset("node-departure","The Node — Before Departure","Five small family figures pause together beside the corridor of light, with Rama still in its cradle; no one has left yet."),
+  node_quarters_domestic:illustratedContextAsset("node-quarters-domestic","The Node — Family Quarters","A few lines describe a bunk, children's drawings and a kitchen alcove in the family quarters, without fixing anyone's presence."),
+  node_quarters_fever:illustratedContextAsset("node-quarters-fever","The Node — Simone's Fever","In the same quarters Simone lies quietly on her bunk while Katie stands guard beside her; the kitchen and drawings remain familiar."),
+  tailor_workspace:illustratedContextAsset("tailor-workspace","The Node — The Tailor's Room","A seamless waist-high synthesizer pillar bears three small colored squares; no medicine, drawer or completed result is shown."),
+  design_atelier_detail:illustratedContextAsset("design-atelier-detail","The Node — Design Atelier","A close view of the light-model table's rim and lake; the variable archive, housing and garden plots are outside this view.")
+});
+
+const ILLUSTRATED_ACT_THREE_CONTEXTS=Object.freeze({
+  eden_home_quiet:illustratedContextAsset("eden-home-quiet","New Eden — Wakefield Home","A quiet human home within the new settlement, with no fixed family tableau."),
+  eden_plaza_civic:ILLUSTRATED_OPENING_ARC_SCENES.new_eden_plaza,
+  eden_clinic_recovered_context:illustratedContextAsset("eden-clinic-recovered","New Eden — Clinic","A calm clinic ward after treatment, without fixing the allocation outcome."),
+  eden_hall_council:ILLUSTRATED_OPENING_ARC_SCENES.assembly_hall_election_eve,
+  assembly_hall_trial:illustratedContextAsset("assembly-hall-trial","New Eden — The Trial","Nicole stands within a horseshoe of witnesses before any verdict or escape."),
+  gatehouse_escape_katie:illustratedContextAsset("gatehouse-rescue-katie","New Eden — Gatehouse","Katie has opened the gatehouse route; no later escape has occurred."),
+  gatehouse_escape_siblings:illustratedContextAsset("gatehouse-rescue-siblings","New Eden — Gatehouse","Ellie and Patrick have opened the gatehouse route; no later escape has occurred."),
+  central_plain_return:illustratedContextAsset("central-plain-return","Central Plain — Return","The old Alpha stairway and empty plain after the expedition's years have passed."),
+  camp_alpha_ruins_context:illustratedContextAsset("camp-alpha-ruins","Camp Alpha — Ruins","Collapsed hut frames and a dead mast mark the abandoned camp."),
+  beta_shore_return_context:illustratedContextAsset("beta-shore-skiff-return","Beta Shore — Resolution II","The old cliff, a floating stage and the return skiff; no departure beyond this shore."),
+  new_york_return_context:illustratedContextAsset("new-york-return","New York — Return","The familiar seawall and silent city with the returning skiff, without the old expedition landing."),
+  lair_return_grill:illustratedContextAsset("lair-return-grill","Under New York — The Closed Grill","The family gallery before the sanctuary opens, with the grill still closed."),
+  vegas_council_floor:illustratedContextAsset("vegas-council-floor","Vegas — Council Floor","A civic floor in Vegas without fixing the pending political result.")
+});
+
 let ILLUSTRATED_TARGET=null, ILLUSTRATED_PANEL=null, ILLUSTRATED_IMAGE=null;
 let ILLUSTRATED_LABEL=null, ILLUSTRATED_FALLBACK=null, ILLUSTRATED_CURRENT_ASSET="";
 let ILLUSTRATED_SKIP=null, ILLUSTRATED_TIMER=null, ILLUSTRATED_PACKET_KEY="";
@@ -211,7 +240,7 @@ let ILLUSTRATED_VIEWS=[], ILLUSTRATED_VIEW_INDEX=0;
 const ILLUSTRATED_FAILED_ASSETS=new Set();
 
 function illustratedAssetFor(id){
-  return ILLUSTRATED_ACT_ONE_CONTEXTS[id]||ILLUSTRATED_OPENING_ARC_SCENES[id]||null;
+  return ILLUSTRATED_ACT_THREE_CONTEXTS[id]||ILLUSTRATED_ACT_TWO_CONTEXTS[id]||ILLUSTRATED_ACT_ONE_CONTEXTS[id]||ILLUSTRATED_OPENING_ARC_SCENES[id]||null;
 }
 function illustratedSceneFor(frame){
   if(frame&&frame.presentation) return illustratedAssetFor(frame.presentation.context.id);
@@ -310,7 +339,7 @@ function createIllustratedRenderer(){
 }
 
 globalThis.RamaEditionRendererFactory=createIllustratedRenderer;
-globalThis.RamaEditionPresentationProfile="act-one-continuity";
+globalThis.RamaEditionPresentationProfile="act-three-continuity";
 globalThis.__RAMA_ILLUSTRATED=Object.freeze({
   sceneFor:function(frame){ return illustratedSceneFor(frame); },
   assetStatus:"production-approved-opening-arc"

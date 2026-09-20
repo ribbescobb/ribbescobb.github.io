@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "date": "2026-09-19",
+  "scope": "Act III graphical visual continuity; canonical simulation and Text fallback unchanged",
+  "status": "implemented-candidate-awaiting-user-review",
+  "fallback": "canonical Text presentation on missing or failed asset",
+  "assets": [
+    {"era":"illustrated","file":"eden-home-quiet.png","sha256":"a247f7441a9b09284e4435275ea6ceb6088833f4b9d0c9afd14b9a6234ac77fd"},
+    {"era":"illustrated","file":"eden-clinic-recovered.png","sha256":"1ba66928559cdb55db82fd8042a82deaa85e6ed50524292b2d2c77c807808517"},
+    {"era":"illustrated","file":"gatehouse-rescue-katie.png","sha256":"e226f6bb19a3bd4353e80937dc681e8f2e1bb4ee9526480e0d94a84d12d8f1dc"},
+    {"era":"illustrated","file":"gatehouse-rescue-siblings.png","sha256":"9792eab28a9f81a3c2650cde5f665c15a1dbe070f0db1086153549db90bf39b7"},
+    {"era":"illustrated","file":"central-plain-return.png","sha256":"5bbdfacb4a857d089b45e7e530e324bd14803c4fe361c57f5bb5da8418efc09f"},
+    {"era":"illustrated","file":"camp-alpha-ruins.png","sha256":"6064815df0a3f23ffb4c2797492871190c96895ee71a54a043aecaf419639ef9"},
+    {"era":"illustrated","file":"beta-shore-skiff-return.png","sha256":"d4a4a5851e107b32f8ed2a37a8c86127554ceadc20cf26b8be8c951401288488"},
+    {"era":"illustrated","file":"new-york-return.png","sha256":"81aeeddaf8659eb62cdec2ce3245c3717579115606f0325dd8d9e998147d0886"},
+    {"era":"illustrated","file":"lair-return-grill.png","sha256":"f99df8ce0a6dec0f2453544e0ec077412236578a21886d398f752648f343000e"},
+    {"era":"illustrated","file":"assembly-hall-trial.png","sha256":"68e127a84251ab18a6fd1f65590ad8d3cc992a0431107957b1d2a856c3c8b5b8"},
+    {"era":"era-1989","file":"eden-home-quiet.png","sha256":"b98e13dd9d6bdf02e64fe14917564c387a277d7c8a744fcdb3cccc0c802e5e6c"},
+    {"era":"era-1989","file":"eden-clinic-recovered.png","sha256":"9c8f412e1c0e65769faced622883f1f422d7869327cf3ba49005862d8cf79620"},
+    {"era":"era-1989","file":"gatehouse-rescue-katie.png","sha256":"c18e79cdfa8e1d4841bf37a2e06ef733e57ee784dd33e820c6a7e250da8cf5e6"},
+    {"era":"era-1989","file":"gatehouse-rescue-siblings.png","sha256":"75a2b8ddd917fe3d1028678f0d714d43b0d559723a8c55b562afbc80012f3b60"},
+    {"era":"era-1989","file":"central-plain-return.png","sha256":"a670a934dedbeccff0c4975412e2931e084645a802ce689f50d2d55a5a9e6d45"},
+    {"era":"era-1989","file":"new-york-return.png","sha256":"130816432be9fc637317fbda6aff9ceea869ad9dc689b306e22130e60281e333"},
+    {"era":"era-1989","file":"lair-return-grill.png","sha256":"82d4ed7ece250160f3368bda1cbb9e1a28cb16770e4f5bc003b062b8aff8f0cd"},
+    {"era":"era-1989","file":"vegas-council-floor.png","sha256":"1ee8171263d04f044e3d9469f7eda4421a7047086fa4371eab7e52521a7273ad"},
+    {"era":"era-1994","file":"central-plain-return.png","sha256":"c19e0a62d08142c05a0b4aede4cb3a23b9b9138a052167156675da9f56dbe74f"},
+    {"era":"era-1994","file":"new-york-return.png","sha256":"252290223d79dce14dc241d15702df116cff92f18cd4513be7be81449a8f6a7e"},
+    {"era":"era-1994","file":"lair-return-grill.png","sha256":"e373d7ac71fb341dc9097d1acf2820f5b0415750b1b16fee5a06d3a2de5265b1"}
+  ]
+}

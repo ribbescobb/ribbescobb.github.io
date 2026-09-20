@@ -248,7 +248,29 @@ const ERA_1989_ACT_ONE_CONTEXTS=Object.freeze({
   pit_waiting:ERA_1989_SCENES.the_pit_stranded,
   pit_contact_context:ERA_1989_SCENES.pit_falstaff_contact,
   pit_rescue_cable:egaContextAsset("pit-rescue-cable","The Pit — Rescue Cable","A thin rescue cable reaches the seated Nicole below the same three empty tunnels and distant shaft light."),
-  lair_first_shelter:egaContextAsset("lair-first-shelter","Under New York — First Shelter","Three castaways establish their first sparse shelter beneath New York.")
+  lair_first_shelter:egaContextAsset("lair-first-shelter","Under New York — First Shelter","Three castaways establish their first sparse shelter beneath New York."),
+  atrium_undeciphered:egaContextAsset("atrium-undeciphered","The Atrium — Unread Display","A wall of abstract glyphs, one plain star and an unexplained elliptical path."),
+  avian_search_context:ERA_1989_SCENES.katie_lost_vertical,
+  node_hall_conversation:egaContextAsset("node-hall-conversation","The Node — Hall of Reception","The pearl-grey hall with its dark doorway and food table, deliberately without a fixed cast."),
+  node_observation_quiet:egaContextAsset("node-observation-quiet","The Node — Observation Gallery","The quiet gallery faces the paired stars without a foreground family tableau."),
+  node_hangar_quiet:egaContextAsset("node-hangar-quiet","The Node — Hangar of Light","Rama rests in its cradle, with neutral nearby berths establishing the Node's scale."),
+  node_departure_context:egaContextAsset("node-departure","The Node — Before Departure","Five family figures pause together beside the radiant corridor; nobody has yet left."),
+  node_quarters_domestic:egaContextAsset("node-quarters-domestic","The Node — Family Quarters","A neutral bunk, kitchen alcove and children's drawings; no character state is fixed."),
+  node_quarters_fever:egaContextAsset("node-quarters-fever","The Node — Simone's Fever","Simone rests under a blanket while Katie keeps watch; no cure is implied."),
+  tailor_workspace:ERA_1989_SCENES.tailors_room,
+  design_atelier_detail:egaContextAsset("design-atelier-detail","The Node — Design Atelier","A neutral close view of the model table and its small lake, excluding variable city plans."),
+  eden_home_quiet:egaContextAsset("eden-home-quiet","New Eden — Wakefield Home","A quiet New Eden home with no fixed family tableau."),
+  eden_plaza_civic:ERA_1989_SCENES.new_eden_plaza,
+  eden_clinic_recovered_context:egaContextAsset("eden-clinic-recovered","New Eden — Clinic","A calm clinic after treatment, without fixing an allocation outcome."),
+  eden_hall_council:ERA_1989_SCENES.assembly_hall_election_eve,
+  gatehouse_escape_katie:egaContextAsset("gatehouse-rescue-katie","New Eden — Gatehouse","Katie has opened the route; no later escape is shown."),
+  gatehouse_escape_siblings:egaContextAsset("gatehouse-rescue-siblings","New Eden — Gatehouse","Ellie and Patrick have opened the route; no later escape is shown."),
+  central_plain_return:egaContextAsset("central-plain-return","Central Plain — Return","The old stairway and empty plain after the expedition's years."),
+  camp_alpha_ruins_context:ERA_1989_SCENES.camp_alpha_ruins,
+  beta_shore_return_context:ERA_1989_SCENES.beta_shore_skiff_return,
+  new_york_return_context:egaContextAsset("new-york-return","New York — Return","The silent seawall and city with a returning skiff."),
+  lair_return_grill:egaContextAsset("lair-return-grill","Under New York — The Closed Grill","The family gallery before the sanctuary opens."),
+  vegas_council_floor:egaContextAsset("vegas-council-floor","Vegas — Council Floor","A civic floor with no political result fixed.")
 });
 
 globalThis.RamaEditionRendererFactory=function(){
@@ -256,5 +278,5 @@ globalThis.RamaEditionRendererFactory=function(){
     id:"era-1989",scenes:ERA_1989_SCENES,contexts:ERA_1989_ACT_ONE_CONTEXTS,continuity:true
   });
 };
-globalThis.RamaEditionPresentationProfile="act-one-continuity";
+globalThis.RamaEditionPresentationProfile="act-three-continuity";
 globalThis.__RAMA_ERA_1989=Object.freeze({scenes:ERA_1989_SCENES,fallback:"canonical-text"});

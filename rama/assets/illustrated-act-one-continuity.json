@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "date": "2026-09-15",
+  "scope": "Illustrated Act I continuity only; no EGA/VGA/CPM or simulation changes",
+  "status": "implemented-candidate-awaiting-user-review",
+  "promptReference": "rosetta/art/prompts/illustrated-act-one-continuity.md",
+  "assets": [
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "alpha_upper_flights",
+      "runtimePath": "rama/editions/illustrated/assets/alpha-upper-flights.png",
+      "productionSource": "rosetta/art/production/illustrated/alpha-upper-flights.png",
+      "sourceGeneration": "exec-71438a22-259f-4d12-998d-e83af7c5121b",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "4e9cd5742696fccfa29e8e50a40ec4d173c51cf5fa19b90ef44760ba22b81c59",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/alpha-stairway-climb.png",
+      "inputSha256": "cd420e7d5b671700cdb026f8d4bd0d5a752c0691e9fbc5113dfdc809298fb1cc",
+      "truthNotes": "Act I stair_top; shallow upper flight distinct from lower treads.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "camp_alpha_working",
+      "runtimePath": "rama/editions/illustrated/assets/camp-alpha-context.png",
+      "productionSource": "rosetta/art/production/illustrated/camp-alpha-context.png",
+      "sourceGeneration": "exec-378c6a73-ec07-430a-afc6-d5e0e8376149",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "9eb76ef765b12a4ba25cdcf3bec9ff38fb8008f38b9a7955c40906f892cefd8d",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "truthNotes": "Act I camp_alpha with campLoss != true; no fixed cast. Two standing huts.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "london_exterior",
+      "runtimePath": "rama/editions/illustrated/assets/london-exterior.png",
+      "productionSource": "rosetta/art/production/illustrated/london-exterior.png",
+      "sourceGeneration": "exec-363ffb88-c0f1-480f-8c06-1a54ece052ee",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "b8cea97de9afbba9653bd6fbe9a6ccf92ce193a8e1afbe9bed9d47847c085c28",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "truthNotes": "Act I London; sealed exterior, no factory reveal or invented entrances.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "medical_hut_emergency",
+      "runtimePath": "rama/editions/illustrated/assets/medical-hut-emergency.png",
+      "productionSource": "rosetta/art/production/illustrated/medical-hut-emergency.png",
+      "sourceGeneration": "exec-54ce0f5a-5e71-413f-a7d2-86ef23721417",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "8d1e82917506c9861358dcea4347060b1678e15e68563320c28d9ff9d335d1db",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/medical-hut-quiet.png",
+      "inputSha256": "b73ba21a01da8da73aa655244c899455576f6e69342a44137ec4b2d36d4a31cc",
+      "truthNotes": "Act I medlab; Borzov locally present and sick; no premature diagnosis.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "medical_hut_recovery",
+      "runtimePath": "rama/editions/illustrated/assets/medical-hut-recovery.png",
+      "productionSource": "rosetta/art/production/illustrated/medical-hut-recovery.png",
+      "sourceGeneration": "exec-91bd4bf1-9afb-4c56-9af5-af4f59a344c4",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "8714fe35c751f44ca975351d10a4927dc934fb6dc89e7bbf2d431a3541302b47",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/medical-hut-quiet.png",
+      "inputSha256": "b73ba21a01da8da73aa655244c899455576f6e69342a44137ec4b2d36d4a31cc",
+      "truthNotes": "Act I medlab; Borzov locally present and operated; use quiet-hut source after evacuation.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "biot_track_empty",
+      "runtimePath": "rama/editions/illustrated/assets/biot-track-empty.png",
+      "productionSource": "rosetta/art/production/illustrated/biot-track-empty.png",
+      "sourceGeneration": "exec-03f2141e-cdba-419d-ac23-d2b036380604",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "f2636bbcab74f922bd4bbbbf0d3308cfd3168e5c41b51c452f5d3ce63cd93580",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/biot-procession-opening-arc.png",
+      "inputSha256": "3c93d9b30e2ed2ebc05f9fd6470bc0746f64f529dfcb746e5030182b1eb04f83",
+      "truthNotes": "Act I plain_biot before biotSeen or after biotGone; no robots or cargo.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "pit_rescue_cable",
+      "runtimePath": "rama/editions/illustrated/assets/pit-rescue-cable.png",
+      "productionSource": "rosetta/art/production/illustrated/pit-rescue-cable.png",
+      "sourceGeneration": "exec-448931c5-d5ec-4301-93e8-5830c7ea3d8c",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "f7ec515d99951e259508364940a2faa689155141b0afad28ce243870afeba25c",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/the-pit-stranded.png",
+      "inputSha256": "dfae96f3d83c7ad32a471e24e88847e36cf2a36e7a8e614f3186d7120e6e63b7",
+      "truthNotes": "Act I pit with cableDown; absent Falstaff, cable attachment omitted in shadow.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "new_york_waterfront_withdrawal",
+      "runtimePath": "rama/editions/illustrated/assets/new-york-withdrawal.png",
+      "productionSource": "rosetta/art/production/illustrated/new-york-withdrawal.png",
+      "sourceGeneration": "exec-3807cd5a-e21c-499a-920e-80e46fb9c5bc",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "d55d59ba09ee6c5cfdf7d96ebdd792366c60301880890f0f6b970fdcca35106e",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/new-york-waterfront.png",
+      "inputSha256": "3060c444caac733892bccee50d620844b9a582fd581e11173284a0c978746142",
+      "truthNotes": "Act I ny_dock after rescued; original Resolution absent. Lower landing outside frame: no assertion about Beta dinghy arrival, availability or wreckage.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    },
+    {
+      "era": "illustrated",
+      "act": 1,
+      "sceneId": "camp_alpha_storm_damage",
+      "runtimePath": "rama/editions/illustrated/assets/camp-alpha-storm-damage.png",
+      "productionSource": "rosetta/art/production/illustrated/camp-alpha-storm-damage.png",
+      "sourceGeneration": "exec-782b12ad-e860-4898-a798-eb03f30678fc",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "sha256": "d5600914a21cde0c6f46db7e6551f62b86b5ebe75bfbc0f2327c96fb776aecfe",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "inputReference": "rama/editions/illustrated/assets/camp-alpha-context.png",
+      "inputSha256": "9eb76ef765b12a4ba25cdcf3bec9ff38fb8008f38b9a7955c40906f892cefd8d",
+      "truthNotes": "Act I camp_alpha with campLoss == true; exactly one collapsed hut.",
+      "fallback": "canonical Text presentation on missing or failed asset"
+    }
+  ]
+}

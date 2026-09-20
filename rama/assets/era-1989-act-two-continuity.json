@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "date": "2026-09-19",
+  "scope": "1989 EGA Act II visual-continuity plates; canonical simulation and Text fallback unchanged",
+  "status": "implemented-candidate-awaiting-user-review",
+  "assets": [
+    {"sceneId":"atrium_undeciphered","runtimePath":"rama/editions/era-1989/assets/atrium-undeciphered.png","productionSource":"rosetta/art/production/era-1989/atrium-undeciphered.png","sourceGeneration":"exec-f202df75-a680-48a1-99a4-a0c10d12afd7","sha256":"2aadaff43cdc2e1efaeb2cf1ab5f463827b15ab6aea261389fe36764b2f39eb8"},
+    {"sceneId":"node_hall_conversation","runtimePath":"rama/editions/era-1989/assets/node-hall-conversation.png","productionSource":"rosetta/art/production/era-1989/node-hall-conversation.png","sourceGeneration":"exec-917f6bbb-0fb3-4853-8648-502984f40151","sha256":"2f5d091e47924a090c727ea1160de71b92c08ca61612d748e48df070799c5b62"},
+    {"sceneId":"node_observation_quiet","runtimePath":"rama/editions/era-1989/assets/node-observation-quiet.png","productionSource":"rosetta/art/production/era-1989/node-observation-quiet.png","sourceGeneration":"exec-827bb68e-c3ee-4f58-bc66-02c45111ea38","sha256":"6ee285cd8556cb1deedb6173f1c574b7c215401468358d54b46987c240f4cb24"},
+    {"sceneId":"node_hangar_quiet","runtimePath":"rama/editions/era-1989/assets/node-hangar-quiet.png","productionSource":"rosetta/art/production/era-1989/node-hangar-quiet.png","sourceGeneration":"exec-5f627140-6c8d-42da-a6bc-fc8bf3bd01fc","sha256":"efb31b406ddaa375c8808032186506e1fa2fe1d567e244eba490450566f4bdd8"},
+    {"sceneId":"node_departure_context","runtimePath":"rama/editions/era-1989/assets/node-departure.png","productionSource":"rosetta/art/production/era-1989/node-departure.png","sourceGeneration":"exec-c627caee-b530-468e-b752-60315c1d6380","sha256":"d549cd36c5116583d08813f3c41058f3107f1ef10e3f277ff237e9df5d96fb5c"},
+    {"sceneId":"node_quarters_domestic","runtimePath":"rama/editions/era-1989/assets/node-quarters-domestic.png","productionSource":"rosetta/art/production/era-1989/node-quarters-domestic.png","sourceGeneration":"exec-0a82246c-6ec4-49bd-84dd-2644a94930e3","sha256":"a21a6c13ac4a618750e2302d8bb655a38e3a763024d0c3083c134e3dd067c602"},
+    {"sceneId":"node_quarters_fever","runtimePath":"rama/editions/era-1989/assets/node-quarters-fever.png","productionSource":"rosetta/art/production/era-1989/node-quarters-fever.png","sourceGeneration":"exec-79f01420-c45a-4536-aa2a-7fa084a77bf0","sha256":"f1d7b11f5588d69f26c828bdb3e8e86fde7a569822f1d9e54e8a64b95006d0ed"},
+    {"sceneId":"design_atelier_detail","runtimePath":"rama/editions/era-1989/assets/design-atelier-detail.png","productionSource":"rosetta/art/production/era-1989/design-atelier-detail.png","sourceGeneration":"exec-938650ff-423a-4bf1-be70-0307aeb5b4e0","sha256":"213d02853a63d57ee94c2828957c7d5537ab277918eeece7950c0bfc0ad19545"}
+  ],
+  "reusedExistingAssets": ["katie-lost-vertical.png", "tailors-room.png"],
+  "fallback": "canonical Text presentation on missing or failed asset"
+}

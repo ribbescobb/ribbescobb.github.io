@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "date": "2026-09-15",
+  "scope": "1989 EGA Act I continuity only; existing atomic Act I closing handoff",
+  "approvalStatus": "implemented-candidates-awaiting-user-review",
+  "mode": "built-in-image-tool",
+  "promptReference": "rosetta/art/prompts/era-1989-act-one-continuity.md",
+  "assets": [
+    {
+      "sceneId": "biot_track_empty",
+      "era": "era-1989",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1989/assets/biot-track-empty.png",
+      "productionSource": "rosetta/art/production/era-1989/biot-track-empty.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-8ecb40f7-99a0-4cf8-84ae-60118de2d4be.png",
+      "sha256": "3fc9a4541bf97d222982f0127f89565fd1ebf977103d3525b0d5c34a52cff202",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1989/assets/biot-procession.png",
+      "inputSha256": "b7364656d9296e5d6d3d66a08b8e745b05846214962d41510941fa4a32778af9",
+      "approvalStatus": "implemented-candidate-awaiting-user-review"
+    },
+    {
+      "sceneId": "medical_hut_recovery",
+      "era": "era-1989",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1989/assets/medical-hut-recovery.png",
+      "productionSource": "rosetta/art/production/era-1989/medical-hut-recovery.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-7af6887b-46d5-4e39-ae45-b4f86e06e099.png",
+      "sha256": "b7485526595cccf78d02a5a780cb4f103a307c19cd666fab19a45c6f50498de2",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1989/assets/borzov-emergency.png",
+      "inputSha256": "8f672b97ea3031406a1ee01bf053f4ef588619990bfa1086eea0460d86086f61",
+      "approvalStatus": "implemented-candidate-awaiting-user-review"
+    },
+    {
+      "sceneId": "camp_alpha_storm_damage",
+      "era": "era-1989",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1989/assets/camp-alpha-storm-damage.png",
+      "productionSource": "rosetta/art/production/era-1989/camp-alpha-storm-damage.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-506d6838-7651-4119-ac7f-1a117e2cb47b.png",
+      "sha256": "9e28483495df8c2ce1757f0ad45b3915c341e49d681f26d2d35867f634f79b3a",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1989/assets/camp-alpha-survey.png",
+      "inputSha256": "63c16636ecd0d55f6ae47305220b9639553492a06de6c00d4f7125116f9e4a68",
+      "approvalStatus": "implemented-candidate-awaiting-user-review",
+      "revisionInput": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-8e5ab6ad-3a22-436f-9fea-81282b67e973.png",
+      "revisionInputSha256": "cc10da02cee7ec43fb5cbaab28e57fd7606afbf062739e6bd0a5de4e8165b0af",
+      "revisionReason": "Remove open-sky reading; restore enclosed machine-world background."
+    },
+    {
+      "sceneId": "pit_rescue_cable",
+      "era": "era-1989",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1989/assets/pit-rescue-cable.png",
+      "productionSource": "rosetta/art/production/era-1989/pit-rescue-cable.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-b9d5ff6a-0bf5-433c-bf88-d2b585b86ce7.png",
+      "sha256": "d72900d0b87d26a4d410b83128b873a8b135e4d65f00e4e0e166f60b6292ac91",
+      "dimensions": {
+        "width": 1402,
+        "height": 1122
+      },
+      "inputReference": "rama/editions/era-1989/assets/the-pit-stranded.png",
+      "inputSha256": "9f24651cf49af35044a2b518cfd1a4a13ac84eff609c62f8ba5885e88856f872",
+      "approvalStatus": "implemented-candidate-awaiting-user-review"
+    },
+    {
+      "sceneId": "new_york_waterfront_withdrawal",
+      "era": "era-1989",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1989/assets/new-york-withdrawal.png",
+      "productionSource": "rosetta/art/production/era-1989/new-york-withdrawal.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-da964550-ab21-4bd7-8a0c-c4a5a16dd329.png",
+      "sha256": "b342e61622b849cbad8cf6b245128d61dc343d0acb88c1a20737e44c3d7dc327",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1989/assets/new-york-waterfront.png",
+      "inputSha256": "b62a4a853e6fb30c3dc0be0a4203ec537a5a4bbcb9e7b0e1231ed93d2fb8c83c",
+      "approvalStatus": "implemented-candidate-awaiting-user-review"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "date": "2026-09-16",
+  "scope": "1994 VGA Act I continuity only; existing atomic Act I closing handoff",
+  "approvalStatus": "production-approved",
+  "approvedOn": "2026-09-17",
+  "approvalAuthority": "User approval to wrap VGA Act I",
+  "mode": "built-in-image-tool",
+  "promptReference": "rosetta/art/prompts/era-1994-act-one-continuity.md",
+  "assets": [
+    {
+      "sceneId": "biot_track_empty",
+      "era": "era-1994",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1994/assets/biot-track-empty.png",
+      "productionSource": "rosetta/art/production/era-1994/biot-track-empty.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-70b5261e-3c4b-4904-bb3d-97b23848677d.png",
+      "sha256": "b5d62d776dbeef6817da8749a3857a0d2bfdc15125570ca7b2fb4147d97184cd",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1994/assets/biot-procession.png",
+      "inputSha256": "7d891dc7ee2e601380d78f322632f581de2dd2db05278309ae71935eda6194ce",
+      "approvalStatus": "production-approved"
+    },
+    {
+      "sceneId": "medical_hut_recovery",
+      "era": "era-1994",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1994/assets/medical-hut-recovery.png",
+      "productionSource": "rosetta/art/production/era-1994/medical-hut-recovery.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-7fd60060-6358-4fcc-8f23-9cc90b787b80.png",
+      "sha256": "edda611ce598a9e51b0edfa8fead390d52babf948a08f047887d21ff4e1dab09",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1994/assets/borzov-emergency.png",
+      "inputSha256": "f83ed205dd6032050e3e592c9b329ae2346118c50343d805663db0f3a05927b2",
+      "approvalStatus": "production-approved"
+    },
+    {
+      "sceneId": "camp_alpha_storm_damage",
+      "era": "era-1994",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1994/assets/camp-alpha-storm-damage.png",
+      "productionSource": "rosetta/art/production/era-1994/camp-alpha-storm-damage.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-69585c03-f6fa-43c0-a079-d94e669be700.png",
+      "sha256": "7c47a4cbce31adf3e7d950e297911e2f651a7c3aa17929e67dec86ef376a5e6d",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1994/assets/camp-alpha-survey.png",
+      "inputSha256": "3a145dec780317251372e298dd3e2b6dc50bf72b8b8dcc4ec983cc2079e160d9",
+      "approvalStatus": "production-approved"
+    },
+    {
+      "sceneId": "pit_rescue_cable",
+      "era": "era-1994",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1994/assets/pit-rescue-cable.png",
+      "productionSource": "rosetta/art/production/era-1994/pit-rescue-cable.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-18acfcc6-d728-47e4-9018-3479ca4335ad.png",
+      "sha256": "7d883796931ab2e1611ad54c6a503e129baf5242844f7152e10f6731f0a38f03",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1994/assets/the-pit-stranded.png",
+      "inputSha256": "91c3847059763b8ab22a1237c385bac1a223760b6e11dd5678089092b5fd3b78",
+      "approvalStatus": "production-approved"
+    },
+    {
+      "sceneId": "new_york_waterfront_withdrawal",
+      "era": "era-1994",
+      "act": 1,
+      "runtimePath": "rama/editions/era-1994/assets/new-york-withdrawal.png",
+      "productionSource": "rosetta/art/production/era-1994/new-york-withdrawal.png",
+      "sourceGeneration": "/Users/cmanna/.codex/generated_images/01a00ac6-a196-7603-a2d0-4b5beec739df/exec-56f71a56-75f6-48ce-8edb-7e59a2d6f619.png",
+      "sha256": "a5661ba894ed6c6e972bef746ae1c1c62f4b8bc3054d7bf6c39c086402db46ba",
+      "dimensions": {
+        "width": 1448,
+        "height": 1086
+      },
+      "inputReference": "rama/editions/era-1994/assets/new-york-waterfront.png",
+      "inputSha256": "bb769a4b61412229b56e3036c6873ec0ea8603733aee7788d4100a01ae4d8c2f",
+      "approvalStatus": "production-approved"
+    }
+  ]
+}
