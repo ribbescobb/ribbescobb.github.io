@@ -261,9 +261,14 @@ h1 {
   width: 100%;
   height: 100%;
   object-fit: fill;
+  /* Safari otherwise starts its native image ghost-drag before our Pointer Event turn begins. */
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
 
-/* Four printed cardboard edges close the volume between front and back. */
+/* Four printed edges close the volume between front and back. */
 .box-edge {
   position: absolute;
   display: flex;

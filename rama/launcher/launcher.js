@@ -211,6 +211,9 @@
   function installPackageDrag(card){
     const surface=card.querySelector(".box-select");
     const box=card.querySelector(".box-object");
+    // Stop the browser's native image drag (most visibly Safari's ghost image) so
+    // the same gesture always belongs to the package turn.
+    surface.addEventListener("dragstart",function(event){event.preventDefault();});
     surface.addEventListener("pointerdown",function(event){
       if(event.pointerType==="mouse"&&event.button!==0)return;
       if(card.classList.contains("is-flipping")||card.classList.contains("is-preparing")||card.classList.contains("is-drag-settling"))return;
