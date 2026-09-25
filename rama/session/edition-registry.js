@@ -13,6 +13,17 @@
       description: "The canonical parser-driven RAMA voyage, preserved behind its original textual interface."
     },
     {
+      id: "book-1982",
+      label: "1982 Choose Your Path Book",
+      shortLabel: "1982 Book Edition",
+      route: "../editions/book-1982/",
+      launcherAvailable: true,
+      sessionMode: "standalone",
+      status: "Available book",
+      implementation: "branching-page-book",
+      description: "A separate, abridged branching-book interpretation with its own pages, choices, endings and bookmark."
+    },
+    {
       id: "illustrated",
       label: "Illustrated Adventure Edition",
       shortLabel: "Illustrated Edition",

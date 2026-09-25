@@ -80,8 +80,15 @@
   }
 
   function openEditionSession(id){
-    if(!registry.launcherEdition(id))return false;
+    const edition=registry.launcherEdition(id);
+    if(!edition)return false;
     selectEdition(id);
+    if(edition.sessionMode==="standalone"){
+      const destination=registry.resolveLauncherRoute(id,window.location.href);
+      if(!destination){announce("That artifact cannot be opened.",true);return false;}
+      window.location.assign(destination.href);
+      return true;
+    }
     updateSaveStatus();
     sessionDialog.showModal();
     return true;

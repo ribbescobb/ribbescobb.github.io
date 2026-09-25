@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d9ceb0">
+  <title>RAMA: The World Within — 1982 Book Edition</title>
+  <meta name="description" content="A branching 1982 paperback voyage through RAMA.">
+  <link rel="stylesheet" href="styles.css?v=20260925-1">
+</head>
+<body>
+  <header class="book-toolbar">
+    <a href="../../launcher/" class="shelf-link" aria-label="Return to the RAMA launcher">← Shelf</a>
+    <div class="book-identity">
+      <span>Fiction Archaeology · Choose Your Path · No. 5</span>
+      <strong>RAMA: The World Within</strong>
+    </div>
+    <div class="book-actions">
+      <span id="bookmark-status" role="status" aria-live="polite">Bookmark ready</span>
+      <button id="restart-book" type="button">Start over</button>
+    </div>
+  </header>
+
+  <main class="reader-shell">
+    <article class="open-book" id="open-book" aria-live="polite">
+      <section class="book-page illustration-page" aria-label="Illustration page">
+        <p class="running-head">RAMA · THE WORLD WITHIN</p>
+        <figure id="page-figure" hidden>
+          <img id="page-art" alt="">
+        </figure>
+        <div class="printer-mark" id="printer-mark" aria-hidden="true">
+          <span>FA</span>
+          <b>8205</b>
+          <small>PRINTED IN U.S.A.</small>
+        </div>
+        <p class="page-number" id="left-page-number">2</p>
+      </section>
+
+      <section class="book-page story-page">
+        <p class="running-head" id="page-act">ACT I — RAMA</p>
+        <div class="story-copy">
+          <h1 id="page-title">The Alpha Airlock</h1>
+          <div id="page-text"></div>
+          <p class="the-end" id="the-end" hidden>THE END</p>
+        </div>
+        <nav class="choices" id="page-choices" aria-label="Choose what Nicole does next"></nav>
+        <p class="page-number" id="right-page-number">3</p>
+      </section>
+      <div class="book-spine" aria-hidden="true"></div>
+    </article>
+
+    <div class="reader-controls">
+      <button id="turn-back" type="button">← Turn back</button>
+      <p>Your place is saved automatically in this book only.</p>
+      <button id="resume-book" type="button" hidden>Resume bookmark →</button>
+    </div>
+  </main>
+
+  <dialog id="restart-dialog" aria-labelledby="restart-title">
+    <form method="dialog">
+      <p class="series-label">YOUR BOOKMARK WILL BE REMOVED</p>
+      <h2 id="restart-title">Begin again at page 1?</h2>
+      <p>This restarts only the 1982 book. The four computer-edition voyage saves will not be touched.</p>
+      <div>
+        <button value="cancel">Keep my place</button>
+        <button id="confirm-restart" type="button">Begin again</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="story.js?v=20260925-1"></script>
+  <script src="book.js?v=20260925-1"></script>
+</body>
+</html>

@@ -105,6 +105,75 @@ h1 {
   line-height: 1.65;
 }
 
+.book-feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 23rem);
+  align-items: center;
+  gap: clamp(2rem, 7vw, 7rem);
+  margin: clamp(2.25rem, 5vw, 4.5rem) 0 clamp(3.25rem, 7vw, 6rem);
+  padding: clamp(1.4rem, 3.5vw, 3rem);
+  border-block: 1px solid color-mix(in srgb, #d94a39 38%, var(--line));
+  background:
+    radial-gradient(ellipse at 81% 48%, color-mix(in srgb, #d94a39 13%, transparent), transparent 46%),
+    linear-gradient(90deg, color-mix(in srgb, #e8dfc6 5%, transparent), transparent 55%);
+}
+
+.book-feature::before {
+  content: "PAPERBACK BRANCHING EDITION · VOLUME 5";
+  position: absolute;
+  top: -0.55rem;
+  left: clamp(1rem, 3vw, 2rem);
+  padding: 0 0.45rem;
+  background: var(--bg);
+  color: color-mix(in srgb, #e8dfc6 70%, var(--muted));
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+}
+
+.book-feature-copy { max-width: 40rem; }
+.book-feature-copy .eyebrow { color: #e5ad69; }
+.book-feature-copy h2,
+.computer-editions-heading h2 {
+  margin-bottom: 0.8rem;
+  font-size: clamp(1.75rem, 3.2vw, 3rem);
+  font-weight: 320;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.book-feature-copy > p:not(.eyebrow) {
+  max-width: 34rem;
+  margin-bottom: 0.7rem;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.6;
+}
+.book-feature-copy .book-feature-note {
+  color: color-mix(in srgb, #e8dfc6 72%, var(--muted));
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+.book-feature-artifact {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+}
+.book-feature .edition-card { width: min(100%, 19rem); }
+.book-feature .box-select { height: clamp(22rem, 35vw, 31rem); }
+.book-feature .card-meta { padding-top: 1rem; }
+
+.computer-editions { margin-bottom: 1.5rem; }
+.computer-editions-heading { margin-bottom: clamp(1.6rem, 3vw, 2.75rem); }
+.computer-editions-heading .eyebrow { margin-bottom: 0.7rem; }
+.computer-editions-heading > p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
 .collection {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -128,6 +197,14 @@ h1 {
   --box-stock: #ead7ae;
   --box-ink: #672e27;
   --box-ratio: 981 / 1604;
+}
+
+.edition-card[data-edition="book-1982"] {
+  --box-accent: #d94a39;
+  --box-stock: #e8dfc6;
+  --box-ink: #174d5c;
+  --box-ratio: 2 / 3;
+  --box-depth: clamp(10px, 4.2cqw, 18px);
 }
 
 .edition-card[data-edition="era-1989"] {
@@ -317,6 +394,26 @@ h1 {
 .box-top { top: 0; transform: translateY(-50%) rotateX(90deg); }
 .box-bottom { top: 100%; transform: translateY(-50%) rotateX(-90deg); }
 .box-top b { font-family: Georgia, "Times New Roman", serif; font-size: 4cqw; letter-spacing: 0.2em; }
+
+.edition-card[data-edition="book-1982"] .box-left,
+.edition-card[data-edition="book-1982"] .box-right { font-size: 2.3cqw; }
+.edition-card[data-edition="book-1982"] .box-left b,
+.edition-card[data-edition="book-1982"] .box-right b { font-size: 5.4cqw; }
+
+/* A paperback has one printed spine and one exposed block of pages. During a
+   hand-controlled turn the right edge is the worn, striped fore-edge—not a
+   second cover spine. */
+.edition-card[data-edition="book-1982"] .box-right {
+  display: block;
+  padding: 0;
+  background:
+    linear-gradient(90deg, rgba(79, 52, 28, .46), transparent 18%, rgba(255, 247, 210, .78) 53%, rgba(92, 62, 34, .34)),
+    repeating-linear-gradient(to right, #d5c38c 0 1px, #796344 1px 2px, #eee0ad 2px 4px, #b49a69 4px 5px);
+  box-shadow:
+    inset 1px 0 rgba(63, 40, 20, .7),
+    inset -1px 0 rgba(255, 244, 200, .72),
+    inset 0 0 7px rgba(61, 37, 18, .35);
+}
 
 /* Use the same centered caption for every era, with a separate control row. */
 .version-label {
@@ -713,6 +810,8 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
 
 @media (max-width: 900px) {
   .collection { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2.5rem; }
+  .book-feature { grid-template-columns: minmax(0, 1fr) minmax(13rem, 18rem); gap: clamp(1.5rem, 4vw, 3rem); }
+  .book-feature .box-select { height: clamp(19rem, 45vw, 25rem); }
 }
 
 @media (max-width: 560px) {
@@ -720,6 +819,12 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
   .masthead > p, .wordmark span { display: none; }
   main { padding-top: 1.5rem; }
   .collection { gap: 1rem; row-gap: 2rem; }
+  .book-feature { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 1.5rem 1rem 1.8rem; }
+  .book-feature-copy { text-align: center; }
+  .book-feature-copy > p:not(.eyebrow) { margin-inline: auto; }
+  .book-feature-artifact { order: -1; }
+  .book-feature .edition-card { width: min(100%, 16rem); }
+  .book-feature .box-select { height: clamp(20rem, 82vw, 26rem); }
   footer { flex-direction: column; }
   .warning-actions { flex-direction: column; }
   .viewer-header { align-items: flex-start; flex-direction: column; gap: 0.8rem; }

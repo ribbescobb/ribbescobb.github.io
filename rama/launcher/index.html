@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RAMA — Fiction Archaeology</title>
   <meta name="description" content="Choose a preserved RAMA edition and continue one canonical voyage.">
-  <link rel="stylesheet" href="styles.css?v=20260925-1">
+  <link rel="stylesheet" href="styles.css?v=20260925-3">
 </head>
 <body>
   <header class="masthead">
@@ -13,17 +13,60 @@
       <span>Fiction Archaeology</span>
       <strong>RAMA</strong>
     </a>
-    <p>One voyage. Four machines.</p>
+    <p>One voyage. Five artifacts.</p>
   </header>
 
   <main>
     <section class="intro" aria-labelledby="launcher-title">
       <p class="eyebrow">The fiction is the constant. The machine is the variable.</p>
       <h1 id="launcher-title">Choose an edition</h1>
-      <p class="lede">Four interpretations of one preserved adventure. Your voyage belongs to RAMA, not to the machine you enter through.</p>
+      <p class="lede">Five interpretations of one preserved adventure. Four share a canonical computer voyage; one belongs to the choices printed on its pages.</p>
     </section>
 
-    <section class="collection" aria-label="RAMA editions">
+    <section class="book-feature" aria-labelledby="book-feature-title">
+      <div class="book-feature-copy">
+        <p class="eyebrow">A fifth artifact · 1982</p>
+        <h2 id="book-feature-title">The world within — in your hands</h2>
+        <p>A separate branching paperback voyage: ink plates, numbered pages, choices that send Nicole toward four true conclusions and many abrupt endings.</p>
+        <p class="book-feature-note">A standalone fan-book edition. Its bookmark lives in the book, not in the canonical computer voyage.</p>
+      </div>
+      <div class="book-feature-artifact">
+        <article class="edition-card" data-edition="book-1982">
+          <button class="box-select" type="button" aria-label="Select 1982 Book Edition; drag left or right to rotate the book" aria-pressed="false">
+            <span class="box-object">
+              <span class="box-face box-front" aria-hidden="false">
+                <img class="box-art" src="../assets/packaging/book-1982-front.png?v=20260925-1" alt="Front of the RAMA The World Within branching-adventure paperback">
+              </span>
+              <span class="box-face box-back" aria-hidden="true">
+                <img class="box-art" src="../assets/packaging/book-1982-back.png?v=20260925-1" alt="Back of the RAMA The World Within branching-adventure paperback">
+              </span>
+              <span class="box-edge box-left" aria-hidden="true"><b>RAMA</b><span>THE WORLD WITHIN</span><small>FA-8205</small></span>
+              <span class="box-edge box-right" aria-hidden="true"></span>
+              <span class="box-edge box-top" aria-hidden="true"><b>RAMA</b><span>FICTION ARCHAEOLOGY</span></span>
+              <span class="box-edge box-bottom" aria-hidden="true"><b>1982 PAPERBACK</b><span>MORE THAN 30 POSSIBLE ROUTES · $2.25</span></span>
+            </span>
+          </button>
+          <div class="card-meta">
+            <p class="version-label">Version: <strong>1982</strong></p>
+            <button class="card-play" type="button" aria-label="Play 1982 Book Edition"><span aria-hidden="true">▶</span> Read</button>
+            <span class="selection-marker" aria-hidden="true">Selected artifact</span>
+            <div class="card-controls">
+              <button class="zoom-control" type="button" aria-label="View 1982 Book Edition front at full size">Full size</button>
+              <button class="flip-control" type="button" aria-label="Flip 1982 Book Edition to show the back">Flip</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="computer-editions" aria-labelledby="computer-editions-title">
+      <div class="computer-editions-heading">
+        <p class="eyebrow">The canonical computer voyage</p>
+        <h2 id="computer-editions-title">Choose your machine</h2>
+        <p>Four historical interfaces. One shared RAMA.</p>
+      </div>
+
+      <section class="collection" aria-label="RAMA computer editions">
       <article class="edition-card is-selected" data-edition="text">
         <button class="box-select" type="button" aria-label="Select Text Edition; drag left or right to rotate the box" aria-pressed="true">
           <span class="box-object">
@@ -127,6 +170,7 @@
           </div>
         </div>
       </article>
+      </section>
     </section>
 
   </main>
@@ -207,7 +251,7 @@
 
   <script src="../session/edition-registry.js"></script>
   <script src="../session/voyage-session.js"></script>
-  <script src="package-copy.js?v=20260911-1"></script>
-  <script src="launcher.js?v=20260925-1"></script>
+  <script src="package-copy.js?v=20260925-1"></script>
+  <script src="launcher.js?v=20260925-2"></script>
 </body>
 </html>

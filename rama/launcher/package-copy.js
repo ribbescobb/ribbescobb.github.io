@@ -81,6 +81,42 @@
         ]}
       ]
     ),
+    "book-1982:front":record(
+      "1982 Book Edition — front",
+      "A battered cream paperback promises an impossible journey inside Rama through a framed, exuberant early-eighties science-fiction painting.",
+      [
+        {heading:"Front-cover text",paragraphs:[
+          "FICTION ARCHAEOLOGY · CHOOSE YOUR PATH · No. 5",
+          "RAMA",
+          "THE WORLD WITHIN",
+          "A VOYAGE OF DECISION",
+          "BY FICTION ARCHAEOLOGY",
+          "A PRIVATE FAN PROJECT"
+        ]}
+      ]
+    ),
+    "book-1982:back":record(
+      "1982 Book Edition — back",
+      "A black-ink first-contact drawing crowns dense paperback copy, a choice-count callout, fictional catalog block and barcode on handled cream stock.",
+      [
+        {heading:"You are Nicole des Jardins",paragraphs:[
+          "RAMA HAS OPENED. WHAT WILL YOU CARRY OUT?",
+          "Cross the Alpha Airlock into a world fifty kilometers long. Strange machines cross the plain. A black sea curves overhead. Every discovery asks you to decide what kind of explorer—and what kind of human—you will become."
+        ]},
+        {heading:"Your choices change the voyage",items:[
+          "More than 30 possible routes",
+          "Four true conclusions",
+          "Several sudden and extremely final mistakes",
+          "Can you reach the Node—and return?"
+        ]},
+        {heading:"Imprint",paragraphs:[
+          "FICTION ARCHAEOLOGY · CHOOSE YOUR PATH",
+          "CATALOG FA-8205 · PRINTED IN U.S.A.",
+          "$2.25",
+          "A PRIVATE FAN PROJECT · NOT FOR SALE"
+        ]}
+      ]
+    ),
     "illustrated:front":record(
       "Illustrated Adventure Edition — front",
       "A colorful painted view of Rama's interior is presented inside an early home-computer software package.",
