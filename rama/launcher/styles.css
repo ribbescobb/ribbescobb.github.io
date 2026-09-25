@@ -156,12 +156,47 @@ h1 {
   border: 0;
   background: transparent;
   color: inherit;
-  cursor: pointer;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
   perspective: 75rem;
   text-align: left;
   transform: translateY(0) scale(1);
   transition: transform 320ms ease;
 }
+
+/* A quiet affordance for the direct-manipulation package turn. */
+.box-select::after {
+  content: "↔  DRAG";
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 0.4rem;
+  translate: -50% 0;
+  border: 1px solid color-mix(in srgb, var(--box-accent) 35%, transparent);
+  border-radius: 999px;
+  padding: 0.25rem 0.55rem;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.35);
+  color: color-mix(in srgb, var(--box-accent) 72%, var(--muted));
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  opacity: 0.64;
+  pointer-events: none;
+  transition: opacity 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.box-select:hover::after,
+.box-select:focus-visible::after,
+.edition-card.is-dragging .box-select::after {
+  border-color: color-mix(in srgb, var(--box-accent) 72%, transparent);
+  color: var(--box-accent);
+  opacity: 1;
+}
+
+.edition-card.is-dragging .box-select { cursor: grabbing; }
 
 /* Light belongs behind the object, not in a frame around the printed cover. */
 .box-select::before {
@@ -182,19 +217,28 @@ h1 {
 .edition-card.is-selected { z-index: 1; }
 
 .box-object {
+  --rest-angle: -6deg;
+  --live-angle: var(--rest-angle);
   position: relative;
   display: block;
   width: auto;
   height: 100%;
   max-width: 100%;
   aspect-ratio: var(--box-ratio);
-  transform: rotateX(4deg) rotateY(-6deg);
+  transform: rotateX(4deg) rotateY(var(--live-angle));
   transform-style: preserve-3d;
   transition: transform 1140ms cubic-bezier(0.4, 0, 0.6, 1);
   will-change: transform;
 }
 
-.edition-card.is-flipped .box-object { transform: rotateX(4deg) rotateY(174deg); }
+.edition-card.is-flipped .box-object { --rest-angle: 174deg; }
+.edition-card.is-dragging .box-object,
+.edition-card.is-drag-settling .box-object { --live-angle: var(--drag-angle); }
+.edition-card.is-dragging .box-object { transition: none; }
+.edition-card.is-drag-settling .box-object {
+  transition: transform 460ms cubic-bezier(0.22, 0.72, 0.18, 1);
+}
+.edition-card.is-drag-reset .box-object { transition: none; }
 
 .box-face {
   position: absolute;
@@ -481,7 +525,32 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
   place-items: center;
   padding: 1rem;
   background: radial-gradient(circle, rgba(167, 200, 189, 0.06), transparent 52%);
+  touch-action: pan-y;
 }
+
+.viewer-stage::after {
+  content: "↔  DRAG TO TURN";
+  position: sticky;
+  z-index: 5;
+  left: 50%;
+  bottom: 0.8rem;
+  translate: -50% 0;
+  align-self: end;
+  justify-self: center;
+  width: max-content;
+  border: 1px solid rgba(167, 200, 189, 0.3);
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  background: rgba(8, 10, 13, 0.72);
+  color: rgba(167, 200, 189, 0.78);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.viewer-stage.is-turning::after { opacity: 0; }
 
 .viewer-stage img {
   position: absolute;
@@ -495,7 +564,9 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
   transform: translate(-50%, -50%);
   object-fit: contain;
   box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.55);
-  cursor: zoom-in;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .viewer-stage[data-view="actual"] {
@@ -509,7 +580,7 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
   width: auto;
   height: auto;
   transform: none;
-  cursor: zoom-out;
+  cursor: grab;
 }
 
 /* Temporary six-face volume follows the inspection image, including its scroll
@@ -539,6 +610,16 @@ dialog::backdrop { background: rgba(3, 4, 6, 0.82); backdrop-filter: blur(10px);
 
 .viewer-turntable.is-rotating .box-object {
   transition: transform 1140ms cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.viewer-turntable.is-dragging .box-object,
+.viewer-turntable.is-drag-settling .box-object {
+  transform: translateZ(calc(0px - var(--half-depth))) rotateY(var(--drag-angle));
+}
+
+.viewer-turntable.is-dragging .box-object { transition: none; }
+.viewer-turntable.is-drag-settling .box-object {
+  transition: transform 460ms cubic-bezier(0.22, 0.72, 0.18, 1);
 }
 
 .viewer-stage .viewer-turntable .box-art {

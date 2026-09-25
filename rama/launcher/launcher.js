@@ -44,6 +44,8 @@
   let viewerCard=null;
   let viewerSide="front";
   let viewerTurn=null;
+  let viewerPointer=null;
+  let suppressViewerDoubleClickUntil=0;
 
   function announce(message,isError){
     launcherStatus.textContent=message||"";
@@ -94,8 +96,8 @@
     const flip=card.querySelector(".flip-control");
     card.querySelector(".box-front").setAttribute("aria-hidden",String(side!=="front"));
     card.querySelector(".box-back").setAttribute("aria-hidden",String(side!=="back"));
-    flip.textContent=side==="back"?"View front":"View back";
-    flip.setAttribute("aria-label",`${side==="back"?"Show front":"Show back"} of ${edition.shortLabel} box`);
+    flip.textContent="Flip";
+    flip.setAttribute("aria-label",`Flip ${edition.shortLabel} box to show the ${side==="back"?"front":"back"}`);
     zoom.setAttribute("aria-label",`View ${edition.shortLabel} box ${side} at full size`);
   }
 
@@ -108,8 +110,8 @@
     viewerFit.setAttribute("aria-pressed",String(viewerMode==="fit"));
     viewerActual.setAttribute("aria-pressed",String(viewerMode==="actual"));
     packageViewerImage.title=viewerMode==="fit"
-      ?"Double-click to view at 100%"
-      :"Double-click to fit the package";
+      ?"Drag left or right to turn · Double-click to view at 100%"
+      :"Drag left or right to turn · Double-click to fit the package";
     viewerStage.scrollTop=0;
     viewerStage.scrollLeft=0;
     return viewerMode;
@@ -158,6 +160,112 @@
   }
 
   const packageImagePreparations=new WeakMap();
+  const packageDragState=new WeakMap();
+  const suppressedPackageClicks=new WeakMap();
+
+  function restingPackageAngle(card){return card.classList.contains("is-flipped")?174:-6;}
+
+  function packageDetent(angle){
+    const stop=Math.round((angle+6)/180)*180-6;
+    const distance=angle-stop;
+    return Math.abs(distance)<18?stop+distance*0.28:angle;
+  }
+
+  function packageSideAtAngle(angle){
+    return Math.abs(Math.round((angle+6)/180)%2)===1?"back":"front";
+  }
+
+  function finishPackageDrag(card,targetAngle){
+    const box=card.querySelector(".box-object");
+    box.style.removeProperty("--drag-angle");
+    card.classList.remove("is-dragging","is-drag-settling");
+    card.classList.add("is-drag-reset");
+    requestAnimationFrame(()=>card.classList.remove("is-drag-reset"));
+    card.classList.toggle("is-flipped",packageSideAtAngle(targetAngle)==="back");
+    updatePackageControls(card);
+  }
+
+  function settlePackageDrag(card,angle,velocity){
+    const box=card.querySelector(".box-object");
+    const projected=angle+Math.max(-0.65,Math.min(0.65,velocity))*150;
+    const targetAngle=Math.round((projected+6)/180)*180-6;
+    card.classList.remove("is-dragging");
+    card.classList.add("is-drag-settling");
+    card.classList.toggle("is-flipped",packageSideAtAngle(targetAngle)==="back");
+    box.style.setProperty("--drag-angle",targetAngle+"deg");
+    if(reducedMotion.matches||Math.abs(targetAngle-angle)<0.15){
+      finishPackageDrag(card,targetAngle);
+      return targetAngle;
+    }
+    const finish=function(event){
+      if(event.target!==box||event.propertyName!=="transform")return;
+      box.removeEventListener("transitionend",finish);
+      box.removeEventListener("transitioncancel",finish);
+      finishPackageDrag(card,targetAngle);
+    };
+    box.addEventListener("transitionend",finish);
+    box.addEventListener("transitioncancel",finish);
+    return targetAngle;
+  }
+
+  function installPackageDrag(card){
+    const surface=card.querySelector(".box-select");
+    const box=card.querySelector(".box-object");
+    surface.addEventListener("pointerdown",function(event){
+      if(event.pointerType==="mouse"&&event.button!==0)return;
+      if(card.classList.contains("is-flipping")||card.classList.contains("is-preparing")||card.classList.contains("is-drag-settling"))return;
+      preparePackageImages(card);
+      packageDragState.set(card,{
+        pointerId:event.pointerId,
+        startX:event.clientX,
+        startY:event.clientY,
+        startAngle:restingPackageAngle(card),
+        rawAngle:restingPackageAngle(card),
+        angle:restingPackageAngle(card),
+        lastX:event.clientX,
+        lastTime:event.timeStamp,
+        velocity:0,
+        active:false
+      });
+    });
+    surface.addEventListener("pointermove",function(event){
+      const drag=packageDragState.get(card);
+      if(!drag||drag.pointerId!==event.pointerId)return;
+      const dx=event.clientX-drag.startX;
+      const dy=event.clientY-drag.startY;
+      if(!drag.active){
+        if(Math.abs(dx)<7)return;
+        if(Math.abs(dy)>Math.abs(dx)*0.9)return;
+        drag.active=true;
+        card.classList.add("is-dragging");
+        selectEdition(card.dataset.edition);
+        if(surface.setPointerCapture)surface.setPointerCapture(event.pointerId);
+      }
+      event.preventDefault();
+      const width=Math.max(180,surface.getBoundingClientRect().width||0);
+      const rawAngle=drag.startAngle+(dx/width)*230;
+      const now=event.timeStamp;
+      const elapsed=Math.max(8,now-drag.lastTime);
+      const instant=((event.clientX-drag.lastX)/width*230)/elapsed;
+      drag.velocity=drag.velocity*0.68+instant*0.32;
+      drag.rawAngle=rawAngle;
+      drag.angle=packageDetent(rawAngle);
+      drag.lastX=event.clientX;
+      drag.lastTime=now;
+      box.style.setProperty("--drag-angle",drag.angle+"deg");
+    });
+    const release=function(event){
+      const drag=packageDragState.get(card);
+      if(!drag||drag.pointerId!==event.pointerId)return;
+      packageDragState.delete(card);
+      if(surface.hasPointerCapture&&surface.hasPointerCapture(event.pointerId))surface.releasePointerCapture(event.pointerId);
+      if(!drag.active)return;
+      suppressedPackageClicks.set(card,Date.now()+400);
+      settlePackageDrag(card,drag.angle,event.type==="pointercancel"?0:drag.velocity);
+    };
+    surface.addEventListener("pointerup",release);
+    surface.addEventListener("pointercancel",release);
+  }
 
   function preparePackageImages(card){
     const pending=packageImagePreparations.get(card);
@@ -196,6 +304,7 @@
   async function flipPackage(card){
     if(card.classList.contains("is-flipping"))return false;
     if(card.classList.contains("is-preparing"))return false;
+    if(card.classList.contains("is-dragging")||card.classList.contains("is-drag-settling"))return false;
     const box=card.querySelector(".box-object");
     const flip=card.querySelector(".flip-control");
     const zoom=card.querySelector(".zoom-control");
@@ -260,6 +369,132 @@
     // Disabling the action may move focus to the body. Restore it only if the
     // reader has not moved on to Close or another control during the turn.
     if(packageViewer.open&&turn.restoreFocus&&document.activeElement===document.body)viewerRotate.focus();
+  }
+
+  function positionViewerTurn(turn){
+    const imageRect=packageViewerImage.getBoundingClientRect();
+    const stageRect=viewerStage.getBoundingClientRect();
+    turn.host.style.width=imageRect.width+"px";
+    turn.host.style.height=imageRect.height+"px";
+    turn.host.style.left=(imageRect.left-stageRect.left+viewerStage.scrollLeft)+"px";
+    turn.host.style.top=(imageRect.top-stageRect.top+viewerStage.scrollTop)+"px";
+    turn.host.style.setProperty("--box-depth",imageRect.width*0.09+"px");
+    turn.host.style.perspective=imageRect.width*5+"px";
+  }
+
+  function createViewerTurn(mode){
+    const host=document.createElement("div");
+    host.className="viewer-turntable";
+    host.setAttribute("aria-hidden","true");
+    host.classList.toggle("is-flipped",viewerSide==="back");
+    const box=viewerCard.querySelector(".box-object").cloneNode(true);
+    host.append(box);
+    const stock=getComputedStyle(viewerCard);
+    for(const name of ["--box-stock","--box-ink"])host.style.setProperty(name,stock.getPropertyValue(name));
+    const turn={host,box,side:viewerSide,onEnd:null,restoreFocus:false,mode};
+    viewerTurn=turn;
+    viewerStatus.textContent="";
+    viewerStage.setAttribute("aria-busy","true");
+    for(const control of [viewerRotate,viewerFit,viewerActual,viewerCopy])control.disabled=true;
+    viewerStage.append(host);
+    return turn;
+  }
+
+  async function prepareViewerDrag(turn){
+    const ready=await preparePackageImages(turn.host);
+    if(viewerTurn!==turn)return false;
+    if(!ready){
+      finishViewerTurn(turn,false);
+      viewerPointer=null;
+      viewerStatus.textContent="That box image could not be prepared. Please try dragging again.";
+      return false;
+    }
+    positionViewerTurn(turn);
+    turn.host.classList.add("is-ready");
+    viewerStage.classList.add("is-turning");
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    if(viewerTurn!==turn)return false;
+    turn.drag.ready=true;
+    turn.host.classList.add("is-dragging");
+    turn.box.style.setProperty("--drag-angle",turn.drag.angle+"deg");
+    // A quick swipe can end before decoding finishes. Preserve one painted
+    // drag frame so the subsequent settling transform always has a real
+    // transition (and therefore a reliable transitionend cleanup event).
+    if(turn.drag.released)requestAnimationFrame(()=>settleViewerDrag(turn));
+    return true;
+  }
+
+  function settleViewerDrag(turn){
+    if(viewerTurn!==turn)return false;
+    const drag=turn.drag;
+    const projected=drag.angle+Math.max(-0.65,Math.min(0.65,drag.cancelled?0:drag.velocity))*150;
+    const targetAngle=Math.round(projected/180)*180;
+    turn.side=Math.abs(Math.round(targetAngle/180)%2)===1?"back":"front";
+    turn.host.classList.remove("is-dragging");
+    turn.host.classList.add("is-drag-settling");
+    turn.box.style.setProperty("--drag-angle",targetAngle+"deg");
+    if(reducedMotion.matches||Math.abs(targetAngle-drag.angle)<0.15){
+      finishViewerTurn(turn,true);
+      return true;
+    }
+    turn.onEnd=function(event){
+      if(event.target===turn.box&&event.propertyName==="transform")finishViewerTurn(turn,true);
+    };
+    turn.box.addEventListener("transitionend",turn.onEnd);
+    turn.box.addEventListener("transitioncancel",turn.onEnd);
+    return true;
+  }
+
+  function beginViewerPointer(event){
+    if(!packageViewer.open||!viewerCard||viewerTurn)return;
+    if(event.pointerType==="mouse"&&event.button!==0)return;
+    viewerPointer={
+      pointerId:event.pointerId,startX:event.clientX,startY:event.clientY,
+      startAngle:viewerSide==="back"?180:0,
+      angle:viewerSide==="back"?180:0,
+      lastX:event.clientX,lastTime:event.timeStamp,velocity:0,active:false,turn:null
+    };
+  }
+
+  function moveViewerPointer(event){
+    const drag=viewerPointer;
+    if(!drag||drag.pointerId!==event.pointerId)return;
+    const dx=event.clientX-drag.startX;
+    const dy=event.clientY-drag.startY;
+    if(!drag.active){
+      if(Math.abs(dx)<7)return;
+      if(Math.abs(dy)>Math.abs(dx)*0.9)return;
+      drag.active=true;
+      const turn=createViewerTurn("drag");
+      turn.drag=drag;
+      drag.turn=turn;
+      if(packageViewerImage.setPointerCapture)packageViewerImage.setPointerCapture(event.pointerId);
+      prepareViewerDrag(turn);
+    }
+    event.preventDefault();
+    const width=Math.max(240,packageViewerImage.getBoundingClientRect().width||0);
+    const rawAngle=drag.startAngle+(dx/width)*230;
+    const stop=Math.round(rawAngle/180)*180;
+    const distance=rawAngle-stop;
+    drag.angle=Math.abs(distance)<18?stop+distance*0.28:rawAngle;
+    const elapsed=Math.max(8,event.timeStamp-drag.lastTime);
+    const instant=((event.clientX-drag.lastX)/width*230)/elapsed;
+    drag.velocity=drag.velocity*0.68+instant*0.32;
+    drag.lastX=event.clientX;
+    drag.lastTime=event.timeStamp;
+    if(drag.turn)drag.turn.box.style.setProperty("--drag-angle",drag.angle+"deg");
+  }
+
+  function releaseViewerPointer(event){
+    const drag=viewerPointer;
+    if(!drag||drag.pointerId!==event.pointerId)return;
+    viewerPointer=null;
+    if(packageViewerImage.hasPointerCapture&&packageViewerImage.hasPointerCapture(event.pointerId))packageViewerImage.releasePointerCapture(event.pointerId);
+    if(!drag.active)return;
+    suppressViewerDoubleClickUntil=Date.now()+450;
+    drag.released=true;
+    drag.cancelled=event.type==="pointercancel";
+    if(drag.turn?.drag.ready)settleViewerDrag(drag.turn);
   }
 
   async function rotateViewerPackage(){
@@ -364,7 +599,11 @@
   for(const card of cards){
     // Warm both faces, including the initially hidden back, without delaying the launcher.
     preparePackageImages(card);
-    card.querySelector(".box-select").addEventListener("click",function(){selectEdition(card.dataset.edition);});
+    installPackageDrag(card);
+    card.querySelector(".box-select").addEventListener("click",function(){
+      if((suppressedPackageClicks.get(card)||0)>Date.now())return;
+      selectEdition(card.dataset.edition);
+    });
     card.querySelector(".zoom-control").addEventListener("click",function(){showPackage(card);});
     card.querySelector(".flip-control").addEventListener("click",function(){flipPackage(card);});
     const play=card.querySelector(".card-play");
@@ -378,6 +617,7 @@
   });
   packageViewer.addEventListener("close",function(){
     if(viewerTurn)finishViewerTurn(viewerTurn,false);
+    viewerPointer=null;
     viewerCard=null;
     packageViewerImage.removeAttribute("src");
     packageViewerImage.alt="";
@@ -390,11 +630,16 @@
   viewerFit.addEventListener("click",function(){setViewerMode("fit");});
   viewerActual.addEventListener("click",function(){setViewerMode("actual");});
   viewerRotate.addEventListener("click",rotateViewerPackage);
+  packageViewerImage.addEventListener("pointerdown",beginViewerPointer);
+  packageViewerImage.addEventListener("pointermove",moveViewerPointer);
+  packageViewerImage.addEventListener("pointerup",releaseViewerPointer);
+  packageViewerImage.addEventListener("pointercancel",releaseViewerPointer);
   window.addEventListener("resize",function(){
     if(viewerTurn)finishViewerTurn(viewerTurn,false);
   });
   viewerCopy.addEventListener("click",function(){showPackageTranscript(packageTranscript.hidden);});
   packageViewerImage.addEventListener("dblclick",function(){
+    if(Date.now()<suppressViewerDoubleClickUntil)return;
     setViewerMode(viewerMode==="fit"?"actual":"fit");
   });
 
