@@ -388,7 +388,8 @@
     turn.host.style.height=imageRect.height+"px";
     turn.host.style.left=(imageRect.left-stageRect.left+viewerStage.scrollLeft)+"px";
     turn.host.style.top=(imageRect.top-stageRect.top+viewerStage.scrollTop)+"px";
-    turn.host.style.setProperty("--box-depth",imageRect.width*0.09+"px");
+    const depthRatio=viewerCard.dataset.edition==="book-1982"?0.135:0.09;
+    turn.host.style.setProperty("--box-depth",imageRect.width*depthRatio+"px");
     turn.host.style.perspective=imageRect.width*5+"px";
   }
 
@@ -537,14 +538,7 @@
       return false;
     }
     if(reducedMotion.matches){finishViewerTurn(turn,true);return true;}
-    const imageRect=packageViewerImage.getBoundingClientRect();
-    const stageRect=viewerStage.getBoundingClientRect();
-    host.style.width=imageRect.width+"px";
-    host.style.height=imageRect.height+"px";
-    host.style.left=(imageRect.left-stageRect.left+viewerStage.scrollLeft)+"px";
-    host.style.top=(imageRect.top-stageRect.top+viewerStage.scrollTop)+"px";
-    host.style.setProperty("--box-depth",imageRect.width*0.09+"px");
-    host.style.perspective=imageRect.width*5+"px";
+    positionViewerTurn(turn);
     host.classList.add("is-ready");
     viewerStage.classList.add("is-turning");
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));

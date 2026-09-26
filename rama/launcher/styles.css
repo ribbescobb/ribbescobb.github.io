@@ -119,19 +119,6 @@ h1 {
     linear-gradient(90deg, color-mix(in srgb, #e8dfc6 5%, transparent), transparent 55%);
 }
 
-.book-feature::before {
-  content: "PAPERBACK BRANCHING EDITION · VOLUME 5";
-  position: absolute;
-  top: -0.55rem;
-  left: clamp(1rem, 3vw, 2rem);
-  padding: 0 0.45rem;
-  background: var(--bg);
-  color: color-mix(in srgb, #e8dfc6 70%, var(--muted));
-  font-family: var(--mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.14em;
-}
-
 .book-feature-copy { max-width: 40rem; }
 .book-feature-copy .eyebrow { color: #e5ad69; }
 .book-feature-copy h2,
@@ -204,7 +191,7 @@ h1 {
   --box-stock: #e8dfc6;
   --box-ink: #174d5c;
   --box-ratio: 2 / 3;
-  --box-depth: clamp(10px, 4.2cqw, 18px);
+  --box-depth: clamp(15px, 6.3cqw, 27px);
 }
 
 .edition-card[data-edition="era-1989"] {
@@ -399,6 +386,33 @@ h1 {
 .edition-card[data-edition="book-1982"] .box-right { font-size: 2.3cqw; }
 .edition-card[data-edition="book-1982"] .box-left b,
 .edition-card[data-edition="book-1982"] .box-right b { font-size: 5.4cqw; }
+
+/* Printed series roundel stays upright at the head of the spine. These child
+   selectors also travel with the cloned spine in the full-size turntable. */
+.box-left:has(> .book-volume) {
+  padding-top: calc(var(--box-depth) * 1.4 + 5cqw);
+}
+.book-volume {
+  position: absolute;
+  top: calc(var(--box-depth) * 0.35);
+  left: 50%;
+  width: calc(var(--box-depth) * 0.8);
+  height: calc(var(--box-depth) * 0.8);
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #c53f32;
+  color: #f4e9c7;
+  box-shadow: inset 0 0 0 1px #752a2440;
+  writing-mode: horizontal-tb;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(var(--box-depth) * 0.6);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-shadow: none;
+}
 
 /* A paperback has one printed spine and one exposed block of pages. During a
    hand-controlled turn the right edge is the worn, striped fore-edge—not a
