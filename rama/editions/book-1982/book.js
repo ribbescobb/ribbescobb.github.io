@@ -25,13 +25,12 @@
   const reducedMotion=globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")||{matches:false};
 
   function freshState(){
-    return {version:1,current:story.start,history:[],flags:{},endings:[],turns:0,updatedAt:Date.now()};
+    return {version:1,current:story.start,history:[],endings:[],turns:0,updatedAt:Date.now()};
   }
 
   function validState(candidate){
     if(!candidate||candidate.version!==1||!story.nodes[candidate.current])return false;
     if(!Array.isArray(candidate.history)||!candidate.history.every(id=>!!story.nodes[id]))return false;
-    if(!candidate.flags||typeof candidate.flags!=="object"||Array.isArray(candidate.flags))return false;
     if(!Array.isArray(candidate.endings)||!candidate.endings.every(id=>typeof id==="string"))return false;
     return true;
   }
@@ -125,7 +124,6 @@
     if(!story.nodes[choice.to])return;
     turnPage(()=>{
       state.history.push(state.current);
-      Object.assign(state.flags,choice.set||{});
       state.current=choice.to;
       state.turns+=1;
       const ending=story.nodes[state.current].ending;
