@@ -43,12 +43,13 @@ SCENERY.richard_robots={name:"Richard's little robots",alias:["robots","little r
 
 WORLD.stair_top = {
   name:"Alpha Stairway — Upper Flights",
-  desc:"The stairway pours down the inside of the bowl like something geological. This high, Nicole can descend in long floating bounds, the handrail sliding through her glove. Below, three threads of light — the beams of earlier parties — stitch the darkness of the Central Plain. The scale refuses to become normal. Every time she looks out, some animal part of her brain files a formal objection.",
+  desc:function(){ return S.act===3?"The stairway pours down the inside of the bowl like something geological. The abandoned chairlift cable follows its rail into darkness; no camp lights mark the plain below. The scale still refuses to become normal.":"The stairway pours down the inside of the bowl like something geological. This high, Nicole can descend in long floating bounds, the handrail sliding through her glove. A chairlift cable follows the rail, still unpowered while Janos finishes rigging the ascent system. Below, three threads of light — the beams of earlier parties — stitch the darkness of the Central Plain. The scale refuses to become normal. Every time she looks out, some animal part of her brain files a formal objection."; },
   brief:"The upper flights, gravity gathering slowly beneath her.",
-  scenery:["handrail","plain_view","stair_flights"],
+  scenery:["handrail","stair_chair","plain_view","stair_flights"],
   exits:{ up:"hub", down:{to:"stairway", msg:"Down. The bounds shorten as Rama's spin takes hold of her."} }
 };
 SCENERY.handrail={name:"handrail",alias:["rail"],desc:"Sized, as far as anyone can tell, for hands. That thought has kept more than one cosmonaut awake."};
+SCENERY.stair_chair={name:"chairlift cable",alias:["chairlift","chairlift cable","chair","stair-chair","lift","ascent system"],desc:function(){ return S.act===3?"The expedition cable still traces the rail, but the chair and its power system are long gone. This stairway offers only the climb.":"Janos has run an expedition cable beside the Raman rail. The powered chair is still being rigged; for now, Nicole descends under her own power. It is an evacuation route, not a shortcut on today's survey."; }};
 SCENERY.plain_view={name:"plain",alias:["central plain","landscape","view","darkness","lights","beams","threads of light","cities","city","cylindrical sea","distant sea","ridged fields","fields","straight channels","channels","camp floodlights"],desc:"Sixteen kilometers below and fifty ahead: a plain that bends up and over her head to close upon itself. A cylindrical sea belts the world's waist. Cities — they call them cities — sit dark on the land like circuit elements. All of it engineered. None of it explained.",
   on:{touch:"It is a world away beneath her boots. The distance is the thing she can feel."}};
 SCENERY.stair_flights={name:"stairway",alias:["stairway","stairs","steps","flights","upper flights","lower flights"],
@@ -59,7 +60,7 @@ WORLD.stairway = {
   name:"Alpha Stairway — Lower Flights",
   desc:"True weight now, and ten thousand steps behind her. The stairway has become work, thighs burning, breath loud in her ears. The plain below has resolved into textures: ridged fields that are not fields, straight channels that carry no water, and to the east the low geometries of the camp's floodlights.",
   brief:"The lower flights, the camp lights visible below.",
-  scenery:["plain_view","stair_flights"],
+  scenery:["plain_view","stair_flights","stair_chair"],
   exits:{ up:{to:"stair_top", msg:"Up is easier on the lungs and harder on the schedule."}, down:{to:"plain_north", msg:"The last thousand steps. Her legs will file their complaint tomorrow."} }
 };
 
@@ -85,9 +86,20 @@ WORLD.plain_biot = {
   scenery:["track","grooves","biot_parts"],
   exits:{ north:"plain_north" },
   onTurn:function(){
-    if(!F().biotSeen && S.visited.plain_biot){
-      F().biotSeen=true; F().biotTurn=S.turn;
-      out("A sound at last — a ticking, multiplying. Out of the southern dark comes a procession: six machines the size of ponies, low-slung, six-legged, carapaced in dull bronze. Crab biots, the survey calls them. They flow along the polished track with absolute economy, neither fast nor slow, and they do not so much ignore Nicole as fail to include her in any category worth processing.");
+    // The original departure event runs only once. Later patrols still need to
+    // depart, including when an older save has already completed that event.
+    if(F().biotSeen&&!F().biotGone&&S.turn>=(F().biotTurn||0)+4){
+      F().biotGone=true;
+      out("The last biot ticks past and the procession pours away south. The track falls quiet again.");
+      if(!K().k_biots) outSys("Another maintenance patrol will use this track. Nicole can wait for a clear photograph.");
+    }
+    if(S.act!==1||S.phase!=="survey"||K().k_biots) return;
+    if((!F().biotSeen||(F().biotGone&&S.turn>=(F().biotTurn||0)+6))&&S.visited.plain_biot){
+      const returning=!!F().biotSeen;
+      F().biotSeen=true; F().biotGone=false; F().biotTurn=S.turn;
+      out(returning
+        ? "The ticking returns. Another six crab biots come up the polished track, carrying their grey slurry south in the same patient rhythm. Nicole has another chance to record them."
+        : "A sound at last — a ticking, multiplying. Out of the southern dark comes a procession: six machines the size of ponies, low-slung, six-legged, carapaced in dull bronze. Crab biots, the survey calls them. They flow along the polished track with absolute economy, neither fast nor slow, and they do not so much ignore Nicole as fail to include her in any category worth processing.");
       outSys("The biots are passing. This may not last.");
     }
   }
@@ -96,7 +108,7 @@ SCENERY.track={name:"track",alias:["polished track","road"],desc:"A wide band wo
 WORLD.plain_biot.scenery.push("biot");
 SCENERY.biot={name:"crab biot",alias:["biot","biots","crab","machine","machines","robot","procession","creature"],
   desc:function(){
-    if(F().biotGone) return "Gone south, toward the sea. The polished track keeps their absence the way a riverbed keeps a river.";
+    if(F().biotGone) return "Gone south, toward the sea. The polished track keeps their absence the way a riverbed keeps a river. Another patrol may follow.";
     if(!F().biotSeen) return "No biots here now — only the track they use.";
     return "Six legs in a rhythm no animal uses; a carapace with the sheen of old bronze; forward sensors like a row of stitched shut eyes. It is not alive. It is not exactly a machine either, or not only. Nicole's professional instincts reach for a taxonomy and come back empty-handed.";
   },
@@ -120,7 +132,7 @@ SCENERY.biot={name:"crab biot",alias:["biot","biots","crab","machine","machines"
 SCENERY.biot_parts={name:"biot machinery",alias:["legs","leg","joints","joint","carapace","sensors","sensor","eyes","vents","intake vents","flank","hopper","hoppers","cargo","slurry"],
   desc:function(){
     if(!F().biotSeen) return "Only the polished track is present. Whatever owns those engineered details has not arrived.";
-    if(F().biotGone) return "The biots have carried their anatomy and cargo south. Nicole has the images: articulated legs, stitched-eye sensors, flank vents, bronze carapaces, dorsal hoppers.";
+    if(F().biotGone) return K().k_biots?"The biots have carried their anatomy and cargo south. Nicole has the images: articulated legs, stitched-eye sensors, flank vents, bronze carapaces, dorsal hoppers.":"The biots have carried their anatomy and cargo south before Nicole could record them. The polished track is still in use; another patrol may follow.";
     return "Articulated legs keep an unvarying six-beat gait. Stitched-eye sensors line each bronze carapace; intake vents open along the flank. Dorsal hoppers carry grey slurry, except on the last two machines, whose empty bins make the procession look like a completed work shift.";
   },
   on:{photograph:function(){ return SCENERY.biot.on.photograph(); },
@@ -292,7 +304,7 @@ SCENERY.factory_interior={name:"factory interior",alias:["factory interior","rac
 WORLD.beta_shore = {
   name:"Beta Camp — Shore of the Cylindrical Sea",
   desc:function(){
-    if(S.act===3) return "The cliff, the hoist frame rusted to sculpture, the ringed sea breathing below in the dark — Beta Camp, reduced to geometry and memory. The stage still floats at the cable's foot, patient as ever, and something rides beside it that was not here twenty years ago.";
+    if(S.act===3) return "The cliff, the hoist frame rusted to sculpture, the ringed sea breathing below in the dark — Beta Camp, reduced to geometry and memory. The stage still floats at the cable's foot, patient as ever, and something rides beside it that was not here thirty-seven years ago.";
     let d="The plain ends at a fifty-meter cliff, and beyond it lies the impossible: a sea that girdles the world, a band of dark water ten kilometers wide, bending up on either hand to meet itself overhead. "+(F().ramaDawn?"Under the risen light it is grey-green and restless, whitecaps chasing themselves around the sky.":"In the darkness it is a blackness with texture, felt more than seen.")+" A cable hoist descends the cliff to a floating stage where the expedition's skiff, the Resolution, rides its line.";
     if(F().boatDamaged&&!F().boatFixed) d+=" The Resolution lies half-swamped against the stage, hull gashed.";
     return d;
@@ -305,7 +317,7 @@ WORLD.beta_shore = {
       if(S.phase==="storm") return "Richard's hand closes on her arm. \"Not on that water. Not until we know what the dawn is going to do.\"";
       if(F().boatDamaged&&!F().boatFixed) return "The Resolution is holed. Nothing crosses ten kilometers of that on goodwill. (The hull patch kit from camp stores could mend her.)";
       return null;
-    }, msg:"CROSSING. The hoist lowers them to the stage; the Resolution takes the sea at a steady eight knots. Halfway out, sleek shapes pace the boat for a kilometer — shark biots, Richard names them, with more delight than the name deserves — then peel away as if dismissed. The far cliff rises. On its crown stand towers."} },
+    }, msg:"CROSSING. Nicole, Richard, and Francesca board the hoist; Michael holds Beta. It lowers the three to the stage, and the Resolution takes the sea at a steady eight knots. Halfway out, sleek shapes pace the boat for a kilometer — shark biots, Richard names them, with more delight than the name deserves — then peel away as if dismissed. The far cliff rises. On its crown stand towers."} },
   onCmd:function(verb,obj){
     if(verb==="drink"&&obj&&obj.kind==="scenery"&&obj.id==="sea"){
       out("Absolutely not — her own rule, posted in the medical log in capital letters."); endTurn(); return true;
@@ -608,7 +620,7 @@ pitTreatSelf = function(){
 }
 function pitClimbOut(){
   F().rescued=true; S.phase="stranded";
-  out("She ties the cable around her waist with a surgeon's knots and calls up two words she will remember as among the best of her life: \"Take me.\" The winch above — Richard's improvisation of hoist motor and stubbornness — walks her up the wall, her good foot fending, the coin of light widening into a sky.");
+  out("She ties the cable around her waist with a surgeon's knots and calls up two words she will remember as among the best of her life: \"Take me.\" The winch above — Richard's improvisation of Raman salvage and stubbornness — walks her up the wall, her good foot fending, the coin of light widening into a sky.");
   out("Then hands. Richard Wakefield hauls her over the polished lip and holds on — no words for a moment, just the grip of a man doing arithmetic about how close it was. \"Three days,\" he says finally, into her hair. \"Francesca said the shaft was empty. She said she looked.\" A beat. \"I looked.\"");
   outAlert("* * *");
   moveTo("ny_lattice");
@@ -632,8 +644,8 @@ CHARS.falstaff={name:"Falstaff",alias:["robot","falstaff","little robot","rat ro
 };
 ITEMS.cable={name:"cable",alias:["line","rope","winch cable","cable end","end","swaying end","rescue line"],loc:"limbo",fixed:true,hidden:false,
   here:"A cable hangs down the shaft wall, its end swaying at chest height.",
-  desc:"Woven line from the Beta hoist, rigged above to a motor and to Richard Wakefield. Rated, he calls down, 'for two Nicoles and a piano.'",
-  takeFail:"The cable is still rigged to the Beta hoist and to Richard above. Its useful destination is around Nicole, not in her bag.",
+  desc:"Woven expedition line — Janos packed a spare coil in every boat — rigged above to a winch Richard improvised from Raman salvage. Rated, he calls down, 'for two Nicoles and a piano.'",
+  takeFail:"The cable is rigged to Richard's salvage winch above. Its useful destination is around Nicole, not in her bag.",
   on:{ touch:"Woven human rescue line, rough enough for a gloved grip and taut with the load Richard's hoist is ready to take.",
        tie:function(){ F().cableTied=true; out("She ties it around her waist and under her arms — bowline, backed up, dressed and set. Her hands know the knots better than her mind does, which is the point of training."); outSys("Tied on. Now UP."); return endTurn(); },
        pull:function(){ if(!F().cableTied){ out("It gives a little, then holds — Richard's rig is sound. Tie on first; falling twice into the same pit is against her religion."); return endTurn(); } pitClimbOut(); },
@@ -646,6 +658,7 @@ WORLD.lair = {
   desc:function(){
     if(S.act===1) return "A gallery beneath the island: vaulted, dry, floored in the warm grey material, lit by their three lamps and, faintly, by veins of luminescence in the walls. Tunnel mouths open in several directions, one barred by a grill of woven metal. On the wall opposite, painted bands of color run in ordered rows — red, blue, green, and colors between — deliberate as text.";
     if(S.act===3&&S.phase==="act3_sanctuary"&&F().grillOpened) return "The old family gallery opens into its deeper life. Where the woven grill stood, a warm banded passage descends among the octospiders; Richard's lexicon rests beside the mature mural, and its recurring red-blue-green greeting is no longer unanswered. Richard is here. The landlords attend at a courteous distance.";
+    if(S.act===3) return "The old family gallery has stood empty for decades. Its partitions remain, but the garden tray is dry and the children's drawings have faded on the grey wall. The luminescent veins still make their patient dusk. At Richard's workbench, a fresh lamp and a few newly sorted tools show that one person has returned; the color-banded wall and the barred grill wait where the family left them.";
     let d="The gallery they have made a home: partitioned rooms of salvage and Raman lattice, Richard's workbench of scavenged wonders, a garden tray under a grow lamp, drawings pinned to the grey wall at child height. The luminescent veins give a dusk that never deepens. The color-banded wall — their oldest neighbor — keeps its counsel. The barred grill guards the deep tunnel; a shaft-passage leads north toward the avian vertical.";
     return d;
   },
@@ -656,7 +669,7 @@ WORLD.lair = {
           north:{to:"avian_shaft", hidden:function(){ return S.act===1; } } }
 };
 SCENERY.lair_home={name:"family gallery",alias:["gallery","lair","partitioned rooms","rooms","home","family","children","Raman lattice"],
-  desc:"Fourteen years of human insistence laid over Raman structure: sleeping partitions, shared tables, storage tucked into every useful recess, and paths worn by five people who stopped calling this temporary long ago."};
+  desc:function(){ return S.act===3?"The sleeping partitions and shared tables are still here, dusted by decades without a family. Faded drawings and a dry garden tray mark the five who once lived here; one newly lit corner marks Richard's recent return.":S.act===1?"Vaulted Raman stone and luminescent veins, still waiting for anyone to call this gallery home.":"Thirteen years of human insistence laid over Raman structure: sleeping partitions, shared tables, storage tucked into every useful recess, and paths worn by five people who stopped calling this temporary long ago."; }};
 SCENERY.mural={name:"color bands",alias:["mural","bands","colors","wall","painted bands","color wall","color-banded wall","color banded wall"],
   desc:function(){ if(!K().k_mural){ K().k_mural=true; outSysDeferred("Learned: the color bands repeat in ordered patterns — a script of color."); }
     return "Rows of painted bands, each a precise width: red, blue, green, and graded hues between, repeating in groups. Richard has photographed every row. The groups repeat the way words repeat. Somebody wrote this wall."; },
@@ -672,10 +685,10 @@ function grillTry(){
   if(S.act===3 && S.phase==="act3_sanctuary") return octoDoor();
   out("It neither lifts nor swings. The three colored squares on its panel look, the longer she studies them, less like decoration and more like a lock stating its terms."); K().k_grillLock=true; return endTurn();
 }
-SCENERY.workbench={name:"workbench",alias:["bench","richard's bench","tools","gadgets","salvage","raman salvage","scavenged wonders","wonders","raman fragments","fragments","coils","shakespeareans","robots"],desc:"Richard's empire: disassembled Raman fragments, hand-wound coils, three of his tiny Shakespeareans in various states of undress. Order would be an insult to it."};
-SCENERY.garden={name:"garden tray",alias:["garden","plants","tray","tomatoes","beans","rose","heroic rose","seed stock","survival stores"],desc:"Tomatoes, beans, and one heroic rose, grown from the seed stock in the survival stores, under a lamp Richard rigged from Raman luminescence. The children think food comes from here. It very nearly does."};
+SCENERY.workbench={name:"workbench",alias:["bench","richard's bench","tools","gadgets","salvage","raman salvage","scavenged wonders","wonders","raman fragments","fragments","coils","shakespeareans","robots"],desc:function(){ return S.act===3?"Old coils and disassembled Raman fragments lie under dust. One corner is newly cleared: Richard has sorted tools and lit a lamp here within the month.":"Richard's empire: disassembled Raman fragments, hand-wound coils, three of his tiny Shakespeareans in various states of undress. Order would be an insult to it."; }};
+SCENERY.garden={name:"garden tray",alias:["garden","plants","tray","tomatoes","beans","rose","heroic rose","seed stock","survival stores"],desc:function(){ return S.act===3?"The old garden tray is dry. Its rose and vegetables are long gone; Richard has not tried to pretend a month's return could restore thirteen years of tending.":"Tomatoes, beans, and one heroic rose, grown from the seed stock in the survival stores, under a lamp Richard rigged from Raman luminescence. The children think food comes from here. It very nearly does."; }};
 SCENERY.lair_drawings={name:"children's drawings",alias:["drawings","pinned drawings","children's drawings","grey wall"],
-  desc:"Years of the girls in layers: Simone's careful sections and constellations; Katie's wings, speed lines, and impossible landings. The lowest pages are sun-faded now. Newer ones climb the wall as their hands have climbed.",
+  desc:function(){ return S.act===3?"The last drawings have faded where they were pinned: Simone's careful sections and constellations, Katie's wings and impossible landings. No new pages climbed the wall after the family left.":"Years of the girls in layers: Simone's careful sections and constellations; Katie's wings, speed lines, and impossible landings. The lowest pages are sun-faded now. Newer ones climb the wall as their hands have climbed."; },
   on:{read:"The pictures have no captions, but their two vocabularies are unmistakable: Simone labels the world by structure; Katie labels it by motion."}};
 SCENERY.lair_veins={name:"luminescent veins",alias:["luminescent veins","veins","luminescence","banded light"],
   desc:"Threads of Raman light under the grey surface, steady enough to live by and strange enough that Nicole still sometimes wakes to remember there is no bulb behind them.",
@@ -688,13 +701,14 @@ SCENERY.lair_passage={name:"shaft-passage",alias:["shaft-passage","shaft passage
   on:{enter:function(){ return doGo("north"); }}};
 SCENERY.node_approach={name:"Node structure",alias:["structure","node structure","lattice of spars","spars","dark chambers","chambers","double dawn","harbor"],
   desc:function(){
+    if(S.act===3) return "The Node is twenty-four years behind Nicole, at Sirius. Richard's old display is dark; no lattice of spars or double dawn shows through this wall now.";
     if(!F().nodeCorridor) return "Nothing beyond Rama's familiar skin yet — only the sense, stronger every day, of Sirius drawing near.";
     return "Through Richard's patient wall of light: a lattice of spars and vast dark chambers in Sirius's double dawn. Rama is not approaching a world but a harbor large enough to receive worlds.";
   }};
 SCENERY.node_corridor={name:"corridor of white light",alias:["corridor","white corridor","corridor of light","corridor of white light","seam","way out"],
-  desc:function(){ return F().nodeCorridor?"A seam in the gallery wall has opened into depthless white radiance. The light makes a corridor by agreeing, step by step, to be a floor.":"The wall is seamless here. Whatever door it may contain has not chosen to become one yet."; },
-  on:{touch:function(){ out(F().nodeCorridor?"Light meets her palm with the gentle resistance of warm glass. The corridor holds.":"Warm grey wall, unbroken under her hand."); return endTurn(); },
-      enter:function(){ if(F().nodeCorridor) return doGo("out"); outSys("No corridor is open yet."); }}};
+  desc:function(){ return S.act===3?"The corridor of white light closed when Rama left the Node. The seam is only warm grey wall now.":F().nodeCorridor?"A seam in the gallery wall has opened into depthless white radiance. The light makes a corridor by agreeing, step by step, to be a floor.":"The wall is seamless here. Whatever door it may contain has not chosen to become one yet."; },
+  on:{touch:function(){ out(S.act===3?"Warm grey wall. The old corridor has been gone since the Node farewell.":F().nodeCorridor?"Light meets her palm with the gentle resistance of warm glass. The corridor holds.":"Warm grey wall, unbroken under her hand."); return endTurn(); },
+      enter:function(){ if(S.act===2&&F().nodeCorridor) return doGo("out"); outSys("No corridor is open now."); }}};
 
 WORLD.avian_shaft = {
   name:"The Avian Vertical",
@@ -768,7 +782,7 @@ CHARS.richard={name:"Richard Wakefield",alias:["richard","wakefield"],loc:"hub",
       {if:()=>S.phase==="act2_farewell", text:"Richard looks toward the corridor Simone will take. \"We raised two girls who think the impossible is ordinary. One of them has chosen to stay with it. I am proud enough to be furious.\""},
       {if:()=>true, text:"\"Simone studies until the question becomes larger. Katie jumps until the distance becomes smaller,\" Richard says. \"Between them they have reverse-engineered parenthood into a continuous emergency.\""}
     ],
-    "voyage|years|journey":"\"Fourteen years inside a machine that never once asked our permission and never once failed to keep us alive,\" Richard says. \"Long enough to stop calling it survival. Long enough for the girls to call it childhood.\"",
+    "voyage|years|journey":"\"Thirteen years inside a machine that never once asked our permission and never once failed to keep us alive,\" Richard says. \"Long enough to stop calling it survival. Long enough for the girls to call it childhood.\"",
     "colors|color|grammar":[
       {if:()=>K().k_colorGrammar, text:"\"Order is syntax, repetition is courtesy, and red-blue-green is *begin*,\" Richard says. \"We spent years admiring a sentence before we knew it was speaking. That's practically the human condition.\""},
       {if:()=>true, text:"\"The bands repeat like language,\" Richard says. \"I can prove the pattern and none of the meaning. Yet.\""}
@@ -889,7 +903,7 @@ CHARS.francesca={name:"Francesca Sabatini",alias:["francesca","sabatini","journa
   ask:{
     "story|broadcast|journalism|camera":"\"Two billion people are watching this expedition through my edit, darling. History is a story someone had the sense to file on deadline. I intend to be someone.\"",
     "rama":"\"Rama is the best set ever built,\" Francesca says. \"I keep waiting for it to send someone out to take a bow.\"",
-    "crew|brown|david":"\"David Brown wants a Nobel, Borzov wants everyone home alive, Richard wants the machine, Michael wants heaven, and you—\" the smile sharpens a degree \"—you want to *understand*, which is the most expensive want on the list.\"",
+    "crew":"\"The science team wants a Nobel, Borzov wants everyone home alive, Richard wants the machine, Michael wants heaven, and you—\" the smile sharpens a degree \"—you want to *understand*, which is the most expensive want on the list.\"",
     "shaft|pit|fall":[
       {if:()=>F().rescued, text:"\"I looked,\" she says, too quickly, on the radio's clean channel. \"The lamp was gone, there was no answer, the sea was turning — Nicole, what would staying have been except a second casualty?\" A pause with edges. \"I'm glad you're alive. Put that on the record.\"", fx:function(){ F().francescaConfronted=true; }},
       {if:()=>true, text:"\"That web-alley? Magnificent framing. Let me get you against the depth of it sometime.\""}
@@ -1011,7 +1025,7 @@ function borzovOperate(){
   if(!K().k_diag){ outSys("Operate on what? Diagnose first. (SCAN BORZOV.)"); return; }
   if(S.borzov!=="sick"){ outSys("There is no one on the table."); return; }
   const thorough = K().k_history;
-  S.borzov="operated"; S.flags.borzovPath="operated"; S.phase="storm_prep";
+  S.borzov="operated"; S.flags.borzovPath="operated";
   out("She scrubs in a hut, in an alien world, with Michael passing instruments in a silence that has the shape of prayer. The anesthesia takes; the field kit performs; her hands do what four decades trained them for while the largest machine in the universe holds perfectly still around a single sleeping man."+(thorough?" His clean history is the margin she plays in, and the margin holds.":""));
   out("Forty minutes. Then the closing, the count, the exhale. Borzov will wake commanding again. Michael touches her shoulder once, says nothing, and goes out to tell the crew — and she hears, through the hut skin, something she will not forget: applause, thin and fierce, under a sky sixteen kilometers deep.");
   relUp("michael",1); relUp("community",2); relUp("richard",1);
@@ -1022,7 +1036,7 @@ function borzovOperate(){
 function borzovEvacuate(){
   if(!K().k_diag){ outSys("Evacuate whom, and why? Diagnose first. (SCAN BORZOV.)"); return; }
   if(S.borzov!=="sick"){ outSys("There is no one on the table."); return; }
-  S.borzov="evacuated"; S.flags.borzovPath="evacuated"; S.phase="storm_prep"; CHARS.borzov.loc="limbo";
+  S.borzov="evacuated"; S.flags.borzovPath="evacuated"; CHARS.borzov.loc="limbo";
   out("She makes the unglamorous call: stabilize, package, and send him up. Antibiotics to hold the line; a litter rigged to the chairlift; Janos coaxing the hoist like a lover. Thirty thousand steps of ascent measured out in her mind against one operating table forty light-minutes from backup.");
   out("Six hours later the Newton's channel crackles: on the table topside, appendix out, prognosis excellent. Nobody applauds a safe decision. Nicole has made a career of not needing them to.");
   relUp("michael",1); relUp("community",1);
@@ -1176,7 +1190,11 @@ function registerActOneEvents(){
   addEvent("biots_leave",
     ()=>F().biotSeen&&!F().biotGone&&S.turn>=(F().biotTurn||0)+4,
     function(){ F().biotGone=true;
-      if(S.loc==="plain_biot") out("The last biot ticks past and the procession pours away south, unhurried, complete. The silence that closes behind them is the same silence as before, and entirely different."); });
+      if(S.loc==="plain_biot"){
+        out("The last biot ticks past and the procession pours away south, unhurried, complete. The silence that closes behind them is the same silence as before, and entirely different.");
+        if(!K().k_biots) outSys("Another maintenance patrol will use this track. Nicole can wait for a clear photograph.");
+      }
+    });
   addEvent("rama_dawn",
     ()=>S.phase==="storm"&&F().dawnClock!==undefined&&S.turn>=F().dawnClock+6,
     function(){
@@ -1213,7 +1231,6 @@ THINK={
   survey:function(){ return "Assignments: sample the plain, get imagery of the biots on the track south"+(K().k_biots?" — done; the crew should hear about the hoppers":"")+". London stands southwest, sealed and unassigned, which is Richard-speak for irresistible."+((K().k_biots&&!F().reportedBiots)?" Tell someone about the biots.":""); },
   borzov:function(){ return (S.loc==="medlab"?"Borzov is on the table beside her.":"Borzov is in the medical hut at Camp Alpha. Go IN from camp to reach him.")+" Examine him, ask about the pain, and SCAN BORZOV — diagnosis before decision, always."; },
   borzov_decide:"The scan says appendix, hours to spare, none to waste. Operate here with a field kit and steady hands, or stabilize and evacuate him up thirty thousand steps to the Newton's theater. His history matters; so does the climb. Her call. (OPERATE or EVACUATE.)",
-  storm_prep:"The sea next. East from camp when she's ready.",
   storm:function(){ return "Richard's dawn is coming, and wind with it. The Resolution needs securing (TIE BOAT)"+(F().boatSecured?" — done":"")+", and Camp Alpha should be warned (TELL MICHAEL ABOUT THE STORM)"+(F().stormWarned?" — done":"")+". Then: witness it."; },
   crossing:function(){ return F().boatDamaged&&!F().boatFixed?"The Resolution is holed. The patch kit from camp stores can mend her (USE PATCH ON BOAT); then south, across the sea.":"South, across ten kilometers of impossible water, to the island that hums."; },
   newyork:"New York breathes — the hum under everything. Explore it. Francesca wants drama at the latticed way east of the plaza; the shaft there exhales like something alive. Careful footing. Careful everything.",
@@ -1222,11 +1239,10 @@ THINK={
 };
 HINTS={
   arrival:["The stairway leads DOWN, several times over.","Keep going DOWN until the plain, then EAST to the camp lights.","GO DOWN from the hub, DOWN twice more, then EAST to Camp Alpha."],
-  survey:["The assignment: a sample from the plain, and imagery of biots on the southern track. USE SAMPLER on the plain; wait where the track runs.","Biots travel the polished track SOUTH of the stairway's foot. Be present, be patient, and PHOTOGRAPH them when they come. London (southwest) rewards a close look at its one imperfect shed.","1) At the plain: USE SAMPLER. 2) Go SOUTH, WAIT for the procession, PHOTOGRAPH BIOT. 3) In London, EXAMINE SHED, then PHOTOGRAPH SLOT. 4) Return to camp and TELL RICHARD ABOUT BIOTS."],
+  survey:["The assignment: a sample from the plain, and imagery of biots on the southern track. USE SAMPLER on the plain; wait where the track runs.","Biots travel the polished track SOUTH of the stairway's foot. If one patrol has gone, wait for the next; PHOTOGRAPH them while they pass. London (southwest) rewards a close look at its one imperfect shed.","1) At the plain: USE SAMPLER. 2) Go SOUTH, WAIT for a procession, PHOTOGRAPH BIOT before it leaves. 3) In London, EXAMINE SHED, then PHOTOGRAPH SLOT. 4) Return to camp and TELL RICHARD ABOUT BIOTS."],
   borzov:["A physician's order of operations: history, examination, imaging.","ASK BORZOV ABOUT THE PAIN, then SCAN BORZOV in the medical hut.","SCAN BORZOV. The scanner will put the decision in front of you."],
   borzov_decide:["Both paths can save him; they cost different things. His clean history favors boldness; the thirty-thousand-step climb punishes delay.","Asking about his HISTORY firms the surgical case. Then commit: OPERATE or EVACUATE.","Type OPERATE (field surgery, Nicole's hands) or EVACUATE (stabilize and hoist him to the Newton). Both succeed; the expedition remembers differently."],
-  storm_prep:["The expedition is moving toward the Cylindrical Sea.","Return to Camp Alpha; the rover route runs east from there.","OUT from the medical hut, then EAST from Camp Alpha to Beta Camp."],
-  storm:["Two verbs protect two things: the boat, and the camp.","TIE BOAT secures the Resolution. TELL MICHAEL ABOUT THE STORM sends the warning east.","1) TIE BOAT. 2) TELL MICHAEL ABOUT STORM. 3) WAIT for the dawn. It is worth being outside for."],
+  storm:["Two verbs protect two things: the boat, and the camp.","TIE BOAT secures the Resolution. TELL MICHAEL ABOUT THE STORM sends the warning west to Camp Alpha.","1) TIE BOAT. 2) TELL MICHAEL ABOUT STORM. 3) WAIT for the dawn. It is worth being outside for."],
   crossing:["If the boat took damage, camp stores held a patch kit (SEARCH CRATES at Alpha — or it may already be in the bag).","USE PATCH ON BOAT at Beta if she's holed. Then GO SOUTH.","Repair if needed (USE PATCH ON BOAT), then SOUTH across the sea."],
   newyork:["The city wants examining: the octahedron, the towers, the hum. The story wants the latticed way, east of the plaza.","EXAMINE the octahedron; TOUCH it if her nerve holds. Then EAST to the lattice. What happens at the shaft is not her fault.","Go EAST from the plaza. EXAMINE the SHAFT. The rest is Rama."],
   pit:["Doctor first, castaway second: assess, splint, ration.","SCAN SELF, then TREAT SELF (the kit is on her sling). DRINK sparingly. SLEEP to pass the dark. When anything appears above — SIGNAL it.","1) SCAN SELF. 2) TREAT SELF. 3) SLEEP / WAIT; DRINK only when needed. 4) When the little robot appears: SHOUT or WAVE SCARF. 5) When the cable drops: TIE CABLE, then UP."],
@@ -1256,7 +1272,7 @@ function startActII(){
   out("Time, aboard a world with its own agenda, does what time does.");
   out("The three of them build a life in the gallery under New York the way coral builds a reef: layer by patient layer. Richard tames Raman salvage into light, water, heat; Michael establishes a calendar, a sabbath, and a garden; Nicole keeps them alive and, harder, keeps them whole. In the second year"+(F().kissed?", to the surprise of no one,":", to the surprise only of themselves,")+" Michael marries Nicole and Richard beneath the color-banded wall, using words he wrote for the occasion because no liturgy had anticipated it.");
   out("Simone is born in the third year — grave, gentle, watchful. Katie in the fifth — a spark looking for oxygen. They are the first human beings in history for whom Rama is not a mystery but an address.");
-  out("And ahead, for twelve years, one star has grown slowly brighter, dead on the bow.");
+  out("And ahead, for thirteen years, one star has grown slowly brighter, dead on the bow.");
   outSys("(Years have passed. Nicole's family: Richard; the girls, Simone and Katie; and Michael, godfather-general to everyone. Richard has been asking her to come and see something in the atrium — the chamber EAST of the lair.)");
   moveTo("lair");
 }
@@ -1271,7 +1287,7 @@ WORLD.atrium={
 SCENERY.screen={name:"display wall",alias:["screen","wall of light","display","glyphs","window","bridge","map","schematic","ellipse","moving point","point","star","sirius","companion","two suns","suns","course","line","spectra","timetable"],
   desc:function(){
     if(!K().k_sirius){ K().k_sirius=true; F().siriusTurn=S.turn;
-      return "She studies the schematic while Richard hovers like a man introducing his parents. The moving point is Rama; the ellipse is its course; and the star it falls toward has a companion — two suns, circling each other. \"Run the spectra and it's unambiguous,\" Richard says. \"Sirius, Nicole. The brightest star in Earth's sky. We are twelve years into an eight-point-six light-year commute, and somebody built the timetable a million years early.\" The point creeps along its line. Destination is no longer a metaphor.";
+      return "She studies the schematic while Richard hovers like a man introducing his parents. The moving point is Rama; the ellipse is its course; and the star it falls toward has a companion — two suns, circling each other. \"Run the spectra and it's unambiguous,\" Richard says. \"Sirius, Nicole. The brightest star in Earth's sky. We are thirteen years into an eight-point-six light-year commute, and somebody built the timetable a million years early.\" The point creeps along its line. Destination is no longer a metaphor.";
     }
     return "Rama's course, drawn in patient light: the double star of Sirius, closer every time she looks.";
   },
@@ -1294,7 +1310,7 @@ CHARS.simone={name:"Simone",alias:["simone","daughter"],loc:"limbo",pron:"her",
     "god|faith":"\"Michael says God is a direction,\" Simone reports thoughtfully. \"I checked with Papa's instruments. They can't find it. Michael says that's correct.\""
   },
   on:{
-    scan:function(){ if(S.phase==="simone_fever"&&!F().feverCured){ out("The scan again, hoping for a different truth: fever climbing in slow stairs, a terrestrial pathogen twelve years drifted from every reference she carries. Her stocks can harry it. The Tailor's Room could end it — if she can make the synthesizer listen."); return endTurn(); } out("Vitals steady. Her gravest patient, in every sense."); return endTurn(); },
+    scan:function(){ if(S.phase==="simone_fever"&&!F().feverCured){ out("The scan again, hoping for a different truth: fever climbing in slow stairs, a terrestrial pathogen thirteen years drifted from every reference she carries. Her stocks can harry it. The Tailor's Room could end it — if she can make the synthesizer listen."); return endTurn(); } out("Vitals steady. Her gravest patient, in every sense."); return endTurn(); },
     treat:function(){ if(S.phase==="simone_fever"&&!F().feverCured){ out("Antipyretics, fluids, cool cloths — the rearguard actions. They buy hours. The answer is east, in the Tailor's Room, behind three colors."); return endTurn(); } out("Nothing to treat; the treaty holds."); return endTurn(); },
     touch:function(){ out(S.phase==="simone_fever"&&!F().feverCured?"Simone's skin is fever-hot beneath Nicole's hand, dry at the forehead and damp at the hairline. The cool cloth is already losing ground.":"Warm skin, steady pulse. Simone squeezes her mother's hand before Nicole can pretend this was not a checkup."); return endTurn(); }
   },
@@ -1348,7 +1364,7 @@ function registerActTwoEvents(){
       S.phase="act2_arrival";
       CHARS.simone.loc="party"; CHARS.katie.loc="party";
       outAlert("Deceleration.");
-      out("It comes in the night watch: the hum changing key, the floor leaning the other way, twelve years of velocity being paid back with interest. For six days Rama brakes, and the family lives on the walls, and Richard laughs at intervals for no reason he can explain.");
+      out("It comes in the night watch: the hum changing key, the floor leaning the other way, thirteen years of velocity being paid back with interest. For six days Rama brakes, and the family lives on the walls, and Richard laughs at intervals for no reason he can explain.");
       out("On the seventh day the engines stop, the lights of Rama dim to a hush — and through the atrium wall, rendered in patient light, they see what has caught them: a structure. A lattice of spars and vast dark chambers, hanging in the double dawn of Sirius, so large that Rama — their whole world, their sixteen-kilometer nation — is entering it the way a bee enters a cathedral.");
       out("Richard says, at last, in a small voice: \"It's a harbor.\" And in the gallery wall behind them, with a sound like a chord resolving, a seam none of them has ever found opens onto a corridor of white light.");
       outSys("The Node. A way OUT has opened from the lair.");
@@ -1438,7 +1454,7 @@ CHARS.eagle={name:"the Eagle",alias:["eagle","alien","host","bird","eagle's head
     "hierarchy|station|clearance|clearances":"\"This Node can answer within its station,\" the Eagle says. \"Some questions belong to the network; some to the builders; some have not been assigned an answer. Your species also distinguishes ignorance from classification, though less consistently.\"",
     "rama":"\"Rama is a survey instrument. It gathers.\" A pause calibrated to human rhythm. \"You have perhaps noticed that it gathered you.\"",
     "purpose|mission|why|for":"\"You are asking the question beneath the question,\" the Eagle observes. \"Why observe? I will say this much: information about spacefaring species is being assembled. Carefully. Comprehensively. For a purpose that is—\" the pause, this time, seems almost rueful \"—above this Node's station.\"",
-    "builders|ramans|makers|creators":"\"You wish to meet the builders.\" The gold eyes are steady. \"Nicole des Jardins: in a sense you have been inside their handshake for fourteen years. The hand itself is further away. In every direction you can name, and several you cannot.\"",
+    "builders|ramans|makers|creators":"\"You wish to meet the builders.\" The gold eyes are steady. \"Nicole des Jardins: in a sense you have been inside their handshake for thirteen years. The hand itself is further away. In every direction you can name, and several you cannot.\"",
     "god":"\"General O'Toole asks me that daily,\" the Eagle says. \"I give him the only honest answer available at this level of the hierarchy: the question is receivable, and I am not authorized to be its answer.\"",
     "itself|yourself|you":"\"I am an interface, purpose-built for your species from your species' own broadcasts. The eagle was selected from your iconography of the trustworthy. If the selection was in error, alternative forms exist.\" It does not smile — it cannot — and yet.",
     "broadcasts|alternative forms|forms|body":"\"Your broadcasts provided shapes, voices, gestures, and many incompatible theories of authority,\" it says. \"This form produced the lowest modeled fear and the highest modeled attention. Alternative bodies remain available. None improved both values.\"",
@@ -1503,7 +1519,7 @@ function answerInterview(verb){
   if(q===2){
     if(verb==="honestly") out("She tells it the truth so plainly that Richard, beside her, looks at the floor: a father's scarf; a daughter's hand in the dark of a vertical; a man who searched a pit for three days because arithmetic was unacceptable. \"It doesn't scale and it doesn't optimize,\" she says. \"It's the most expensive thing we make. We make it constantly.\"");
     else if(verb==="curated") out("She gives the anthropology: pair-bonding, kin altruism, the chemistry and the sociology, love as strategy refined into sentiment. Accurate, defensible, and — she hears it as she says it — a map of a country drawn by someone standing outside it.");
-    else out("\"That one isn't mine to file,\" Nicole says. \"You've watched us for fourteen years. Check your own instruments.\" The Eagle's head tilts, one degree. \"We have. They disagree with each other. It is our favorite anomaly.\"");
+    else out("\"That one isn't mine to file,\" Nicole says. \"You've watched us for thirteen years. Check your own instruments.\" The Eagle's head tilts, one degree. \"We have. They disagree with each other. It is our favorite anomaly.\"");
     out("\"Last. You are mortal, and you know it as few species know it. Tell me about your species and fear — what you do with the ending of things.\"");
     queueInterviewQuestion(3);
     outSys("HONESTLY, CURATED, or REFUSE.");
@@ -1612,7 +1628,7 @@ function clinicColor(color){
   }
   if(S.cseq.length===3){
     S.cseq=[]; F().serumMade=true; S.phase="act3_alloc";
-    out("Red, blue, green: *begin* — and the pillar wakes the way the Tailor's Room woke a quarter century ago, colors cascading in courteous inquiry. She feeds it the medscan's RV-41 workup, holding the readout to the light, answering cascade with cascade; and after a night of low chiming the drawer that was not there opens on the first tray of serum, dosage-marked, blood-warm, smelling faintly of rain on warm stone.");
+    out("Red, blue, green: *begin* — and the pillar wakes the way the Tailor's Room woke twenty-four years ago, colors cascading in courteous inquiry. She feeds it the medscan's RV-41 workup, holding the readout to the light, answering cascade with cascade; and after a night of low chiming the drawer that was not there opens on the first tray of serum, dosage-marked, blood-warm, smelling faintly of rain on warm stone.");
     out("Ellie reads the assay twice and puts it down carefully, as one puts down something explosive. \"Maman. This doesn't manage RV-41. This *reverses* it.\" Then, doctor to doctor, the next sentence they both already know: \"First run is forty doses. We have forty-one patients — and a waiting list of exposed.\"");
     outSys("Allocation. Who receives the first run: the SICKEST first, the CHILDREN first, or a public LOTTERY?");
     return endTurn();
@@ -1624,7 +1640,7 @@ function registerFeverEvent(){
     ()=>S.act===2&&(S.phase==="act2_settled")&&F().obsSeen&&Number.isInteger(F().obsTurn)&&S.turn>=F().obsTurn+2,
     function(){
       S.phase="simone_fever"; CHARS.simone.loc="node_quarters"; CHARS.katie.loc="node_quarters";
-      out("It arrives the way trouble arrives in families: quietly, at night. Simone — steady Simone — is burning. The medscan gives Nicole a fever chart climbing wrong and a pathogen profile it hesitates over: terrestrial, but drifted, twelve years of shipboard evolution ahead of every reference in her formulary. Her stocks can chase it. The Tailor's Room could *answer* it — if she can make the synthesizer listen.");
+      out("It arrives the way trouble arrives in families: quietly, at night. Simone — steady Simone — is burning. The medscan gives Nicole a fever chart climbing wrong and a pathogen profile it hesitates over: terrestrial, but drifted, thirteen years of shipboard evolution ahead of every reference in her formulary. Her stocks can chase it. The Tailor's Room could *answer* it — if she can make the synthesizer listen.");
       outSys("Simone is feverish in the family quarters (WEST of the hall). The synthesizer (EAST) speaks in color — and Rama has been showing them one three-color phrase for years. (The lair's wall, the pit tunnel, the grill: red, blue, green.)");
     });
 }
@@ -1652,7 +1668,7 @@ SCENERY.quarters_cloth={name:"cool cloth",alias:["cloth","cool cloth","folded cl
   desc:function(){ return S.phase==="simone_fever"&&!F().feverCured?"The cloth is already warming against Simone's fevered forehead. It is comfort and borrowed time, not a cure.":"The clean cloth is folded at the head of Simone's bunk, ordinary and welcome among the Node's impossible provisions."; },
   on:{touch:function(){ out(S.phase==="simone_fever"&&!F().feverCured?"Damp and no longer cool. Nicole turns it to the cooler side and settles it back against Simone's forehead.":"Cool, damp, clean cotton — an ordinary household reassurance."); return endTurn(); },
       take:function(){ out(S.phase==="simone_fever"&&!F().feverCured?"She lifts the cloth only long enough to cool and replace it. Simone needs it here; Nicole has no reason to carry it away.":"She leaves the folded cloth by the bunk, where it belongs."); return endTurn(); }}};
-SCENERY.quarters_diagnostics={name:"medical diagnostics",alias:["fever chart","chart","pathogen profile","pathogen","profile","formulary","stocks","medical stocks","readout","medscan readout"],desc:function(){ return S.phase==="simone_fever"&&!F().feverCured?"The fever climbs in slow stairs. The pathogen is terrestrial but drifted beyond the formulary Nicole carried into Rama. Her stocks can hold it; the Tailor's Room may be able to answer it.":F().feverCured?"The chart records a clean inflection: the synthesized treatment enters, the fever breaks, the pathogen count collapses. Competent medicine from an impossible pharmacy.":"The compact kit and formulary have kept a family alive across fourteen years. Everything is counted; everything human eventually runs short."; },on:{read:function(){ return doExamine({kind:"scenery",id:"quarters_diagnostics"}); }}};
+SCENERY.quarters_diagnostics={name:"medical diagnostics",alias:["fever chart","chart","pathogen profile","pathogen","profile","formulary","stocks","medical stocks","readout","medscan readout"],desc:function(){ return S.phase==="simone_fever"&&!F().feverCured?"The fever climbs in slow stairs. The pathogen is terrestrial but drifted beyond the formulary Nicole carried into Rama. Her stocks can hold it; the Tailor's Room may be able to answer it.":F().feverCured?"The chart records a clean inflection: the synthesized treatment enters, the fever breaks, the pathogen count collapses. Competent medicine from an impossible pharmacy.":"The compact kit and formulary have kept a family alive across thirteen years. Everything is counted; everything human eventually runs short."; },on:{read:function(){ return doExamine({kind:"scenery",id:"quarters_diagnostics"}); }}};
 function openDesignPhase(){
   F().designOpen=true;
   out("The next day the Eagle finds her in the hall. \"Your daughter recovers. You addressed the fabricator in its own syntax.\" A pause of, she would swear, approval. \"That aptitude has scheduling implications. Nicole des Jardins: it is time to speak about what your species does next. The atelier is open — south of this hall — when your family is ready.\"");
@@ -1764,7 +1780,7 @@ WORLD.node_dock.onGo=function(dir){
   return true;
 };
 function actTwoFinale(){
-  out("They say goodbye at the corridor of light, because there is no good place and this one at least is beautiful. Katie clings to her sister and will not cry in front of the Eagle, which Nicole understands completely. Richard holds Michael a long time — the atheist and the priest, fourteen years past needing words. Simone comes last, and puts into her mother's hands a folded paper: the drawing, the woman with the scarf, larger than her sun.");
+  out("They say goodbye at the corridor of light, because there is no good place and this one at least is beautiful. Katie clings to her sister and will not cry in front of the Eagle, which Nicole understands completely. Richard holds Michael a long time — the atheist and the priest, thirteen years past needing words. Simone comes last, and puts into her mother's hands a folded paper: the drawing, the woman with the scarf, larger than her sun.");
   out("\"You taught me the whole job, maman,\" Simone says. \"Watch carefully. Love anyway. Leave the door open.\" She steps back beside Michael, into the white, and the two of them stand there — a lighthouse, staffed — until the corridor closes like water.");
   outAlert("Rama departs the Node. Aboard: Nicole, Richard, Katie — and, waiting to be born in the years of the long return, Ellie, Patrick, and Benjy. Sunward. Home, whatever that means now.");
   startActIII();
@@ -1780,9 +1796,9 @@ function startActIII(){
   CHARS.ellie.loc="eden_clinic"; CHARS.patrick.loc="eden_plaza"; CHARS.benjy.loc="eden_home"; CHARS.nakamura.loc="vegas";
   S.inv=["medkit","medscan","scarf"]; ITEMS.medkit.loc="inv"; ITEMS.medscan.loc="inv"; ITEMS.scarf.loc="inv";
   outAct("ACT III","RETURN");
-  out("The return voyage is a story in itself, and it is told, as long stories are, in the names of children: Ellie, born in the second year, curious as her father; Patrick, in the fourth, an engineer before he could spell it; and Benjy — gentle Benjy, born with a mind that walks where others run, and a heart that arrived complete.");
-  out("At the solar system's edge, humanity delivered its two thousand: chosen, screened, hopeful, and human, which is to say carrying everything. New Eden opened its gates in Rama's northern bowl — the villages, the lake, the weather, "+(S.habitat.garden==="yes"?"the Memory Garden green at its heart, ":"")+"all of it exactly as the model promised. Rama swung outbound again. And for five years, it worked.");
-  out("It works less now. There is a sickness in the settlement called RV-41 that came up the well from Earth in someone's blood. There is a man named Toshio Nakamura who arrived with soft loans and hard friends and now owns the district everyone calls Vegas. There is an election coming that smells like an ending. And there is Nicole des Jardins Wakefield — councilor, chief physician, sixty-one years old — holding a clinic, a family, and a conscience in a colony that is starting to choose sides against itself.");
+  out("The nineteen-year return voyage is a story in itself, and it is told, as long stories are, in the names of children: Ellie, born in the second year, curious as her father; Patrick, in the fourth, an engineer before he could spell it; and Benjy, in the tenth — gentle Benjy, born with a mind that walks where others run, and a heart that arrived complete.");
+  out("Katie came back from the Node without Simone or the avians, and spent that long return learning to sound as if she missed neither. At the solar system's edge, humanity delivered its two thousand: chosen, screened, hopeful, and human, which is to say carrying everything. New Eden opened its gates in Rama's northern bowl — the villages, the lake, the weather, "+(S.habitat.garden==="yes"?"the Memory Garden green at its heart, ":"")+"all of it exactly as the model promised. Rama swung outbound again. And for five years, it worked.");
+  out("It works less now. There is a sickness in the settlement called RV-41 that came up the well from Earth in someone's blood. There is a man named Toshio Nakamura who arrived with soft loans and hard friends and now owns the district everyone calls Vegas; Katie, grown and furious at every door that closed behind her, found a place in his machine. There is an election coming that smells like an ending. And there is Nicole des Jardins Wakefield — councilor, chief physician, seventy-three years old, privately monitoring an arrhythmia that began on the return voyage — holding a clinic, a family, and a conscience in a colony that is starting to choose sides against itself.");
   outSys("(New Eden, year five. Home is where Benjy is; the clinic, the plaza, the assembly hall, the gate, and Vegas lie beyond. THINK reviews what's pressing.)");
   moveTo("eden_home");
 }
@@ -2123,7 +2139,7 @@ function registerActThreeEvents(){
     function(){
       F().arrested=true; F().arrestSoon=true; S.phase="act3_trial"; F().trialScene=true;
       outAlert("They come for her at the clinic, because of course they do.");
-      out("Four uniforms and a warrant with new letterhead: *sedition, sabotage of colonial infrastructure, conspiracy with the fugitive Wakefield*. The charges are upholstery; the frame is the furniture. Ellie steps between her mother and the door with a clipboard like a shield until Nicole, very gently, takes it out of her hands. \"Run the ward,\" she says. \"That's the resistance. Do you hear me? *The ward.*\"");
+      out("Four uniforms and a warrant with new letterhead: *sedition, sabotage of colonial infrastructure, conspiracy with the fugitive Wakefield*. Richard's flight is their pretext, whether Nicole spoke at the assembly or not; the other charges are upholstery. Ellie steps between her mother and the door with a clipboard like a shield until Nicole, very gently, takes it out of her hands. \"Run the ward,\" she says. \"That's the resistance. Do you hear me? *The ward.*\"");
       out("The trial convenes in her own hall that night — Nakamura understands theater the way she understands anatomy. The horseshoe is packed. The charges are read into the record by a clerk who was in the second cohort of children she vaccinated, and who cannot meet her eyes.");
       out("\"The accused,\" says the bench, \"may make a statement.\"");
       moveTo("eden_hall");
@@ -2136,7 +2152,7 @@ function registerActThreeEvents(){
       if(F().katieWarned||S.rel.katie>=4){
         F().rescuer="katie"; CHARS.katie.loc="eden_gate";
         out("Past midnight, the lock speaks — not forced, *keyed* — and Katie is inside the holding room in Vegas black, moving like the professional her mother never wanted her to become. \"Guard rotation's mine till the hour,\" she says, flat and fast. \"Nakamura thinks I'm running his errand. I am running his errand. The errand is wrong about its contents.\" She sets a bundle on the bench: boots, a lamp, the medkit — and, folded with a care that undoes Nicole completely, the red-and-gold scarf. \"Papa's waiting somewhere only you two believe in. Ellie packed the kit. Patrick killed the plaza cameras. Benjy—\" her voice snags, one broken note \"—Benjy said to tell you: *lost is not gone*.\"");
-        out("At the service door she stops her mother with one hand. \"I'm not coming. Someone has to be inside his machine, and I'm already — I'm *placed*, maman. Let me be placed.\" A beat, and the armor fails entirely, twenty years too late and right on time: \"Tell Papa I kept the feathers.\"");
+        out("At the service door she stops her mother with one hand. \"I'm not coming. Someone has to be inside his machine, and I'm already — I'm *placed*, maman. Let me be placed.\" A beat, and the armor fails entirely, a lifetime too late and right on time: \"Tell Papa I kept the feathers.\"");
         relUp("katie",2);
       } else {
         F().rescuer="ellie";
@@ -2152,7 +2168,7 @@ ITEMS.rnote={name:"Richard's note",alias:["note","graph paper","page"],loc:"limb
   desc:"Graph paper, folded in eighths, her name on the outside in the handwriting of a man who thinks in exploded diagrams.",
   on:{read:function(){
     if(!F().readNote){ F().readNote=true; F().noteTurn=S.turn; }
-    out("*N. — They'll come for me first and you second; my leaving buys you days, use them better than I would. I've gone DOWN, to the old address — the one with the painted wall and the terrible acoustics. The landlords below have been leaving the porch light on for us for years (three colors; you know the knock). Bring the scarf. Bring yourself. Everything else the neighbors can print. — R.*");
+    out("*N. — They'll come for me first and you second; my leaving buys you days, use them better than I would. I've gone DOWN, to the old address — the one with the painted wall and the terrible acoustics. I think the landlords below have been leaving the porch light on for us for years (three colors; you know the knock). Bring the scarf. Bring yourself. Everything else the neighbors can print. — R.*");
     out("*P.S. — Falstaff knows the way to the boat. He always did like you best.*");
     outSys("Richard has gone to the lair, below New York — and something is waiting at the old shore to take her across. First: survive what's coming here.");
     return endTurn();
@@ -2240,7 +2256,7 @@ const _richardRobotsTake=SCENERY.richard_robots.on.take;
 const _michaelRosaryDesc=SCENERY.michael_rosary.desc;
 const _michaelRosaryTouch=SCENERY.michael_rosary.on.touch;
 WORLD.camp_alpha.desc=function(){
-  if(S.act===3) return "Camp Alpha, twenty-six years on: hut frames scoured to skeletons, the med-lab's shell half-swallowed by the plain's slow dust, one rover wheel standing upright like a monument to itself. Here she cut a man open under an alien sky. Here Michael said grace over ration bars. The folding table's legs remain planted, faithful as furniture: her own museum, not finished being lived.";
+  if(S.act===3) return "Camp Alpha, thirty-seven years on: hut frames scoured to skeletons, the med-lab's shell half-swallowed by the plain's slow dust, one rover wheel standing upright like a monument to itself. Here she cut a man open under an alien sky. Here Michael said grace over ration bars. The folding table's legs remain planted, faithful as furniture: her own museum, not finished being lived.";
   return val(_campDesc);
 };
 SCENERY.huts.desc=function(){ return S.act===3?"The inflatable skins are long gone. Hut frames and the med-lab shell stand scoured to pale skeletons in the slow dust.":val(_campHutsDesc); };
@@ -2256,7 +2272,7 @@ WORLD.camp_alpha.sound=function(){ return S.act===3?"No generator, no mast tick:
 SCENERY.huts.on.open=function(){ if(S.act===3){ out("There are no hut skins or working airlocks left to open, only scoured frames and the med-lab shell."); return endTurn(); } out(val(_campHutsOpen)); return endTurn(); };
 SCENERY.huts.on.touch=function(){ out(S.act===3?"Dusty frame alloy and torn restraint points; the inflatable skins are only memory now.":"Cool, smoother than it looks. Whatever made this did not worry about fingerprints."); return endTurn(); };
 SCENERY.huts.on.take=function(){ out(S.act===3?"The skeletal frames are fixed in the dust and offer Nicole no useful salvage.":"It is part of Rama, or as good as. It stays."); return endTurn(); };
-SCENERY.mast.on.touch=function(){ if(S.act===3){ out("Cold, dead aluminum roughened by twenty-six years without a relay pulse."); return endTurn(); } out(val(_campMastTouch)); return endTurn(); };
+SCENERY.mast.on.touch=function(){ if(S.act===3){ out("Cold, dead aluminum roughened by thirty-seven years without a relay pulse."); return endTurn(); } out(val(_campMastTouch)); return endTurn(); };
 SCENERY.mast.on.use=function(){ out(S.act===3?"There is no relay package left to use and no Newton to answer it.":"Try a more specific verb — OPEN, PUSH, SCAN, TIE, that sort of thing."); return endTurn(); };
 SCENERY.mast.on.take=function(){ out(S.act===3?"The dead mast is anchored among the ruins. It has no message left to carry.":"It is part of Rama, or as good as. It stays."); return endTurn(); };
 SCENERY.camp_table.on.search=function(){ if(S.act===3){ out("Dust, fixed metal legs, and no surviving notes or game pieces."); return endTurn(); } out(val(_campTableSearch)); return endTurn(); };
@@ -2385,7 +2401,7 @@ WORLD.beta_shore.onGo=function(dir){
   return _betaAct3OnGo?_betaAct3OnGo(dir):false;
 };
 ITEMS.skiff={name:"skiff",alias:["boat","boat2","hull","richard's boat","richard s boat","carriage","resolution ii","resolution 2"],loc:"limbo",fixed:true,takeFail:"Resolution II is transport, not luggage. Nicole leaves Richard's skiff secured to its lines.",
-  desc:"Workshop-built, Rama-salvaged, twenty years of secret weekends explained in one hull. On the transom, hand-lettered: RESOLUTION II. Under it, smaller: *she'll forgive the name — R.*",
+  desc:"Workshop-built, Rama-salvaged, twenty secret weekends explained in one hull. On the transom, hand-lettered: RESOLUTION II. Under it, smaller: *she'll forgive the name — R.*",
   on:{enter:function(){ return crossHome(); }, use:function(){ return crossHome(); }, board:function(){ return crossHome(); },
       sit:"The stern seat waits aboard Resolution II. ENTER THE SKIFF when Nicole is ready to cross; sitting beside it will not make the voyage for her.",
       read:"On the transom, hand-lettered: RESOLUTION II. Beneath it, smaller: *she'll forgive the name — R.*",
@@ -2414,7 +2430,7 @@ SCENERY.sea_log.on.read=function(){ if(S.act===3){ out("The absent page remains 
 function crossHome(){
   if(S.loc==="ny_dock"){ out("Resolution II rests at the New York waterfront, crossing complete. The old address is up through the seawall."); return endTurn(); }
   if(S.loc!=="beta_shore"){ outSys("The skiff is not here."); return; }
-  out("The crossing, this time, is quiet. Falstaff steers — of course Falstaff steers — and Nicole sits in the stern of her husband's secret boat with the scarf at her throat and twenty-six years of this sea moving under her, and lets the dark ring carry her toward the island that hums. New York rises off the bow the way it rose the first morning of the world: patient, lit from within by its own idea of itself.");
+  out("The crossing, this time, is quiet. Falstaff steers — of course Falstaff steers — and Nicole sits in the stern of her husband's secret boat with the scarf at her throat and thirty-seven years of this sea moving under her, and lets the dark ring carry her toward the island that hums. New York rises off the bow the way it rose the first morning of the world: patient, lit from within by its own idea of itself.");
   S.phase="act3_sanctuary";
   S.loc="ny_dock"; S.pronoun=null;
   ITEMS.skiff.loc="ny_dock"; CHARS.falstaff.loc="ny_dock"; CHARS.falstaff.gone=false;
@@ -2483,7 +2499,7 @@ SCENERY.lair_passage.desc=function(){
   if(S.act===3&&S.phase==="act3_sanctuary"&&F().grillOpened) return "The dissolved grill reveals a descending passage washed in warm biolight, its curved walls speaking in patient bands of color.";
   return val(_lairPassageDesc);
 };
-SCENERY.octo_lexicon={name:"octospider lexicon",alias:["lexicon","book","translation","translations","dispatches"],desc:function(){ return F().grillOpened?"Richard's patient, handmade concordance of ordered light. Whole pages circle meanings near greeting, shelter, mending, and begin.":"Richard's note promised a language below. The lexicon and its maker wait on the other side of the grill."; },on:{read:function(){ out(F().grillOpened?"RED-BLUE-GREEN: BEGIN / GREETING. A longer band Richard glosses as THE ONE WHO MENDS. The margins contain twenty-six years of delighted argument.":"Not until the grill opens and Richard can put the colors in context."); return endTurn(); }}};
+SCENERY.octo_lexicon={name:"octospider lexicon",alias:["lexicon","book","translation","translations","dispatches"],desc:function(){ return F().grillOpened?"Richard's patient, handmade concordance of ordered light. Whole pages circle meanings near greeting, shelter, mending, and begin.":"Richard's note promised a language below. The lexicon and its maker wait on the other side of the grill."; },on:{read:function(){ out(F().grillOpened?"RED-BLUE-GREEN: BEGIN / GREETING. A longer band Richard glosses as THE ONE WHO MENDS. The margins contain a month's delighted argument with his new hosts.":"Not until the grill opens and Richard can put the colors in context."); return endTurn(); }}};
 WORLD.lair.scenery.push("color_squares","octo_lexicon");
 const _richardChildrenAsk=CHARS.richard.ask["children|simone|katie"];
 CHARS.richard.ask["children|simone|katie"]=[
@@ -2525,8 +2541,8 @@ function octoPress(color){
 function grillOpens(){
   F().grillOpened=true;
   out("Red, blue, green: *begin*. The grill does not swing — it *dissolves*, lattice folding into wall like a sentence finishing, and warm biolight breathes out of the passage beyond, banded in slow colors down walls that curve away and down. And in the doorway, backlit, thinner, greyer, grinning like the boy given the largest machine in the universe, stands Richard Wakefield.");
-  out("\"You kept them waiting,\" he says, unsteady, holding her at last at arm's length as if to verify the instruments. \"Twenty-six years I've been telling them my wife says a proper thank-you eventually—\" and then neither of them manages words for a while, and the colors on the walls slow to something like tact.");
-  out("Behind him, at a respectful remove, stand the landlords: three beings the height of doors, eight-limbed, velvet-black, their heads ringed with bands of flowing color — speaking, she realizes, *watching them speak* — and one of them cycles, very slowly, red, blue, green: *begin*. \"They pulled me out of a search party's worth of trouble the month I arrived,\" Richard says. \"Same as they watched over you, that first time, in the pit. They've been leaving the light on for us for twenty-six years, Nicole. Turns out we were never squatters. We were *expected*.\"");
+  out("\"You kept them waiting,\" he says, unsteady, holding her at last at arm's length as if to verify the instruments. \"This whole month I've been telling them my wife says a proper thank-you eventually—\" and then neither of them manages words for a while, and the colors on the walls slow to something like tact.");
+  out("Behind him, at a respectful remove, stand the landlords: three beings the height of doors, eight-limbed, velvet-black, their heads ringed with bands of flowing color — speaking, she realizes, *watching them speak* — and one of them cycles, very slowly, red, blue, green: *begin*. \"They pulled me out of a search party's worth of trouble the month I arrived,\" Richard says. \"Same as they watched over you, that first time, in the pit. They've been leaving the light on for us since our first days in Rama, Nicole. Turns out we were never squatters. We were *expected*.\"");
   CHARS.richard.loc="party"; CHARS.octos.loc="lair"; CHARS.octos.gone=false;
   relUp("richard",2);
   outSys("Sanctuary. (Talk to RICHARD; meet the OCTOSPIDERS. And when she is ready to rest — truly ready — SLEEP.)");
@@ -2538,7 +2554,7 @@ CHARS.octos={name:"the octospiders",alias:["octospiders","octospider","octo","la
   talk:"She faces the nearest and, feeling equal parts ambassador and toddler, cycles her lamp: red, blue, green. The rings around its head flare in what she will go to her grave believing is delight, and it answers — a long, banded, patient sentence of which she understands one word, the first one, which is *begin*. It is, she reflects, the only word two species strictly need to share.",
   suggest:["the colors"],
   ask:{
-    "colors|language|color":"Richard translates what twenty-six years and a homemade lexicon can: they speak in ordered light; red-blue-green opens every courtesy; and they have a word for Nicole — he shows her, lamp in hand — that renders, as best he can tell, as *the one who mends*. She decides she can live inside that translation.",
+    "colors|language|color":"Richard translates what a month and a homemade lexicon can: they speak in ordered light; red-blue-green opens every courtesy; and they have a word for Nicole — he shows her, lamp in hand — that renders, as best he can tell, as *the one who mends*. She decides she can live inside that translation.",
     "pit|rescue|past":"Richard confirms what the tunnels only hinted: the soft sounds in her three lost days, the water that never quite ran out. \"They triaged you,\" he says. \"Their word for it is nicer. Their word for it is the same as their word for *greeting*.\""
   },
   tell:{}, show:{ scarf:function(){ out("She holds up the scarf. Three heads ring slowly through red and gold — matching it, she realizes, *complimenting* it — and one reaches out a velvet limb and, with the delicacy of a surgeon, does not touch it. Manners, rendered in restraint."); return endTurn(); } }
@@ -2549,7 +2565,7 @@ WORLD.lair.onSleep=function(){
 };
 function finaleTwilight(){
   S.phase="act3_twilight";
-  out("Years, then. The lair years, the second edition: Richard's lamps strung down the octospider galleries, a lexicon growing page by patient page, dispatches smuggled up-habitat through Katie's channels and back — Ellie's ward reports, Patrick's pressure readings, one drawing from Benjy every month, always of a garden. New Eden argues its way onward overhead. Below, in the banded light, two elderly humans are, against every actuarial table of two worlds, *happy*.");
+  out("Two years, then. The lair years, the second edition: Richard's lamps strung down the octospider galleries, a lexicon growing page by patient page, dispatches smuggled up-habitat through Katie's channels and back — Ellie's ward reports, Patrick's pressure readings, one drawing from Benjy every month, always of a garden. New Eden argues its way onward overhead. Below, in the banded light, two elderly humans are, against every actuarial table of two worlds, *happy*.");
   out("Her heart declares itself on an ordinary evening — the old arrhythmia she has carried like a folded letter since the return voyage, opening at last. Nicole des Jardins Wakefield, physician, does the workup on herself with steady hands, closes the scanner, and tells her husband the truth, because they have never once managed anything else that stuck.");
   out("Rama, as if it had been waiting for exactly this, begins — very gently, sixteen kilometers around them — to decelerate.");
   out("She lies down in the garden of luminescence with the scarf at her throat and Richard's hand in hers and the colors on the walls slowing, slowing, to the rhythm of a tide, or a heart, or circulation; and the last thing she hears from the world of instruments is Richard's voice, very far away and very close, saying her name the way he said it the first morning of the world—");
@@ -2630,7 +2646,7 @@ CHARS.eagle.finalAsk=function(topic){
   } else if(topic==="family"){
     out("\"Watch,\" says the Eagle, and the lit windows of the far cylinder come gently closer, one by one: Richard in the banded garden, planting a lamp at her grave like a seedling, already — she laughs, weightless — already improving its wiring. Ellie, sleeves rolled, teaching a second generation to read a fever's grammar. Patrick at his gauges; Benjy watering the wall of names, telling them, one by one, today's news. Katie in the bright quarter, placed, keeping a feather in a locked drawer and the drawer's key on a chain. And far sternward, at a door between species, a grave woman with her mother's stillness, keeping the light on. \"They do not require your worry,\" the Eagle says. \"They are, every one, already what you were for them. That is how your species stores its dead, Nicole. In the living. It is the finest data architecture we have yet catalogued.\"");
   } else {
-    out("\"The purpose.\" The Eagle is silent for three full seconds, and she understands the silence now: not computation — *permission*, sought and granted. \"At the top of every hierarchy we can observe, the purpose of the gathering is this: the universe is young, and lonely, and does not yet know what it will be when it grows up. It is assembling — carefully, at the speed of ships and patience — a memory of every way that matter has learned to care. Against what, we are not told. *For* what, you have spent seventy years demonstrating.\" The gold eyes close, once, deliberately: the only bow its body can make. \"You were never the subject of the study, Nicole des Jardins. You were the finding.\"");
+    out("\"The purpose.\" The Eagle is silent for three full seconds, and she understands the silence now: not computation — *permission*, sought and granted. \"At the top of every hierarchy we can observe, the purpose of the gathering is this: the universe is young, and lonely, and does not yet know what it will be when it grows up. It is assembling — carefully, at the speed of ships and patience — a memory of every way that matter has learned to care. Against what, we are not told. *For* what, you have spent seventy-five years demonstrating.\" The gold eyes close, once, deliberately: the only bow its body can make. \"You were never the subject of the study, Nicole des Jardins. You were the finding.\"");
   }
   out("The light is a direction now. Somewhere ahead of her — prepositions have stopped insisting, but *ahead* survives — the pulse she has heard beneath everything is resolving into what it always was: not tide, not heart. A door, being held open. She takes one step, and it is exactly like beginning.");
   finishGame(topic);
@@ -2689,7 +2705,7 @@ Object.assign(HINTS,{
   act3_trial:["Same three doors as every hard room this year.","Her statement shapes what the town does after — and one line of the ending.","Type HONESTLY, CURATED, or REFUSE."],
   act3_escape:function(){ return F().cellOpen?[THINK.act3_escape()]:["Cells in this colony have more exits than the architect filed.","WAIT for midnight; this family does not leave people in rooms.","WAIT. When the door opens: OUT, then NORTH across the plain, EAST to the old camps, and the shore beyond."]; },
   act3_sanctuary:["The route is a memory: plain, camp, shore, sea, island, lattice, down.","At the grill: the phrase Rama has been teaching her since the pit.","PUSH RED, PUSH BLUE, PUSH GREEN at the grill. Then, when whole: SLEEP."],
-  act3_twilight:["SLEEP.","SLEEP.","SLEEP. It has been a long seventy years, and the last room is lit."],
+  act3_twilight:["SLEEP.","SLEEP.","SLEEP. It has been a long seventy-five years, and the last room is lit."],
   postlude:["One question, four doors: GOD, RAMA, FAMILY, PURPOSE.","There is no best answer; there is the one Nicole would ask.","ASK EAGLE ABOUT GOD / RAMA / FAMILY / PURPOSE. Then let go of the keyboard gently."]
 });
 

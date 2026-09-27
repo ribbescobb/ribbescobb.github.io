@@ -464,7 +464,7 @@ function doShowGive(mode,obj,who){
 
 /* ---------- self ---------- */
 function selfDesc(){
-  if(S.act===1) return "Nicole des Jardins. Life-sciences officer, Newton expedition; once an Olympian, always a physician. Copper-dark skin, forty-one years old, a green flight suit with more pockets than she needs and a red-and-gold scarf — her father's — knotted at her throat. She is very far from Beauvois, and not sorry.";
+  if(S.act===1) return "Nicole des Jardins. Life-sciences officer, Newton expedition; once an Olympian, always a physician. Copper-dark skin, thirty-six years old, a green flight suit with more pockets than she needs and a red-and-gold scarf — her father's — knotted at her throat. She is very far from Beauvois, and not sorry.";
   if(S.act===2) return "Nicole des Jardins Wakefield. Physician, mother, involuntary ambassador of a species she is no longer sure she can summarize. The scarf is faded now. She still wears it.";
   if(S.act===3) return "Nicole des Jardins Wakefield. Councilor and chief physician of New Eden. There is grey in her hair and an ache in her chest she has diagnosed and told no one about. The scarf, threadbare, stays knotted at her throat.";
   return "Light, and the memory of a woman.";

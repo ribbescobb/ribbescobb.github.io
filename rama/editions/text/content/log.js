@@ -15,8 +15,6 @@ const LOG_ENTRIES = [
     text:"Examine and diagnose General Borzov."},
   {id:"borzov_treatment", active:()=>S.phase==="borzov_decide"&&S.borzov==="sick",
     text:"Choose a treatment plan for General Borzov."},
-  {id:"reach_sea", active:()=>S.phase==="storm_prep",
-    text:"Continue the expedition at the Cylindrical Sea."},
   {id:"secure_resolution", active:()=>S.phase==="storm"&&!F().boatSecured,
     text:"Secure the Resolution before Raman dawn."},
   {id:"warn_alpha", active:()=>S.phase==="storm"&&!F().stormWarned,

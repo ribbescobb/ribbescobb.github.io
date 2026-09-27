@@ -98,7 +98,7 @@
     if (outputIncludes(records, "racks of half-made things receding out of focus")) {
       return identity("london_factory_reveal");
     }
-    if (outputIncludes(records, "CROSSING. The hoist lowers them to the stage")) {
+    if (outputIncludes(records, "CROSSING.") && outputIncludes(records, "Resolution takes the sea at a steady eight knots")) {
       return identity("resolution_crossing");
     }
     if (outputIncludes(records, "Slots between towers, dark and patient.")) {
