@@ -104,6 +104,10 @@ body{
   min-width:320px;min-height:240px;background:var(--void);border:1px solid #142818;
   box-shadow:0 0 42px rgba(92,172,93,.12),inset 0 0 90px rgba(73,145,74,.035);
 }
+@supports (height:100dvh){
+  html,body{height:100dvh}
+  #machine{width:min(100vw,calc(100dvh * 4 / 3));height:min(100dvh,calc(100vw * 3 / 4))}
+}
 #machine::after{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:20;opacity:.1;
   background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(170,255,170,.09) 4px);
@@ -227,11 +231,15 @@ body{
 @media (prefers-reduced-motion:reduce){
   #scrollwrap{scroll-behavior:auto}.is-running .boot-line,.is-running .boot-lines,.is-running .boot-picture{animation:none;opacity:1;clip-path:none}.is-running .boot-bloom{display:none}
 }
+@media (min-width:701px) and (orientation:landscape) and (max-height:900px){
+  #scene-panel{flex-basis:40%}
+  #inputbar{padding-bottom:max(9px,env(safe-area-inset-bottom))}
+}
 /* On phones RAMA becomes a deliberate portrait play surface instead of a
    shrunken, vertically-centred 4:3 computer.  The plate is always visible at
    the top; only the room prose scrolls, with the command row remaining above
    the iOS keyboard's dynamic viewport. */
-@media (max-width:700px) and (orientation:portrait){
+@media (max-width:900px) and (orientation:portrait){
   html,body{height:100%;height:100dvh}
   body{align-items:stretch;justify-content:stretch;overflow:hidden}
   #machine{
