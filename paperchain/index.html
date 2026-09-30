@@ -184,7 +184,7 @@
         .screen:nth-child(1) { transform: rotate(-2deg); }
         .screen:nth-child(2) { transform: rotate(1.2deg) translateY(28px); }
         .screen:nth-child(3) { transform: rotate(-0.8deg); }
-        .screen img { width: 100%; display: block; border-radius: 22px; }
+        .screen img { width: 100%; height: auto; display: block; border-radius: 22px; }
         .screen p { font-size: 14px; color: var(--ink-soft); padding: 14px 6px 0; line-height: 1.5; }
 
         /* ── Does / Doesn't ── */
@@ -216,7 +216,9 @@
 
         /* ── Closer ── */
         .closer { text-align: center; max-width: 720px; margin: 0 auto; padding: 40px 32px 100px; }
-        .closer-line { font-family: var(--serif); font-weight: 800; font-size: clamp(28px, 5vw, 42px); letter-spacing: -0.5px; margin: 28px 0 14px; }
+        /* The scraps: art on the page's own cream, so it has no edge. */
+        .pile { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
+        .closer-line { font-family: var(--serif); font-weight: 800; font-size: clamp(28px, 5vw, 42px); letter-spacing: -0.5px; margin: 12px 0 14px; }
         .closer-kick { color: var(--ink-soft); font-size: 16px; }
 
         /* ── Footer ── */
@@ -295,7 +297,7 @@
         <div class="section-label">What it is</div>
         <p><strong>Remember the paper chain on the classroom wall in December? One link for every day until winter break, and every morning somebody got to tear one off.</strong></p>
         <p>Paper Chain is that, on your iPhone. Pull the bottom link down. It stretches, it strains, and then it gives. The scrap flutters to the floor and lands on the pile, and you're one link closer.</p>
-        <p>Count down to a date (Halloween, the trip, the wedding, the last day of school) and each link waits for its day. Or just count: twenty push-ups, twelve chapters, thirty days of practice. When the last link goes, the whole pile goes up in the air. Then you sweep up and start the next one.</p>
+        <p>Count down to a date (Halloween, the trip, the wedding, the last day of school) and each link waits for its day. Or just count: thirty workouts, twelve chapters, ten piano lessons. When the last link goes, the whole pile goes up in the air. Then you sweep up and start the next one.</p>
     </section>
 
     <div class="chain" aria-hidden="true">
@@ -311,15 +313,15 @@
 
     <div class="screens fade-up">
         <div class="screen">
-            <img src="home.jpg" width="600" height="1305" alt="A cream wall with three paper chains: Halloween, Beach trip, and The wedding, with torn scraps on the floor">
+            <img src="home.jpg" width="600" height="1304" alt="A cream wall with three paper chains: Halloween, Beach trip, and The wedding, with torn scraps on the floor">
             <p>Three chains to a room. Rooms are free, as many as you like.</p>
         </div>
         <div class="screen">
-            <img src="halloween.jpg" width="600" height="1305" alt="A Halloween chain printed with pumpkins and witch hats, 32 days left until Saturday, October 31">
+            <img src="halloween.jpg" width="600" height="1304" alt="A Halloween chain printed with pumpkins and witch hats, 32 days left until Saturday, October 31">
             <p>Printed paper for the seasons: pumpkins, witch hats, friendly ghosts.</p>
         </div>
         <div class="screen">
-            <img src="beach.jpg" width="600" height="1305" alt="A bright paper chain hanging from driftwood at the beach, with the sea behind it">
+            <img src="beach.jpg" width="600" height="1304" alt="A bright paper chain hanging from driftwood at the beach, with the sea behind it">
             <p>Some rooms are outside. The wind picks up.</p>
         </div>
     </div>
@@ -360,9 +362,7 @@
 
     <!-- CLOSER -->
     <div class="closer fade-up">
-        <div class="chain" aria-hidden="true">
-            <span></span><span></span><span></span>
-        </div>
+        <img class="pile" src="pile.jpg" width="1400" height="583" alt="A pile of torn paper-chain links in red, orange, yellow, green, blue, and purple">
         <div class="closer-line">Pull. Tear. One link closer.</div>
         <div class="closer-kick">Coming to the App Store in October, just in time for Halloween.</div>
     </div>
