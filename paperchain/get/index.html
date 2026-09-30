@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Paper Chain — opening the App Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Three-layer redirect, as on /kept/get:
+      1. <script> at the end fires window.location.replace() as soon as the page parses.
+      2. <meta http-equiv="refresh"> is the fallback without JavaScript.
+      3. The visible link is the manual fallback.
+    The App Store URL appears in all three places.
+  -->
+  <meta http-equiv="refresh" content="0; url=https://apps.apple.com/app/id6817136564">
+  <style>
+    html, body { margin: 0; padding: 0; min-height: 100vh; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #F2ECE2;
+      color: #2B2724;
+      font-family: -apple-system, 'Space Grotesk', sans-serif;
+      text-align: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1 {
+      font-family: ui-serif, "New York", Georgia, serif;
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 12px;
+    }
+    p { font-size: 15px; color: #6B6155; margin: 6px 0; }
+    a { color: #C8463A; }
+  </style>
+</head>
+<body>
+  <h1>Paper Chain</h1>
+  <p>Taking you to the App Store…</p>
+  <p>or <a href="https://apps.apple.com/app/id6817136564">tap here</a> if nothing happens.</p>
+  <script>
+    window.location.replace('https://apps.apple.com/app/id6817136564');
+  </script>
+</body>
+</html>

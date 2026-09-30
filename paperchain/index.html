@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Chain — a countdown you tear by hand</title>
+    <meta name="description" content="Paper Chain is a countdown for your iPhone that you tear by hand, one paper link a day, all the way to the day. Free, with no account, no ads, and no subscription. Ever.">
+    <meta property="og:title" content="Paper Chain — a countdown you tear by hand">
+    <meta property="og:description" content="One paper link a day, all the way to the day. On your wall, on your Home Screen, and in a pile on the floor.">
+    <meta property="og:image" content="https://ribbescobb.com/paperchain/home.jpg">
+    <link rel="icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wall: #F2ECE2;
+            --card: #FBF7F0;
+            --chip: #E6DCCB;
+            --oak: #C99A62;
+            --ink: #2B2724;
+            --ink-soft: #6B6155;
+            --red: #C8463A;
+            --orange: #D8732C;
+            --yellow: #E3B23C;
+            --green: #5E8C4A;
+            --blue: #3F6FA8;
+            --purple: #7B5AA6;
+            --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--wall);
+            color: var(--ink);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: clip;
+        }
+
+        /* ── Nav ── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(242,236,226,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(43,39,36,0.07);
+        }
+        .nav-brand { font-size: 15px; font-weight: 600; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+        .nav-links { display: flex; gap: 28px; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink-soft); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--ink); }
+        .nav-links a.active { color: var(--red); font-weight: 600; }
+
+        /* ── Hero ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 32px 80px;
+            text-align: center;
+        }
+        .hero-icon {
+            width: 128px; height: 128px;
+            border-radius: 28px;
+            display: block;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(43,39,36,0.22);
+        }
+        .hero-title {
+            font-family: var(--serif);
+            font-weight: 800;
+            font-size: clamp(46px, 9vw, 92px);
+            line-height: 1;
+            letter-spacing: -1.5px;
+        }
+        .hero-sub {
+            font-size: 20px;
+            color: var(--ink-soft);
+            margin-top: 20px;
+            max-width: 520px;
+        }
+        .store-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            padding: 14px 28px;
+            border-radius: 999px;
+            background: var(--ink);
+            color: var(--wall);
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: transform 0.15s;
+        }
+        .store-button:hover { transform: translateY(-2px); }
+        .store-button svg { width: 18px; height: 18px; fill: currentColor; }
+        .arrival {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 8px 20px;
+            border: 2px dashed var(--red);
+            border-radius: 8px;
+            color: var(--red);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            transform: rotate(-1.5deg);
+        }
+
+        /* A paper chain hanging down the page, drawn in CSS: loops of paper, alternately face-on and edge-on. */
+        .chain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+        .chain span {
+            display: block;
+            width: 30px; height: 46px;
+            border: 7px solid var(--c);
+            border-radius: 50%;
+            margin-top: -12px;
+        }
+        .chain span:nth-child(even) { width: 12px; border-width: 5px 6px; }
+        .chain span:nth-child(6n+1) { --c: var(--red); }
+        .chain span:nth-child(6n+2) { --c: var(--orange); }
+        .chain span:nth-child(6n+3) { --c: var(--yellow); }
+        .chain span:nth-child(6n+4) { --c: var(--green); }
+        .chain span:nth-child(6n+5) { --c: var(--blue); }
+        .chain span:nth-child(6n+6) { --c: var(--purple); }
+        .chain .torn { border-top-color: transparent; transform: rotate(18deg) translate(6px, 14px); opacity: 0.9; }
+
+        /* ── Sections ── */
+        .section { max-width: 720px; margin: 0 auto; padding: 80px 32px; }
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-family: var(--serif);
+            font-weight: 800;
+            font-size: clamp(30px, 5vw, 42px);
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+        }
+        .section p { color: var(--ink-soft); margin-bottom: 16px; }
+        .section p strong { color: var(--ink); font-weight: 600; }
+
+        /* ── Screens, pinned up like snapshots ── */
+        .screens {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 32px 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 36px;
+        }
+        .screen {
+            background: var(--card);
+            padding: 12px 12px 18px;
+            border-radius: 6px;
+            box-shadow: 0 16px 44px rgba(43,39,36,0.16);
+        }
+        .screen:nth-child(1) { transform: rotate(-2deg); }
+        .screen:nth-child(2) { transform: rotate(1.2deg) translateY(28px); }
+        .screen:nth-child(3) { transform: rotate(-0.8deg); }
+        .screen img { width: 100%; display: block; border-radius: 22px; }
+        .screen p { font-size: 14px; color: var(--ink-soft); padding: 14px 6px 0; line-height: 1.5; }
+
+        /* ── Does / Doesn't ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            max-width: 720px;
+            margin: 0 auto 40px;
+            padding: 0 32px;
+        }
+        .col-header { padding: 16px 24px; font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+        .col-header.yes { background: var(--ink); color: var(--wall); border-radius: 10px 10px 0 0; }
+        .col-header.no  { background: var(--chip); color: var(--ink-soft); border-radius: 10px 10px 0 0; }
+        .col-item { padding: 14px 24px; font-size: 15px; border-top: 1px solid rgba(43,39,36,0.08); }
+        .col-item.yes { background: var(--card); color: var(--ink); }
+        .col-item.no  { background: rgba(251,247,240,0.55); color: var(--ink-soft); text-decoration: line-through; }
+
+        /* ── Price ── */
+        .price {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 32px;
+            margin-top: 8px;
+            box-shadow: 0 10px 30px rgba(43,39,36,0.08);
+        }
+        .price h3 { font-family: var(--serif); font-weight: 800; font-size: 26px; margin-bottom: 8px; }
+        .price p:last-child { margin-bottom: 0; }
+
+        /* ── Closer ── */
+        .closer { text-align: center; max-width: 720px; margin: 0 auto; padding: 40px 32px 100px; }
+        .closer-line { font-family: var(--serif); font-weight: 800; font-size: clamp(28px, 5vw, 42px); letter-spacing: -0.5px; margin: 28px 0 14px; }
+        .closer-kick { color: var(--ink-soft); font-size: 16px; }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 40px 32px;
+            border-top: 1px solid rgba(43,39,36,0.1);
+            font-size: 13px;
+            color: var(--ink-soft);
+            letter-spacing: 0.06em;
+        }
+        .footer a { color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+        .footer a:hover { color: var(--ink); }
+        .footer .links { margin-top: 8px; display: flex; gap: 20px; justify-content: center; }
+
+        /* ── Responsive ── */
+        @media (max-width: 760px) {
+            .screens { grid-template-columns: 1fr; max-width: 360px; gap: 40px; }
+            .screen:nth-child(2) { transform: rotate(1.2deg); }
+        }
+        @media (max-width: 600px) {
+            .two-col { display: flex; flex-direction: column; gap: 0; padding: 0 16px; }
+            .col-header.yes { order: 1; }
+            .col-item.yes   { order: 2; }
+            .col-header.no  { order: 3; margin-top: 24px; }
+            .col-item.no    { order: 4; }
+            .hero { padding: 100px 16px 60px; }
+            .section, .closer { padding-left: 16px; padding-right: 16px; }
+            .screens { padding-left: 16px; padding-right: 16px; }
+            .price { padding: 24px; }
+            .nav { padding: 14px 16px; flex-wrap: wrap; row-gap: 6px; }
+            .nav-brand { font-size: 13px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 12px; }
+        }
+
+        /* ── Fade-in ── */
+        .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-up.visible { opacity: 1; transform: none; }
+        .screens.fade-up.visible .screen:nth-child(2) { transform: rotate(1.2deg) translateY(28px); }
+        @media (max-width: 760px) { .screens.fade-up.visible .screen:nth-child(2) { transform: rotate(1.2deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-up { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="https://ribbescobb.com" class="nav-brand">Ribbescobb Labs</a>
+        <div class="nav-links">
+            <a href="/paperchain/" class="active" aria-current="page">Paper Chain</a>
+            <a href="https://thatstronk.com">STRONK</a>
+            <a href="/unravel/">Unravel</a>
+            <a href="/kept">Kept</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <img class="hero-icon" src="icon.png" width="128" height="128" alt="Paper Chain app icon: two paper chains hanging on a cream wall">
+        <h1 class="hero-title">Paper Chain.</h1>
+        <p class="hero-sub">A countdown you tear by hand. One paper link a day, all the way to the day.</p>
+        <a class="store-button" href="/paperchain/get/">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.37 12.63c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-3-.79-1.54.02-2.96.9-3.76 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.77-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.66zM14.1 5.88c.63-.77 1.06-1.83.94-2.88-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.75-.96 2.78 1.01.08 2.05-.52 2.69-1.27z"/></svg>
+            Get it on the App Store
+        </a>
+        <!-- At launch: remove this stamp. -->
+        <div class="arrival">ARRIVING OCTOBER 2026</div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section class="section fade-up">
+        <div class="section-label">What it is</div>
+        <p><strong>Remember the paper chain on the classroom wall in December? One link for every day until winter break, and every morning somebody got to tear one off.</strong></p>
+        <p>Paper Chain is that, on your iPhone. Pull the bottom link down. It stretches, it strains, and then it gives. The scrap flutters to the floor and lands on the pile, and you're one link closer.</p>
+        <p>Count down to a date (Halloween, the trip, the wedding, the last day of school) and each link waits for its day. Or just count: twenty push-ups, twelve chapters, thirty days of practice. When the last link goes, the whole pile goes up in the air. Then you sweep up and start the next one.</p>
+    </section>
+
+    <div class="chain" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span class="torn"></span>
+    </div>
+
+    <!-- SCREENS -->
+    <div class="section fade-up" style="padding-bottom: 24px;">
+        <div class="section-label">The wall</div>
+        <h2>Real paper. Real physics. Your wall.</h2>
+        <p>Every link is a loop of construction paper that swings when you tilt your phone, catches the light, and tears where it's weakest. Long countdowns wind onto a wooden spool that clicks round as the next link comes off.</p>
+    </div>
+
+    <div class="screens fade-up">
+        <div class="screen">
+            <img src="home.jpg" width="600" height="1305" alt="A cream wall with three paper chains: Halloween, Beach trip, and The wedding, with torn scraps on the floor">
+            <p>Three chains to a room. Rooms are free, as many as you like.</p>
+        </div>
+        <div class="screen">
+            <img src="halloween.jpg" width="600" height="1305" alt="A Halloween chain printed with pumpkins and witch hats, 32 days left until Saturday, October 31">
+            <p>Printed paper for the seasons: pumpkins, witch hats, friendly ghosts.</p>
+        </div>
+        <div class="screen">
+            <img src="beach.jpg" width="600" height="1305" alt="A bright paper chain hanging from driftwood at the beach, with the sea behind it">
+            <p>Some rooms are outside. The wind picks up.</p>
+        </div>
+    </div>
+
+    <!-- DOES / DOESN'T -->
+    <div class="section fade-up" style="padding-bottom: 24px;">
+        <div class="section-label">The whole feature list</div>
+        <h2>What it does. And what it will never do.</h2>
+    </div>
+
+    <div class="two-col fade-up">
+        <div class="col-header yes">It does</div>
+        <div class="col-header no">It doesn't</div>
+        <div class="col-item yes">Let you tear it by hand, every day</div>
+        <div class="col-item no">Give you a checkbox to tap</div>
+        <div class="col-item yes">Hang on your Home Screen and Lock Screen</div>
+        <div class="col-item no">Keep score or count streaks</div>
+        <div class="col-item yes">Remind you once, on the day a link is ready</div>
+        <div class="col-item no">Remind you twice</div>
+        <div class="col-item yes">Keep your countdowns on your phone</div>
+        <div class="col-item no">Put them on a server</div>
+        <div class="col-item yes">Work with no account at all</div>
+        <div class="col-item no">Ask for your email</div>
+        <div class="col-item yes">Stay free, forever</div>
+        <div class="col-item no">Do subscriptions. Ever.</div>
+    </div>
+
+    <!-- PRICE -->
+    <section class="section fade-up" style="padding-top: 40px;">
+        <div class="section-label">The price</div>
+        <h2>Free. That's not a trial.</h2>
+        <p>Every part of counting down is free, forever: the tearing, the widgets, the reminders, as many chains and rooms as you want, with bright paper, three birthday papers, and Halloween.</p>
+        <div class="price">
+            <h3>The Party Pack</h3>
+            <p>The one thing for sale. Every holiday, event, and color paper (Christmas two ways, Hanukkah, Thanksgiving, New Year's, winter, vacation, a wedding, a baby), every room's look, like the beach, and every new one we add after. <strong>$4.99, once.</strong> Shared with your family.</p>
+        </div>
+    </section>
+
+    <!-- CLOSER -->
+    <div class="closer fade-up">
+        <div class="chain" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="closer-line">Pull. Tear. One link closer.</div>
+        <div class="closer-kick">Coming to the App Store in October, just in time for Halloween.</div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        &copy; <a href="https://ribbescobb.com">Ribbescobb Labs</a>, LLC 2026
+        <div class="links">
+            <a href="/paperchain/privacy/">Privacy</a>
+            <a href="/paperchain/support/">Support</a>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(
+            (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+            { threshold: 0.12 }
+        );
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

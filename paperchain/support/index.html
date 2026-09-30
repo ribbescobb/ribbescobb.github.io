@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Chain — Support</title>
+    <meta name="description" content="Help with Paper Chain: tearing links, widgets, reminders, rooms, and the Party Pack.">
+    <link rel="icon" href="../icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wall: #F2ECE2;
+            --card: #FBF7F0;
+            --ink: #2B2724;
+            --ink-soft: #6B6155;
+            --red: #C8463A;
+            --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--wall);
+            color: var(--ink);
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+        .nav {
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(43,39,36,0.07);
+        }
+        .nav a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 15px; }
+        .nav .back { font-weight: 500; font-size: 14px; color: var(--ink-soft); }
+        main { max-width: 680px; margin: 0 auto; padding: 56px 32px 80px; }
+        .label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); font-weight: 600; margin-bottom: 14px; }
+        h1 { font-family: var(--serif); font-weight: 800; font-size: clamp(34px, 6vw, 48px); line-height: 1.1; margin-bottom: 14px; }
+        .intro { color: var(--ink-soft); margin-bottom: 36px; }
+        details {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 18px 22px;
+            margin-bottom: 12px;
+            box-shadow: 0 6px 20px rgba(43,39,36,0.05);
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: "+"; color: var(--red); font-weight: 700; }
+        details[open] summary::after { content: "−"; }
+        details p, details ul { margin-top: 12px; color: var(--ink); }
+        details ul { margin-left: 22px; }
+        details li { margin-bottom: 4px; }
+        h2 { font-family: var(--serif); font-weight: 800; font-size: 26px; margin: 44px 0 12px; }
+        .contact {
+            background: var(--ink);
+            color: var(--wall);
+            border-radius: 18px;
+            padding: 26px 28px;
+        }
+        .contact a { color: #F2C9A6; }
+        .contact p + p { margin-top: 8px; opacity: 0.85; font-size: 15px; }
+        a { color: var(--red); }
+        footer { text-align: center; padding: 40px 32px; border-top: 1px solid rgba(43,39,36,0.1); font-size: 13px; color: var(--ink-soft); letter-spacing: 0.06em; }
+        footer a { color: var(--ink-soft); text-decoration: none; }
+        @media (max-width: 600px) {
+            .nav { padding: 14px 16px; }
+            main { padding: 40px 16px 60px; }
+            details { padding: 16px 18px; }
+            .contact { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="/paperchain/">Paper Chain</a>
+        <a class="back" href="/paperchain/privacy/">Privacy</a>
+    </nav>
+
+    <main>
+        <div class="label">Paper Chain</div>
+        <h1>Support</h1>
+        <p class="intro">Answers to the usual questions. If yours isn't here, write to us; a real person reads every email.</p>
+
+        <details>
+            <summary>How do I tear a link?</summary>
+            <p>Open a chain and pull the bottom link down until it gives. A link that belongs to a later day waits for its day; pull it early and the chain tells you when it's ready.</p>
+        </details>
+
+        <details>
+            <summary>I tore one by mistake.</summary>
+            <p>Right after a tear, tap <strong>Torn by mistake? Tape it back</strong> at the bottom of the screen. The link goes back on the chain, with a little tape to show for it. The offer lasts a few seconds.</p>
+        </details>
+
+        <details>
+            <summary>How do I add a widget?</summary>
+            <ul>
+                <li><strong>Home Screen:</strong> press and hold an empty spot, tap <strong>Edit</strong>, then <strong>Add Widget</strong>, and search for Paper Chain.</li>
+                <li><strong>Lock Screen:</strong> press and hold the Lock Screen, tap <strong>Customize</strong>, choose the Lock Screen, and tap the widget area.</li>
+            </ul>
+            <p>To pick which chain a widget shows, press and hold the widget and tap <strong>Edit Widget</strong>.</p>
+        </details>
+
+        <details>
+            <summary>How do reminders work?</summary>
+            <p>A chain counting down to a date reminds you once, on the day a link is ready, and never nags about links you haven't torn. To change the time or turn them off, open the chain and tap <strong>Edit</strong>. Not getting them? Check <strong>Settings → Notifications → Paper Chain</strong>.</p>
+        </details>
+
+        <details>
+            <summary>How do I change or delete a chain?</summary>
+            <p>Open the chain and tap <strong>Edit</strong>. You can rename it, change its length or date, its paper and color pattern, or delete it.</p>
+        </details>
+
+        <details>
+            <summary>What are rooms?</summary>
+            <p>Each room holds three chains. Swipe sideways on the wall to move between rooms; the page after your last room starts a new one. Tap a room's name at the top to rename it or change how it looks. Rooms are free, as many as you like.</p>
+            <p>To move a chain to another spot on the wall, press and hold it, slide it along the shelf, and let go.</p>
+        </details>
+
+        <details>
+            <summary>What's the Party Pack?</summary>
+            <p>The one thing for sale in Paper Chain: a single purchase that unlocks every paper and every room's look, including every new one we add later. It's shared with your family through Family Sharing. Everything else in the app is free.</p>
+        </details>
+
+        <details>
+            <summary>I bought the Party Pack, but the papers are locked.</summary>
+            <p>Tap any locked paper, then <strong>Restore Purchases</strong>. Make sure you're signed in with the same Apple Account you bought it with. For refunds or billing questions, go to <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>, since Apple handles every purchase.</p>
+        </details>
+
+        <details>
+            <summary>Will my chains come to a new iPhone?</summary>
+            <p>Your chains live only on your phone; there's no account or sync. If you set up your new iPhone from a backup of the old one, they come along. Deleting the app deletes them.</p>
+        </details>
+
+        <details>
+            <summary>What does Paper Chain do with my information?</summary>
+            <p>Nothing leaves your phone except a few anonymous counts, like how many chains get made. No names, no dates, nothing you type. The <a href="/paperchain/privacy/">privacy policy</a> lists every one.</p>
+        </details>
+
+        <h2>Still stuck?</h2>
+        <div class="contact">
+            <p>Email <a href="mailto:chris@ribbescobb.com?subject=Paper%20Chain">chris@ribbescobb.com</a>.</p>
+            <p>It helps to include which iPhone you have and what version of iOS it's running (Settings → General → About).</p>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <a href="https://ribbescobb.com">Ribbescobb Labs</a>, LLC 2026 · <a href="/paperchain/">Paper Chain</a> · <a href="/paperchain/privacy/">Privacy</a>
+    </footer>
+</body>
+</html>
