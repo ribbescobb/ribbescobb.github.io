@@ -122,29 +122,6 @@
             transform: rotate(-1.5deg);
         }
 
-        /* A paper chain hanging down the page, drawn in CSS: loops of paper, alternately face-on and edge-on. */
-        .chain {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 auto;
-        }
-        .chain span {
-            display: block;
-            width: 30px; height: 46px;
-            border: 7px solid var(--c);
-            border-radius: 50%;
-            margin-top: -12px;
-        }
-        .chain span:nth-child(even) { width: 12px; border-width: 5px 6px; }
-        .chain span:nth-child(6n+1) { --c: var(--red); }
-        .chain span:nth-child(6n+2) { --c: var(--orange); }
-        .chain span:nth-child(6n+3) { --c: var(--yellow); }
-        .chain span:nth-child(6n+4) { --c: var(--green); }
-        .chain span:nth-child(6n+5) { --c: var(--blue); }
-        .chain span:nth-child(6n+6) { --c: var(--purple); }
-        .chain .torn { border-top-color: transparent; transform: rotate(18deg) translate(6px, 14px); opacity: 0.9; }
-
         /* ── Sections ── */
         .section { max-width: 720px; margin: 0 auto; padding: 80px 32px; }
         .section-label {
@@ -166,13 +143,28 @@
         .section p { color: var(--ink-soft); margin-bottom: 16px; }
         .section p strong { color: var(--ink); font-weight: 600; }
 
+        /* ── The hero: the app itself, swaying ── */
+        .hero-clip {
+            max-width: 340px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        .hero-clip video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 34px;
+            background: var(--chip);
+            box-shadow: 0 30px 70px rgba(43,39,36,0.25), 0 0 0 10px var(--card), 0 0 0 11px rgba(43,39,36,0.08);
+        }
+
         /* ── Screens, pinned up like snapshots ── */
         .screens {
-            max-width: 1000px;
+            max-width: 720px;
             margin: 0 auto;
             padding: 20px 32px 60px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 36px;
         }
         .screen {
@@ -300,8 +292,9 @@
         <p>Count down to a date (Halloween, the trip, the wedding, the last day of school) and each link waits for its day. Or just count: thirty workouts, twelve chapters, ten piano lessons. When the last link goes, the whole pile goes up in the air. Then you sweep up and start the next one.</p>
     </section>
 
-    <div class="chain" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span class="torn"></span>
+    <!-- The app itself, the chains swaying as the phone tilts. -->
+    <div class="hero-clip">
+        <video src="home.mp4" poster="home.jpg" width="600" height="1304" autoplay muted loop playsinline preload="auto" aria-label="Two paper chains, Halloween and The wedding, swaying on a cream wall as the phone tilts, with torn scraps on the floor"></video>
     </div>
 
     <!-- SCREENS -->
@@ -313,16 +306,12 @@
 
     <div class="screens fade-up">
         <div class="screen">
-            <video src="home.mp4" poster="home.jpg" width="600" height="1304" autoplay muted loop playsinline preload="metadata" aria-label="Two paper chains, Halloween and The wedding, swaying on a cream wall as the phone tilts, with torn scraps on the floor"></video>
-            <p>Two chains to a room. Rooms are free, as many as you like.</p>
-        </div>
-        <div class="screen">
             <video src="halloween.mp4" poster="halloween.jpg" width="600" height="1304" autoplay muted loop playsinline preload="metadata" aria-label="A Halloween chain printed with pumpkins and bats swaying in front of a pumpkin patch at dusk, under a full moon"></video>
             <p>Printed paper for the seasons, and rooms to match: a pumpkin patch at dusk.</p>
         </div>
         <div class="screen">
             <video src="beach.mp4" poster="beach.jpg" width="600" height="1304" autoplay muted loop playsinline preload="metadata" aria-label="A bright paper chain swaying in the breeze from a driftwood beam at the beach, with the sea behind it"></video>
-            <p>Some rooms are outside. The wind picks up.</p>
+            <p>Some rooms are outside. The wind picks up. Two chains to a room, and rooms are free, as many as you like.</p>
         </div>
     </div>
 
@@ -385,7 +374,7 @@
 
         // The chains sway only for people who haven't asked for less motion; everyone else sees the still.
         const still = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const clips = document.querySelectorAll('.screen video');
+        const clips = document.querySelectorAll('video');
         const settle = () => clips.forEach(v => {
             if (still.matches) { v.pause(); v.currentTime = 0; } else { v.play().catch(() => {}); }
         });
