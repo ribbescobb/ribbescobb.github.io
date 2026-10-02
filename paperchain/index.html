@@ -65,12 +65,10 @@
 
         /* ── Hero ── */
         .hero {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 120px 32px 80px;
+            padding: 120px 32px 40px;
             text-align: center;
         }
         .hero-icon {
@@ -145,8 +143,9 @@
 
         /* ── The hero: the app itself, swaying ── */
         .hero-clip {
+            width: 100%;
             max-width: 340px;
-            margin: 0 auto;
+            margin: 56px auto 0;
             padding: 0 32px;
         }
         .hero-clip video {
@@ -282,6 +281,11 @@
         </a>
         <!-- At launch: remove this stamp. -->
         <div class="arrival">ARRIVING OCTOBER 2026</div>
+
+        <!-- The app itself, the chains swaying as the phone tilts, right under the button (owner, 2026-10-02). -->
+        <div class="hero-clip">
+            <video src="home.mp4" poster="home.jpg" width="600" height="1304" autoplay muted loop playsinline preload="auto" aria-label="Two paper chains, Halloween and The wedding, swaying on a cream wall as the phone tilts, with torn scraps on the floor"></video>
+        </div>
     </section>
 
     <!-- WHAT IT IS -->
@@ -291,11 +295,6 @@
         <p>Paper Chain is that, on your iPhone. Pull the bottom link down. It stretches, it strains, and then it gives. The scrap flutters to the floor and lands on the pile, and you're one link closer.</p>
         <p>Count down to a date (Halloween, the trip, the wedding, the last day of school) and each link waits for its day. Or just count: thirty workouts, twelve chapters, ten piano lessons. When the last link goes, the whole pile goes up in the air. Then you sweep up and start the next one.</p>
     </section>
-
-    <!-- The app itself, the chains swaying as the phone tilts. -->
-    <div class="hero-clip">
-        <video src="home.mp4" poster="home.jpg" width="600" height="1304" autoplay muted loop playsinline preload="auto" aria-label="Two paper chains, Halloween and The wedding, swaying on a cream wall as the phone tilts, with torn scraps on the floor"></video>
-    </div>
 
     <!-- SCREENS -->
     <div class="section fade-up" style="padding-bottom: 24px;">
