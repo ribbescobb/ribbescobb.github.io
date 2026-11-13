@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>A paper chain for you</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    A Paper Chain sent as a gift (Paper Chain 1.7). The chain's settings ride after the # in the link, which the
+    browser never sends to this server, so this page reads them right here, only to show the chain's name.
+    Where Paper Chain is installed, the link opens the app instead of this page (/.well-known/apple-app-site-association).
+  -->
+  <meta property="og:title" content="A paper chain for you">
+  <meta property="og:description" content="Tap to hang it on your wall in Paper Chain, and tear a link off each day.">
+  <meta property="og:image" content="https://ribbescobb.com/paperchain/home.jpg">
+  <meta property="og:type" content="website">
+  <meta name="apple-itunes-app" content="app-id=6817136564">
+  <style>
+    html, body { margin: 0; padding: 0; min-height: 100vh; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #F2ECE2;
+      color: #2B2724;
+      font-family: -apple-system, 'Space Grotesk', sans-serif;
+      text-align: center;
+      padding: 24px;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 360px; }
+    img.icon { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 6px 18px rgba(43, 39, 36, 0.18); }
+    .kicker { font-size: 15px; color: #6B6155; margin: 22px 0 4px; }
+    h1 {
+      font-family: ui-serif, "New York", Georgia, serif;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 0 0 8px;
+      overflow-wrap: anywhere;
+    }
+    .until { font-size: 17px; color: #6B6155; margin: 0 0 26px; }
+    ol { text-align: left; font-size: 16px; line-height: 1.45; padding-left: 22px; margin: 0 0 22px; }
+    ol li { margin-bottom: 8px; }
+    a.button {
+      display: inline-block;
+      background: #2B2724;
+      color: #F2ECE2;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 17px;
+      padding: 14px 26px;
+      border-radius: 14px;
+    }
+    p.small { font-size: 14px; color: #6B6155; margin: 22px 0 0; }
+    a { color: #C8463A; }
+    .past { color: #C8463A; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="icon" src="../icon.png" alt="Paper Chain's icon">
+    <p class="kicker">Someone made you a paper chain</p>
+    <h1 id="name">A paper chain for you</h1>
+    <p class="until" id="until">Tear a link off each day until the big day.</p>
+    <ol>
+      <li>Get Paper Chain from the App Store. It's free.</li>
+      <li>Come back to the message and tap the link again. Your chain will build on your wall.</li>
+    </ol>
+    <a class="button" href="https://apps.apple.com/app/id6817136564">Get Paper Chain</a>
+    <p class="small">Already have it? <a id="open" href="paperchain://gift">Open your chain in Paper Chain</a></p>
+  </main>
+  <script>
+    // The settings after the # (base64url JSON, the app's GiftChain), read only to show the name and the day.
+    (function () {
+      var hash = window.location.hash.slice(1);
+      if (!hash) return;
+      document.getElementById('open').href = 'paperchain://gift#' + hash;
+      var gift;
+      try {
+        var base64 = hash.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) base64 += '=';
+        var bytes = Uint8Array.from(atob(base64), function (c) { return c.charCodeAt(0); });
+        gift = JSON.parse(new TextDecoder().decode(bytes));
+      } catch (e) { return; }
+      if (!gift || typeof gift.name !== 'string' || !gift.name) return;
+      document.getElementById('name').textContent = '“' + gift.name + '”';
+      document.title = 'A paper chain for you: ' + gift.name;
+      var schedule = gift.schedule || {};
+      var kind = Object.keys(schedule)[0];
+      var until = document.getElementById('until');
+      if (kind === 'goal') {
+        var count = schedule.goal && schedule.goal.count;
+        if (count) until.textContent = count + (count === 1 ? ' link' : ' links') + ' to tear.';
+        return;
+      }
+      var target = schedule[kind] && schedule[kind].until;
+      if (!target || !target.year) return;
+      var day = new Date(target.year, target.month - 1, target.day);
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (day < today) {
+        until.textContent = 'This date is past – sorry.';
+        until.className = 'until past';
+        return;
+      }
+      until.textContent = 'Counting down to ' + day.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }) + '.';
+    })();
+  </script>
+</body>
+</html>

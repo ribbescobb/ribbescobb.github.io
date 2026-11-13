@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["BRBSDPZ9DJ.com.ribbescobblabs.paperchain"],
+        "components": [
+          { "/": "/paperchain/gift/*", "comment": "A Paper Chain sent as a gift: the chain's settings ride after the #" },
+          { "/": "/paperchain/gift", "comment": "The same, without the trailing slash" }
+        ]
+      }
+    ]
+  }
+}
