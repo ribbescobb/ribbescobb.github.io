@@ -72,30 +72,30 @@
     <p class="small">Have the latest Paper Chain? <a id="open" href="paperchain://gift">Open your chain in it</a></p>
   </main>
   <script>
-    // The settings after the # (base64url JSON, the app's GiftChain), read only to show the name and the day.
+    // The settings after the # (the app's GiftChain), read only to show the name and the day.
+    // Packed (Paper Chain 1.7): a version byte (2), the chain's id (16 bytes), its name, then its schedule's kind and
+    // target day; the format is the app's CountdownEngine/Packing.swift. Base64url, with a dot after every 100
+    // characters so Messages and Mail keep the whole link. JSON (1.7's TestFlight builds) still reads too.
     (function () {
       var hash = window.location.hash.slice(1);
       if (!hash) return;
       document.getElementById('open').href = 'paperchain://gift#' + hash;
       var gift;
       try {
-        var base64 = hash.replace(/-/g, '+').replace(/_/g, '/');
+        var base64 = hash.replace(/[.\s]/g, '').replace(/-/g, '+').replace(/_/g, '/');
         while (base64.length % 4) base64 += '=';
         var bytes = Uint8Array.from(atob(base64), function (c) { return c.charCodeAt(0); });
-        gift = JSON.parse(new TextDecoder().decode(bytes));
+        gift = bytes[0] === 0x7B ? readJSON(bytes) : readPacked(bytes);
       } catch (e) { return; }
       if (!gift || typeof gift.name !== 'string' || !gift.name) return;
       document.getElementById('name').textContent = '“' + gift.name + '”';
       document.title = 'A paper chain for you: ' + gift.name;
-      var schedule = gift.schedule || {};
-      var kind = Object.keys(schedule)[0];
       var until = document.getElementById('until');
-      if (kind === 'goal') {
-        var count = schedule.goal && schedule.goal.count;
-        if (count) until.textContent = count + (count === 1 ? ' link' : ' links') + ' to tear.';
+      if (gift.goal) {
+        until.textContent = gift.goal + (gift.goal === 1 ? ' link' : ' links') + ' to tear.';
         return;
       }
-      var target = schedule[kind] && schedule[kind].until;
+      var target = gift.until;
       if (!target || !target.year) return;
       var day = new Date(target.year, target.month - 1, target.day);
       var today = new Date();
@@ -107,6 +107,49 @@
       }
       until.textContent = 'Counting down to ' + day.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }) + '.';
     })();
+
+    function readPacked(bytes) {
+      var at = 0;
+      function byte() {
+        if (at >= bytes.length) throw new Error('cut short');
+        return bytes[at++];
+      }
+      function count() {
+        var value = 0, scale = 1, b;
+        do { b = byte(); value += (b & 0x7F) * scale; scale *= 128; } while (b & 0x80);
+        return value;
+      }
+      function number() {
+        var zigzag = count();
+        return zigzag % 2 ? -(zigzag + 1) / 2 : zigzag / 2;
+      }
+      function date(value) {
+        return { year: Math.floor(value / 372), month: Math.floor(value / 31) % 12 + 1, day: value % 31 + 1 };
+      }
+      if (byte() !== 2) return null;
+      at += 16;
+      var length = count();
+      if (at + length > bytes.length) return null;
+      var name = new TextDecoder().decode(bytes.subarray(at, at + length));
+      at += length;
+      var kind = byte();
+      if (kind === 12) return { name: name, goal: number() };
+      if (kind === 11) {
+        var dates = count(), latest = -1;
+        for (var i = 0; i < dates; i++) latest = Math.max(latest, count());
+        return { name: name, until: latest < 0 ? null : date(latest) };
+      }
+      if (kind >= 1 && kind <= 10) return { name: name, until: date(count()) };
+      return { name: name };
+    }
+
+    function readJSON(bytes) {
+      var gift = JSON.parse(new TextDecoder().decode(bytes));
+      var schedule = gift.schedule || {};
+      var kind = Object.keys(schedule)[0];
+      if (kind === 'goal') return { name: gift.name, goal: schedule.goal && schedule.goal.count };
+      return { name: gift.name, until: schedule[kind] && schedule[kind].until };
+    }
   </script>
 </body>
 </html>
